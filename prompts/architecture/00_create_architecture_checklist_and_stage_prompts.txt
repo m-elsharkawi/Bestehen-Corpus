@@ -1,0 +1,888 @@
+# Agent Prompt — Bestehen / Corpus Architecture
+## Create the Architecture Checklist and Complete Stage-Prompt Pack
+
+You are the lead data/platform architect responsible for preparing the complete **architecture-shaping workflow** for **Bestehen / Corpus**.
+
+Your job in this run is to:
+
+1. read and reconcile the complete Corpus product-shaping record in `m-elsharkawi/Bestehen-Shaping`;
+2. read the complete Corpus design system, operations screens, prototype flows, and handoff artifacts in `m-elsharkawi/Bestehen-Corpus`;
+3. inspect relevant Bestehen / App contract and architecture artifacts so both products agree at their boundary;
+4. define a rigorous dependency-aware Corpus architecture checklist;
+5. create one detailed execution prompt for every architecture stage, following the durable prompt/checklist workflow used for the App PRD and App architecture;
+6. leave `m-elsharkawi/Bestehen-Corpus` ready for later architect agents to execute the stages sequentially without inventing scope, collapsing evidence semantics, or losing design intent.
+
+This run is **architecture-workflow planning**, not Corpus implementation and not execution of the architecture stages. Do not write production crawler, parser, database, API, operations-console, infrastructure, or model code. Do not prematurely commit to a framework, vendor, physical schema, pipeline technology, or deployment topology in the master-planning artifact unless necessary to define the workflow itself. Later stage prompts must research, compare, choose, and document those decisions with traceability.
+
+The result must be concrete enough that each later architecture agent knows:
+
+- which product and design inputs to read;
+- which architectural decisions it owns;
+- which decisions are already settled product truth;
+- which artifact and ADRs it must create;
+- which checklist items it may mark complete;
+- which previous architecture stages it depends on;
+- which downstream stages consume its decisions;
+- how to preserve provenance, uncertainty, rights, quality, independence, cost, security, and App compatibility;
+- what must degrade, remain provisional, or stop safely when inputs, models, budget, or infrastructure fail.
+
+## 0. Run Configuration Variables
+
+Treat these as explicit controls for the architecture-planning run. Supplied values may refine the plan but cannot override product truth. If absent, use the recommended default and record it in the workflow plan.
+
+| Variable | Recommended default | Rule |
+|---|---|---|
+| `SOURCE_REPOSITORY` | `m-elsharkawi/Bestehen-Shaping` | Read-only product source |
+| `TARGET_REPOSITORY` | `m-elsharkawi/Bestehen-Corpus` | All Corpus architecture outputs and prompts are written here |
+| `APP_REFERENCE_REPOSITORY` | `m-elsharkawi/Bestehen-App` | Read-only integration reference when current artifacts exist |
+| `BRANCH` | `main` | Use another branch/PR only if the owner explicitly supplies it |
+| `ARCHITECTURE_OUTPUT_DIR` | `Architecture/` | Keep one durable Markdown output per stage |
+| `ADR_DIR` | `Architecture/adr/` | Lightweight durable decision records |
+| `PROMPT_DIR` | `prompts/architecture/` | One executable `.txt` prompt per stage |
+| `CHECKLIST_PATH` | `Bestehen_Corpus_Architecture_Checklist.md` | Live sequential checklist |
+| `STAGE_COUNT_MODE` | `recommended-28` | Change only if coverage/dependencies improve and one-to-one consistency is preserved |
+| `DIAGRAM_FORMAT` | Mermaid plus tables | Do not use fragile ASCII diagrams |
+| `RESEARCH_POLICY` | Current official sources for mutable technology/vendor claims | Record research date and links in the stage artifact |
+| `PERSONAL_PROJECT_MODE` | `true` | Optimize for one owner, low operations burden, progressive scale, and explicit cash limits |
+
+If a runner wants to enhance the workflow—for example by adding an architecture decision index, machine-readable contract appendix, or risk register—include it only when it remains maintainable and traceable. Do not add process theater.
+
+## 1. Repositories, Preconditions, and Authority
+
+Use GitHub as the source of truth.
+
+### 1.1 Read-only product-shaping repository
+
+- **Repository:** `m-elsharkawi/Bestehen-Shaping`
+- **Branch:** `main`
+
+### 1.2 Corpus design and architecture repository
+
+- **Repository:** `m-elsharkawi/Bestehen-Corpus`
+- **Branch:** `main`
+
+Read design artifacts and current architecture planning from this repository. Write all new Corpus architecture artifacts, the checklist, and generated prompts only here.
+
+### 1.3 Read-only App integration reference
+
+- **Repository:** `m-elsharkawi/Bestehen-App`
+- **Branch:** `main`
+
+Use current App architecture artifacts only to reconcile the Corpus → App boundary. App architecture does not supersede the Corpus product specification. If the App architecture is incomplete, record which counterpart contract decisions remain to be reconciled later rather than inventing them.
+
+### 1.4 Design-artifact precondition
+
+Before planning stages, recursively inspect `Bestehen-Corpus/Design/` or the equivalent current design location. A completed design handoff and inspectable design artifacts must exist. At minimum, expect:
+
+- a design handoff Markdown artifact;
+- foundations/tokens and reusable components;
+- operations screens and state variants;
+- prototype-flow coverage;
+- responsive/accessibility rules;
+- launch/deferred and open-assumption notes.
+
+If the repository still contains only this master prompt or lacks a usable design handoff, stop without creating a false architecture checklist. Report:
+
+`Blocked — Corpus design artifacts are required before architecture workflow planning can be completed.`
+
+Do not fill the missing design layer with architecture assumptions.
+
+### 1.5 Source authority order
+
+Use this order when sources appear to disagree:
+
+1. `Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md` — authoritative consolidated Corpus product behavior.
+2. `Bestehen-Shaping/corpus/01-*.md` through `corpus/16-*.md` — normative detail where Stage 17 delegates or summarizes; later relevant Corpus stages take precedence over earlier unresolved wording.
+3. `Bestehen-Shaping/01_Bestehen_Product_Overview.md` — umbrella mission and App/Corpus boundary.
+4. `Bestehen-Shaping/02_Bestehen_Identity.md` — brand/voice/visual guardrails relevant to the internal operations UI.
+5. `Bestehen-Corpus/Design/DESIGN-HANDOFF.md` and the current design artifacts — authoritative design expression where consistent with product truth.
+6. Relevant `Bestehen-App` product/architecture contract artifacts — integration counterpart, not authority to redefine Corpus semantics.
+7. Design artifact runtime/support code — illustrative only; never a production architecture mandate.
+
+If the final specification and an earlier Corpus stage genuinely differ, the final specification wins unless it explicitly points back for detail. If design and product differ, product wins and the mismatch must be documented. If App and Corpus architecture disagree at the interface, surface the incompatibility and identify the product-contract source that resolves it; do not silently choose one implementation.
+
+## 2. Mandatory Discovery — Read Before Planning Stages
+
+Do not rely on filenames alone. Read the human-authored content and create a source manifest with repository, path, current blob/commit SHA where available, authority, architectural relevance, and duplicate/superseded status.
+
+### 2.1 Shared shaping sources
+
+Read from `m-elsharkawi/Bestehen-Shaping`:
+
+- `01_Bestehen_Product_Overview.md`
+- `02_Bestehen_Identity.md`
+- `Bestehen_Corpus_Product_Shaping_Checklist.md`
+- `Bestehen_App_Product_Shaping_Checklist.md` for cross-product status only
+
+The `.docx` files are archival copies; use Markdown.
+
+### 2.2 Every Corpus shaping output
+
+Read every Markdown file under `corpus/`, currently including:
+
+1. `corpus/01-product-mission-and-boundaries.md`
+2. `corpus/02-source-strategy.md`
+3. `corpus/03-trust-authenticity-confidence.md`
+4. `corpus/04-rights-and-usage-metadata.md`
+5. `corpus/05-canonical-exam-model.md`
+6. `corpus/06-exam-and-skill-taxonomy.md`
+7. `corpus/07-difficulty-and-relevance-models.md`
+8. `corpus/08-ingestion-and-extraction-pipeline.md`
+9. `corpus/09-deduplication-strategy.md`
+10. `corpus/10-validation-and-quality-assurance.md`
+11. `corpus/11-corpus-analytics.md`
+12. `corpus/12-corpus-app-contract.md`
+13. `corpus/13-operations-and-review-experience.md`
+14. `corpus/14-cost-scale-and-automation.md`
+15. `corpus/15-security-privacy-and-abuse-boundaries.md`
+16. `corpus/16-initial-corpus-benchmark.md`
+17. `corpus/17-bestehen-corpus-product-specification.md`
+
+If additional Corpus Markdown outputs exist, read them too. Do not treat Stage 17 as permission to skip the detailed sources.
+
+### 2.3 Prompt-workflow conventions
+
+Inspect the shaping prompt pack under `Bestehen-Shaping/prompts/corpus/`, especially:
+
+- `01_lock_the_product_mission_and_boundaries.txt`
+- `17_produce_the_final_product_specification.txt`
+- representative middle stages such as 08, 12, 13, 14, and 16.
+
+Also inspect the existing App architecture master prompt and representative generated architecture prompts under `Bestehen-App/prompts/architecture/` if present. Reuse their strongest workflow conventions—stage identity, mandatory reads, concrete decisions, live-checklist updates, durable Markdown output, cost notes, and final verification—without copying App-specific stage content.
+
+### 2.4 Corpus design artifacts
+
+Recursively read all human-authored files under the Corpus design location, including Markdown, HTML design artifacts, SVG/vector/logo assets, token exports, interaction/state specifications, and implementation handoff notes.
+
+- Read design files as specifications even when they use `.html` or another design-tool format.
+- Inspect embedded text, variables/tokens, component names, state mappings, screen titles, prototype flows, breakpoint rules, and accessibility annotations.
+- Ignore thumbnails, caches, generated previews, and duplicate uploaded copies once their identity is confirmed.
+- Treat design-support JavaScript/CSS as artifact-rendering support unless the handoff explicitly declares a product contract.
+- Do not copy design-tool runtime code into production architecture.
+- Reconcile every design `Open decision` against the product specification; do not preserve a resolved question merely because the design file used older wording.
+
+### 2.5 App boundary sources
+
+At minimum read:
+
+- `Bestehen-Shaping/app/28-bestehen-app-product-specification.md` sections governing content, Corpus integration, learner-data ownership, Readiness, and original-practice generation;
+- `Bestehen-Shaping/corpus/12-corpus-app-contract.md` in full;
+- `Bestehen-App/Architecture/10-corpus-integration-compatibility-cache-and-rights.md`, if present;
+- `Bestehen-App/Architecture/12-api-contracts-jobs-events-and-idempotency.md`, if present;
+- `Bestehen-App/Architecture/28-bestehen-app-architecture-specification.md`, if present.
+
+If those App architecture paths do not yet exist, record the dependency in the workflow plan and make Corpus stages define a clear versioned provider-side contract that can later be reconciled.
+
+### 2.6 Existing target inspection
+
+Before writing, inspect `Bestehen-Corpus` for existing:
+
+- `Architecture/` outputs and ADRs;
+- `Bestehen_Corpus_Architecture_Checklist.md`;
+- `prompts/architecture/` files;
+- repository instructions such as `AGENTS.md`, `CLAUDE.md`, contribution rules, or design handoff updates.
+
+If a target exists, fetch current contents and amend/reconcile rather than blindly replacing it. Preserve completed valid work; identify stale or conflicting artifacts.
+
+## 3. Product and Design Invariants Every Architecture Stage Must Respect
+
+Every generated stage prompt must repeat the subset relevant to that stage and link it to the owning product/design sources.
+
+### 3.1 Product boundary
+
+- Corpus is an **exam-data and intelligence product**, not a learner-facing course, public mirror, generic scraper, learner-attempt store, or certification/scoring authority.
+- Initial acquisition covers German A2, B1, and mixed A2–B1 sources; A1 scaffolding belongs to App.
+- TELC B1 is the strongest target authority signal, not the only source family.
+- Primary customer is Bestehen / App; the single owner/operator is the initial human user.
+- Launch excludes public submissions/API/research UI, multi-tenancy, billing, collaboration workflows, authenticated crawling of paid/private third-party sites, and enterprise controls.
+
+### 3.2 The six axes must never collapse
+
+Architecture must model separately:
+
+1. Source/provenance.
+2. Authenticity/evidence confidence.
+3. Rights/usage.
+4. Difficulty and Generic-B1/TELC relevance.
+5. Extraction/QA readiness by capability.
+6. Content identity, derivative lineage, and metric-specific analytical independence.
+
+No table, aggregate, API DTO, search index, cache, UI state, or publication flag may erase these distinctions.
+
+### 3.3 Uncertainty and local evidence
+
+- `unknown`, `not_applicable`, `disputed`, `review_required`, `unresolved_dependency`, `incomplete`, and `provisional` are first-class states.
+- Missing values are never invented to satisfy a schema.
+- The smallest relevant scope controls high-risk uses.
+- A trusted parent does not rescue a defective child.
+- One local defect does not invalidate unaffected parent/sibling capabilities unless evidence shows broader corruption.
+
+### 3.4 Capability-scoped publication
+
+- There is no universal `production_ready=true`.
+- Promotion/eligibility is per stated capability with remaining restrictions and versions.
+- Structure analytics, correctness/scoring, taxonomy, abstract pattern intelligence, exact source reuse, asset exposure, and independent prevalence can have different gates.
+- Quarantine, hold, limited/provisional, stale, superseded, and invalidated states must propagate predictably.
+
+### 3.5 Provenance and canonical model
+
+- Preserve Source Observation → Document → Exam → Section → optional Part → Task → Item.
+- Instructions, Stimuli, Options, Answers/Scoring, Assets, provenance observations, derivations, findings, decisions, and versions are first-class where the product specifies them.
+- Observed source expression remains distinct from curated interpretation/correction and derived intelligence.
+- Stable identity and mutable revision/version semantics must survive reprocessing and contract publication.
+
+### 3.6 Trust, rights, and governance
+
+- Officiality/authenticity/confidence and usage rights are independent.
+- Unknown rights never imply permission.
+- Allow/block acquisition policy grants neither confidence nor rights.
+- Manual corrections/overrides preserve old state and remain authoritative across reruns until explicitly superseded.
+- Consequential human/automated changes are auditable with actor, time, old/new state, reason/evidence, method/model/rule/taxonomy versions, and downstream impact.
+- Takedown/security blocks override ordinary acquisition/reprocessing paths and prevent mirror re-ingestion where required.
+
+### 3.7 Deduplication and analytics
+
+- Preserve all observations while separating content identity, derivative lineage, canonical provenance anchor, preferred processing representation, and metric-specific independence.
+- Mirrors/derivatives cannot manufacture prevalence, corroboration, or diversity.
+- Decision-grade results carry denominator, independent evidence, confidence/uncertainty, source/provider mix, version, freshness, and applicability.
+- Raw/source volume is not decision-grade evidence weight.
+
+### 3.8 Corpus → App boundary
+
+- App requests desired exam/learning patterns, not learner profiles.
+- Corpus returns eligible structured intelligence, constraint blueprints, governance envelopes, versions, and change impact; it does not decide learner coaching or Readiness.
+- Original practice generation/evaluation belongs to App. Source content is direct-delivery input only through explicit rights-governed capability.
+- Corpus stores no learner data.
+- App sessions do not trigger routine Corpus AI inference; intelligence is precomputed, cached, batched, and reusable.
+
+### 3.9 Pipeline and recovery
+
+Preserve the conceptual lifecycle:
+
+**Discover → Fetch → Normalize → Parse → Segment → Classify → Extract Answers → Extract Assets → Enrich → Validate → Deduplicate → Review → Publish**
+
+Architecture may implement it differently, but must preserve:
+
+- partial success at the smallest meaningful scope;
+- idempotent/replayable work;
+- method/input/model/rule/taxonomy/version lineage;
+- explicit retry/defer/review/quarantine/hold states;
+- scoped non-destructive reprocessing from the earliest affected stage;
+- curator-override conflict handling;
+- downstream stale/recompute/invalidate propagation;
+- bounded retry and no expensive failure loops.
+
+### 3.10 Security and privacy
+
+- Corpus has a near-zero learner/personal-data footprint.
+- Every external input is untrusted and never executed as active content.
+- Security preflight precedes deep/expensive processing.
+- Archives, redirects, network destinations, file size/type, HTML/rich content, embedded assets, OCR/ASR/model inputs, and prompt injection require bounded handling.
+- Source text cannot command tools, publishing, policies, or secrets.
+- Operator authority, credentials, and secrets are isolated from source data.
+- Retention/deletion must preserve legitimate provenance/audit/derived truth while honoring takedown/security/privacy requirements.
+
+### 3.11 Benchmark and quality
+
+- No automated production capability claims qualification without an instantiated benchmark/gold core and relevant gates.
+- Stage 16 specifies a 16-slot seed, 12–14-package gold core, content-family-disjoint 70/30 development/holdout split, negative/uncertain cases, immutable releases, and incident replays.
+- `corpus-benchmark-1.0.0` is a bootstrap obligation, not an already-existing artifact.
+- Algorithms, models, thresholds, and vendors remain replaceable subject to benchmark qualification.
+
+### 3.12 Cost and scale
+
+- Design center: roughly 20k–50k canonical Items, not hypothetical internet scale.
+- Product target: at most approximately `€3 / 1,000 Items` variable processing under the defined measurement policy and approximately `€25/month` normal Corpus cash envelope, subject to later measured recalibration.
+- Human review is a cost even without an invoice.
+- Prefer deterministic/local/open-source first, content-addressed reuse, batching, caching, deferred enrichment, bounded crawling, and risk-triggered escalation.
+- Premium services are invoked only for defined high-impact ambiguity or failed cheaper gates, not every source/view/item.
+- Architecture must measure cost by productive/qualified output and failed/retried work, not only vendor invoices.
+
+### 3.13 Operations and design
+
+- Launch needs a minimal owner-only operations surface, not raw database surgery and not enterprise workflow.
+- One prioritized Inbox with specialized views, reusable record/review detail, Source Controls & Intake, scoped Reprocessing & Change Actions, and Corpus Health are the core areas.
+- Health is a vector; no scalar score can hide Q0/Q1, rights, quarantine, correctness, or regression blockers.
+- Complex comparison/review is desktop-first; responsive/accessibility behavior must match the design handoff.
+- Architecture must support design states without embedding a specific design-tool runtime.
+
+## 4. Required Outputs of This Master-Planning Run
+
+Create or reconcile all of the following in `m-elsharkawi/Bestehen-Corpus`.
+
+### 4.1 Architecture workflow plan
+
+Path:
+
+`Architecture/00-architecture-shaping-plan.md`
+
+It must contain:
+
+- purpose, scope, and explicit non-implementation boundary;
+- source manifest and authority/conflict rules;
+- product/design invariants;
+- architecture concern map and ownership matrix;
+- stage sequence, dependencies, parallel-safe work where any, and critical path;
+- output/ADR/prompt naming conventions;
+- design-to-architecture traceability approach;
+- Corpus → App contract reconciliation approach;
+- cost/security/benchmark research rules;
+- checklist mechanics and definition of done;
+- risk register for stage planning;
+- prompt index linking every stage number, title, output, prerequisites, and generated prompt;
+- any justified deviation from the recommended baseline.
+
+### 4.2 Live architecture checklist
+
+Path:
+
+`Bestehen_Corpus_Architecture_Checklist.md`
+
+The checklist must:
+
+- use one numbered section per architecture stage;
+- begin with every execution checkbox unchecked;
+- include concrete decisions and validations, not vague `design architecture` items;
+- give the exact output path for the stage;
+- name prerequisite stages and downstream consumers;
+- require ADRs only for durable choices;
+- require cost, security/privacy/rights, reliability/recovery, observability, testability, and App-contract implications where relevant;
+- include source/design traceability and Definition-of-Done checks;
+- support `Deferred — architecture/implementation decision:` and `Blocked — owner decision required:` notes;
+- include a final global completion section.
+
+Do not mark architecture-execution items complete during this master-planning run. The prompts/checklist exist; the stages have not yet been executed.
+
+### 4.3 One detailed prompt per architecture stage
+
+Directory:
+
+`prompts/architecture/`
+
+Create one `.txt` prompt for every checklist stage. The master prompt remains:
+
+`prompts/architecture/00_create_architecture_checklist_and_stage_prompts.txt`
+
+The generated prompts begin at Stage 01 and map one-to-one to checklist sections and Architecture outputs.
+
+### 4.4 Final-stage destination
+
+The final stage must produce:
+
+`Architecture/28-bestehen-corpus-architecture-specification.md`
+
+or the equivalently numbered path if a justified stage-count change is made.
+
+## 5. Recommended 28-Stage Architecture Baseline
+
+Use this baseline unless repository evidence justifies a better merge, split, or ordering. You may adjust it only if all capabilities remain covered, dependencies become clearer, prompts remain independently executable, checklist/prompt numbering remains one-to-one, and the workflow plan explains the change.
+
+Do not add stages for document count. Do not combine unrelated high-risk areas into one vague `data pipeline architecture` stage.
+
+### Stage 01 — Architecture Charter and Quality Attributes
+
+Owns: architecture principles; product/design invariants; one-owner/personal-project constraints; decision method; measurable quality-attribute scenarios; cost/security/quality budgets; ADR convention; assumptions; forbidden shortcuts.
+
+Output: `Architecture/01-architecture-charter-and-quality-attributes.md`
+
+### Stage 02 — System Context and Product Boundaries
+
+Owns: C4-style context; owner/operator, App, source web, file/media inputs, model/OCR/ASR services, storage, scheduler, operations UI, and future/non-goal boundaries; trust zones; runtime versus offline/batch paths; external dependency inventory.
+
+Output: `Architecture/02-system-context-and-product-boundaries.md`
+
+### Stage 03 — Technology Stack and Repository Strategy
+
+Owns: language/runtime/framework comparison; operations UI strategy; managed versus self-hosted services; repository/package/module organization; hosting/deployment candidates; local development; dependency policy; current official research; cash/operations/exit-risk comparison.
+
+Output: `Architecture/03-technology-stack-and-repository-strategy.md`
+
+### Stage 04 — Domain Model and Bounded Contexts
+
+Owns: ubiquitous language; bounded contexts/modules; ownership of acquisition, evidence, governance, processing, quality, identity/independence, analytics, publication, contracts, operations, benchmark, and cost; aggregates/value objects/policies; anti-corruption boundaries.
+
+Output: `Architecture/04-domain-model-and-bounded-contexts.md`
+
+### Stage 05 — Data Ownership, Persistence, Storage, and Schema Evolution
+
+Owns: logical data stores; relational/document/graph/vector/blob/search needs; identifiers/revisions; observed versus curated versus derived data; transactional boundaries; content addressing; migrations; historical correction; retention/deletion; backup/restore; no premature warehouse/polyglot sprawl.
+
+Output: `Architecture/05-data-ownership-persistence-storage-and-schema-evolution.md`
+
+### Stage 06 — Source Registry, Discovery, and Acquisition Architecture
+
+Owns: source observations/locations/families; automated discovery and owner URL/file intake; acquisition policy; provider/source prioritization; access/robots/rate-limit behavior; allow/block scopes; mirrors/dead sources; discovery budgets; no authenticated private crawling at launch.
+
+Output: `Architecture/06-source-registry-discovery-and-acquisition-architecture.md`
+
+### Stage 07 — Provenance, Authenticity, and Confidence Architecture
+
+Owns: claimed versus evidenced origin; categorical authenticity; confidence dimensions/tiers/caps; local/inherited evidence; corroboration/contradiction and independence; uncertainty/disputes; hard use gates; curated overrides; versioning and audit.
+
+Output: `Architecture/07-provenance-authenticity-and-confidence-architecture.md`
+
+### Stage 08 — Rights, Usage, Attribution, Takedown, and Removal Architecture
+
+Owns: operational rights statuses; action-level permissions/conditions; component/asset overrides; evidence/rationale; source expression versus abstract intelligence; attribution; legal-review state; takedown holds; suppression/purge/recompute; mirror/prevention fingerprint; no invented legal certainty.
+
+Output: `Architecture/08-rights-usage-attribution-takedown-and-removal-architecture.md`
+
+### Stage 09 — Canonical Exam, Content, Answer, and Asset Model
+
+Owns: Source Observation through Item hierarchy; shared instructions/stimuli/options; objective/rubric scoring; answer relationships; assets and dependencies; composite/partial exams; provider fidelity; completeness; source observations versus interpretations; stable IDs/revisions.
+
+Output: `Architecture/09-canonical-exam-content-answer-and-asset-model.md`
+
+### Stage 10 — Taxonomy, Difficulty, Relevance, and Versioning Architecture
+
+Owns: shared skill graph; multi-axis task/skill/grammar/vocabulary/topic/reasoning/distractor taxonomy; assignment roles/confidence/origin; governed node lifecycle/migrations; CEFR/difficulty/Generic-B1/TELC relevance separation; calibration and App mapping.
+
+Output: `Architecture/10-taxonomy-difficulty-relevance-and-versioning-architecture.md`
+
+### Stage 11 — Pipeline Orchestration, State Machines, Idempotency, and Reprocessing
+
+Owns: lifecycle orchestration; unit-of-work/scoping; jobs/events/queues/scheduler decisions; state machines; partial success; idempotency/dedup of work; retries/defer/review/hold/quarantine; version lineage; scoped replay from earliest affected stage; stale/recompute propagation; curator conflicts.
+
+Output: `Architecture/11-pipeline-orchestration-state-idempotency-and-reprocessing.md`
+
+### Stage 12 — Secure Fetch, File, Archive, and Content Intake
+
+Owns: SSRF/redirect/DNS/network egress controls; file sniffing/type/size; malware scanning/sandbox boundaries; archive bomb/path traversal/password protection; macro/active-content neutralization; HTML sanitization; object quarantine; security preflight; safe preview/transfer; acquisition secret isolation.
+
+Output: `Architecture/12-secure-fetch-file-archive-and-content-intake.md`
+
+### Stage 13 — Document, Image, OCR, Layout, and Structure Extraction
+
+Owns: normalization; native PDF/DOCX/image/scanned PDF paths; OCR/layout/table/reading-order extraction; segmentation to canonical scope; multilingual/German fidelity; partial/error results; method selection/escalation; artifact/version lineage; benchmark slices; manual fallback.
+
+Output: `Architecture/13-document-image-ocr-layout-and-structure-extraction.md`
+
+### Stage 14 — Audio, Video, ASR, and Media Processing
+
+Owns: audio/video discovery and extraction; ASR/caption/source-script alignment; segmentation; acoustic versus script evidence; media metadata/format storage; missing/broken assets; local/external processing privacy/rights; large-media budgets; deterministic/cache/batch strategy; qualification.
+
+Output: `Architecture/14-audio-video-asr-and-media-processing.md`
+
+### Stage 15 — Semantic Enrichment, Classification, and Answer Mapping
+
+Owns: task/provider/level classification; taxonomy candidates; answer/key/scoring links; grammar/vocabulary/topic/reasoning/distractor enrichment; difficulty/relevance estimates; deterministic versus model-assisted stages; structured outputs; confidence/disagreement/escalation; prompt injection isolation; no fabricated truth.
+
+Output: `Architecture/15-semantic-enrichment-classification-and-answer-mapping.md`
+
+### Stage 16 — Duplicate, Derivative, Identity, and Analytical Independence
+
+Owns: exact/near/structural/semantic/media detection; content identity and lineage; fragment/reformatted/derivative/related-variant states; clustering; canonical provenance anchor versus preferred processing representation; metric-specific independence; reversible review; recalculation and benchmark thresholds.
+
+Output: `Architecture/16-duplicate-derivative-identity-and-analytical-independence.md`
+
+### Stage 17 — Validation, QA, Findings, and Capability-Scoped Publication
+
+Owns: quality model; Q0–Q3 findings; structural/correctness/taxonomy/OCR/ASR/asset/dedup gates; validation scopes; quarantine/restore; capability eligibility; promotion/revocation; local defect propagation; publication manifests/versions; incident response and no universal ready flag.
+
+Output: `Architecture/17-validation-qa-findings-and-capability-scoped-publication.md`
+
+### Stage 18 — Analytics and Exam-Intelligence Architecture
+
+Owns: evidence-aware aggregations; independent/weighted denominators; decision-grade versus exploratory envelopes; vocabulary/grammar/topic/task/skill/provider/progression/TELC-vs-generic/reasoning/distractor/co-occurrence/difficulty families; recomputation; reproducibility; source concentration; explainability; no mirror inflation.
+
+Output: `Architecture/18-analytics-and-exam-intelligence-architecture.md`
+
+### Stage 19 — Corpus → App Contract, API, Bundles, Compatibility, and Change Propagation
+
+Owns: capability catalogue; request/response envelopes; pattern-first blueprints; raw/reference exceptional path; eligibility/governance envelope; stable IDs/revisions/contract versions; bundle/cache/offline delivery; compatibility; reclassification/removal/taxonomy/target-format changes; App reconciliation and Corpus downtime.
+
+Output: `Architecture/19-corpus-app-contract-api-bundles-and-change-propagation.md`
+
+### Stage 20 — Operations Console, Review Workflows, Audit, and Source Controls
+
+Owns: design-to-component/module mapping; Inbox/saved views; record/review detail; source intake/controls; governed actions; rationale; audit queries; reprocessing/change-impact UI states; health integration; owner authentication; polling/realtime choice; desktop/accessibility; no raw-row surgery or enterprise workflow.
+
+Output: `Architecture/20-operations-console-review-audit-and-source-controls.md`
+
+### Stage 21 — Benchmark, Gold Data, Reproducibility, and Capability Qualification
+
+Owns: instantiate/version seed and gold core; lawful source manifest; annotations/adjudication; dev/holdout split; negative/uncertain cases; immutable releases; evaluation harness; thresholds by capability/slice; incident replay; candidate promotion; benchmark retirement/takedown; reproducible lineage.
+
+Output: `Architecture/21-benchmark-gold-data-reproducibility-and-capability-qualification.md`
+
+### Stage 22 — AI and Automation Gateway, Model Governance, and Cost Controls
+
+Owns: local/deterministic/cheap-first ladder; provider/model abstraction where justified; capability routing; structured schemas; prompt/model versions; batching/cache/dedup; confidence/disagreement; one/escalation limits; paid-job gating; cost ledger; circuit breakers/fallback; benchmark release gates; vendor substitution.
+
+Output: `Architecture/22-ai-automation-gateway-model-governance-and-cost-controls.md`
+
+### Stage 23 — Security, Privacy, Access, Secrets, Retention, and Threat Model
+
+Owns: end-to-end data-flow/threat model; operator authentication/authorization; secrets; least privilege; source/model/operations trust zones; personal-data minimization/redaction; retention/deletion proof; encryption; audit/security logging; dependency/supply chain; abuse/rate limits; future public/multi-user triggers; no fake compliance.
+
+Output: `Architecture/23-security-privacy-access-secrets-retention-and-threat-model.md`
+
+### Stage 24 — Observability, Performance, Reliability, Backup, and Cost Operations
+
+Owns: structured logs/metrics/traces; pipeline/run/capability health; SLO-style quality scenarios appropriate to one owner; stuck work/alerts; latency/throughput/capacity envelopes; graceful degradation; storage lifecycle; backups/restore drills; provider outage; cost attribution/budgets/alerts; low-ops runbooks.
+
+Output: `Architecture/24-observability-performance-reliability-backup-and-cost-operations.md`
+
+### Stage 25 — Testing, Evaluation, and Quality Gates
+
+Owns: test strategy; domain invariants/property/state-machine tests; parser/OCR/ASR/model/dedup evaluations; contract/schema/migration tests; security/adversarial inputs; rights/takedown/reprocessing tests; operations UI/accessibility/browser tests; performance/cost regressions; benchmark/holdout discipline; release-blocking gates.
+
+Output: `Architecture/25-testing-evaluation-and-quality-gates.md`
+
+### Stage 26 — Environments, CI/CD, Release, and Operations
+
+Owns: local/dev/preview/staging/production/benchmark environments; configuration/secrets; infrastructure/data/schema/taxonomy/model/contract releases; deployment/migration order; feature flags; rollback; scheduled jobs; backup/restore; dependency updates; incident/change runbooks; personal-project maintenance.
+
+Output: `Architecture/26-environments-ci-cd-release-and-operations.md`
+
+### Stage 27 — End-to-End Architecture Validation
+
+Owns: validate representative source-to-App scenarios; failure/recovery/security/rights/cost/accessibility walkthroughs; design Flows A–H; cross-stage state/version/ownership consistency; dependency-cycle review; reconcile App interface; amend earlier architecture docs when necessary; prove no product invariant is left to implementation invention.
+
+Output: `Architecture/27-end-to-end-architecture-validation.md`
+
+### Stage 28 — Final Architecture Specification and Implementation Roadmap
+
+Owns: consolidate all stages into the authoritative implementation-facing Corpus architecture; C4/component/data/deployment views; state/contract/version ownership; ADR index; security/rights/privacy/benchmark/reliability/cost requirements; phased vertical implementation slices; dependency/critical path; bootstrap `corpus-benchmark-1.0.0`; risk register; open questions; traceability and Definition-of-Done audit.
+
+Output: `Architecture/28-bestehen-corpus-architecture-specification.md`
+
+## 6. Checklist Design Requirements
+
+For every stage section, include:
+
+1. **Objective** — the exact architectural uncertainty removed.
+2. **Inputs** — shaping/design/architecture sources to read.
+3. **Decisions** — granular checkboxes for the owned choices.
+4. **Product invariants** — relevant rules that cannot be reopened.
+5. **Research/evidence** — current official sources or benchmark work required.
+6. **Alternatives and rationale** — options compared and chosen default.
+7. **Contracts/state/ownership** — data, version, API/event/job, and responsible component implications.
+8. **Failure/recovery** — degraded, partial, retry, hold, quarantine, stale, and correction behavior.
+9. **Security/privacy/rights** — stage-specific threat and retention implications.
+10. **Performance/reliability/observability/cost** — measurable implications and cheap fallback.
+11. **Testing/validation** — proof the decision works and preserves Corpus truth.
+12. **ADRs** — only durable decisions needing a record.
+13. **Output and downstream handoff** — exact Markdown path and consumers.
+14. **Definition of Done** — traceability and checklist reconciliation.
+
+Checklist items must describe observable decisions. Avoid `choose database`, `define pipeline`, `consider security`, or `document API` without naming the required outcomes.
+
+## 7. Mandatory Template for Every Generated Stage Prompt
+
+Every prompt must be a self-contained executable handoff, not a paragraph copied from the stage list.
+
+### 7.1 Header and role
+
+Begin with:
+
+`# Agent Prompt — Bestehen / Corpus Architecture — Stage XX of YY`
+
+Then the stage title and a role appropriate to the concern, such as data architect, security architect, ML/platform architect, integration architect, or frontend/internal-tools architect.
+
+State clearly that the stage is **architecture decision work, not production implementation**. Small pseudocode, conceptual schemas, contract examples, queries, Mermaid diagrams, and decision tables are allowed when they clarify architecture. Do not write production code or perform deployments.
+
+### 7.2 Compact project context
+
+Every prompt must restate enough context to stand alone:
+
+- Corpus mission and App relationship;
+- single-owner personal-project phase;
+- six independent truth axes;
+- uncertainty/locality/capability-scoped publication;
+- pattern-first App contract;
+- no learner data and untrusted-input boundary;
+- cheap-first measured cost posture.
+
+### 7.3 Mandatory GitHub reads
+
+Each prompt must require reading:
+
+- `Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`;
+- `Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md`;
+- `Bestehen_Corpus_Architecture_Checklist.md`;
+- `Bestehen-Corpus/Design/DESIGN-HANDOFF.md` or current equivalent;
+- every prior Architecture output named as a prerequisite;
+- stage-specific Corpus shaping files;
+- stage-specific design artifacts/anchors;
+- current ADR index/relevant ADRs;
+- current App contract architecture where the stage touches integration.
+
+Do not tell all stages merely to `read relevant files`. List exact paths and what contract each contributes. Stage 28 must read all previous architecture outputs.
+
+### 7.4 Concrete decisions and prohibitions
+
+List specific questions the stage must settle, including alternatives, recommended default, ownership, state/version flow, failure/recovery, security/rights/privacy, testing, observability, cost, and downstream consequences.
+
+State what it must not reopen and which decisions belong to later stages. Require explicit treatment of partial/unknown/provisional states rather than happy-path diagrams only.
+
+### 7.5 Current research
+
+When choices depend on mutable facts—vendor pricing, service limits, framework support, security guidance, file/media format support, hosting limits, model/OCR/ASR capabilities, browser accessibility behavior, licensing—require web research using **primary official sources** and record links/access dates.
+
+Do not browse for stable product rules already in the repository. Do not accept blog comparisons as sole evidence for a durable platform choice. Preserve uncertainty where a benchmark is needed.
+
+### 7.6 Exact deliverable
+
+Name one primary Markdown path under `Architecture/`. If ADRs or appendices may be required, name their directory and conventions. Require current-file fetch/SHA-safe amendment if the output already exists.
+
+### 7.7 Normal deliverable structure
+
+Every stage output should normally contain:
+
+1. Purpose and Scope
+2. Inputs, Source Traceability, and Constraints
+3. Architecture Decisions and Rationale
+4. Alternatives Considered
+5. Components, Boundaries, and Ownership
+6. Data, State, Contracts, and Versioning
+7. Processing/Interaction Flows and State Transitions
+8. Failure, Partial Success, Recovery, and Uncertainty
+9. Security, Privacy, Rights, and Abuse Considerations
+10. Performance, Reliability, Observability, Operations, and Cost
+11. Testing, Benchmark, and Validation Strategy
+12. Diagrams and Decision Tables
+13. ADRs Created or Superseded
+14. Relationship to Earlier and Later Stages
+15. Decisions Made
+16. Open Questions / Implementation Deferrals
+17. Definition of Done Check
+
+Adapt headings where the stage is narrower, but never omit substance relevant to it.
+
+Use Mermaid for C4-style context/container/component views, data lineage, state machines, sequences, deployment, and trust boundaries. Use tables for mappings, ownership, alternatives, failure matrices, versions, and cost comparisons. Do not use ASCII-box diagrams.
+
+### 7.8 Live-checklist workflow — mandatory
+
+Every generated prompt must instruct its agent to:
+
+1. fetch and review the complete stage checklist section before decisions;
+2. update each checkbox from `[ ]` to `[x]` only after the decision is captured in the stage output or an explicitly referenced artifact;
+3. perform checklist writes sequentially with the current blob SHA;
+4. leave genuine implementation-only items unchecked with `Deferred — architecture/implementation decision:` and a reason;
+5. leave owner-blocked items unchecked with `Blocked — owner decision required:` and the precise question plus recommended default;
+6. re-fetch the checklist at the end and reconcile every item with the committed output;
+7. avoid modifying unrelated stages except where a documented cross-stage correction requires it.
+
+### 7.9 Handoff requirements
+
+Every stage prompt must require:
+
+- concise decisions-made summary;
+- ADR list;
+- assumptions and empirical calibration needs;
+- unresolved risks/questions;
+- cost-sensitive choices and cheaper fallback;
+- exact downstream dependencies;
+- contradictions found and resolution authority;
+- confirmation of output/checklist commits.
+
+## 8. Architecture Decision Record Strategy
+
+Use lightweight ADRs under:
+
+`Architecture/adr/ADR-0001-short-title.md`
+
+The workflow plan should define a small template: Status, Context, Decision, Alternatives, Consequences, Product/Design Traceability, Cost, Security/Rights/Privacy, Validation, Supersedes/Superseded by.
+
+Create ADRs only for durable cross-cutting choices such as primary data store, content/blob addressing strategy, pipeline orchestration model, execution isolation boundary, deployment topology, API/bundle contract style, operations UI strategy, model-provider abstraction, and benchmark release method. Do not create an ADR for every checkbox. Supersede rather than delete decisions.
+
+## 9. Cost-Control Requirements for the Prompt Pack
+
+Architecture must preserve Corpus quality without designing an enterprise platform or an always-on AI bill.
+
+Every cost-sensitive stage prompt must require:
+
+- workload assumptions tied to the low/base/high product envelopes;
+- recurring cash, variable processing, storage/egress, human-review, and maintenance-time costs;
+- cost per productive/qualified Item or capability output;
+- retry/failure/reprocess cost visibility;
+- free/cheap default and upgrade trigger;
+- caching/content-addressed reuse/batching/deferred work strategy;
+- spending caps or paid-job gates where the product requires them;
+- current official pricing research without inventing permanent prices.
+
+Preferred default pattern:
+
+1. deterministic rule/parser/hash/metadata work;
+2. local/open-source processing where operationally sane;
+3. cached/batched inexpensive managed capability;
+4. selective stronger model/service;
+5. human review for high-impact ambiguity/gold truth.
+
+Reject by default unless evidence justifies:
+
+- premium AI/OCR/ASR on every source/item;
+- live model inference for ordinary App requests or operations-page loads;
+- unbounded crawling, archive expansion, retries, or backfills;
+- full-video understanding where audio/captions/selected frames suffice;
+- multiple specialized managed services before measured need;
+- microservices per domain in a one-owner project;
+- premature lakehouse/warehouse/streaming platform/vector database;
+- duplicate storage/processing without content-addressed reuse;
+- high-scale infrastructure for hypothetical millions of records;
+- vendor lock-in without export/replay/benchmark fallback.
+
+Paying more is justified for current target correctness, benchmark/gold truth, unique high-value evidence, rights/takedown/security handling, or measured labor/reliability savings that exceed the added cost.
+
+## 10. Security, Privacy, Rights, and Safety Requirements
+
+The prompt pack must force security to appear early in intake/pipeline design and later as an end-to-end threat-model/release concern.
+
+Require:
+
+- data-flow and trust-boundary diagrams;
+- untrusted-input policy before parsing/model processing;
+- SSRF/redirect/DNS/egress protections;
+- file magic/type/size and archive-bound controls;
+- non-execution/sanitization of HTML, Office macros, PDF embedded content, archives, scripts, and active media;
+- prompt-injection isolation and tool/output validation;
+- quarantine, content-security finding, and safe-preview boundaries;
+- least privilege, source-data/secret separation, credential redaction, and environment isolation;
+- owner authentication proportional to risk;
+- auditability for high-impact rights/security/curation actions;
+- conservative rights/attribution/takedown propagation;
+- no learner data and minimal incidental personal-data retention;
+- export/deletion/retention mechanics where applicable;
+- supply-chain/dependency/image/model artifact governance;
+- backup/restore and deletion proof;
+- incident response proportional to a personal project;
+- explicit triggers before public submissions, multiple operators, commercial reuse, or paid/private crawling can be added.
+
+Do not claim legal compliance or complete malware safety without evidence. Define technical controls, remaining risk, and when legal/security expertise becomes necessary.
+
+## 11. Validation Requirements for the Master-Planning Run
+
+Before finishing, validate the planning artifacts from current GitHub state.
+
+### 11.1 Source reconciliation
+
+- every Corpus stage document was read and mapped;
+- final product spec is the authority for consolidated behavior;
+- design artifacts were read as product-design specifications;
+- generated previews/duplicates were not treated as independent authority;
+- every design open decision was reconciled against the PRD;
+- relevant App boundary artifacts were checked and incompatibilities recorded;
+- no shaping/design files were modified.
+
+### 11.2 Concern ownership
+
+Create a matrix proving each concern has one primary stage owner and named consumers:
+
+- mission/context/quality attributes;
+- stack/repository/deployment candidates;
+- domain/data/storage/versioning;
+- sources/discovery/acquisition;
+- provenance/authenticity/confidence;
+- rights/takedown;
+- canonical structure/answers/assets;
+- taxonomy/difficulty/relevance;
+- orchestration/idempotency/reprocessing;
+- secure intake;
+- document/OCR/layout extraction;
+- audio/video/ASR;
+- semantic enrichment/answer mapping;
+- duplicate/derivative/independence;
+- QA/capability publication;
+- analytics;
+- App contract/change propagation;
+- operations/review/audit/design;
+- benchmark/gold/reproducibility;
+- AI/model governance/cost;
+- security/privacy/retention;
+- observability/reliability/performance/backup/cost;
+- testing/evaluation;
+- environments/CI/CD/release;
+- end-to-end validation/final specification.
+
+No stage may depend on a later undecided stage without an explicit temporary assumption and reconciliation point. Avoid cycles.
+
+### 11.3 Checklist/prompt consistency
+
+- checklist stage count equals generated prompt count;
+- stage numbering, titles, outputs, and prerequisites match exactly;
+- every prompt has one exact output path;
+- every checklist output exists in the prompt index;
+- prerequisites point to earlier stages or explicit external sources;
+- every prompt contains the sequential live-checklist workflow;
+- no prompt writes to `Bestehen-Shaping`, `Bestehen-App`, or Corpus design files;
+- no prompt asks for production implementation;
+- all planning files are actually committed to `Bestehen-Corpus`.
+
+### 11.4 Architecture completeness test
+
+Use representative questions to detect missing ownership:
+
+- How can an official source be reference-only without losing authenticity evidence?
+- How is a disputed answer blocked for correctness while its language/topic evidence remains usable?
+- How are 20 mirrors preserved yet counted as one occurrence?
+- How can a re-recorded listening script be dependent for language but independent for acoustic evidence?
+- How do stable IDs and revisions survive reprocessing, taxonomy migration, and contract publication?
+- How does a curator override survive a rerun and surface a conflict?
+- How is reprocessing started at the earliest affected stage without erasing unaffected outputs?
+- How does a rights-only removal differ from trust/correctness invalidation downstream?
+- How is a mirror prevented from reintroducing takedown material?
+- How do untrusted PDFs/DOCX/ZIP/HTML/media reach parsers/models without active execution or SSRF?
+- How are source-text prompt injections prevented from invoking tools or changing policy?
+- How does capability-scoped publication travel through caches/bundles to App?
+- How does App behave when Corpus is unavailable or no decision-grade pattern exists?
+- How are taxonomies shared without Corpus receiving learner data or cloning mastery after a node split?
+- How is `corpus-benchmark-1.0.0` bootstrapped, versioned, and used for candidate promotion?
+- How does a failed benchmark slice block only the relevant capability/scope?
+- How are model/OCR/ASR/processing costs bounded, attributed, and deferred when budget is exhausted?
+- How can the one owner operate safely without editing raw database rows?
+- How do design tables, comparisons, governed actions, and keyboard paths map to architecture without per-view backend forks?
+- What is backed up, reproducible from raw evidence, intentionally ephemeral, suppressed, or physically deleted?
+
+If no stage owns an answer, the plan is incomplete.
+
+## 12. GitHub Web Execution Requirements — Mandatory
+
+This master prompt is intended for a web agent using the GitHub connector.
+
+- Treat all referenced repositories' `main` branches as current source of truth.
+- Do not assume a local checkout, mounted filesystem, prior-chat attachment, or stale cached file.
+- Read current contents before changing an existing text file.
+- Use current blob SHA for updates.
+- Do not run parallel writes against the same path.
+- Distinct new files may be created independently; checklist updates must remain sequential.
+- Work directly on `Bestehen-Corpus/main` unless the owner explicitly requests a branch/PR.
+- Use clear commits, for example:
+  - `Corpus architecture planning: add workflow plan`
+  - `Corpus architecture planning: add architecture checklist`
+  - `Corpus architecture planning: add stage 01–07 prompts`
+- Do not modify `m-elsharkawi/Bestehen-Shaping`.
+- Do not modify `m-elsharkawi/Bestehen-App`.
+- Do not modify files under `Bestehen-Corpus/Design/`.
+- If a target exists, fetch/reconcile/update it with its current SHA rather than blindly replacing it.
+- Completion requires actual GitHub writes; do not merely paste proposed artifacts in chat.
+
+## 13. Decision-Making Rules
+
+- Make normal planning decisions through architecture reasoning; do not turn every trade-off into an owner question.
+- Prefer the simplest stage structure that preserves complete coverage and clean dependencies.
+- Separate product truth, design expression, architecture decisions, calibration parameters, benchmark evidence, and implementation details.
+- Do not let design artifacts accidentally mandate backend frameworks or data stores.
+- Do not let architecture simplify away uncertainty, local scope, capability eligibility, rights, independence, audit, or partial success.
+- Do not copy design-tool HTML/JavaScript/runtime patterns into the production plan.
+- Do not choose vendors from memory when pricing, limits, supported formats, licensing, security guidance, or platform behavior may have changed.
+- When multiple options are reasonable, require comparison and recommend the best personal-project default.
+- Prefer boring, maintainable, replaceable components over fashionable distributed systems.
+- Preserve empirical calibration rather than inventing precise thresholds not supported by the benchmark.
+- Record contradictions with exact paths and resolution authority.
+- If a critical owner question remains, ask precisely, explain impact, and give a recommended default so work can continue if accepted.
+
+## 14. Final Response Requirements
+
+At the end of the master-planning run, report:
+
+1. the workflow-plan document created or amended;
+2. the architecture checklist created or amended;
+3. the number of architecture stages and prompts created;
+4. the prompt directory and final-stage output path;
+5. any deviation from the recommended 28-stage baseline and why;
+6. any source contradiction, design assumption, or App-contract mismatch later agents must know;
+7. any owner question that remains;
+8. confirmation that the checklist and prompt pack match one-to-one and were re-verified from current GitHub state.
+
+The task is complete only when `m-elsharkawi/Bestehen-Corpus` contains a coherent architecture workflow plan, a complete live checklist, and one detailed executable prompt per stage. Later architect agents must be able to shape the complete Corpus architecture from product and design truth without guessing workflow, collapsing evidence semantics, losing the App boundary, violating rights/security, or overbuilding a personal project.
