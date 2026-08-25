@@ -1,0 +1,48 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 16 of 28
+## Define Duplicate, Derivative, Identity, and Analytical Independence
+
+You are the identity/analytics architect responsible for **Stage 16: Duplicate, Derivative, Identity, and Analytical Independence**.
+
+Define how Corpus detects exact/near duplicates and derivative relationships while preserving all observations and computing metric-specific independence correctly. This is **architecture decision work, not implementation**. Do not write similarity code/indexes, provision vector/search services, create resources/accounts/keys, deploy or make live calls.
+
+## App implementation reuse and no-provisioning rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse selected Stage 03 runtime, PostgreSQL/R2/Coolify and existing provider account family by default. Python is fully acceptable if selected. **Do not add a vector database, managed similarity service or search cluster unless measured Stage 16 needs cannot be met by hashes, ordinary PostgreSQL indexes/extensions and bounded batch computation.** New vendor/account requires evidence, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Deduplication never deletes Source Observations. Exact duplicate, near duplicate, derivative/re-recorded/adapted relationships and analytical independence are distinct. Independence depends on the metric: lexical/content dependence may differ from acoustic/form/provider independence. Mirror count never equals corroboration/prevalence. Historical cluster decisions are auditable/revisable.
+
+## Mandatory reads
+
+Read Corpus shaping Stages 02,03,05,07,09,10,11,16,17; Architecture 05,07,09–15; full Stage 16 checklist; design duplicate workbench/state/flow artifacts; reuse policy/App handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define stable content identity/fingerprint layers for bytes, normalized text, structural item representation, media fingerprints and semantic features.
+2. Define exact duplicate versus near-duplicate candidate generation, evidence and threshold releases without hardcoding uncalibrated constants.
+3. Define derivative relationship types: mirror/copy, reformatted, excerpted, translated/adapted, answer-key variation, re-recorded audio, same script/new audio, same item/new wrapper and other product-defined families.
+4. Preserve every observation/location and choose canonical/preferred processing records separately from evidence count.
+5. Define cluster IDs/revisions, merge/split/review/supersession and manual override behavior.
+6. Define **metric-specific independence** policies for prevalence/frequency, structural corroboration, lexical evidence, acoustic evidence, source/provider diversity and benchmark holdouts.
+7. Define how unresolved duplicate candidates affect analytics/publication: uncertainty propagates to affected metric only.
+8. Define cheap-first detection: checksums/exact normalized hashes → deterministic structural/text similarity → bounded local embeddings/features if useful → model review only for unresolved high-value cases.
+9. If embeddings are used, evaluate local batch vectors stored in PostgreSQL/ordinary files before any vector DB. Do not introduce a new service merely for 20k–50k Items.
+10. Define reprocessing/versioning when normalization/feature/model/threshold release changes without rewriting historical decisions.
+11. Define operations comparison evidence and explanation for merge/split decisions.
+
+## Alternatives / cost
+
+Compare hash/rule/PostgreSQL batch similarity, local embedding similarity, and dedicated vector/search infrastructure. Prefer simplest current-scale solution. Include compute/storage cost, owner review time and **App implementation reuse assessment**.
+
+## Failure/security/testing
+
+Cover hash collision suspicion, giant clusters, transitive overmerge, false split, source mirror storms, model/embedding drift and contradictory reviewer decisions. Tests must prove observation preservation, metric-specific independence, merge/split reversibility, no trust/rights side effects and benchmark family separation.
+
+## Deliverable
+
+Create/amend `Architecture/16-duplicate-derivative-identity-and-analytical-independence.md` with normal 17-part structure. Include identity/fingerprint ladder, derivative taxonomy, cluster state machine, metric-independence matrix, alternatives/cost, failure matrix, benchmark requirements and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 16 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report decisions, ADRs, threshold/benchmark needs, no-new-service result or exception, risks, downstream dependencies and commits.
