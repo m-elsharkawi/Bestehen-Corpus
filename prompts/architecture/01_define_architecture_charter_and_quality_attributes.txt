@@ -3,9 +3,9 @@
 
 You are the lead data/platform architect responsible for **Stage 01: Architecture Charter and Quality Attributes** of **Bestehen / Corpus**.
 
-Your job is to remove ambiguity about the architecture principles, measurable quality priorities, personal-project limits, forbidden shortcuts, decision method, and durable architecture conventions that every later stage must obey.
+Your job is to remove ambiguity about architecture principles, measurable quality priorities, personal-project limits, forbidden shortcuts, decision method, and durable architecture conventions that every later stage must obey.
 
-This is **architecture decision work, not production implementation**. Do not write production crawler, parser, database, API, worker, UI, infrastructure, or model code. Small pseudocode, conceptual schemas, Mermaid diagrams, decision tables, and example quality scenarios are allowed only when they clarify architecture.
+This is **architecture decision work, not production implementation**. Do not write production crawler, parser, database, API, worker, UI, infrastructure, or model code. Do not provision, configure, deploy, create accounts/resources/keys, enter provider dashboards, or make live provider calls. Small pseudocode, conceptual schemas, Mermaid diagrams, decision tables, and example quality scenarios are allowed only when they clarify architecture.
 
 ## Project context you must preserve
 
@@ -13,148 +13,92 @@ Bestehen / Corpus is the exam-data and intelligence product behind Bestehen / Ap
 
 This is initially a **single-owner personal project**. Architecture must therefore be cheap to operate, easy to understand and replay, and deliberately resistant to enterprise-style overbuilding.
 
-Six truth axes must remain independent in every later data model, aggregate, index, API, cache and UI state:
-
-1. source/provenance;
-2. authenticity/evidence confidence;
-3. rights/usage;
-4. difficulty plus Generic-B1/TELC relevance;
-5. extraction/QA readiness by capability;
-6. content identity, derivative lineage and metric-specific analytical independence.
-
-`unknown`, `not_applicable`, `disputed`, `review_required`, `unresolved_dependency`, `incomplete`, `provisional` and equivalent explicit non-final states are first-class. Evidence is local: a trusted parent cannot rescue a defective child, and one local defect must not invalidate unrelated sibling capabilities. Publication is capability-scoped; there is no universal `production_ready=true`.
+Six truth axes must remain independent in every later data model, aggregate, index, API, cache and UI state: source/provenance; authenticity/evidence confidence; rights/usage; difficulty plus Generic-B1/TELC relevance; extraction/QA readiness by capability; and content identity/derivative lineage/metric-specific analytical independence. Unknown/disputed/review-required/incomplete/provisional states are first-class. Publication is capability-scoped; there is no universal `production_ready=true`.
 
 The normal Corpus → App contract is **pattern-first and learner-data-free**. Corpus must not receive learner profiles/attempts/Readiness, and ordinary App sessions must not trigger live Corpus inference. Every external source/file/media/model input is untrusted. The cost posture is deterministic/local/cheap-first, with measured escalation and bounded paid work.
 
+## App implementation reuse and no-provisioning rule — mandatory
+
+Read `m-elsharkawi/Bestehen-Corpus/Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and the current Bestehen / App implementation provider handoff/runbook before any tooling/provider/account decision.
+
+Current accepted App implementation reality is the reusable default: GitHub/GitHub Actions; the existing two-VM Coolify deployment boundary; Pangolin private ingress; Node.js/TypeScript/pnpm; PostgreSQL/Kysely/pg-boss; Cloudflare R2 EU; Auth0 EU; AWS SES Frankfurt; Gemini; OpenAI STT/TTS; Docker/Compose; deterministic fake adapters; and existing owner secret-custody conventions. Treat the App provider setup as an accepted implementation/runbook baseline, not proof that every external resource is already live.
+
+Default order: **no new service → reuse the existing App tool/account/billing relationship → if isolation is necessary, use a separate least-privilege Corpus resource inside the same account → only then consider a new vendor/account**. A new vendor/account requires a measured Corpus-specific blocker, explicit incremental cash/owner-operations cost, an ADR, and an exit path.
+
+“Same account” does not mean reuse one database, bucket, API key or auth client when that would broaden access or mix learner/source data. Preserve least privilege and cross-product isolation while avoiding duplicate subscriptions/control planes.
+
 ## GitHub web execution requirements — mandatory
 
-Use GitHub as the current source of truth.
+- Read-only product source: `m-elsharkawi/Bestehen-Shaping/main`.
+- Architecture/design target: `m-elsharkawi/Bestehen-Corpus/main`.
+- App implementation/reference: `m-elsharkawi/Bestehen-App/main`, read-only.
+- Do not assume a local checkout or stale previous-chat content.
+- Fetch current file/SHA before updates and never parallel-write the same path.
+- Do not modify Shaping, App or `Bestehen-Corpus/Design/`.
+- Completion requires actual GitHub commits for output, justified ADR/index changes, and checklist updates.
 
-- Read-only product source: `m-elsharkawi/Bestehen-Shaping`, branch `main`.
-- Architecture/design target: `m-elsharkawi/Bestehen-Corpus`, branch `main`.
-- App reference when needed: `m-elsharkawi/Bestehen-App`, branch `main`, read-only.
-- Do not assume a local checkout, mounted filesystem, previous-chat attachment, or stale cached content.
-- Before modifying an existing text file, fetch its current contents and current blob SHA.
-- Use the current SHA for updates. Do not run parallel writes against the same path.
-- Work directly on `main` unless the owner explicitly changes the workflow.
-- Do **not** modify `Bestehen-Shaping`, `Bestehen-App`, or anything under `Bestehen-Corpus/Design/`.
-- Completion requires actual GitHub commits for the stage output, any ADR/index changes, and the live checklist update.
+## Mandatory reads
 
-## Mandatory reads — read before deciding
+Read current versions of:
 
-Read these exact current paths:
-
-### Product truth
-- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md` — consolidated Corpus product authority.
-- `m-elsharkawi/Bestehen-Shaping/corpus/01-product-mission-and-boundaries.md` — mission, scope and non-goals.
-- `m-elsharkawi/Bestehen-Shaping/corpus/12-corpus-app-contract.md` — pattern-first App boundary.
-- `m-elsharkawi/Bestehen-Shaping/corpus/14-cost-scale-and-automation.md` — scale and cash/processing constraints.
-- `m-elsharkawi/Bestehen-Shaping/corpus/15-security-privacy-and-abuse-boundaries.md` — untrusted-input and privacy boundary.
-- `m-elsharkawi/Bestehen-Shaping/corpus/16-initial-corpus-benchmark.md` — qualification and benchmark obligations.
-- `m-elsharkawi/Bestehen-Shaping/01_Bestehen_Product_Overview.md`.
-- `m-elsharkawi/Bestehen-Shaping/02_Bestehen_Identity.md`.
-
-### Architecture workflow and design
-- `m-elsharkawi/Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md` — source manifest, authority order, dependencies and planning risks.
-- `m-elsharkawi/Bestehen-Corpus/Bestehen_Corpus_Architecture_Checklist.md` — read the **complete Stage 01 section** before work.
-- `m-elsharkawi/Bestehen-Corpus/Design/DESIGN-HANDOFF.md` — behavioral/design invariants.
-- `m-elsharkawi/Bestehen-Corpus/Design/Corpus-00-Cover-Principles.dc.html` — six axes and design principles.
-- `m-elsharkawi/Bestehen-Corpus/Design/Corpus-09-Coverage-Handoff.dc.html` — load-bearing decisions, assumptions and deferred design scope.
-- `m-elsharkawi/Bestehen-Corpus/Architecture/adr/README.md` — ADR convention and current index.
-
-If any path has changed, discover the current equivalent, record the change, and do not silently rely on stale names.
+- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
+- `corpus/01-product-mission-and-boundaries.md`
+- `corpus/12-corpus-app-contract.md`
+- `corpus/14-cost-scale-and-automation.md`
+- `corpus/15-security-privacy-and-abuse-boundaries.md`
+- `corpus/16-initial-corpus-benchmark.md`
+- `01_Bestehen_Product_Overview.md`
+- `02_Bestehen_Identity.md`
+- `m-elsharkawi/Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md`
+- `m-elsharkawi/Bestehen-Corpus/Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`
+- `Bestehen_Corpus_Architecture_Checklist.md` — complete Stage 01 section
+- `Design/DESIGN-HANDOFF.md`
+- `Design/Corpus-00-Cover-Principles.dc.html`
+- `Design/Corpus-09-Coverage-Handoff.dc.html`
+- `Architecture/adr/README.md`
+- `m-elsharkawi/Bestehen-App/Implementation/Personal/02-provider-service-setup/handoff.md`
+- `m-elsharkawi/Bestehen-App/docs/setup/personal/README.md`
+- `m-elsharkawi/Bestehen-App/.env.example`
 
 ## Product/design decisions you must not reopen
 
-Do not redefine Corpus as a learner product, a public mirror or a generic scraper. Do not merge confidence with rights, source volume with independence, or QA with trust. Do not introduce learner data, a universal ready flag, live per-session Corpus inference, automatic publication from model output, active execution of source content, or an enterprise budget/scale assumption.
+Do not redefine Corpus as a learner product, public mirror or generic scraper. Do not merge confidence with rights, source volume with independence, or QA with trust. Do not introduce learner data, a universal ready flag, live per-session Corpus inference, automatic publication from model output, active source execution, or speculative internet-scale infrastructure.
 
-Treat the design handoff as authoritative for observable states and safety/accessibility behavior, not as a mandate for its artifact runtime, exact backend framework, data store, or queue technology.
+Treat design as authoritative for observable states/safety/accessibility, not as a backend/runtime mandate.
 
 ## Architecture decisions this stage owns
 
-Settle and document all of the following, plus every Stage 01 checklist checkbox:
+Settle every Stage 01 checklist item, including:
 
-1. **Architecture principles.** Define a small explicit set that preserves product boundary, six-axis separation, uncertainty/locality, capability publication, immutable observations, append-only audit, replayability, replaceability and one-owner maintainability.
-2. **Quality-attribute scenarios.** Turn product goals into measurable scenarios for correctness, provenance integrity, rights safety, security, recoverability, availability/degradation, performance, owner operability, accessibility, benchmark qualification and cost. Each scenario should state stimulus, environment, expected response and measurable response measure.
-3. **Architecture budgets.** Translate the roughly 20k–50k canonical Item design center, approximately `€3 / 1,000 Items` variable-processing target and approximately `€25/month` normal Corpus cash envelope into architectural budgets/guardrails without hardcoding empirically recalibratable product numbers.
-4. **Decision precedence.** State how later stages decide when simplicity, quality, evidence, rights, security, App compatibility, cost and owner effort conflict.
-5. **Forbidden shortcuts.** Explicitly ban designs such as one ready flag, rights=trust coupling, destructive rerun, learner-data ingress, live App search/inference dependency, unbounded retries/paid loops, active source execution, mirror-count prevalence, and speculative internet-scale infrastructure.
-6. **Version/audit vocabulary.** Define the minimum cross-stage language for stable identity, mutable revision, source observation, method/model/rule/taxonomy/contract versions, findings, holds, stale, provisional and superseded states. Do not design the physical schema yet.
-7. **Graceful-degradation doctrine.** Unsafe work stops; expensive work may defer; known-valid outputs survive; uncertainty stays visible; infrastructure/provider failure never becomes corpus truth.
-8. **Research policy.** Define which mutable architecture decisions require current primary official sources and how access dates/evidence must be recorded.
-9. **ADR policy.** Confirm the lightweight ADR convention and criteria for creating/superseding ADRs.
-10. **Cross-stage proof obligations.** Define what every later artifact must say about failure/recovery, security/privacy/rights, performance/reliability/observability, cost and testing.
+1. Define a small explicit architecture-principle set preserving product boundary, six-axis separation, uncertainty/locality, capability publication, immutable observations, append-only audit, replayability and one-owner maintainability.
+2. Define measurable quality-attribute scenarios for correctness, provenance integrity, rights safety, security, recoverability, availability/degradation, performance, operability, accessibility, benchmark qualification and cost.
+3. Translate the roughly 20k–50k canonical Item design center, approximately `€3 / 1,000 Items` variable-processing target and approximately `€25/month` normal Corpus cash envelope into architecture guardrails without hardcoding recalibratable product values.
+4. Define decision precedence when simplicity, evidence quality, rights, security, App compatibility, cost and owner effort conflict.
+5. Ban shortcuts such as one ready flag, rights=trust, destructive rerun, learner-data ingress, live App dependency, unbounded retries/paid loops, active source execution, mirror-count prevalence and speculative scale.
+6. Define minimum cross-stage identity/revision/method/model/rule/taxonomy/contract/finding/hold/stale/provisional/superseded vocabulary.
+7. Define graceful degradation: unsafe work stops; expensive work may defer; known-valid outputs survive; infrastructure/provider failure never becomes corpus truth.
+8. Define current-research policy and ADR criteria.
+9. Define the mandatory **App implementation reuse assessment** that later technology/provider-sensitive stages must include.
+10. Define cross-stage proof obligations for failure/recovery, security/privacy/rights, observability/reliability, cost and testing.
 
 ## Alternatives and recommendation
 
-Compare credible architecture operating philosophies at the principle level—for example a modular/boring/offline-first personal-project approach versus a distributed/service-first approach—but **do not select the final framework, database, queue or cloud topology here**. Recommend the philosophy that best preserves product truth with the smallest justified operational surface.
+Compare a boring modular/offline-first/reuse-first personal-project philosophy with a distributed/service-first/new-vendor philosophy. Recommend the minimum operational surface that preserves product truth. Do not select the final framework/database/cloud topology in Stage 01, but establish a strong burden of proof against duplicating the App implementation stack or provider accounts.
 
-## Current research rule
+## Research rule
 
-Do not browse for stable product rules already in GitHub. If this stage makes any claim about a mutable standard, platform support lifecycle, security guidance or cost that affects the charter, use **primary official sources**, record links and access date, and distinguish documented fact from assumption. Do not use blogs as sole evidence for a durable platform decision.
-
-## Failure, security, cost and testing requirements
-
-Your charter must make clear that:
-
-- failure/partial/blocked/provisional states are architecture states, not exceptional prose;
-- source/model content is data, never authority;
-- rights and security holds override ordinary processing paths without mutating other axes;
-- human review time is a cost and repeated failure/reprocessing must be measured;
-- benchmark qualification is required before automated production claims;
-- later tests must prove invariants, not merely happy paths.
+Use GitHub product truth for stable requirements. For mutable platform/security/cost facts, use current primary official sources, record links and access date, and distinguish fact from assumption. Do not reopen the App implementation provider baseline based only on popularity or temporary promotional pricing.
 
 ## Required deliverable
 
-Create or safely amend:
+Create/amend `Architecture/01-architecture-charter-and-quality-attributes.md` using the normal 17-part stage structure from the workflow plan. Include quality scenarios, budgets, decision precedence, forbidden shortcuts, graceful degradation, reuse rules and a reusable App-implementation/account-reuse decision template. Use Mermaid/tables where helpful.
 
-`m-elsharkawi/Bestehen-Corpus/Architecture/01-architecture-charter-and-quality-attributes.md`
-
-If the file already exists, fetch it and reconcile rather than replacing valid completed work blindly.
-
-Use this structure unless a narrower equivalent is clearer:
-
-1. Purpose and Scope
-2. Inputs, Source Traceability, and Constraints
-3. Architecture Decisions and Rationale
-4. Alternatives Considered
-5. Components, Boundaries, and Ownership
-6. Data, State, Contracts, and Versioning
-7. Processing/Interaction Flows and State Transitions
-8. Failure, Partial Success, Recovery, and Uncertainty
-9. Security, Privacy, Rights, and Abuse Considerations
-10. Performance, Reliability, Observability, Operations, and Cost
-11. Testing, Benchmark, and Validation Strategy
-12. Diagrams and Decision Tables
-13. ADRs Created or Superseded
-14. Relationship to Earlier and Later Stages
-15. Decisions Made
-16. Open Questions / Implementation Deferrals
-17. Definition of Done Check
-
-Use Mermaid for any architecture/state diagrams and tables for quality scenarios, alternatives, budgets and forbidden shortcuts. Do not use ASCII-box diagrams.
+Create ADRs only when a durable architecture choice belongs to this stage; update `Architecture/adr/README.md` sequentially.
 
 ## Live-checklist workflow — mandatory
 
-1. Fetch `Bestehen_Corpus_Architecture_Checklist.md` and read the **complete Stage 01 section** before making decisions.
-2. Update `[ ]` to `[x]` only after the corresponding decision is captured in the committed Stage 01 output or an explicitly linked ADR/artifact.
-3. Perform checklist writes sequentially using the current blob SHA; never parallel-write this file.
-4. Leave genuine implementation-only items unchecked and add `Deferred — architecture/implementation decision:` with the reason.
-5. Leave genuine owner-blocked items unchecked and add `Blocked — owner decision required:` followed by the precise question **and a recommended default**.
-6. Re-fetch the checklist after the output/ADR commits and reconcile every Stage 01 item with the committed evidence.
-7. Do not modify unrelated stages except when a documented cross-stage correction is strictly necessary.
+Fetch/read the complete Stage 01 checklist section before deciding. Check `[x]` only after committed evidence. Use current SHA for sequential checklist updates. Leave implementation-only work unchecked with `Deferred — architecture/implementation decision:`. Leave owner blockers unchecked with `Blocked — owner decision required:` plus a recommended default. Re-fetch/reconcile at the end and do not alter unrelated stages without a documented correction.
 
-## Handoff requirements
+## Handoff
 
-At the end of the Stage 01 artifact and in your final response, include:
-
-- concise decisions made;
-- ADRs created/superseded, if any;
-- assumptions and empirical calibration needs;
-- unresolved risks/questions;
-- cost-sensitive choices and cheaper fallback;
-- exact downstream dependencies;
-- contradictions found and the authority used to resolve them;
-- confirmation of the output and checklist commits.
-
-The stage is complete only when the committed charter defines a measurable architecture decision framework without prematurely implementing or selecting later-stage technology decisions.
+Report decisions, ADRs, calibration needs, unresolved risks, cost-sensitive choices/cheaper fallback, App implementation reuse constraints, downstream dependencies, contradictions/resolution authority and exact commits. Stage 01 is complete only when later stages have a measurable decision framework that strongly prefers reuse and simplicity without prematurely implementing anything.
