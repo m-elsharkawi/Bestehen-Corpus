@@ -1,0 +1,50 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 14 of 28
+## Define Audio, Video, ASR, and Media Processing
+
+You are the media-processing architect responsible for **Stage 14: Audio, Video, ASR, and Media Processing**.
+
+Define the cheapest reliable architecture for source audio/video normalization, segmentation, ASR/transcript candidates and media-derived structure while preserving source evidence, rights and uncertainty. This is **architecture decision work, not implementation**. Do not install codecs/models, write processing code, upload media, create provider projects/keys, deploy/configure services or make live calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse the existing Coolify/Pangolin/R2/OpenAI account families where appropriate. **Python is a first-class Corpus runtime if Stage 03 selected it** and may substantially simplify local media/ASR tooling; that is not an account/tooling-policy violation. Everything must remain reproducibly containerized for Coolify. OpenAI STT is the existing paid-provider family to evaluate first when local ASR is insufficient. TTS is normally irrelevant to source ingestion. Polly remains `not_admitted` unless later benchmark evidence proves a need. New ASR/media SaaS/vendor account requires benchmarked need, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Original media remains immutable source evidence. Normalized media, segments, transcripts and diarization/timing are derived artifacts with method/model/version/confidence. ASR output is not source truth. Rights may allow analysis while restricting retention/publication of bytes or transcript expression. Partial success and local uncertainty are first-class.
+
+## Mandatory reads
+
+Read Corpus shaping Stages 04,05,08,10,14,15,16,17; Architecture 03,05,09,11,12; full Stage 14 checklist; design source/detail/reprocess/security artifacts; reuse policy/App handoff and current AI/STT/TTS setup guide; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define media intake routing for audio-only, video with audio, silent video, multiple tracks and unsupported/corrupt formats after Stage 12 preflight.
+2. Define deterministic normalization/metadata extraction: codec/container, sample rate/channels, duration, loudness where needed, checksums and derived lineage without overwriting original.
+3. Define cheap-first ASR ladder: metadata/native transcript → deterministic/local ASR if benchmark-qualified → existing OpenAI STT account family for bounded unresolved material → human review/unknown.
+4. If Python is selected, compare local Python-compatible ASR/media tooling and model artifact footprint against paid STT; if TypeScript is selected, compare bounded local CLI/Python worker only if it materially reduces paid cost or improves quality.
+5. Define segmentation/timestamp/speaker-turn candidate representation and confidence, including overlap/background noise and unknown speaker identity.
+6. Define script/transcript relationship: provided source script, ASR transcript, corrected transcript and generated summary are distinct.
+7. Define content-addressed media/segment reuse so unchanged audio is not repeatedly transcoded/transcribed.
+8. Define rights-aware raw-media/transcript retention, temporary provider-input lifecycle and R2 isolation within the same Cloudflare account.
+9. Define provider request/response lineage, model snapshot, language hints, confidence/logprob use where available, timeout/retry and no-training/privacy review handoff to Stage 22/23.
+10. Define CPU/GPU needs and prove whether existing VMs/CPU batch processing are sufficient before introducing a GPU VM/service. State measured trigger for GPU/dedicated worker.
+11. Define output contract for Stage 15 semantic mapping, Stage 16 independence, Stage 17 QA and Stage 21 benchmark.
+
+## Alternatives / cost
+
+Compare local CPU ASR, local GPU/self-hosted ASR, reuse of OpenAI STT, and one credible new managed ASR provider only if necessary. Score German A2/B1 accuracy, timing, robustness, privacy/rights, owner maintenance, VM resource need and cost per audio hour. Prefer cached/local/open-source when quality is sufficient; otherwise reuse OpenAI before adding another account.
+
+Include **App implementation reuse assessment**.
+
+## Failure/security/testing
+
+Cover corrupt codecs, huge duration, missing audio track, clipping/noise, language mismatch, ASR timeout/quota, malformed response, low confidence, model drift and interrupted temp deletion. Tests use rights-safe media fixtures and benchmark WER/segment/timing/semantic preservation as appropriate; infrastructure failure never becomes a content error.
+
+## Deliverable
+
+Create/amend `Architecture/14-audio-video-asr-and-media-processing.md` with normal 17-part structure. Include media/ASR routing diagram, local-vs-OpenAI-vs-alternative matrix, artifact/segment contract, retention table, resource/cost model, failure matrix, benchmark gates, reuse assessment and upgrade triggers.
+
+## Checklist / handoff
+
+Read full Stage 14 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report selected media/ASR direction, Python implications, provider-account reuse, cost/fallback, risks, benchmark needs and commits.
