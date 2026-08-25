@@ -1,0 +1,96 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 03 of 28
+## Decide the Technology Stack and Repository Strategy
+
+You are the lead platform architect responsible for **Stage 03: Technology Stack and Repository Strategy** of Bestehen / Corpus.
+
+This stage researches, compares, chooses and documents the simplest technology direction capable of implementing Corpus product truth safely and economically. This is **architecture decision work, not production implementation**. Do not scaffold applications, write production code, deploy services or create infrastructure. Small conceptual layouts, dependency maps and configuration examples are acceptable only to make decisions precise.
+
+## Project context
+
+Corpus is a single-owner exam-data/intelligence product for German A2/B1 evidence; Bestehen / App consumes versioned eligible pattern intelligence and owns learner state, Readiness and original-practice generation. Architecture must preserve six independent truth axes—provenance, authenticity/confidence, rights, difficulty/relevance, capability QA readiness, and identity/metric independence—plus local uncertainty and capability-scoped publication. Corpus stores no learner data. Every external input is untrusted. The operating posture is low-ops, deterministic/local/cheap-first, benchmark-qualified and replaceable rather than fashionable or distributed by default.
+
+## GitHub execution — mandatory
+
+Read Shaping/App on current `main`; write only `m-elsharkawi/Bestehen-Corpus/main`. Do not rely on local files. Fetch current contents/SHA before updates, never parallel-write one path, and do not modify Shaping, App or `Design/`. Actual GitHub commits are required.
+
+## Mandatory reads
+
+Read:
+
+- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
+- `corpus/08-ingestion-and-extraction-pipeline.md`
+- `corpus/13-operations-and-review-experience.md`
+- `corpus/14-cost-scale-and-automation.md`
+- `corpus/15-security-privacy-and-abuse-boundaries.md`
+- `corpus/16-initial-corpus-benchmark.md`
+- `m-elsharkawi/Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md`
+- `Architecture/01-architecture-charter-and-quality-attributes.md`
+- `Architecture/02-system-context-and-product-boundaries.md`
+- `Bestehen_Corpus_Architecture_Checklist.md` — entire Stage 03 section
+- `Design/DESIGN-HANDOFF.md`
+- `Design/Corpus-02-Components.dc.html` — reusable UI/state needs
+- `Design/Corpus-06-Responsive.dc.html` — desktop-first/accessibility constraints
+- `Design/Corpus-09-Coverage-Handoff.dc.html` — architecture-replaceable design assumptions
+- `Architecture/adr/README.md` and current ADRs.
+
+Also inspect the current target repository tree before recommending repository/module organization.
+
+## Product/design truths not to reopen
+
+Do not select a design-tool runtime as production technology merely because the handoff uses `.dc.html`. Do not add microservices, streaming infrastructure, warehouse/lakehouse/vector databases, dedicated search engines or multiple managed stores just because they are common in “data platforms.” The product scale is roughly 20k–50k canonical Items, one owner, approximately `€25/month` normal cash envelope and approximately `€3/1,000 Items` target variable processing, subject to measured recalibration.
+
+## Decisions this stage owns
+
+Settle every Stage 03 checklist item:
+
+1. **Language/runtime/backend comparison.** Compare credible stacks against document/media parsing ecosystem, type safety, background jobs, testability, operational familiarity/burden, security patch lifecycle, portability and packaging.
+2. **Operations UI strategy.** Compare practical UI architectures that can implement the dense desktop-first, WCAG 2.2 AA owner console and persisted workflow state. Preserve design behavior; do not clone the design artifact runtime.
+3. **Managed vs self-hosted posture.** Compare candidates for relational persistence, object/blob storage, scheduled/background execution and hosting. Treat search/vector/graph capabilities as optional needs to justify, not defaults.
+4. **Repository strategy.** Choose monorepo/module/package organization, boundaries for core domain vs adapters/workers/UI/contracts, and how future isolation can occur without service sprawl.
+5. **Local development.** Define reproducible local development and representative processing without requiring every paid provider.
+6. **Dependency policy.** Define licensing, vulnerability/update policy, pinning/reproducibility, native/binary dependency handling, model/tool artifact provenance and export/exit requirements.
+7. **Deployment candidates.** Identify feasible low-ops hosting/deployment shapes and their constraints, but leave final environment/CI/CD/release operationalization to Stage 26.
+8. **Upgrade triggers.** State measured thresholds that would justify splitting services, adding a search index, separate worker pool, specialized managed media/OCR service or other complexity.
+
+## Current research — mandatory
+
+Technology facts are mutable. Research **primary official sources** current at execution time for:
+
+- supported runtime/framework versions and lifecycle;
+- hosting/service limits and pricing;
+- database/object-storage/background-job limits;
+- security/update policy;
+- relevant licenses and commercial-use restrictions;
+- portability/export capabilities.
+
+Record links and access date. Do not rely on memory or use blog comparisons as sole evidence for a durable choice. Distinguish vendor claims from benchmark-dependent suitability.
+
+## Alternatives and recommendation
+
+For each material choice, compare at least two credible alternatives plus the status quo/no-extra-service option where applicable. Produce a recommended personal-project default and explicitly state why more complex options are rejected **for current scale**. Include cash cost, variable cost, maintenance time, lock-in/exit risk, offline fallback and expected operational burden.
+
+## Cross-cutting architecture requirements
+
+- **Failure/recovery:** chosen components must support queued/deferred work, idempotent replay and preserving valid partial outputs.
+- **Security/privacy/rights:** chosen stack must permit isolation of untrusted parsing/model work, least privilege and secrets separation; do not weaken this to reduce components.
+- **App:** support precomputed/versioned publication without requiring a live learner-session dependency.
+- **Cost:** show low/base/high recurring and variable cost for the recommended direction and cheaper fallback if a managed dependency exceeds budget.
+- **Observability/testability:** require hooks for structured logs/metrics, reproducible tests and benchmark evaluation without selecting the full Stage 24/25 design yet.
+
+## Required deliverable
+
+Create or safely amend:
+
+`Architecture/03-technology-stack-and-repository-strategy.md`
+
+Use the normal 17-part stage structure from the workflow plan. Include current-research citations/links/access dates, a decision matrix, repository/module diagram, deployment-candidate diagram/table, cost comparison and explicit upgrade triggers.
+
+Create ADRs under `Architecture/adr/` only for durable selected choices such as primary stack/repository or operations-UI strategy. Update the ADR index sequentially if you create them.
+
+## Live checklist — mandatory
+
+Fetch the current checklist; read all Stage 03 items; check `[x]` only after committed evidence; use current SHA sequentially; use `Deferred — architecture/implementation decision:` for true implementation-only work; use `Blocked — owner decision required:` plus recommended default for genuine blockers; re-fetch/reconcile at end; do not edit unrelated stages without a documented correction.
+
+## Handoff
+
+Summarize selected technology direction, rejected alternatives, ADRs, mutable facts researched, assumptions/benchmark questions, cost and cheaper fallback, security/exit risks, downstream dependencies and exact commits. Stage 03 is complete only when Stage 05/11/20/26 can use a clear selected direction without mistaking it for finished implementation.
