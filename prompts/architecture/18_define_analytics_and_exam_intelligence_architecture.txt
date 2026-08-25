@@ -1,0 +1,49 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 18 of 28
+## Define Analytics and Exam-Intelligence Architecture
+
+You are the analytics architecture owner responsible for **Stage 18: Analytics and Exam-Intelligence Architecture**.
+
+Define how Corpus derives decision-grade exam intelligence from validated, independence-aware evidence without inventing certainty, inflating mirrors or requiring a warehouse/BI stack at personal-project scale. This is **architecture decision work, not implementation**. Do not write analytics jobs/queries, create warehouses/dashboards/services/accounts/keys, deploy/configure systems or make live calls.
+
+## App implementation reuse and no-provisioning rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse Stage 03 selected runtime, PostgreSQL and existing GitHub/Coolify infrastructure. Python is fully acceptable if selected and may simplify data analysis. **Do not add a warehouse, lakehouse, ClickHouse, BigQuery, Snowflake, product-analytics SaaS or BI SaaS unless measured PostgreSQL/offline analysis is insufficient.** New vendor/account requires evidence, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Analytics is derived intelligence, not source truth. Every metric preserves denominator, eligibility, missingness, confidence and metric-specific independence. Mirror count never inflates prevalence. TELC-specific claims remain distinct from Generic-B1. Rights/trust/QA gates affect usable evidence per metric without becoming one score. Corpus analytics never consumes learner data.
+
+## Mandatory reads
+
+Read Corpus shaping Stages 03,06,07,09–12,14,16,17; Architecture 07–10,16,17; full Stage 18 checklist; design analytics/health/App-impact/benchmark surfaces; reuse policy/App handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define metric catalog categories: source/coverage, exam structure, task/topic/language-pattern prevalence, difficulty/relevance, answer/scoring patterns, media/acoustic patterns, quality/rights/trust coverage and change/drift.
+2. Define each metric’s eligible population, denominator, missing/unknown treatment and exact independence policy.
+3. Define evidence-weight/confidence envelopes without hiding low-quality or disputed contributions.
+4. Define time/version slices by source observation, taxonomy, dedup/independence, QA rules and analytics release.
+5. Define materialized projections/caches in PostgreSQL or offline artifacts and recomputation triggers; avoid a parallel analytics truth store.
+6. Define incremental vs full recomputation and idempotent versioned outputs.
+7. Define how low sample size, concentration, source-family skew and unresolved duplicate clusters limit claims.
+8. Define TELC-specific vs Generic-B1 outputs and prevent unsupported transfer of findings between them.
+9. Define exam-intelligence artifacts required by Stage 19 App bundles: patterns, evidence/support metadata, confidence/coverage, version and change semantics—not learner-specific recommendations.
+10. Define owner health/impact dashboards as projections over existing facts, not event-clickstream collection.
+11. Define calibration/backtest inputs and benchmark holdouts for Stage 21 without circular use.
+12. Define cost accounting for recomputation/model-assisted enrichment and review time.
+
+## Alternatives / cost
+
+Compare PostgreSQL/materialized views + offline Python/SQL analysis, file-based reproducible analysis, and a separate warehouse/BI stack. Prefer current infrastructure at 20k–50k Items. Include **App implementation reuse assessment** and measured triggers for a dedicated analytics store only after proven query/performance/isolation need.
+
+## Failure/testing
+
+Cover stale materialization, denominator drift, taxonomy mismatch, cluster change, partial recomputation, low-sample false confidence and incompatible historical versions. Tests must reproduce metrics from frozen fixtures, prove mirror-independence behavior, missingness disclosure and exact version lineage.
+
+## Deliverable
+
+Create/amend `Architecture/18-analytics-and-exam-intelligence-architecture.md` with normal 17-part structure. Include metric/denominator catalog, independence matrix, projection/recompute diagram, low-sample/uncertainty rules, App-intelligence contract candidates, alternatives/cost/reuse assessment and failure/test matrix.
+
+## Checklist / handoff
+
+Read full Stage 18 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report analytics decisions, ADRs, calibration/sample limitations, reuse/no-warehouse result, cost/fallback, Stage 19 dependencies and commits.
