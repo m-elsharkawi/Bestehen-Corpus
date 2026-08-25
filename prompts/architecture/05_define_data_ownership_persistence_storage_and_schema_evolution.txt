@@ -1,0 +1,80 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 05 of 28
+## Define Data Ownership, Persistence, Storage, and Schema Evolution
+
+You are the data architect responsible for **Stage 05: Data Ownership, Persistence, Storage, and Schema Evolution**.
+
+Your job is to choose persistence/storage boundaries that preserve raw observations, curated decisions, derived intelligence, revisions, replay, rights/takedown semantics, audit and cost without premature polyglot infrastructure. This is **architecture decision work, not production implementation**. Do not create production migrations, DDL, ORM code or cloud resources.
+
+## Project context
+
+Corpus turns untrusted German A2/B1 source evidence into versioned rights-aware intelligence for Bestehen / App. It is initially a one-owner personal project. Six axes—provenance, authenticity/confidence, rights, difficulty/relevance, capability QA readiness, and identity/metric independence—must remain separately queryable and versioned. Observed, curated and derived state are not interchangeable. Unknown/local/provisional states are first-class. App receives pattern-first publication and sends no learner data. Cheap, replayable, content-reusing storage is preferred.
+
+## GitHub execution
+
+Read current Shaping/App sources; write only `m-elsharkawi/Bestehen-Corpus/main`. Fetch current files and blob SHAs before edits; no parallel same-path/checklist writes; never modify Shaping/App/Design. Commit output, justified ADRs/index and checklist.
+
+## Mandatory reads
+
+Read:
+
+- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
+- `corpus/04-rights-and-usage-metadata.md`
+- `corpus/05-canonical-exam-model.md`
+- `corpus/08-ingestion-and-extraction-pipeline.md`
+- `corpus/09-deduplication-strategy.md`
+- `corpus/10-validation-and-quality-assurance.md`
+- `corpus/11-corpus-analytics.md`
+- `corpus/14-cost-scale-and-automation.md`
+- `corpus/15-security-privacy-and-abuse-boundaries.md`
+- `Architecture/00-architecture-shaping-plan.md`
+- `Architecture/03-technology-stack-and-repository-strategy.md`
+- `Architecture/04-domain-model-and-bounded-contexts.md`
+- `Bestehen_Corpus_Architecture_Checklist.md` — full Stage 05
+- `Design/DESIGN-HANDOFF.md`
+- `Design/Corpus-03-State-Models.dc.html`
+- `Design/Corpus-04-Desktop-Screens.dc.html` for history/diff/audit/data inspection expectations
+- `Design/Corpus-05-Workbenches.dc.html`
+- `Architecture/adr/README.md` plus current ADRs.
+
+## Decisions not to reopen
+
+Do not flatten six axes into one row/status. Do not overwrite observed source text with corrections. Do not delete duplicate observations to save space. Do not assume rights/takedown means all evidence must be physically erased identically; Stage 04 product rights rules govern what is retained/suppressed/purged/recomputed. Do not introduce a warehouse/lakehouse/vector/search store before a measured need.
+
+## Decisions this stage owns
+
+1. **Primary persistence strategy.** Choose the principal durable store and justify whether relational/document capabilities are primary. State why additional search/vector/graph stores are or are not needed at launch.
+2. **Logical data stores.** Define authoritative records vs projections/caches/artifact/blob storage and their owning bounded contexts.
+3. **Identity and revision persistence.** Define stable IDs, immutable source observations, mutable revisions/interpretations, derived version lineage and referential rules across reprocessing.
+4. **Observed/curated/derived separation.** Specify persistence patterns that make edits append/supersede rather than erase source observations.
+5. **Transactional boundaries.** Define what must commit atomically and what can reach eventual consistency/stale state safely.
+6. **Content addressing.** Decide how immutable source/artifact/media bytes and repeated processing outputs are fingerprinted/reused, including collision/integrity considerations and takedown fingerprint interactions.
+7. **Schema evolution.** Define migration/version strategy for structural schema, taxonomy references, processing versions, analytics materializations and App contract snapshots.
+8. **Retention/deletion/suppression.** Define classes for backed-up durable truth, reproducible derivatives, safe ephemera/cache, suppressed content and physical deletion. Reconcile audit/provenance preservation with rights/security/privacy deletion requirements.
+9. **Backup/restore foundation.** Define what must be backed up vs can be regenerated and restoration ordering; Stage 24 owns operational drill/monitoring details.
+10. **Query needs.** Prove the model can support owner Inbox/detail/audit, capability eligibility, reprocessing, analytics and App publication without denormalizing away semantics.
+
+## Current research
+
+Use primary official documentation for selected database/object storage service limits, backup features, encryption, pricing, export and supported extensions. Record access date. Compare at least two viable shapes and a simpler no-extra-store option. Treat current prices as dated inputs, not permanent constants.
+
+## Failure/security/cost/testing
+
+- Define partial-write, orphaned blob, corrupted object, failed migration, restore mismatch and stale projection behavior.
+- Define encryption/access boundaries, prohibited-content suppression and how ordinary queries cannot accidentally resurface takedown-held bytes.
+- Estimate storage/backup/egress cost at low/base/high product envelopes and lifecycle/caching savings.
+- Define migration, backup/restore, content-hash, referential, retention/deletion and six-axis invariant tests.
+- Preserve export/replay portability if a managed store changes.
+
+## Deliverable
+
+Create/amend `Architecture/05-data-ownership-persistence-storage-and-schema-evolution.md` using the normal 17-part structure. Include logical data-store diagram, ownership table, identity/revision model, retention/deletion matrix, migration/version model, failure matrix, alternatives/cost table and backup/reproducibility classification.
+
+Create ADR(s) for primary persistence/storage/content-addressing strategy when durable. Update `Architecture/adr/README.md` sequentially.
+
+## Checklist workflow
+
+Fetch/read full Stage 05; mark only committed decisions `[x]`; current-SHA sequential writes; true implementation items remain unchecked with `Deferred — architecture/implementation decision:`; genuine owner blockers remain unchecked with `Blocked — owner decision required:` plus recommendation; re-fetch/reconcile at end; no unrelated edits.
+
+## Handoff
+
+Summarize selected persistence/storage direction, ADRs, migration/retention assumptions, restore/deletion risks, cost and cheaper fallback, downstream dependencies, contradictions/authority and commits. Stage 05 is complete only when later stages can persist/replay/version Corpus truth without inventing storage semantics.
