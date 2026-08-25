@@ -3,94 +3,127 @@
 
 You are the lead platform architect responsible for **Stage 03: Technology Stack and Repository Strategy** of Bestehen / Corpus.
 
-This stage researches, compares, chooses and documents the simplest technology direction capable of implementing Corpus product truth safely and economically. This is **architecture decision work, not production implementation**. Do not scaffold applications, write production code, deploy services or create infrastructure. Small conceptual layouts, dependency maps and configuration examples are acceptable only to make decisions precise.
+This stage researches, compares, chooses and documents the **simplest technology direction** capable of implementing Corpus safely and economically. This is **architecture decision work, not production implementation**. Do not scaffold applications, write production code, deploy/configure services, create accounts/projects/tenants/buckets/databases/keys, enter dashboards, or make live provider calls.
 
 ## Project context
 
-Corpus is a single-owner exam-data/intelligence product for German A2/B1 evidence; Bestehen / App consumes versioned eligible pattern intelligence and owns learner state, Readiness and original-practice generation. Architecture must preserve six independent truth axes—provenance, authenticity/confidence, rights, difficulty/relevance, capability QA readiness, and identity/metric independence—plus local uncertainty and capability-scoped publication. Corpus stores no learner data. Every external input is untrusted. The operating posture is low-ops, deterministic/local/cheap-first, benchmark-qualified and replaceable rather than fashionable or distributed by default.
+Corpus is a single-owner A2/B1 exam-data/intelligence product. App consumes versioned eligible pattern intelligence and owns learner state/Readiness/original practice. Preserve the six independent truth axes, local uncertainty and capability-scoped publication. Corpus stores no learner data. All external input is untrusted. The operating posture is low-ops, deterministic/local/cheap-first, benchmark-qualified and replaceable.
+
+## App implementation reuse and no-provisioning rule — binding default
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation artifacts before comparing technology.
+
+**Current App implementation reality—not the older Render-only architecture baseline—is the reuse starting point:**
+
+- GitHub + GitHub Actions;
+- existing two-VM Coolify deployment/control boundary;
+- Pangolin/Newt private ingress and owner-only network boundary;
+- Node.js 24 LTS, TypeScript, pnpm;
+- Next.js/React for web UI;
+- PostgreSQL 18 + Kysely;
+- pg-boss for durable jobs;
+- Docker/Compose and OCI-compatible processes;
+- Cloudflare R2 EU through S3-compatible interfaces;
+- Auth0 EU Passwordless Email OTP when authentication is required;
+- AWS SES Frankfurt when email is required;
+- Gemini for bounded general AI;
+- OpenAI for current approved STT/TTS routes;
+- deterministic fake adapters by default;
+- no new observability/queue/search/feature-flag SaaS baseline.
+
+The App implementation handoff says provider-service setup is accepted as repository/runbook work but is not yet live-service-ready. Do not claim live resources from documentation alone.
+
+### Burden of proof
+
+For every stack/platform/provider choice use this order:
+
+1. no extra service;
+2. reuse the same App technology and existing owner account/billing relationship;
+3. if isolation is needed, use a separate least-privilege Corpus resource inside that same account/infrastructure;
+4. introduce a new vendor/account/subscription only when a measured Corpus-specific blocker remains.
+
+A new vendor/account must document why the App implementation option fails, incremental recurring/variable cash cost, added owner maintenance, security/privacy/rights effect, cheaper fallback, migration/exit and a durable ADR. Temporary discounts are not sufficient reason.
+
+**Do not confuse account reuse with unsafe resource reuse.** Default to separate Corpus database/schema/user, bucket/prefix credentials, API key/project or auth client where least privilege/right isolation needs it, while keeping the same provider account/control plane.
 
 ## GitHub execution — mandatory
 
-Read Shaping/App on current `main`; write only `m-elsharkawi/Bestehen-Corpus/main`. Do not rely on local files. Fetch current contents/SHA before updates, never parallel-write one path, and do not modify Shaping, App or `Design/`. Actual GitHub commits are required.
+Read Shaping/App current `main`; write only Corpus `main`; fetch current contents/SHA before update; no parallel checklist/path writes; do not modify Shaping/App/Design; commit actual architecture output/ADRs/checklist only.
 
 ## Mandatory reads
 
 Read:
 
-- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
-- `corpus/08-ingestion-and-extraction-pipeline.md`
-- `corpus/13-operations-and-review-experience.md`
-- `corpus/14-cost-scale-and-automation.md`
-- `corpus/15-security-privacy-and-abuse-boundaries.md`
-- `corpus/16-initial-corpus-benchmark.md`
-- `m-elsharkawi/Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md`
-- `Architecture/01-architecture-charter-and-quality-attributes.md`
-- `Architecture/02-system-context-and-product-boundaries.md`
-- `Bestehen_Corpus_Architecture_Checklist.md` — entire Stage 03 section
-- `Design/DESIGN-HANDOFF.md`
-- `Design/Corpus-02-Components.dc.html` — reusable UI/state needs
-- `Design/Corpus-06-Responsive.dc.html` — desktop-first/accessibility constraints
-- `Design/Corpus-09-Coverage-Handoff.dc.html` — architecture-replaceable design assumptions
-- `Architecture/adr/README.md` and current ADRs.
+- Corpus product Stages 08, 13, 14, 15, 16 and 17;
+- `Architecture/00-architecture-shaping-plan.md`;
+- `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`;
+- Architecture 01–02;
+- full Stage 03 checklist;
+- Corpus design handoff/components/responsive/coverage artifacts;
+- ADR index/current ADRs;
+- `m-elsharkawi/Bestehen-App/Implementation/Personal/02-provider-service-setup/handoff.md`;
+- `m-elsharkawi/Bestehen-App/docs/setup/personal/README.md`;
+- relevant current App guides: GitHub, Coolify two-VM, Pangolin, R2, Auth0, SES, AI/STT/TTS, secrets/recovery;
+- `m-elsharkawi/Bestehen-App/.env.example` and `README.md`;
+- current App architecture Stage 03 and Stage 26 only to understand semantic/runtime constraints and where implementation reality superseded earlier deployment assumptions.
 
-Also inspect the current target repository tree before recommending repository/module organization.
+Inspect current Corpus repository tree before recommending modules.
 
 ## Product/design truths not to reopen
 
-Do not select a design-tool runtime as production technology merely because the handoff uses `.dc.html`. Do not add microservices, streaming infrastructure, warehouse/lakehouse/vector databases, dedicated search engines or multiple managed stores just because they are common in “data platforms.” The product scale is roughly 20k–50k canonical Items, one owner, approximately `€25/month` normal cash envelope and approximately `€3/1,000 Items` target variable processing, subject to measured recalibration.
+Do not select the `.dc.html` runtime as production technology. Do not add microservices, Kubernetes, Redis, streaming, warehouse/lakehouse/vector DB/search engine/graph DB or multiple managed stores merely because they are common. Current scale is roughly 20k–50k canonical Items and one owner. Preserve WCAG 2.2 AA desktop-first owner console and read-only narrow-screen safety.
 
 ## Decisions this stage owns
 
 Settle every Stage 03 checklist item:
 
-1. **Language/runtime/backend comparison.** Compare credible stacks against document/media parsing ecosystem, type safety, background jobs, testability, operational familiarity/burden, security patch lifecycle, portability and packaging.
-2. **Operations UI strategy.** Compare practical UI architectures that can implement the dense desktop-first, WCAG 2.2 AA owner console and persisted workflow state. Preserve design behavior; do not clone the design artifact runtime.
-3. **Managed vs self-hosted posture.** Compare candidates for relational persistence, object/blob storage, scheduled/background execution and hosting. Treat search/vector/graph capabilities as optional needs to justify, not defaults.
-4. **Repository strategy.** Choose monorepo/module/package organization, boundaries for core domain vs adapters/workers/UI/contracts, and how future isolation can occur without service sprawl.
-5. **Local development.** Define reproducible local development and representative processing without requiring every paid provider.
-6. **Dependency policy.** Define licensing, vulnerability/update policy, pinning/reproducibility, native/binary dependency handling, model/tool artifact provenance and export/exit requirements.
-7. **Deployment candidates.** Identify feasible low-ops hosting/deployment shapes and their constraints, but leave final environment/CI/CD/release operationalization to Stage 26.
-8. **Upgrade triggers.** State measured thresholds that would justify splitting services, adding a search index, separate worker pool, specialized managed media/OCR service or other complexity.
+1. **Reuse-first stack assessment.** Evaluate whether the App implementation stack can directly satisfy Corpus web/control plane, domain, jobs, storage, parsing orchestration and publication. Treat reuse as the default recommendation unless evidence identifies a blocker.
+2. **Language/runtime.** Prefer Node/TypeScript for shared/control-plane work. A second language (for example Python) is allowed only as a bounded processor if OCR/document/media ecosystem or benchmark quality materially benefits; define IPC/artifact boundary and avoid a second web/backend platform.
+3. **Operations UI.** Prefer the App’s Next.js/React/tooling family for the dense internal console unless a materially simpler solution meets design/accessibility/maintainability better. No second frontend ecosystem for convenience.
+4. **Persistence/jobs.** Start from PostgreSQL/Kysely/pg-boss. Prove whether a separate Corpus database on existing infrastructure is enough; reject Redis/managed queues/new database providers absent measured need.
+5. **Object storage.** Start from the same Cloudflare account/R2 EU boundary, normally with a separate Corpus bucket or tightly scoped resource/credential because Corpus rights/source bytes differ from App media.
+6. **Deployment.** Start from existing two-VM Coolify + Pangolin. Compare placement/on-demand worker shapes, VM capacity and blast radius before paying for Render/Vercel/Railway/Fly/new VM/service. Stage 26 owns final environment operationalization.
+7. **Identity/email.** Do not automatically add Auth0/SES. Compare Pangolin owner access alone versus reuse of the existing Auth0 EU account with a separate Corpus application/client if the design’s sign-in/second-factor/session requirements need it. If email is unnecessary, use none.
+8. **AI/media provider family.** Do not select detailed routes yet, but constrain later stages to reuse Gemini/OpenAI account families first. Polly stays `not_admitted` by default.
+9. **Repository strategy.** Choose simple private repository/module/package boundaries; use existing Node/pnpm/CI patterns where possible. No new build orchestrator absent measured need.
+10. **Local development/test.** Reuse Docker/Compose, PostgreSQL and deterministic fakes; paid/live providers are never required for normal local/CI.
+11. **Dependency/licensing/update policy.** Reuse App pinning/frozen-lock/supply-chain discipline where suitable; add bounded native tools only with licenses, versioning and reproducible installation.
+12. **Observability.** Start with structured logs/health and existing GitHub/Coolify/VM/provider surfaces. Do not buy APM/analytics/log SaaS at Stage 03.
+13. **Upgrade triggers.** Define measurable thresholds for extra VM, split worker pool, search index, alternate database, queue broker, specialized OCR/ASR service or new vendor.
 
 ## Current research — mandatory
 
-Technology facts are mutable. Research **primary official sources** current at execution time for:
+Use current primary official sources for mutable version/support/security/pricing/limits of candidates **only where needed to validate the reuse baseline or a proposed exception**. Do not re-run a broad vendor beauty contest. Record access date and distinguish official fact from architecture judgment.
 
-- supported runtime/framework versions and lifecycle;
-- hosting/service limits and pricing;
-- database/object-storage/background-job limits;
-- security/update policy;
-- relevant licenses and commercial-use restrictions;
-- portability/export capabilities.
+## Required comparison
 
-Record links and access date. Do not rely on memory or use blog comparisons as sole evidence for a durable choice. Distinguish vendor claims from benchmark-dependent suitability.
+Include one matrix whose first row is **reuse current App implementation**. Compare at least:
 
-## Alternatives and recommendation
+- reuse existing App stack/accounts/control plane;
+- reuse stack but add a bounded separate processor/resource where justified;
+- a credible new-platform alternative;
+- no-extra-service/on-demand/local fallback where applicable.
 
-For each material choice, compare at least two credible alternatives plus the status quo/no-extra-service option where applicable. Produce a recommended personal-project default and explicitly state why more complex options are rejected **for current scale**. Include cash cost, variable cost, maintenance time, lock-in/exit risk, offline fallback and expected operational burden.
+Score total owner cost: recurring cash + variable processing + maintenance time + migration/lock-in + blast radius. The recommendation should be the simplest safe option, not the feature-richest.
 
-## Cross-cutting architecture requirements
+## Cross-cutting requirements
 
-- **Failure/recovery:** chosen components must support queued/deferred work, idempotent replay and preserving valid partial outputs.
-- **Security/privacy/rights:** chosen stack must permit isolation of untrusted parsing/model work, least privilege and secrets separation; do not weaken this to reduce components.
-- **App:** support precomputed/versioned publication without requiring a live learner-session dependency.
-- **Cost:** show low/base/high recurring and variable cost for the recommended direction and cheaper fallback if a managed dependency exceeds budget.
-- **Observability/testability:** require hooks for structured logs/metrics, reproducible tests and benchmark evaluation without selecting the full Stage 24/25 design yet.
+- Background work must queue/defer/idempotently replay and preserve valid partial outputs.
+- Untrusted parsing/model work must be isolatable without creating a service-per-stage architecture.
+- App publication remains precomputed/versioned and learner-data-free.
+- Every external service has a cheaper/no-service fallback or an explicit capability-held state.
+- Tests/benchmarks must run without live paid calls.
 
 ## Required deliverable
 
-Create or safely amend:
+Create/amend `Architecture/03-technology-stack-and-repository-strategy.md` using the normal 17-part structure. Include current-research links/access dates, decision matrix, module diagram, deployment candidate diagram/table, low/base/high cost, **App implementation reuse assessment**, resource-isolation recommendations, and upgrade triggers.
 
-`Architecture/03-technology-stack-and-repository-strategy.md`
+Create ADR(s) only for durable selected choices. Do not provision anything.
 
-Use the normal 17-part stage structure from the workflow plan. Include current-research citations/links/access dates, a decision matrix, repository/module diagram, deployment-candidate diagram/table, cost comparison and explicit upgrade triggers.
+## Live checklist
 
-Create ADRs under `Architecture/adr/` only for durable selected choices such as primary stack/repository or operations-UI strategy. Update the ADR index sequentially if you create them.
-
-## Live checklist — mandatory
-
-Fetch the current checklist; read all Stage 03 items; check `[x]` only after committed evidence; use current SHA sequentially; use `Deferred — architecture/implementation decision:` for true implementation-only work; use `Blocked — owner decision required:` plus recommended default for genuine blockers; re-fetch/reconcile at end; do not edit unrelated stages without a documented correction.
+Fetch/read full Stage 03; mark only committed architecture decisions `[x]`; use sequential current-SHA updates; true implementation work remains unchecked with the required deferral phrase; owner blockers use the required blocked phrase plus recommended default; re-fetch/reconcile.
 
 ## Handoff
 
-Summarize selected technology direction, rejected alternatives, ADRs, mutable facts researched, assumptions/benchmark questions, cost and cheaper fallback, security/exit risks, downstream dependencies and exact commits. Stage 03 is complete only when Stage 05/11/20/26 can use a clear selected direction without mistaking it for finished implementation.
+Summarize reused App tools/accounts, any bounded deviations, ADRs, dated mutable facts, incremental cost, cheaper fallback, security/isolation choices, downstream dependencies and commits. Stage 03 is complete only when later stages have a clear reuse-first technology direction and no one could mistake the artifact for completed implementation/provisioning.
