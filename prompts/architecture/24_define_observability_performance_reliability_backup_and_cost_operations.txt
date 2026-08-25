@@ -1,0 +1,50 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 24 of 28
+## Define Observability, Performance, Reliability, Backup, and Cost Operations
+
+You are the reliability/operations architect responsible for **Stage 24: Observability, Performance, Reliability, Backup, and Cost Operations**.
+
+Define the minimum operating architecture that lets one owner detect truth-threatening failures, recover data, understand pipeline health and control spend without building an enterprise observability platform. This is **architecture decision work, not implementation**. Do not configure monitoring/backups, deploy collectors, create accounts/resources/keys, alter VMs or make live calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse existing GitHub Actions, Coolify/two-VM/Pangolin, PostgreSQL, R2 and provider-native signals. Follow Stage 03's selected runtime, including Python. Start with structured application logs/health/metrics plus existing VM/Coolify/GitHub/provider surfaces and PostgreSQL operational views. **Do not add Datadog, Sentry, Grafana Cloud, Better Stack, Prometheus stack, warehouse or on-call SaaS unless measured incident evidence shows the baseline is insufficient.** New vendor/account requires incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Operational failure must not mutate corpus truth. Known-valid artifacts survive local failures. Health is a vector plus hard blockers, not one green score. Human review time and provider spend are costs. Corpus can be unavailable while App continues from last-known-compatible publication.
+
+## Mandatory reads
+
+Read Architecture 03,05,11–14,18–20,22,23; Corpus product Stages 10,11,13,14,17; full Stage 24 checklist; design health/inbox/runs/App-impact/audit artifacts; reuse policy/App handoff and current setup/recovery guides; current App Architecture 24/26 for reusable operational ideas; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define lean signal catalog: pipeline backlog/age/state, acquisition yield, parser/OCR/ASR/model failures, QA blockers, publication freshness, App-compatible snapshot age, security/rights holds, storage/database health and cost envelopes.
+2. Define structured log/event/metric fields with low cardinality, correlation/job/revision IDs, version lineage and redaction; raw source bytes/text are not ordinary logs.
+3. Define health vector and hard-blocker rules matching design; do not collapse to one uptime/health score.
+4. Define internal SLO/operating targets for owner-console availability, durable job acceptance, queue age, publication freshness, backup age/restore evidence and cost—not a public SLA.
+5. Define performance budgets at 20k–50k Items for common owner queries, reprocessing, analytics recompute and bundle generation; state measured triggers before adding indexes/services/VM capacity.
+6. Define worker/runtime capacity and scheduling on existing VMs/Coolify, including batch windows/on-demand jobs and vertical scaling before another always-on service.
+7. Define PostgreSQL backup strategy and R2/object backup/reproducibility classification, reusing existing App backup conventions/account where safe but with separate Corpus archives/credentials.
+8. Define RPO/RTO/recovery ordering and isolated restore drills; deletion/takedown overlay replay is mandatory after restore.
+9. Define artifact regeneration vs backup: do not pay to back up fully reproducible caches/derivatives unless recovery economics justify it.
+10. Define provider/cost ledger aggregation and spend circuits from Stage 22; include owner review time and avoided-call/cache savings.
+11. Define alert routing. Prefer existing owner email/provider/Coolify/GitHub mechanisms; use SES only if alert email genuinely adds value. No new paging service by default.
+12. Define incident/runbook minimum set and evidence retention sufficient for one owner.
+13. Define exact triggers for adding observability SaaS, another VM/worker, database scale, specialized store or longer retention.
+
+## Alternatives / cost
+
+Compare existing native signals + structured logs/PG views, a small self-hosted metrics stack, and managed observability SaaS. Count maintenance time and baseline monthly cost. Prefer the first until a real diagnosis/retention gap is measured. Include **App implementation reuse assessment**.
+
+## Failure/testing
+
+Cover log sink loss, metrics loss, queue stall, DB disk pressure, R2 outage, backup failure, restore mismatch, VM outage, provider quota/cost spike and stale publication. Define synthetic health probes and quarterly/periodic restore/recovery evidence without inventing 24×7 on-call.
+
+## Deliverable
+
+Create/amend `Architecture/24-observability-performance-reliability-backup-and-cost-operations.md` with normal 17-part structure. Include signal/SLO catalog, health vector, capacity/upgrade triggers, backup/recovery diagram, cost ledger, alert/runbook table, failure matrix and reuse/no-new-APM assessment.
+
+## Checklist / handoff
+
+Read full Stage 24 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report operating baseline, reuse decisions, ADRs, backup/RPO/RTO assumptions, cost/fallback, unresolved risks and commits.
