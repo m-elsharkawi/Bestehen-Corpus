@@ -1,0 +1,49 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 15 of 28
+## Define Semantic Enrichment, Classification, and Answer Mapping
+
+You are the semantic-processing architect responsible for **Stage 15: Semantic Enrichment, Classification, and Answer Mapping**.
+
+Define how extracted text/layout/media candidates become structured exam semantics, taxonomy mappings, answer associations and reusable derived features without allowing a model to become source truth. This is **architecture decision work, not implementation**. Do not write enrichment/model code, create provider resources/keys, deploy/configure anything, enter dashboards or make live calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse existing Coolify/PostgreSQL/R2/Gemini/OpenAI account families by default. Follow Stage 03's selected runtime, including Python. Prefer deterministic/local parsing/rules and cached results before paid AI. Reuse Gemini as the first bounded general-model account family only where benchmark evidence shows deterministic/local methods are insufficient. New model/vendor/account requires measured justification, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Model/parser output is a candidate with method/model/rule version and evidence references. Curated/source truth is not overwritten. Answers, instructions, task boundaries, taxonomy, difficulty/relevance and confidence remain separately governed. Unknown/ambiguous mappings are first-class. Paid work is capability/scoped and bounded.
+
+## Mandatory reads
+
+Read Corpus product Stages 03,05–10,14–17; Architecture 07,09–14; full Stage 15 checklist; design state/workbench/reprocess artifacts; reuse policy/App implementation handoff and AI guide; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define semantic candidate contract linking extracted spans/regions/media segments to canonical Document/Exam/Task/Item/Instruction/Stimulus/Option/Answer entities.
+2. Define deterministic heuristics/rules for headings, numbering, repeated templates, answer-key alignment, option labels and task boundaries before model use.
+3. Define classification mappings to taxonomy/difficulty/relevance inputs with confidence, supporting evidence, ambiguity and review state.
+4. Define answer-key association across detached pages/files, item numbering variants and contradictory keys without silently selecting one.
+5. Define structured model-assistance boundary: minimum input, explicit task, no tools/network/secrets, schema-constrained output, evidence/span references, model/prompt/version lineage and validation.
+6. Define cheap-first escalation and caching/content-hash reuse; no per-rerun model call when inputs/method version are unchanged.
+7. Define candidate-vs-curated decision semantics and manual override/supersession behavior.
+8. Define local partial success: one unresolved answer/task/classification does not poison unrelated siblings or capabilities.
+9. Define reprocessing invalidation based on extraction/taxonomy/rule/model version dependencies.
+10. Define confidence thresholds/benchmark gates as configurable releases, not hardcoded architecture constants.
+11. Define provider/account reuse and cost attribution per capability/model release.
+12. Define output contract for Stage 16 dedup, Stage 17 QA, Stage 18 analytics and Stage 21 benchmark.
+
+## Alternatives / cost
+
+Compare deterministic/rule-first enrichment, local open-source NLP/embedding/classifier approaches, and bounded Gemini-assisted enrichment. A generic always-on LLM pipeline is not the default. If Python is selected, evaluate whether local NLP/data libraries eliminate paid calls. Include cost per 1,000 items and an **App implementation reuse assessment**.
+
+## Failure/security/testing
+
+Cover malformed model JSON, hallucinated answer/key, missing evidence span, taxonomy version mismatch, prompt injection from source text, contradictory deterministic/model results, quota timeout and stale cached candidate. Tests need rights-safe gold examples, schema/property checks, answer-mapping accuracy, evidence-reference validation, replay determinism and negative prompt-injection cases.
+
+## Deliverable
+
+Create/amend `Architecture/15-semantic-enrichment-classification-and-answer-mapping.md` with normal 17-part structure. Include cheap-first flow, candidate schema, deterministic-vs-model matrix, answer-mapping state model, escalation/cost table, failure matrix, benchmark gates and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 15 first; mark only committed decisions; sequential current-SHA updates; exact deferral/blocker phrases; re-fetch/reconcile. Report enrichment architecture, model/no-model decisions, Python implications, provider reuse, cost/fallback, benchmark needs, risks and commits.
