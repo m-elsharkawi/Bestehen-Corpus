@@ -1,0 +1,49 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 21 of 28
+## Define Benchmark, Gold Data, Reproducibility, and Capability Qualification
+
+You are the evaluation/benchmark architect responsible for **Stage 21: Benchmark, Gold Data, Reproducibility, and Capability Qualification**.
+
+Instantiate the architecture for a rights-safe, immutable/versioned Corpus benchmark and gold-data workflow that qualifies parsers/OCR/ASR/enrichment/dedup/QA/model candidates before production influence. This is **architecture decision work, not implementation**. Do not collect benchmark files, run models/providers, create resources/accounts/keys, deploy/configure systems or make live calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Follow Stage 03's selected runtime, including Python. Reuse GitHub/Coolify/PostgreSQL/R2/provider accounts; benchmark evaluation should run locally/CI/on existing infrastructure where possible. Do not add an ML experiment-tracking SaaS, labeling platform, data warehouse or benchmark vendor by default. New vendor/account requires measured justification, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+`corpus-benchmark-1.0.0` is intentionally not yet instantiated and must not be treated as complete before this stage. Benchmark data must be rights-safe, independent enough for the capability under test, frozen/versioned and reproducible. A failed slice blocks only the affected capability/scope. Provider/model promotion is benchmark-driven, never marketing-driven.
+
+## Mandatory reads
+
+Read Corpus shaping Stages 09,10,14,16,17; Architecture 08–18 plus 20 where UI/review affects gold maintenance; full Stage 21 checklist; design benchmark/health/audit artifacts; reuse policy/App handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define benchmark manifest/version identity, immutable source cut, taxonomy/rule versions, rights eligibility and checksums.
+2. Instantiate the product’s 16-slot seed design and 12–14 package gold core at architecture level: selection criteria, not actual copyrighted payload collection.
+3. Define slices by source family, format, scan quality, language/task type, media quality, rights state and difficult edge cases.
+4. Define gold labels/annotations for structure, OCR text/layout, ASR transcript/timing, canonical mapping, taxonomy, answer mapping, duplicate/derivative/independence and QA findings as applicable.
+5. Define annotation provenance, reviewer decision, disagreement/adjudication and supersession.
+6. Define independence/holdout rules so a candidate cannot train/tune on its own test evidence and mirrors/derivatives do not inflate results.
+7. Define capability-specific metrics, minimum gates, failure slices and promotion/rollback criteria; calibratable thresholds are versioned releases, not hidden constants.
+8. Define reproducible evaluation runner contract: pinned runtime/dependencies/model artifacts/config, deterministic seeds where meaningful, environment metadata and result manifest.
+9. Define paid-provider evaluation budgets/caps and sampled escalation; no unlimited benchmark spend.
+10. Define benchmark artifact storage in Git for small metadata/rights-safe fixtures and R2/object storage for larger permitted bytes, using existing account infrastructure with separate Corpus boundaries.
+11. Define result comparison/drift reports and how Stage 22 promotes model/provider releases.
+12. Define owner maintenance workflow and audit for benchmark changes.
+
+## Alternatives / cost
+
+Compare simple Git+R2 manifests/fixtures and local CI evaluation with experiment-tracking/labeling SaaS. Prefer first-party/simple. Include owner annotation time, provider-run cost and **App implementation reuse assessment**.
+
+## Failure/testing
+
+Cover missing/corrupt fixture, changed checksum, rights revocation, evaluator version mismatch, leakage between train/tune/test, low-sample slice and nondeterministic provider response. Benchmark harness itself must have integrity/negative tests.
+
+## Deliverable
+
+Create/amend `Architecture/21-benchmark-gold-data-reproducibility-and-capability-qualification.md` with normal 17-part structure. Include benchmark manifest schema, slice/metric matrix, qualification state machine, reproducibility contract, rights/independence controls, cost envelope, storage/reuse assessment and promotion handoff.
+
+## Checklist / handoff
+
+Read full Stage 21 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report benchmark architecture, qualification gates, reuse/no-SaaS decision, cost/fallback, unresolved data-collection work, downstream Stage 22/25 dependencies and commits.
