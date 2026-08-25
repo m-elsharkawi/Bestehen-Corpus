@@ -1,0 +1,48 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 17 of 28
+## Define Validation, QA, Findings, and Capability-Scoped Publication
+
+You are the quality architecture owner responsible for **Stage 17: Validation, QA, Findings, and Capability-Scoped Publication**.
+
+Define how Corpus turns evidence and processing outputs into explicit Q0–Q3 findings and capability-specific eligibility without a scalar readiness shortcut. This is **architecture decision work, not implementation**. Do not write validators, database code, deploy/configure systems, create accounts/resources/keys, enter dashboards or make live calls.
+
+## App implementation reuse and no-provisioning rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Follow Stage 03’s selected primary runtime, including Python. Reuse current GitHub/Coolify/PostgreSQL/R2/provider-account ecosystem and introduce no QA SaaS/rules engine/search service unless measured need proves it. New vendor/account requires incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Q0–Q3 findings are explicit, scoped and evidence-linked. Capability eligibility is independent across usages; no universal `production_ready` flag. Trust, rights, difficulty/relevance and independence remain separate axes. Parent status cannot erase local defects. Technical/provider failure is not content failure. Historical findings/decisions remain auditable under rule changes.
+
+## Mandatory reads
+
+Read Corpus product Stages 03–12,16,17; Architecture 07–16; full Stage 17 checklist; design state/workbench/flows/coverage artifacts; reuse policy/App handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define Finding identity, scope, severity/class Q0–Q3, rule/check version, evidence refs, status, owner action, suppression/resolution and supersession.
+2. Define deterministic validation layers from structural integrity through answer correctness, content quality and use-specific publication criteria.
+3. Define capability families and eligibility gates separately for analytics, internal reference, difficulty/relevance, pattern publication, exact content/media use and other product-approved uses.
+4. Define how authenticity/confidence, rights, extraction quality, answer certainty and independence feed gates **without collapsing into one score**.
+5. Define blockers/warnings/review-needed/unknown semantics and local parent-child propagation.
+6. Define validation under partial/incomplete exams and assets: safe capabilities may publish while affected ones remain held.
+7. Define correction/revalidation behavior after owner decisions, new source evidence, rights changes, taxonomy migration, dedup changes or processor version changes.
+8. Define automated-vs-human QA boundaries and benchmark promotion gates; model output cannot self-certify.
+9. Define publication eligibility snapshots with exact rule/taxonomy/data revisions for Stage 19.
+10. Define health/reporting queries and design state rendering without a backend fork per capability.
+11. Define audit requirements for overrides, suppressions and material eligibility changes.
+
+## Alternatives / cost
+
+Compare explicit findings + rule projections with a single readiness score and a third-party rules/quality platform. Prefer explicit first-party architecture on current PostgreSQL/runtime stack. Include owner-review cost and **App implementation reuse assessment**.
+
+## Failure/testing
+
+Cover validator crash, rule-version incompatibility, missing dependency, conflicting findings, stale projection and partial revalidation. Tests must prove six-axis separation, capability locality, parent/child rules, exact historical replay, no technical-failure learner/content blame and safe partial publication.
+
+## Deliverable
+
+Create/amend `Architecture/17-validation-qa-findings-and-capability-scoped-publication.md` with normal 17-part structure. Include finding model, validation pipeline diagram, capability gate matrix, propagation table, revalidation triggers, failure matrix, cost/reuse assessment and test obligations.
+
+## Checklist / handoff
+
+Read full Stage 17 first; mark only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report decisions, ADRs, calibration needs, reuse result, risks, Stage 19 contract dependencies and commits.
