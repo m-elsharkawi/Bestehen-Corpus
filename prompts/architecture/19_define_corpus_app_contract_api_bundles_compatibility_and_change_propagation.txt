@@ -1,0 +1,50 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 19 of 28
+## Define the Corpus → App Contract, API, Bundles, Compatibility, and Change Propagation
+
+You are the integration architect responsible for **Stage 19: Corpus → App Contract, API, Bundles, Compatibility, and Change Propagation**.
+
+Define the provider-side Corpus contract that satisfies the accepted Bestehen / App bundle-first asynchronous integration without creating learner-runtime coupling. This is **architecture decision work, not implementation**. Do not write APIs/exporters/importers, deploy/configure storage, create accounts/resources/keys, sign real bundles or make live calls.
+
+## App implementation reuse and no-provisioning rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse existing GitHub/Coolify/Pangolin/PostgreSQL/R2/provider-account ecosystem by default. The Corpus implementation language may be Python or TypeScript per Stage 03; the cross-product contract must be language-neutral. Prefer R2/GitHub-compatible immutable artifact publication using the existing Cloudflare/GitHub account family rather than a new API gateway/CDN/object-store vendor. New vendor/account requires measured justification, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Binding counterpart
+
+Read current App Architecture 10, 12 and 28. App already expects **asynchronous bundle-first import**, immutable compatible snapshots, capability-scoped eligibility, stable IDs/revisions, contract/taxonomy versions, rights/removal propagation and last-known-compatible fallback. Ordinary learner attempts do not query Corpus or trigger Corpus AI, and App sends no learner data.
+
+## Mandatory reads
+
+Read Corpus product Stages 04,05,09–12,17; Architecture 05,08,09,10,17,18; full Stage 19 checklist; design App-impact/health/audit/flow artifacts; App Architecture 10,12,28; reuse policy/App implementation handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Reconcile Corpus product contract with current App bundle-first counterpart and record any exact mismatch; do not rediscover the boundary from scratch.
+2. Define publication unit(s): immutable capability-scoped bundle(s), small publication index/manifest and optional internal metadata endpoint only if actually needed.
+3. Define stable IDs/revisions, contract major/minor, taxonomy version, source-cut/data revision, QA rule release, analytics release and generated-at/version metadata.
+4. Define bundle schema for pattern intelligence, evidence/support/coverage/confidence, rights/action eligibility, independence, material references and removal/deny overlays without learner data.
+5. Define integrity/authenticity: hashes/digests, canonical serialization, signing/key-rotation expectations and verification failure behavior. Reuse existing account/storage tooling where possible; do not create keys now.
+6. Define compatibility rules: supported major/minor ranges, unknown fields, incompatible majors, taxonomy changes, partial capability imports and last-known-compatible snapshot.
+7. Define atomic publication/promotion and immutable rollback: App never sees half-generated bundle state.
+8. Define material-change semantics and change journal for add/update/supersede/remove/rights-only removal/trust invalidation/taxonomy remap/independence change.
+9. Define takedown/revocation behavior across already published bundles and App local cache/imported state.
+10. Define Corpus outage/staleness/no-decision-grade-pattern behavior: App continues safely from last compatible data and never converts absence to zero/truth.
+11. Define optional pull/index frequency and cache semantics; avoid webhook/event infrastructure unless measured freshness need justifies it.
+12. Define contract fixtures/schema artifacts and cross-repository compatibility tests Stage 25 must implement.
+13. Define provider-side publication on existing R2/GitHub/Coolify infrastructure versus a new live API service; prefer immutable artifact delivery.
+
+## Alternatives / cost
+
+Compare immutable R2/GitHub artifact bundles, a live REST/GraphQL API and database/shared-network coupling. Recommend the simplest async artifact path compatible with App. Include **App implementation reuse assessment**, incremental storage/egress cost and exit to another S3-compatible/file host.
+
+## Failure/security/testing
+
+Cover incomplete publication, wrong digest/signature, incompatible contract, stale index, partial capability failure, revocation after import, corrupt bundle and Corpus downtime. Tests must prove schema compatibility, atomic snapshot, removal propagation, no learner-data fields and deterministic fixture replay.
+
+## Deliverable
+
+Create/amend `Architecture/19-corpus-app-contract-api-bundles-and-change-propagation.md` with normal 17-part structure. Include provider/consumer sequence diagrams, bundle/index schema tables, compatibility matrix, change/removal semantics, failure matrix, security/integrity model, reuse/cost assessment and cross-repo test contract.
+
+## Checklist / handoff
+
+Read full Stage 19 first; mark only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report App reconciliation, publication mechanism, ADRs, reuse decisions, cost/fallback, risks, downstream dependencies and commits.
