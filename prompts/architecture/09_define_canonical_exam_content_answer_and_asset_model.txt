@@ -1,0 +1,55 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 09 of 28
+## Define the Canonical Exam, Content, Answer, and Asset Model
+
+You are the canonical-content/data architect responsible for **Stage 09: Canonical Exam, Content, Answer, and Asset Model**.
+
+Define the implementation-facing logical model for source-derived exam structure, instructions, stimuli, items, answers/scoring and assets while preserving observed source expression, incomplete material, provenance, rights and revision history. This is **architecture decision work, not implementation**. Do not write production schema/migrations/ORM code, create services/resources/accounts/keys, deploy or make live calls.
+
+## App implementation reuse and no-provisioning rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` plus the current App implementation provider handoff/runbook. Reuse the existing GitHub/Coolify/Pangolin/provider-account ecosystem by default. Prefer no new service, then reuse, then a separate least-privilege Corpus resource inside the same account. A new vendor/account is exceptional and requires measured justification, explicit incremental cost/operations, an ADR and an exit. **Corpus may be Python-first end-to-end if Stage 03 selected it; do not force Node/TypeScript merely to match App.** The chosen runtime must remain containerized and deployable on Coolify. Do not provision/configure/deploy anything in this stage.
+
+## Product invariants
+
+Canonical hierarchy is Source Observation → Document → Exam/Test Set → Section → optional Part → Task → Item, with Instructions, Stimuli, Response Options, Answers, Explanations, Scoring Rules/Rubrics and Assets separately addressable. The schema must remain provider-neutral, represent incomplete material honestly, and keep observed source content separate from curated/derived interpretation. Rights/confidence/QA/independence remain separate axes. Corpus stores no learner data.
+
+## Mandatory reads
+
+Read current Corpus shaping Stages 05,08,09,10,12,15,17; Architecture 04–08; full Stage 09 checklist; design state/detail/workbench/flow artifacts; reuse policy and App implementation handoff/runbook; ADR index/current ADRs.
+
+## GitHub execution
+
+Read Shaping/App current `main`; write only Corpus `main`; fetch current SHA before updates; no parallel same-path/checklist writes; never modify Shaping/App/Design; commit output/ADRs/checklist.
+
+## Decisions this stage owns
+
+1. Define logical entities/value objects and cardinalities for the canonical hierarchy without binding domain truth to an ORM/framework.
+2. Represent optional Parts, multi-part questions, task groups, shared stimuli, tables/forms/notices/ads and provider-specific structure without TELC-only hacks.
+3. Separate instructions from tested content and preserve source ordering/layout cues where meaning depends on them.
+4. Define response-option models for multiple choice, matching, multiple-correct, ordering, free response and productive tasks.
+5. Define answer-key/scoring/rubric representation, answer provenance, detached key linkage, conflicts, unknown keys, correction and supersession.
+6. Define asset model for image/audio/video/page region/file, source relation, media role, checksum, rights and availability independent of content semantics.
+7. Define language/transcript/script/subtitle relationships for listening/speaking source assets without pretending generated transcripts are source truth.
+8. Define stable IDs/revisions so reprocessing can update interpretations without renumbering unrelated entities.
+9. Define incomplete/ambiguous source representation: absent section/answer/asset is absence, not false/zero.
+10. Define canonical references needed by taxonomy, dedup, QA, analytics, benchmark and App publication.
+11. Define how source-specific extensions are contained so they cannot pollute common contracts.
+12. Show how the model can be persisted with the Stage 05 selected PostgreSQL/object-storage direction without a new CMS/search/content service.
+
+## Alternatives / simplicity
+
+Compare a normalized provider-neutral canonical model with a provider-specific JSON/document dump and a maximal universal schema. Recommend the smallest model that preserves observed structure and supports later stages without overgeneralization. If Stage 03 selected Python, keep model definitions compatible with a simple typed/validated Python architecture; if TypeScript, equivalent constraints apply.
+
+## Failure/security/cost/testing
+
+Define missing/corrupt answer keys, detached asset mismatch, partial extraction, conflicting source structure, stale derived transcript, invalid hierarchy and schema-version incompatibility behavior. Source HTML/scripts remain inert data. Tests should cover round-trip preservation, optionality, ID stability, source-order integrity, answer provenance and no rights/confidence coupling.
+
+Include an **App implementation reuse assessment**; expected default is no new paid service/account.
+
+## Deliverable
+
+Create/amend `Architecture/09-canonical-exam-content-answer-and-asset-model.md` using the normal 17-part structure. Include Mermaid entity/relationship view, canonical entity table, answer/scoring matrix, asset/transcript model, incomplete-state table, version/ID rules, failure matrix and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 09 first; mark only committed decisions; sequential current-SHA writes; use exact deferral/blocker phrases; re-fetch/reconcile. Report decisions, ADRs, assumptions, reuse/no-new-service result, risks, downstream dependencies and commits.
