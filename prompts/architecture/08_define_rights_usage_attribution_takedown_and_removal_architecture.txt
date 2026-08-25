@@ -1,0 +1,58 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 08 of 28
+## Define Rights, Usage, Attribution, Takedown, and Removal Architecture
+
+You are the governance/data architect responsible for **Stage 08: Rights, Usage, Attribution, Takedown, and Removal Architecture**.
+
+Define the architecture that keeps rights/usage independent from authenticity, supports action-level permissions and attribution, and can suppress/remove/take down content safely without destroying legitimate provenance/audit evidence. This is **architecture decision work, not implementation**. Do not write production code/migrations, configure storage, create accounts/resources/keys, deploy, enter dashboards or perform live takedown/provider actions.
+
+## Mandatory global rules
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`, App implementation provider handoff, and setup runbook. Default to no new service, then reuse the existing App tool/account/control plane, then use a separate least-privilege Corpus resource inside the same account when isolation is needed. New vendor/account requires measured justification, incremental cost/ops, ADR and exit. This stage normally requires **no new rights/compliance SaaS**. Do not provision anything.
+
+The current reusable family includes GitHub/GitHub Actions, two-VM Coolify/Pangolin, Node/TypeScript/pnpm, PostgreSQL/Kysely/pg-boss, R2 EU, Auth0 EU, SES Frankfurt, Gemini/OpenAI. Rights architecture must remain provider-neutral and must not rely on a vendor dashboard as semantic truth.
+
+## Product invariants
+
+Rights are independent from trust/confidence. Public accessibility does not grant reuse. Valid statuses include `REUSABLE`, `REUSABLE_WITH_CONDITIONS`, `REFERENCE_ONLY`, `UNKNOWN_REVIEW_REQUIRED`, `PROHIBITED` plus action-level conditions/attribution/review state. Takedown/removal can affect source bytes and downstream publication differently from historical derived metadata, depending on product rule. Corpus remains learner-data-free.
+
+## GitHub execution
+
+Read current Shaping/App; write only Corpus main; fetch current content/SHA before updates; sequential checklist writes; never modify Shaping/App/Design; commit output/ADRs/checklist.
+
+## Mandatory reads
+
+Read Corpus product Stages 02,03,04,05,08,10,12,13,15,17; Architecture 04–07; full Stage 08 checklist; design state/workbench/flow/security artifacts; reuse policy; App implementation handoff/runbook; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. **Rights record model.** Separate legal/usage classification, known license, public accessibility, redistribution, derivative use, attribution, commercial restrictions, conditions, evidence, reviewer and review state.
+2. **Action-level authorization.** Define capability/actions such as analyze, retain original bytes, retain excerpts, display internally, export/publish exact material, derive metadata, create transformation/generation constraints, and include in App bundle. Avoid one coarse “allowed” boolean.
+3. **Scope/locality.** Rights may vary at source/document/asset/item/excerpt level. Define inheritance/override and unknown behavior.
+4. **Evidence lineage.** Store evidence/reference/terms snapshot or durable citation metadata without claiming legal certainty; changes append/supersede decisions.
+5. **Attribution contract.** Define structured attribution requirements and how downstream App publication carries only what is appropriate for the permitted action.
+6. **Takedown/removal state machine.** Receive request → identify scope/fingerprints → hold publication/processing → assess → suppress/delete bytes as required → propagate deny/removal overlays → re-evaluate derivatives → record proof/audit.
+7. **Re-ingestion prevention.** Define source/location/content-fingerprint blocks so removed/prohibited material does not re-enter through mirrors where product policy requires it.
+8. **Derived metadata treatment.** Distinguish original expression, extracted structural facts, aggregate/derived intelligence, model artifacts and audit/provenance. Define what is retained, recomputed, suppressed or physically deleted for each rights outcome.
+9. **Publication propagation.** Define material change/removal events for Stage 19 so App can stop using restricted exact material while retaining unaffected safe intelligence where allowed.
+10. **Owner workflow.** Support rights review, rationale, evidence, conditions, destructive-action confirmation and audit without direct DB edits.
+11. **Backup/cache deletion.** Define logical deny overlays and physical deletion obligations across runtime storage, cache, artifact reuse and backups; Stage 23/24 operationalize deletion proof/restore replay.
+
+## Reuse / storage isolation
+
+Explicitly assess reuse of the same Cloudflare account/R2 EU boundary. Because Corpus may hold reference-only/prohibited source bytes, prefer a **separate Corpus bucket or tightly scoped storage resource/credential** rather than sharing App runtime media prefixes. Same account is cost-efficient; broad shared credentials are not. Do not create the bucket/key now.
+
+## Alternatives / cost
+
+Compare structured first-party rights metadata + audit with a separate rights-management SaaS/manual spreadsheet. Prefer first-party architecture unless a later public/commercial scale proves otherwise. Include owner review time and deletion/reprocessing cost.
+
+## Failure, security and testing
+
+Define missing rights evidence, conflicting licenses/terms, takedown while processing, partial deletion, cache/backup lag, mirror re-ingest and stale App publication. Rights hold must fail closed for restricted actions without changing trust. Tests must prove action-level gates, locality, deny overlay precedence, restoration replay, re-ingest block and no rights→confidence mutation.
+
+## Deliverable
+
+Create/amend `Architecture/08-rights-usage-attribution-takedown-and-removal-architecture.md`. Include rights/action matrix, locality/inheritance table, takedown/removal Mermaid state machine, retention/deletion matrix, App propagation contract, failure matrix, R2/account reuse assessment and cost/owner-effort notes.
+
+## Checklist / handoff
+
+Read full Stage 08 first; check only committed evidence; sequential current-SHA updates; exact deferral/blocker phrases; re-fetch/reconcile. Report decisions, ADRs, unresolved legal/product assumptions, reuse/isolation decision, cost/fallback, downstream dependencies and commits. Do not claim legal compliance.
