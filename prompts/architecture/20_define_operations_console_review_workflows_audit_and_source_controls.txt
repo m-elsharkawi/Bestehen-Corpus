@@ -1,0 +1,52 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 20 of 28
+## Define the Operations Console, Review Workflows, Audit, and Source Controls
+
+You are the application/operations architect responsible for **Stage 20: Operations Console, Review Workflows, Audit, and Source Controls**.
+
+Define the internal owner console architecture that implements the design handoff without creating per-screen backend forks or exposing dangerous operations casually. This is **architecture decision work, not implementation**. Do not write UI/backend code, configure auth/networking, create accounts/apps/keys, deploy or make live calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse the existing Coolify/Pangolin/private-access boundary and provider accounts by default. Follow Stage 03's chosen runtime, including Python. Compare whether a Python-native/server-rendered internal UI can satisfy the design more simply than adding Next.js/Node; conversely, reuse Next.js/React if that lowers total owner complexity. **Avoid a hybrid frontend/backend split unless the design or architecture genuinely needs it.**
+
+For access control, compare **Pangolin owner-only private ingress alone** with reuse of the existing Auth0 EU account using a separate Corpus application/client. Do not add a new identity provider/account. Use no email unless a real workflow requires it. Do not provision/configure anything.
+
+## Product/design invariants
+
+Design is load-bearing for six separate truth axes, capability gates, governed action tiers, append-only audit, local corrections, source controls, inert previews, health vector and `<900px` read-only/consequence restrictions. The owner must perform ordinary maintenance without raw database surgery. Consequential actions require rationale/confirmation appropriate to risk.
+
+## Mandatory reads
+
+Read Corpus product Stages 10,11,13,17; Architecture 03–19 (hard focus 05,11,16–19); full Stage 20 checklist; all Corpus design handoff/foundations/components/state/screens/workbenches/responsive/flows/accessibility/security/coverage artifacts; reuse policy/App implementation handoff/runbook and Pangolin/Auth0 guides; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define frontend/application architecture and route/navigation composition for the five primary destinations and contextual records/workbenches.
+2. Define reusable command/query/view-model boundaries so Inbox, source detail, run detail, record detail, workbenches, benchmark, health, App impact and audit reuse domain services instead of custom backends.
+3. Define server-owned authorization for action tiers and `<900px` read-only restrictions; hiding a button is not authorization.
+4. Define owner authentication/session architecture: Pangolin-only vs Pangolin + reused Auth0 EU application/client; select the minimum boundary that satisfies threat model and design.
+5. Define inert source preview architecture: sandbox/no active content/no third-party network/strict CSP or equivalent, with raw source never executed in the console.
+6. Define workflow state persistence for queue filters/saved views/selection, review drafts, rationale, confirmation and safe-leave background jobs.
+7. Define governed action contract: risk tier, preconditions, affected scope, dry-run/impact preview where relevant, rationale, confirmation, idempotency, audit and rollback/supersession.
+8. Define diff/history/source-evidence rendering over common APIs/queries rather than screen-specific storage.
+9. Define accessibility architecture: semantic controls, keyboard/focus, announcements, non-color state, zoom/reflow, table alternatives, destructive confirmation and read-only small-screen behavior.
+10. Define data freshness/conflict behavior when a record changes between review and action; stale form must not overwrite newer state.
+11. Define health as vector + hard blockers, not one green score.
+12. Define minimal notification/email behavior; prefer none if owner console/health is enough.
+13. Define performance/query budgets for dense desktop tables at current scale without adding search SaaS by default.
+
+## Alternatives / cost
+
+Compare Python-native single-stack console, Next.js/React console with selected backend, and a SPA/API split. Score design fidelity, accessibility, owner development/maintenance, auth/network complexity, deployment count and recurring cost. Include **App implementation reuse assessment** and prefer one deployable stack when possible.
+
+## Failure/security/testing
+
+Cover stale edit, double action, interrupted job, auth/session expiry, source-preview attack, browser back/reload, inaccessible table and mobile attempted consequential action. Tests must cover all design states/flows, keyboard/a11y, server authorization, inert preview and audit receipts.
+
+## Deliverable
+
+Create/amend `Architecture/20-operations-console-review-audit-and-source-controls.md` with normal 17-part structure. Include UI/application diagram, route/state map, governed-action table, auth/access comparison, responsive/action matrix, inert-preview boundary, failure matrix, design traceability matrix and reuse/cost assessment.
+
+## Checklist / handoff
+
+Read full Stage 20 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report UI/runtime/auth direction, Python implications, reuse decisions, ADRs, cost/fallback, design gaps, risks and commits.
