@@ -1,0 +1,57 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 26 of 28
+## Define Environments, CI/CD, Release, and Operations
+
+You are the release/operations architect responsible for **Stage 26: Environments, CI/CD, Release, and Operations**.
+
+Define the smallest safe path from reviewed Corpus change to a recoverable private deployment and App publication using the owner’s existing operational estate. This is **architecture decision work, not implementation**. Do not create Coolify projects/services, Pangolin resources, databases/buckets/keys, GitHub workflows/secrets, DNS, provider resources, deployments or live checks.
+
+## Binding App implementation reuse and Python/Coolify rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`, current App implementation handoff/runbook and current App setup guides for GitHub, Coolify two-VM, Pangolin, R2, secrets/recovery and staging readiness.
+
+**Deployment baseline is the actual App implementation boundary: existing two Linux VMs managed through Coolify plus Pangolin/Newt private ingress—not the older Render architecture assumption.** Reuse GitHub/GitHub Actions, existing VMs/Coolify/Pangolin and provider accounts by default. Stage 03 may have selected **Python or TypeScript**; either is acceptable. The only hard runtime requirement here is reproducible container/OCI deployment compatible with Coolify and the existing private network.
+
+Prefer no new VM/service; use current capacity, on-demand/scheduled workers and vertical scaling first. A new VM, host, CI/deployment platform or vendor/account requires measured capacity/security blocker, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Corpus is owner-only/internal, learner-data-free and can process asynchronously. App publication is immutable/bundle-first and App survives Corpus downtime. Product truth is not coupled to deployment status. Unsafe/incompatible releases fail closed without rewriting historical evidence.
+
+## Mandatory reads
+
+Read Architecture 03,05,11,17,19,21–25; full Stage 26 checklist; design access/health/run/audit artifacts; reuse policy; App implementation Stage 01/02 handoffs and provider setup guides; current App repository CI/Dockerfile/local-development/delivery docs where useful; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define environment classes: local, CI, optional disposable preview, on-demand private staging, production/private owner use. Avoid always-on duplicate environments unless needed.
+2. Define exact reuse topology across the existing Coolify controller/deployment VM(s) and Pangolin private ingress without embedding private addresses/names in Git.
+3. Define container build/runtime contract for selected Python/TypeScript stack: pinned runtime/system packages, non-root/read-only where feasible, health/readiness, graceful shutdown, persistent-volume prohibition for authoritative data unless explicitly justified.
+4. Define service decomposition at deployment level: minimum web/control plane and worker/process set; prefer one image/process family or one modular service where safe. On-demand/scheduled workers are preferred over paid/idle services.
+5. Define PostgreSQL placement/isolation and migration runner using existing infrastructure if Stage 05 accepts capacity; separate Corpus DB/schema/user/backup credentials from App.
+6. Define R2 Corpus buckets/resources/credentials inside existing Cloudflare account per Stage 05/23; production/staging separation where actually needed.
+7. Define GitHub Actions CI/promotion and exact-commit release evidence. Reuse current GitHub account/workflow conventions; no separate release SaaS.
+8. Define configuration/secrets: environment-scoped, least privilege, protected-ledger references, no secrets in build args/images/logs; reuse owner conventions.
+9. Define deployment/promotion: fake/local first, exact commit, migration/compatibility gates, private staging rehearsal where needed, owner-controlled production promotion. Do not assume autodeploy is desirable.
+10. Define release units for code, schema, taxonomy/rules, processor/model releases, benchmark and App publication; compatibility manifest rather than one mutable `latest`.
+11. Define rollback/roll-forward and expand/contract migration; historical data/curated decisions cannot be rolled back by filesystem/image rollback.
+12. Define backup/recovery integration and restore/delete-overlay replay from Stage 24.
+13. Define phased activation/circuit flags server-owned and default closed for paid/model/publication capabilities; no feature-flag SaaS.
+14. Define operational runbooks: deploy, pause workers, budget circuit, provider outage, takedown, restore, credential rotation/offboarding and App publication rollback.
+15. Define measured capacity triggers for another VM, separate worker host, GPU capacity or new managed service.
+16. Define current-price/capacity re-verification before any future provisioning; architecture does not authorize spend.
+
+## Alternatives / cost
+
+Compare reuse of existing two-VM Coolify/Pangolin, adding another owner VM to the same estate, and a new managed host/platform. The reuse option is default and must be first. Quantify incremental cash and maintenance; show on-demand/suspend/no-service fallbacks. Include **App implementation reuse assessment**.
+
+## Failure/testing
+
+Cover failed build, failed migration, worker version skew, deployment restart, VM outage, Pangolin outage, DB/R2/provider outage, rollback after schema change, stale bundle and backup restore. Stage 25 evidence gates must be named for each release step.
+
+## Deliverable
+
+Create/amend `Architecture/26-environments-ci-cd-release-and-operations.md` with normal 17-part structure. Include environment/deployment Mermaid diagrams, Coolify/Pangolin reuse topology, service/image table, release/promotion sequence, config/secrets matrix, rollback/restore matrix, capacity/cost triggers, runbook catalog and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 26 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report exact operational baseline, Python/TypeScript container consequences, reused accounts/infrastructure, any capacity exception, ADRs, cost/fallback, risks and commits.
