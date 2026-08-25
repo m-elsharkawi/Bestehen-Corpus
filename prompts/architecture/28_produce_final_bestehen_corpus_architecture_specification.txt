@@ -1,0 +1,110 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 28 of 28
+## Produce the Final Bestehen / Corpus Architecture Specification and Implementation Roadmap
+
+You are the principal architect responsible for **Stage 28: Final Architecture Specification and Implementation Roadmap**.
+
+Consolidate the accepted Stage 01–27 architecture into one authoritative implementation-facing specification and dependency-aware roadmap. This is **architecture consolidation, not implementation**. Do not write production code/workflows/configuration, create resources/accounts/keys, deploy, enter dashboards or make live provider calls.
+
+## App implementation reuse and Python/Coolify rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`, current App implementation handoff/runbook and Stage 27’s reuse audit. The final spec must faithfully state the selected Corpus runtime—**Python or TypeScript, whichever Stage 03 accepted**—without treating Python as a deviation. It must preserve the existing GitHub/GitHub Actions + two-VM Coolify/Pangolin deployment/account baseline, PostgreSQL/R2 reuse, and existing Auth0/SES/Gemini/OpenAI account families where admitted. Do not resurrect older Render/Vercel/Supabase assumptions if accepted implementation reality superseded them.
+
+Any new vendor/account/resource family must have an accepted owning-stage decision/ADR, measured reason, incremental cost/ops and exit. Same-account reuse must preserve least-privilege Corpus isolation from App learner data. The roadmap may say what later implementation must provision/configure; **this architecture stage must not do it**.
+
+## Mandatory reads
+
+Read current:
+
+- Corpus shaping Stage 17 and necessary detailed Stages 01–16 for delegated detail;
+- `Architecture/00-architecture-shaping-plan.md` and reuse policy;
+- **all Architecture/01–27 artifacts**;
+- all current ADRs/index;
+- entire `Bestehen_Corpus_Architecture_Checklist.md`, especially Stage 28;
+- Corpus design handoff/coverage artifacts;
+- current App Architecture 10/12/28 and current App implementation/provider handoff/runbook/setup README;
+- Stage 27 validation/fix register and any owner blockers.
+
+Do not copy stale summaries where current accepted artifacts differ. Record source/commit manifest.
+
+## Consolidation requirements
+
+Produce one coherent spec that includes at minimum:
+
+1. mission/product boundary and six truth axes;
+2. accepted architecture principles/quality/cost budgets;
+3. system context/trust zones;
+4. selected primary language/runtime and why (Python/TypeScript/hybrid if actually accepted), repository/module boundaries and container/Coolify deployment constraint;
+5. persistence/storage/job architecture and cross-product isolation;
+6. source discovery/acquisition and secure intake;
+7. provenance/authenticity/confidence;
+8. rights/attribution/takedown/removal;
+9. canonical exam/content/answer/asset model;
+10. taxonomy/difficulty/relevance/versioning;
+11. orchestration/idempotency/reprocessing;
+12. document/OCR/layout and media/ASR processing;
+13. semantic enrichment/model-assistance boundary;
+14. duplicate/derivative/metric-specific independence;
+15. validation/QA/findings/capability publication;
+16. analytics/exam intelligence;
+17. Corpus→App immutable bundle contract/compatibility/change propagation;
+18. operations console/review/audit/accessibility/responsive safety;
+19. benchmark/gold/reproducibility/qualification;
+20. AI/model governance/provider routing/cost circuits;
+21. security/privacy/access/secrets/retention/threat model;
+22. observability/performance/reliability/backup/cost operations;
+23. testing/evaluation/release gates;
+24. environments/CI/CD/release/operations on current Coolify/Pangolin estate;
+25. failure/degradation/recovery matrix;
+26. ADR index/decision registry and explicit deferrals;
+27. total provider/account/resource inventory and incremental cost model;
+28. implementation roadmap.
+
+## Implementation roadmap requirements
+
+Build a dependency-aware roadmap that is implementable by later agents without architecture invention. Prefer vertical/useful slices and foundational infrastructure only where prerequisites demand it. For each implementation stage/slice state:
+
+- goal and user/operator value;
+- exact architecture inputs/ADRs;
+- modules/processes/data/contracts affected;
+- migrations/resources/configuration that implementation may later need;
+- provider/account reuse expectation and least-privilege resource boundary;
+- whether work is local/fake-first, requires owner dashboard action, or may incur spend;
+- tests/benchmark/release evidence required;
+- rollback/recovery boundary;
+- explicit dependencies and safe parallel work;
+- cost/complexity guardrail.
+
+The roadmap must **not** recommend a new provider merely because implementation could be easier. It must preserve the selected Python/TypeScript simplicity and existing Coolify/GitHub/provider-account ecosystem.
+
+## Cost/account summary
+
+Include a final table with every external dependency: existing App account/control plane, Corpus resource isolation, recurring baseline, variable unit, free/on-demand fallback, spend trigger, owner-only setup action and exit. Clearly distinguish “existing account/runbook” from “verified live resource.” No secret/private identifiers.
+
+## Contradictions and open items
+
+Do not hide unresolved owner blockers. Separate:
+
+- accepted architecture decisions;
+- mutable calibration values;
+- implementation-only choices;
+- owner provisioning/billing/legal/dashboard actions;
+- future scale triggers;
+- genuinely blocked product/architecture decisions.
+
+Stage 28 must not silently solve an owner blocker by assumption.
+
+## Required deliverable
+
+Create/amend exactly:
+
+`Architecture/28-bestehen-corpus-architecture-specification.md`
+
+Use Mermaid/tables where useful and produce an authoritative architecture + roadmap, not a high-level summary. Link every major decision to its owning Stage/ADR.
+
+## Checklist / final verification
+
+Read full Stage 28 before work. Mark only committed evidence `[x]`; sequential current-SHA checklist updates; preserve explicit deferrals/blockers. Re-fetch the final spec, checklist, ADR index and Stage 27 after commit. Verify Stage 01–28 titles/outputs/ADRs/decision statuses, App contract, design traceability, reuse policy, selected language and Coolify deployment are internally consistent.
+
+## Final handoff
+
+Report the final specification commit, checklist commit, selected primary stack/runtime, external-provider/account inventory, estimated baseline/variable cost posture, owner actions deferred to implementation, remaining blockers/risks and first implementation slice. Stage 28 is complete only when implementation agents can proceed without inventing major architecture or opening an unnecessary new account/service.
