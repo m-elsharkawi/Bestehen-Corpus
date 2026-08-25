@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#E4E9F0;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1600px;margin:0 auto;padding:0 32px 140px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 05</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Review workbenches and destructive actions</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      Workbenches collapse the rail to 64px — evidence comparison earns the width<br>
+      Every governed action states its exact scope before it can be committed
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:56px;margin-top:36px;">
+
+    <!-- ===== W2 ===== -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">W2</div>
+        <div style="font-size:19px;font-weight:600;">Authenticity and confidence review</div>
+        <div style="font-size:13px;color:#5A6478;">High TELC relevance, insufficient support: eight dimensions, two unknown, and twenty mirrors that add nothing.</div>
+      </div>
+      <div style="width:1440px;height:1024px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);display:grid;grid-template-columns:64px 1fr;background:#EFF2F6;">
+        <div style="background:#14213D;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#E9EEF5;">B/C</div>
+          <sc-for list="{{ railIcons }}" as="r" hint-placeholder-count="5">
+            <div style="width:40px;height:40px;border-radius:5px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ r.fg }};">{{ r.i }}</div>
+          </sc-for>
+          <div style="margin-top:auto;width:7px;height:7px;border-radius:2px;background:#4CC492;"></div>
+        </div>
+
+        <div style="display:flex;flex-direction:column;overflow:hidden;">
+          <div style="height:56px;background:#FFFFFF;border-bottom:1px solid #DDE3EC;padding:0 22px;display:flex;align-items:center;gap:14px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+              <span style="color:#5A6478;">Inbox</span><span style="color:#C6CFDD;">/</span><span style="color:#5A6478;">Authenticity review</span><span style="color:#C6CFDD;">/</span><span style="font-weight:600;font-family:'IBM Plex Mono',monospace;">EX-3140</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border:1px solid #DDE3EC;border-radius:4px;padding:4px 8px;">2 of 4 in this queue</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Rail collapsed · evidence needs the width</div>
+          </div>
+
+          <div style="padding:18px 22px 0;">
+            <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 20px;">
+              <div style="display:flex;align-items:flex-start;gap:24px;">
+                <div style="flex:1;">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5F6980;">EX-3140</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border:1px solid #DDE3EC;border-radius:3px;padding:2px 6px;">Exam scope</div>
+                  </div>
+                  <div style="font-size:22px;font-weight:600;margin-top:6px;" lang="de">„telc Deutsch B1 — Übungssatz“ (claimed)</div>
+                  <div style="font-size:13px;color:#3E4A63;line-height:1.55;margin-top:7px;max-width:88ch;">The claim matters: this material is highly TELC-relevant and would carry real weight in pattern intelligence. The evidence behind the claim is thin, and no amount of mirroring will thicken it.</div>
+                </div>
+                <div style="display:flex;gap:10px;">
+                  <div style="border:1px solid #BCDAE0;background:#EAF4F6;border-radius:6px;padding:10px 14px;text-align:right;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#26697A;">TELC relevance</div>
+                    <div style="font-size:17px;font-weight:600;color:#26697A;margin-top:2px;">High · ±11</div>
+                  </div>
+                  <div style="border:1px solid #B9CBE6;background:#F0F4FA;border-radius:6px;padding:10px 14px;text-align:right;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#24396B;">Confidence</div>
+                    <div style="font-size:17px;font-weight:600;color:#24396B;margin-top:2px;">C · 54</div>
+                  </div>
+                  <div style="border:1px solid #D8C7E2;background:#F4EFF7;border-radius:6px;padding:10px 14px;text-align:right;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#6A4A7C;">Rights</div>
+                    <div style="font-size:17px;font-weight:600;color:#6A4A7C;margin-top:2px;">Unknown</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:14px 22px 20px;display:grid;grid-template-columns:1fr 1fr 380px;gap:14px;">
+            <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;overflow:hidden;">
+              <div style="font-size:15px;font-weight:600;">Eight confidence dimensions</div>
+              <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:4px;">Local evidence first. Inherited and unknown values are marked as such, and the two unknowns stay in the denominator.</div>
+              <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                <sc-for list="{{ dims }}" as="d" hint-placeholder-count="8">
+                  <div style="padding:8px 0;border-bottom:1px solid #EDF0F4;">
+                    <div style="display:grid;grid-template-columns:1fr 62px 70px;gap:9px;align-items:center;">
+                      <div style="font-size:12.5px;color:#14213D;">{{ d.t }}</div>
+                      <div style="display:flex;align-items:center;justify-content:flex-end;gap:5px;">
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ d.fg }};">{{ d.m }}</div>
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ d.fg }};">{{ d.v }}</div>
+                      </div>
+                      <div style="height:5px;background:#EDF0F4;border-radius:2px;overflow:hidden;">
+                        <div style="height:5px;width:{{ d.w }};background:{{ d.bar }};"></div>
+                      </div>
+                    </div>
+                    <div style="font-size:11.5px;color:#5A6478;line-height:1.45;margin-top:3px;">{{ d.note }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:15px;font-weight:600;">Corroboration and independence</div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:10px;">
+                  <sc-for list="{{ corrob }}" as="c" hint-placeholder-count="6">
+                    <div style="display:grid;grid-template-columns:1fr 92px 96px;gap:10px;padding:7px 0;border-bottom:1px solid #EDF0F4;align-items:center;">
+                      <div>
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#14213D;">{{ c.src }}</div>
+                        <div style="font-size:11.5px;color:#5A6478;line-height:1.4;">{{ c.d }}</div>
+                      </div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ c.tfg }};">{{ c.tier }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ c.ifg }};text-align:right;">{{ c.ind }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#FDF6E8;border:1px solid #E6CE9A;border-radius:6px;padding:11px 13px;margin-top:11px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">▲ Twenty mirrors do not make a fact</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Six of the eight supporting observations are copies of one another. Effective independent support is <strong style="font-weight:600;">two</strong> C-tier sources, which is below the decision-grade cap. Corroboration counts underlying evidence, never hosts.</div>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:15px;font-weight:600;">Contradicting evidence</div>
+                <div style="border:1px solid #DDE3EC;border-left:3px solid #6B7789;border-radius:0 6px 6px 0;padding:11px 13px;margin-top:10px;background:#F5F7FA;">
+                  <div style="font-size:12.5px;color:#14213D;line-height:1.55;" lang="de">Sprachbausteine Teil 2 uses a six-option format; every verified telc B1 release in Corpus uses four.</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;margin-top:6px;">structural comparison · 3 verified releases · rule DR-11</div>
+                </div>
+                <div style="font-size:12px;color:#3E4A63;line-height:1.55;margin-top:9px;">This does not prove the material is fake. It does mean the claim “offizieller Übungssatz” cannot be accepted at face value, and that using it for TELC-specific pattern claims would be unsafe.</div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:15px;font-weight:600;">Downstream uses affected</div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:10px;">
+                  <sc-for list="{{ affected }}" as="a" hint-placeholder-count="5">
+                    <div style="display:grid;grid-template-columns:1fr 78px;gap:9px;padding:7px 0;border-bottom:1px solid #EDF0F4;align-items:center;">
+                      <div style="font-size:12px;color:#14213D;line-height:1.4;">{{ a.t }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:{{ a.fg }};text-align:right;">{{ a.v }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+                <div style="padding:13px 16px;border-bottom:1px solid #EDF0F4;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">Suggested · not authoritative</div>
+                  <div style="font-size:14px;font-weight:600;margin-top:5px;">Accept with restricted influence</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Keeps the material usable for structure and exploratory work; excludes it from decision-grade TELC claims and from prevalence denominators.</div>
+                  <div style="display:flex;gap:8px;margin-top:10px;">
+                    <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#1D6F50;border-radius:4px;padding:7px 12px;">Apply · rationale required</div>
+                  </div>
+                </div>
+                <div style="padding:12px 16px;background:#F5F7FA;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Other safe decisions</div>
+                  <div style="display:flex;flex-direction:column;gap:7px;margin-top:8px;">
+                    <sc-for list="{{ confActions }}" as="a" hint-placeholder-count="5">
+                      <div style="display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;background:#FFFFFF;border:1px solid #DDE3EC;border-radius:4px;padding:8px 10px;">
+                        <div>
+                          <div style="font-size:12.5px;font-weight:600;">{{ a.t }}</div>
+                          <div style="font-size:11.5px;color:#5A6478;line-height:1.4;">{{ a.d }}</div>
+                        </div>
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:{{ a.fg }};">{{ a.tier }}</div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+                <div style="padding:12px 16px;border-top:1px solid #DDE3EC;">
+                  <div style="display:flex;align-items:baseline;justify-content:space-between;">
+                    <div style="font-size:12.5px;font-weight:600;">Rationale <span style="color:#A83F3F;">· required</span></div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">168 / 240</div>
+                  </div>
+                  <div style="margin-top:6px;border:1px solid #C6CFDD;border-radius:6px;padding:9px 11px;font-size:12px;line-height:1.5;color:#14213D;">Six of eight supporting observations are mirrors; effective independent support is two C-tier sources. Option cardinality contradicts three verified releases. Useful for structure, not for TELC-specific claims.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== W3 / W4 ===== -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">W3 · W4</div>
+        <div style="font-size:19px;font-weight:600;">Rights review and the takedown workbench</div>
+        <div style="font-size:13px;color:#5A6478;">A rights change and a trust invalidation are different downstream paths, shown as such.</div>
+      </div>
+      <div style="width:1440px;height:1024px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);display:grid;grid-template-columns:64px 1fr;background:#EFF2F6;">
+        <div style="background:#14213D;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#E9EEF5;">B/C</div>
+          <sc-for list="{{ railIconsSrc }}" as="r" hint-placeholder-count="5">
+            <div style="width:40px;height:40px;border-radius:5px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ r.fg }};">{{ r.i }}</div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;overflow:hidden;">
+          <div style="height:56px;background:#FBEDED;border-bottom:1px solid #D18E8E;padding:0 22px;display:flex;align-items:center;gap:14px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+              <span style="color:#8E2F2F;">Sources</span><span style="color:#D18E8E;">/</span><span style="color:#8E2F2F;">Takedown &amp; security</span><span style="color:#D18E8E;">/</span><span style="font-weight:600;font-family:'IBM Plex Mono',monospace;color:#8E2F2F;">SRC-0412</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;border:1px solid #D18E8E;background:#FFFFFF;border-radius:4px;padding:4px 9px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8E2F2F;">⛔</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8E2F2F;">Immediate use hold active since 11:04</div>
+            </div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8E2F2F;">R3 · not reversible by discovery</div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:18px 22px 20px;display:grid;grid-template-columns:1fr 470px;gap:16px;">
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:16px;font-weight:600;">Rights review · observed evidence and scope</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px;">
+                  <div style="border:1px solid #DDE3EC;border-radius:6px;padding:12px 14px;background:#F5F7FA;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Observed licence evidence</div>
+                    <div style="font-size:12.5px;color:#14213D;line-height:1.55;margin-top:6px;" lang="de">Footer: „© telc gGmbH. Alle Rechte vorbehalten. Vervielfältigung nur mit schriftlicher Genehmigung.“</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;margin-top:7px;">DOC-8841 p.1 · quoted, not interpreted</div>
+                  </div>
+                  <div style="border:1px solid #DDE3EC;border-radius:6px;padding:12px 14px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Notice received 2026-08-25</div>
+                    <div style="font-size:12.5px;color:#14213D;line-height:1.55;margin-top:6px;">Rights holder requests removal of the hosted expression and of derived copies. Scope named in the notice: this document and its mirrors.</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8E2F2F;margin-top:7px;">Recorded as evidence · not a legal opinion</div>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:12px;">
+                  <div style="display:grid;grid-template-columns:1fr 120px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                    <div>Action-level permission</div><div>Before</div><div>After this decision</div>
+                  </div>
+                  <sc-for list="{{ rightsDiff }}" as="r" hint-placeholder-count="6">
+                    <div style="display:grid;grid-template-columns:1fr 120px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #EDF0F4;align-items:center;">
+                      <div style="font-size:12.5px;color:#14213D;">{{ r.t }}</div>
+                      <div style="font-size:12px;color:#5A6478;border-bottom:2px solid #6B7789;display:inline-block;">{{ r.before }}</div>
+                      <div style="font-size:12px;color:{{ r.fg }};font-weight:500;">{{ r.after }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#F4EFF7;border:1px solid #D8C7E2;border-radius:6px;padding:11px 13px;margin-top:12px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#6A4A7C;">§ Legal review required — and honestly labelled</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Corpus records a decision and its evidence. It does not assert that the decision is legally correct, and no screen in this product claims legal certainty.</div>
+                </div>
+              </div>
+
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:16px;font-weight:600;">Affected content discovery · exact scope</div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                  <div style="display:grid;grid-template-columns:1fr 96px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                    <div>What</div><div>Count</div><div>Disposition</div>
+                  </div>
+                  <sc-for list="{{ takedownScope }}" as="s" hint-placeholder-count="8">
+                    <div style="display:grid;grid-template-columns:1fr 96px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #EDF0F4;align-items:center;">
+                      <div style="font-size:12.5px;color:#14213D;">{{ s.t }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ s.fg }};">{{ s.v }}</div>
+                      <div style="font-size:12px;color:#3E4A63;line-height:1.4;">{{ s.d }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #D18E8E;border-radius:8px;overflow:hidden;">
+                <div style="padding:12px 18px;background:#FBEDED;border-bottom:1px solid #D18E8E;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8E2F2F;">Governed sequence · each step audited</div>
+                  <div style="font-size:16px;font-weight:600;color:#8E2F2F;margin-top:5px;">Takedown progress</div>
+                </div>
+                <div style="padding:14px 18px;">
+                  <div style="display:flex;flex-direction:column;gap:0;">
+                    <sc-for list="{{ takedownSteps }}" as="s" hint-placeholder-count="5">
+                      <div style="display:grid;grid-template-columns:22px 1fr;gap:11px;padding:9px 0;border-bottom:1px solid #EDF0F4;">
+                        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ s.fg }};">{{ s.m }}</div>
+                        <div>
+                          <div style="display:flex;align-items:baseline;gap:9px;">
+                            <div style="font-size:13px;font-weight:600;color:{{ s.fg }};">{{ s.t }}</div>
+                            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">{{ s.when }}</div>
+                          </div>
+                          <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:3px;">{{ s.d }}</div>
+                        </div>
+                      </div>
+                    </sc-for>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:#FFFFFF;border:1px solid #C6CFDD;border-radius:10px;overflow:hidden;box-shadow:0 18px 44px rgba(20,33,61,.18);">
+                <div style="padding:15px 18px;background:#FBEDED;border-bottom:1px solid #D18E8E;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8E2F2F;">Risk R3 · step 2 of 2 · you have read the scope</div>
+                  <div style="font-size:17px;font-weight:600;color:#8E2F2F;margin-top:5px;">Suppress source expression and set a prevention fingerprint</div>
+                </div>
+                <div style="padding:14px 18px;">
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;">Removes the retained payloads and every direct use, fingerprints the content so mirrors cannot reintroduce it, and schedules 14 recomputations.</div>
+                  <div style="background:#F5F7FA;border:1px solid #DDE3EC;border-radius:6px;padding:11px 13px;margin-top:11px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">What survives</div>
+                    <div style="font-size:12px;color:#3E4A63;line-height:1.45;margin-top:4px;">Audit record, rationale and a content hash — enough to prevent re-ingestion, not to reconstruct. The observation is never erased.</div>
+                  </div>
+                  <div style="margin-top:12px;">
+                    <div style="font-size:12.5px;color:#3E4A63;">Type <span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#14213D;">SRC-0412</span> to confirm</div>
+                    <div style="margin-top:6px;border:1px solid #1D6F50;border-radius:6px;padding:9px 11px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#14213D;outline:2px solid #1D6F50;outline-offset:2px;">SRC-0412</div>
+                  </div>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#F5F7FA;border-top:1px solid #DDE3EC;">
+                  <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#A83F3F;border-radius:4px;padding:8px 14px;">Suppress and prevent</div>
+                  <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:8px 14px;">Back to scope</div>
+                  <div style="font-size:11.5px;color:#5A6478;margin-left:auto;line-height:1.4;">Focus is trapped here and<br>returns to the row on cancel.</div>
+                </div>
+              </div>
+
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:12px 16px;">
+                <div style="font-size:12.5px;font-weight:600;">Two downstream paths, never merged</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;">
+                  <div style="border:1px solid #D8C7E2;background:#F4EFF7;border-radius:6px;padding:9px 11px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#6A4A7C;">Rights-only suppression</div>
+                    <div style="font-size:11.5px;color:#3E4A63;line-height:1.4;margin-top:3px;">Expression withheld; analysis stands. The App loses artefacts, not knowledge.</div>
+                  </div>
+                  <div style="border:1px solid #B9CBE6;background:#E6EEF9;border-radius:6px;padding:9px 11px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#24396B;">Trust invalidation</div>
+                    <div style="font-size:11.5px;color:#3E4A63;line-height:1.4;margin-top:3px;">Findings recomputed without this support; rights untouched. A different button and a different audit event.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== W5 / W6 ===== -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">W5 · W6</div>
+        <div style="font-size:19px;font-weight:600;">Duplicate cluster review — three decisions, not one</div>
+        <div style="font-size:13px;color:#5A6478;">A re-recorded listening text: dependent for language evidence, potentially independent for acoustic evidence.</div>
+      </div>
+      <div style="width:1440px;height:1024px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);display:grid;grid-template-columns:64px 1fr;background:#EFF2F6;">
+        <div style="background:#14213D;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#E9EEF5;">B/C</div>
+          <sc-for list="{{ railIcons }}" as="r" hint-placeholder-count="5">
+            <div style="width:40px;height:40px;border-radius:5px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ r.fg }};">{{ r.i }}</div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;overflow:hidden;">
+          <div style="height:56px;background:#FFFFFF;border-bottom:1px solid #DDE3EC;padding:0 22px;display:flex;align-items:center;gap:14px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+              <span style="color:#5A6478;">Inbox</span><span style="color:#C6CFDD;">/</span><span style="color:#5A6478;">Duplicate review</span><span style="color:#C6CFDD;">/</span><span style="font-weight:600;font-family:'IBM Plex Mono',monospace;">CL-118</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border:1px solid #DDE3EC;border-radius:4px;padding:4px 8px;">4 members · 1 unresolved</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Desktop-only surface · stated on page 06</div>
+          </div>
+
+          <div style="padding:18px 22px 0;">
+            <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+              <div style="display:grid;grid-template-columns:180px 1fr 96px 116px 104px 128px;gap:12px;padding:9px 18px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                <div>Member</div><div>What it is</div><div>Confidence</div><div>Rights</div><div>Extraction</div><div>Role in this cluster</div>
+              </div>
+              <sc-for list="{{ clusterMembers }}" as="m" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:180px 1fr 96px 116px 104px 128px;gap:12px;padding:10px 18px;border-bottom:1px solid #EDF0F4;align-items:center;background:{{ m.bg }};border-left:3px solid {{ m.mark }};">
+                  <div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ m.id }}</div>
+                    <div style="font-size:11.5px;color:#5A6478;">{{ m.host }}</div>
+                  </div>
+                  <div style="font-size:12.5px;color:#3E4A63;line-height:1.45;" lang="de">{{ m.what }}</div>
+                  <div style="display:flex;align-items:center;gap:6px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#24396B;">{{ m.tier }}</div>
+                    <div style="font-size:11.5px;color:#5A6478;">{{ m.score }}</div>
+                  </div>
+                  <div style="font-size:12px;color:{{ m.rfg }};">{{ m.rights }}</div>
+                  <div style="font-size:12px;color:#3E4A63;">{{ m.ext }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:{{ m.rolefg }};">{{ m.role }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:14px 22px 20px;display:grid;grid-template-columns:1fr 1fr 400px;gap:14px;">
+            <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;overflow:hidden;">
+              <div style="font-size:15px;font-weight:600;">Similarity evidence</div>
+              <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                <sc-for list="{{ simRows }}" as="s" hint-placeholder-count="6">
+                  <div style="padding:8px 0;border-bottom:1px solid #EDF0F4;">
+                    <div style="display:grid;grid-template-columns:1fr 54px 78px;gap:9px;align-items:center;">
+                      <div style="font-size:12.5px;color:#14213D;">{{ s.t }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E4A63;text-align:right;">{{ s.v }}</div>
+                      <div style="height:5px;background:#EDF0F4;border-radius:2px;overflow:hidden;">
+                        <div style="height:5px;width:{{ s.w }};background:{{ s.bar }};"></div>
+                      </div>
+                    </div>
+                    <div style="font-size:11.5px;color:#5A6478;line-height:1.45;margin-top:3px;">{{ s.note }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </div>
+
+            <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;overflow:hidden;">
+              <div style="font-size:15px;font-weight:600;">Meaningful differences</div>
+              <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:4px;">These decide the relationship class — not the similarity score.</div>
+              <div style="display:flex;flex-direction:column;gap:9px;margin-top:11px;">
+                <sc-for list="{{ diffs }}" as="d" hint-placeholder-count="5">
+                  <div style="border:1px solid {{ d.bd }};background:{{ d.bg }};border-radius:6px;padding:10px 12px;">
+                    <div style="display:flex;align-items:baseline;gap:8px;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:{{ d.fg }};">{{ d.k }}</div>
+                      <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:{{ d.fg }};">{{ d.imp }}</div>
+                    </div>
+                    <div style="font-size:12.5px;color:#14213D;line-height:1.5;margin-top:5px;" lang="de">{{ d.t }}</div>
+                    <div style="font-size:11.5px;color:#3E4A63;line-height:1.45;margin-top:4px;">{{ d.why }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:15px 17px;">
+                <div style="font-size:13.5px;font-weight:600;">Analytics impact preview</div>
+                <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Lexical denominator 214 → 187, the honest number. Acoustic difficulty gains one independent sample; 11 held results become computable.</div>
+                <div style="display:flex;gap:8px;margin-top:10px;">
+                  <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#1D6F50;border-radius:4px;padding:7px 12px;">Confirm 3 decisions</div>
+                  <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:7px 12px;">Keep unresolved</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:12px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:15px 17px;">
+                <div style="font-size:13.5px;font-weight:600;">Decision 1 · relationship class</div>
+                <div style="display:flex;flex-direction:column;gap:6px;margin-top:9px;">
+                  <sc-for list="{{ relOptions }}" as="o" hint-placeholder-count="4">
+                    <div style="display:grid;grid-template-columns:16px 1fr;gap:9px;align-items:start;border:1px solid {{ o.bd }};background:{{ o.bg }};border-radius:5px;padding:8px 10px;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ o.fg }};">{{ o.m }}</div>
+                      <div>
+                        <div style="font-size:12.5px;font-weight:600;color:{{ o.fg }};">{{ o.t }}</div>
+                        <div style="font-size:11.5px;color:#3E4A63;line-height:1.4;margin-top:2px;">{{ o.d }}</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:15px 17px;">
+                <div style="font-size:13.5px;font-weight:600;">Decisions 2 and 3</div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:9px;">
+                  <div style="border:1px solid #DDE3EC;border-radius:5px;padding:9px 11px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Canonical provenance anchor</div>
+                    <div style="font-size:12.5px;font-weight:600;margin-top:2px;">SRC-0330 · ÖSD publisher</div>
+                    <div style="font-size:11.5px;color:#3E4A63;line-height:1.4;margin-top:3px;">Citation of record; it raises nobody's tier.</div>
+                  </div>
+                  <div style="border:1px solid #DDE3EC;border-radius:5px;padding:9px 11px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Preferred processing representation</div>
+                    <div style="font-size:12.5px;font-weight:600;margin-top:3px;">SRC-0347 · digital-text mirror</div>
+                    <div style="font-size:11.5px;color:#3E4A63;line-height:1.4;margin-top:2px;">Cleanest extraction, not the anchor.</div>
+                  </div>
+                  <div style="border:1px solid #E6CE9A;background:#FDF6E8;border-radius:5px;padding:9px 11px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">Independence · per metric</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E4A63;line-height:1.7;margin-top:5px;">lexical · dependent<br>grammar · dependent<br>structure · dependent<br><span style="color:#1D6F50;">acoustic · independent</span><br>visual · n/a</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== W7 / W8 ===== -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">W7 · W8</div>
+        <div style="font-size:19px;font-weight:600;">Taxonomy correction and governed migration</div>
+        <div style="font-size:13px;color:#5A6478;">Evidence on the left, current versus proposed on the right, and a split that must not clone mastery.</div>
+      </div>
+      <div style="width:1440px;height:1024px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);display:grid;grid-template-columns:64px 1fr;background:#EFF2F6;">
+        <div style="background:#14213D;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#E9EEF5;">B/C</div>
+          <sc-for list="{{ railIcons }}" as="r" hint-placeholder-count="5">
+            <div style="width:40px;height:40px;border-radius:5px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ r.fg }};">{{ r.i }}</div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;overflow:hidden;">
+          <div style="height:56px;background:#FFFFFF;border-bottom:1px solid #DDE3EC;padding:0 22px;display:flex;align-items:center;gap:14px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+              <span style="color:#5A6478;">Inbox</span><span style="color:#C6CFDD;">/</span><span style="color:#5A6478;">Taxonomy corrections</span><span style="color:#C6CFDD;">/</span><span style="font-weight:600;font-family:'IBM Plex Mono',monospace;">TASK-9917</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border:1px solid #DDE3EC;border-radius:4px;padding:4px 8px;">taxonomy v4.1 → v4.2 candidate</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Select-then-apply · never drag-and-drop</div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:18px 22px 20px;display:grid;grid-template-columns:1fr 1fr 380px;gap:14px;">
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:15px;font-weight:600;">Evidence the decision rests on</div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                  <sc-for list="{{ taxEvidence }}" as="e" hint-placeholder-count="6">
+                    <div style="padding:8px 0;border-bottom:1px solid #EDF0F4;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">{{ e.k }}</div>
+                      <div style="font-size:12.5px;color:{{ e.fg }};line-height:1.55;margin-top:4px;" lang="de">{{ e.v }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:15px;font-weight:600;">Four signals kept separate</div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:11px;">
+                  <div style="border:1px solid #DDE3EC;border-radius:6px;padding:10px 12px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">CEFR scope</div>
+                    <div style="font-size:13px;font-weight:600;margin-top:3px;">B1</div>
+                    <div style="font-size:11.5px;color:#5A6478;line-height:1.4;margin-top:2px;">Declared by the source, not inferred.</div>
+                  </div>
+                  <div style="border:1px solid #BCDAE0;background:#EAF4F6;border-radius:6px;padding:10px 12px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#26697A;">Multidimensional difficulty</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#26697A;line-height:1.7;margin-top:3px;">L 61 · R 58 · T 44 · A — · P 52</div>
+                  </div>
+                  <div style="border:1px solid #BCDAE0;background:#EAF4F6;border-radius:6px;padding:10px 12px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#26697A;">Generic-B1 relevance</div>
+                    <div style="font-size:13px;font-weight:600;color:#26697A;margin-top:3px;">High · ±8</div>
+                  </div>
+                  <div style="border:1px solid #BCDAE0;background:#EAF4F6;border-radius:6px;padding:10px 12px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#26697A;">TELC relevance</div>
+                    <div style="font-size:13px;font-weight:600;color:#26697A;margin-top:3px;">Moderate · ±19</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+                <div style="padding:13px 16px;border-bottom:1px solid #DDE3EC;">
+                  <div style="font-size:15px;font-weight:600;">Current assignments · v4.1</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 76px 52px 96px;gap:9px;padding:8px 16px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                  <div>Skill</div><div>Role</div><div>Conf</div><div>State</div>
+                </div>
+                <sc-for list="{{ taxCurrent }}" as="t" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:1fr 76px 52px 96px;gap:9px;padding:9px 16px;border-bottom:1px solid #EDF0F4;align-items:center;">
+                    <div style="font-size:12.5px;color:#14213D;" lang="de">{{ t.t }}</div>
+                    <div style="font-size:11.5px;color:#5A6478;">{{ t.role }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E4A63;">{{ t.conf }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:#5F6980;">{{ t.st }}</div>
+                  </div>
+                </sc-for>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #B9CBE6;border-radius:8px;overflow:hidden;">
+                <div style="padding:13px 16px;border-bottom:1px solid #B9CBE6;background:#F0F4FA;">
+                  <div style="font-size:15px;font-weight:600;color:#24396B;">Proposed · v4.2 candidate</div>
+                  <div style="font-size:11.5px;color:#3E4A63;line-height:1.45;margin-top:3px;">Automation proposes. Nothing here is applied until you decide.</div>
+                </div>
+                <div style="display:grid;grid-template-columns:1fr 76px 52px 130px;gap:9px;padding:8px 16px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                  <div>Skill</div><div>Role</div><div>Conf</div><div>State</div>
+                </div>
+                <sc-for list="{{ taxProposed }}" as="t" hint-placeholder-count="3">
+                  <div style="display:grid;grid-template-columns:1fr 76px 52px 130px;gap:9px;padding:9px 16px;border-bottom:1px solid #EDF0F4;align-items:center;">
+                    <div style="font-size:12.5px;color:#14213D;" lang="de">{{ t.t }}</div>
+                    <div style="font-size:11.5px;color:#5A6478;">{{ t.role }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E4A63;">{{ t.conf }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:#8A5A0B;">{{ t.st }}</div>
+                  </div>
+                </sc-for>
+                <div style="padding:11px 16px;background:#FDF6E8;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">▲ A split must not clone mastery</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Splitting „Wortschatz · Alltag“ into a housing child does not mean a learner who mastered the parent has mastered the child. Corpus tells the App which side of the split is evidence-backed; it does not copy anything across, and it holds no learner state to copy.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:15px 17px;">
+                <div style="font-size:14.5px;font-weight:600;">Decision</div>
+                <div style="display:flex;flex-direction:column;gap:7px;margin-top:9px;">
+                  <sc-for list="{{ taxActions }}" as="a" hint-placeholder-count="5">
+                    <div style="display:grid;grid-template-columns:1fr auto;gap:9px;align-items:center;border:1px solid #DDE3EC;border-radius:5px;padding:8px 10px;">
+                      <div>
+                        <div style="font-size:12.5px;font-weight:600;">{{ a.t }}</div>
+                        <div style="font-size:11.5px;color:#5A6478;line-height:1.4;margin-top:2px;">{{ a.d }}</div>
+                      </div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">{{ a.tier }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:15px 17px;">
+                <div style="font-size:14.5px;font-weight:600;">Downstream impact of approving</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;line-height:1.9;margin-top:8px;">6 items retagged · 1 task<br>82 analytics results already stale<br>2 App blueprints marked stale<br>contract v3.1 · consumer v3.0 · 2 withheld<br>previous assignments kept in audit</div>
+              </div>
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:15px 17px;">
+                <div style="font-size:14.5px;font-weight:600;">Governed migration entry · W8</div>
+                
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:9px;">
+                  <sc-for list="{{ migrationRows }}" as="m" hint-placeholder-count="5">
+                    <div style="display:grid;grid-template-columns:82px 1fr 58px;gap:9px;padding:7px 0;border-bottom:1px solid #EDF0F4;align-items:start;">
+                      <div style="font-size:12px;font-weight:600;">{{ m.op }}</div>
+                      <div style="font-size:11.5px;color:#3E4A63;line-height:1.45;">{{ m.d }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ m.fg }};text-align:right;">{{ m.risk }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== R4 / R3 ===== -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">R4 · R3</div>
+        <div style="font-size:19px;font-weight:600;">Reprocess composer and run comparison</div>
+        <div style="font-size:13px;color:#5A6478;">Starts at the earliest affected stage. There is no “retry everything”.</div>
+      </div>
+      <div style="width:1440px;height:1024px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);display:grid;grid-template-columns:64px 1fr;background:#EFF2F6;">
+        <div style="background:#14213D;display:flex;flex-direction:column;align-items:center;padding:14px 0;gap:14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:#E9EEF5;">B/C</div>
+          <sc-for list="{{ railIconsRuns }}" as="r" hint-placeholder-count="5">
+            <div style="width:40px;height:40px;border-radius:5px;background:{{ r.bg }};display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:{{ r.fg }};">{{ r.i }}</div>
+          </sc-for>
+        </div>
+
+        <div style="display:flex;flex-direction:column;overflow:hidden;">
+          <div style="height:56px;background:#FFFFFF;border-bottom:1px solid #DDE3EC;padding:0 22px;display:flex;align-items:center;gap:14px;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+              <span style="color:#5A6478;">Runs</span><span style="color:#C6CFDD;">/</span><span style="font-weight:600;">Compose a reprocess</span>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border:1px solid #DDE3EC;border-radius:4px;padding:4px 8px;">from the repeated-failure slice · 6 documents</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">R2 · reversible by a governed inverse action</div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:18px 22px 20px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:16px;font-weight:600;">1 · Scope, counted before you commit</div>
+                <div style="display:flex;flex-direction:column;gap:8px;margin-top:11px;">
+                  <sc-for list="{{ reprocScope }}" as="s" hint-placeholder-count="4">
+                    <div style="display:grid;grid-template-columns:16px 1fr;gap:9px;border:1px solid #DDE3EC;border-radius:5px;padding:9px 11px;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1D6F50;">▪</div>
+                      <div>
+                        <div style="font-size:12.5px;font-weight:600;">{{ s.t }}</div>
+                        <div style="font-size:11.5px;color:#5A6478;line-height:1.4;margin-top:2px;">{{ s.d }}</div>
+                      </div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;gap:3px;margin-top:12px;">
+                  <sc-for list="{{ reprocStages }}" as="s" hint-placeholder-count="13">
+                    <div style="flex:1;min-width:0;border:1px solid {{ s.bd }};background:{{ s.bg }};border-radius:3px;padding:7px 5px;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5F6980;">{{ s.n }}</div>
+                      <div style="font-size:10px;font-weight:600;color:{{ s.fg }};margin-top:2px;line-height:1.15;">{{ s.t }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="font-size:11.5px;color:#5A6478;line-height:1.5;margin-top:8px;">Stages 01–03 are locked out: nothing before Parse can fix an OCR quality defect. The lock is explained, not just disabled.</div>
+              </div>
+
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:16px;font-weight:600;">2 · What changes, and what is preserved</div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                  <div style="display:grid;grid-template-columns:132px 128px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                    <div>Setting</div><div>Previous</div><div>This run</div>
+                  </div>
+                  <sc-for list="{{ reprocDiff }}" as="d" hint-placeholder-count="6">
+                    <div style="display:grid;grid-template-columns:132px 128px 1fr;gap:10px;padding:8px 0;border-bottom:1px solid #EDF0F4;align-items:center;">
+                      <div style="font-size:12.5px;color:#14213D;">{{ d.k }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5A6478;">{{ d.before }}</div>
+                      <div style="font-size:12px;color:{{ d.fg }};line-height:1.4;">{{ d.after }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="background:#F1F7F4;border:1px solid #BFD8CB;border-radius:6px;padding:11px 13px;margin-top:12px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#1D6F50;">● Curated overrides are retained by default</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Four human decisions are in this scope. The run records its own candidate beside each and changes nothing; disagreements arrive as four reviewable rows, not as four silent replacements.</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex;flex-direction:column;gap:14px;overflow:hidden;">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="font-size:16px;font-weight:600;">3 · Downstream impact preview</div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                  <sc-for list="{{ reprocImpact }}" as="i" hint-placeholder-count="6">
+                    <div style="display:grid;grid-template-columns:1fr 96px;gap:10px;padding:8px 0;border-bottom:1px solid #EDF0F4;align-items:start;">
+                      <div>
+                        <div style="font-size:12.5px;font-weight:600;">{{ i.t }}</div>
+                        <div style="font-size:11.5px;color:#5A6478;line-height:1.4;margin-top:2px;">{{ i.d }}</div>
+                      </div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ i.fg }};text-align:right;">{{ i.v }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="display:flex;align-items:center;gap:10px;margin-top:13px;padding-top:12px;border-top:1px solid #EDF0F4;">
+                  <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#1D6F50;border-radius:4px;padding:8px 13px;">Start · €0.40 · 6 documents</div>
+                  <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:8px 13px;">Dry run · impact only</div>
+                  <div style="font-size:11.5px;color:#5A6478;line-height:1.4;margin-left:auto;">Runs in the background.<br>Safe to leave.</div>
+                </div>
+              </div>
+
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+                <div style="display:flex;align-items:baseline;gap:12px;">
+                  <div style="font-size:16px;font-weight:600;">Run comparison · R3</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5A6478;">0815-04 → 0817-03 · after completion</div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+                  <div style="display:grid;grid-template-columns:1fr 84px 84px 130px;gap:10px;padding:8px 0;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                    <div>Measure</div><div>Before</div><div>After</div><div>Reading</div>
+                  </div>
+                  <sc-for list="{{ runCompare }}" as="c" hint-placeholder-count="7">
+                    <div style="display:grid;grid-template-columns:1fr 84px 84px 130px;gap:10px;padding:8px 0;border-bottom:1px solid #EDF0F4;align-items:center;">
+                      <div style="font-size:12.5px;color:#14213D;">{{ c.k }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;">{{ c.a }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ c.b }}</div>
+                      <div style="font-size:11.5px;color:{{ c.fg }};line-height:1.4;">{{ c.v }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+                <div style="font-size:11.5px;color:#5A6478;line-height:1.5;margin-top:10px;">The previous run is preserved, not overwritten, so a regression can be seen rather than inferred. Two new Q2 findings appear as honest consequences of better OCR — more text read means more small things to check.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== C4 / C5 / C6 / A2 ===== -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">C2 · C4 · C5 · C6 · A2</div>
+        <div style="font-size:19px;font-weight:600;">Record Detail variants, the confirmation family, and result states</div>
+        <div style="font-size:13px;color:#5A6478;">The same framework in four difficult situations, plus the four risk tiers and every outcome.</div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;">
+        <sc-for list="{{ variantCards }}" as="v" hint-placeholder-count="4">
+          <div style="background:#FFFFFF;border:1px solid {{ v.bd }};border-radius:8px;overflow:hidden;">
+            <div style="padding:14px 18px;background:{{ v.bg }};border-bottom:1px solid {{ v.bd }};">
+              <div style="font-size:15.5px;font-weight:600;color:{{ v.fg }};">{{ v.t }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ v.fg }};margin-top:4px;">{{ v.chips }}</div>
+            </div>
+            <div style="padding:14px 18px;">
+              <div style="font-size:13px;color:#3E4A63;line-height:1.6;">{{ v.body }}</div>
+              <div style="font-size:12.5px;color:#14213D;line-height:1.55;margin-top:9px;padding-top:9px;border-top:1px solid #EDF0F4;"><strong style="font-weight:600;">Rule:</strong> {{ v.rule }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+        <div style="padding:15px 20px;border-bottom:1px solid #DDE3EC;">
+          <div style="font-size:16px;font-weight:600;">Confirmation family · risk tier decides the pattern</div>
+          <div style="font-size:12.5px;color:#5A6478;line-height:1.5;margin-top:3px;">The tier is a property of the action, not a judgement call at design time.</div>
+        </div>
+        <div style="display:grid;grid-template-columns:56px 320px 1fr 1fr;gap:16px;padding:9px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+          <div>Tier</div><div>Actions</div><div>Confirmation pattern</div><div>Scope stated before commit</div>
+        </div>
+        <sc-for list="{{ confirmFamily }}" as="c" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:56px 320px 1fr 1fr;gap:16px;padding:12px 20px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ c.bg }};">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:{{ c.fg }};">{{ c.tier }}</div>
+            <div style="font-size:12.5px;color:#14213D;line-height:1.45;">{{ c.t }}</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ c.pattern }}</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ c.scope }}</div>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px;">
+        <sc-for list="{{ resultStates }}" as="s" hint-placeholder-count="6">
+          <div style="border:1px solid {{ s.bd }};background:{{ s.bg }};border-radius:8px;padding:14px 16px;">
+            <div style="display:flex;align-items:center;gap:9px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ s.fg }};">{{ s.m }}</div>
+              <div style="font-size:14px;font-weight:600;color:{{ s.fg }};">{{ s.t }}</div>
+            </div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:7px;">{{ s.d }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G='#1D6F50', A='#8A5A0B', R='#A83F3F', S='#4A5568', F='#5F6980', N='#24396B', P='#6A4A7C', T='#26697A', SEC='#8E2F2F';
+    const icons = (active) => ['▤','◉','▦','◈','◍'].map((i,ix) => ({i, bg: ix===active ? '#1C2B4A' : 'transparent', fg: ix===active ? '#4CC492' : '#8FA6C4'}));
+    return {
+      taxCurrent: [
+        {t:'Wortschatz · Alltag', role:'Primary', conf:'0.94', origin:'model de-tax 2.1', ver:'v4.1', st:'Active'},
+        {t:'Leseverstehen · Detailverstehen', role:'Primary', conf:'0.91', origin:'model de-tax 2.1', ver:'v4.1', st:'Active'},
+        {t:'Grammatik · Präpositionen', role:'Secondary', conf:'0.62', origin:'model de-tax 2.1', ver:'v4.1', st:'Provisional'}
+      ],
+      taxProposed: [
+        {t:'Wortschatz · Wohnen und Umzug', role:'Primary', conf:'0.88', origin:'model de-tax 2.2 candidate', ver:'v4.2', st:'Proposed · split child'},
+        {t:'Leseverstehen · Detailverstehen', role:'Primary', conf:'0.93', origin:'unchanged', ver:'v4.2', st:'Unchanged'},
+        {t:'Grammatik · Wechselpräpositionen', role:'Secondary', conf:'0.57', origin:'model de-tax 2.2 candidate', ver:'v4.2', st:'Below gate · keep provisional'}
+      ],
+      taxEvidence: [
+        {k:'Task instruction', v:'„Lesen Sie die Wohnungsanzeigen A–F. Welche Anzeige passt zu welcher Person?“', fg:'#14213D'},
+        {k:'Item stems', v:'Five of six stems name a housing requirement (Miete, Kaution, Stellplatz, Balkon, Haustiere).', fg:'#14213D'},
+        {k:'Answer reasoning', v:'Correct answers require matching a stated constraint to an advertisement detail — detail comprehension, not gist.', fg:'#14213D'},
+        {k:'Distractor logic', v:'Distractors differ by one constraint each; three use a price or date near-miss.', fg:'#14213D'},
+        {k:'Why the split is proposed', v:'Housing vocabulary behaves differently from general everyday vocabulary in the observed difficulty data.', fg:A},
+        {k:'Why the secondary stays provisional', v:'Confidence 0.57 is below the 0.75 assignment gate. Publishing it would claim precision Corpus has not earned.', fg:A}
+      ],
+      taxActions: [
+        {t:'Approve the primary split · keep the secondary provisional', d:'Recommended. Publishes the parent skill for the secondary and the split child for the primary.', tier:'R1', primary:true},
+        {t:'Approve both', d:'Would publish a 0.57-confidence assignment. Available, and audited as an override of the gate.', tier:'R2', primary:false},
+        {t:'Broaden to the parent', d:'Safer and less specific: „Wortschatz · Alltag“ for both assignments.', tier:'R1', primary:false},
+        {t:'Reject both candidates', d:'Keeps v4.1 assignments and records the disagreement for the next model version.', tier:'R1', primary:false}
+      ],
+      migrationRows: [
+        {op:'Rename', d:'Label changes, identity does not. No retagging, no App impact beyond display.', risk:'Low', fg:S},
+        {op:'Merge', d:'Two skills become one. Assignments union; the App is given a mapping so history stays readable.', risk:'Medium', fg:A},
+        {op:'Split', d:'One skill becomes two. Each item is reassigned individually from evidence.', risk:'High', fg:R},
+        {op:'Retire', d:'Removed from the active taxonomy. Historical analytics keep their version reference.', risk:'Medium', fg:A}
+      ],
+      reprocScope: [
+        {t:'6 documents · ÖSD scan slice', d:'Chosen from the repeated-failure slice, not one row at a time.'},
+        {t:'214 items below them', d:'Counted before you commit, not discovered afterwards.'},
+        {t:'2 assets requiring ASR', d:'Excluded from this run: ASR is a separate paid stage.'},
+        {t:'Earliest affected stage · 04 Parse', d:'Locked by the system: the defect is in OCR quality, so nothing earlier can help.'}
+      ],
+      reprocDiff: [
+        {k:'Method change', before:'tesseract-de 5.3', after:'tesseract-de 5.4 · escalation on low-confidence regions', fg:G},
+        {k:'Stages re-run', before:'—', after:'04 Parse → 10 Validate', fg:'#14213D'},
+        {k:'Previous run', before:'run 0815-04', after:'preserved and comparable, not overwritten', fg:G},
+        {k:'Curated overrides in scope', before:'4', after:'retained; each rerun candidate recorded beside them', fg:G},
+        {k:'Estimated cost', before:'—', after:'€0.40 · envelope €18.40 / €25', fg:A},
+        {k:'Expected duration', before:'—', after:'~11 min · safe to leave', fg:'#14213D'}
+      ],
+      reprocImpact: [
+        {t:'Newly eligible if it succeeds', v:'2 capabilities', fg:G, d:'Correctness for 12 items, fine taxonomy for 1 task.'},
+        {t:'Limited rather than normal', v:'1 capability', fg:A, d:'Pattern intelligence stays exploratory until CL-118 resolves.'},
+        {t:'Marked stale for recompute', v:'82 results', fg:A, d:'Already stale since taxonomy v4.2; this run does not add to that.'},
+        {t:'Invalidated', v:'0', fg:G, d:'No published output loses its basis.'},
+        {t:'Risk of conflict', v:'4 overrides', fg:A, d:'If the rerun disagrees, your value stays and the disagreement is queued.'},
+        {t:'Cannot be reprocessed', v:'1 document', fg:SEC, d:'materialsammlung.zip is under a security hold. No reprocess control clears that.'}
+      ],
+      runCompare: [
+        {k:'OCR mean confidence', a:'0.62', b:'0.91', v:'improved', fg:G},
+        {k:'Items with a candidate key', a:'8 / 12', b:'12 / 12', v:'improved', fg:G},
+        {k:'Q0 findings', a:'2', b:'0', v:'resolved', fg:G},
+        {k:'Q2 findings', a:'11', b:'13', v:'2 new minor', fg:A},
+        {k:'Curated overrides replaced', a:'—', b:'0 of 4', v:'all retained', fg:G},
+        {k:'Structure precision', a:'98.6%', b:'98.4%', v:'−0.2 pt · within noise', fg:S},
+        {k:'Cost', a:'€0.09', b:'€0.40', v:'as estimated', fg:S}
+      ],
+      variantCards: [
+        {t:'C4 · Disputed child under a trusted parent', chips:'EX-2291 Tier A · ITEM-44112 disputed', body:'The exam header still reads Anchor 86. The item header reads “disputed · correctness held”. The parent’s structure, taxonomy and difficulty capabilities stay eligible, and the exam’s completeness line says “54 of 58 items usable” rather than showing a red exam.', rule:'A child never repaints its parent. The parent shows a count and a link, never a verdict.', bd:'#B9CBE6', bg:'#F0F4FA', fg:N},
+        {t:'C5 · Prohibited asset inside a usable task', chips:'TASK-9931 eligible · ASSET-7731 prohibited', body:'The audio carries a stricter publisher notice than its document. The task keeps structure, taxonomy and difficulty eligibility; only capabilities that need the audio are blocked. The preview area shows a rights-suppression state, not a broken-file state.', rule:'An override may only tighten, and it tightens exactly one node — the asset.', bd:'#D8C7E2', bg:'#F4EFF7', fg:P},
+        {t:'C6 · Incomplete package with locally valid tasks', chips:'DOC-8902 incomplete · 4 tasks valid', body:'Pages 3 and 9 are missing from the scan. The document reads “incomplete · 2 pages missing” and lists which tasks are affected. Tasks 1–4 remain fully eligible; nothing is marked failed because the package as a whole is partial.', rule:'Incompleteness is a property of the source, reported at the smallest scope it actually damages.', bd:'#E6CE9A', bg:'#FDF6E8', fg:A},
+        {t:'C2 · Clean eligible record', chips:'EX-3155 · all six capabilities E', body:'Every panel passes, the matrix is six E cells, and the action list offers publication per capability with the counts it would affect. There is still no single “ready” badge — six E cells are the statement, and each was decided separately.', rule:'Even the happy path refuses to collapse into one green tick.', bd:'#BFD8CB', bg:'#F1F7F4', fg:G}
+      ],
+      confirmFamily: [
+        {tier:'R0', t:'Defer · note · mark reviewed', pattern:'Inline. Toast with Undo for 8 seconds. Focus stays on the row.', scope:'Row count in the toast.', fg:S, bd:'#C6CFDD', bg:'#F5F7FA'},
+        {tier:'R1', t:'Curated correction · taxonomy remap · allow source', pattern:'Inline confirmation panel inside the detail surface. Rationale prompted only when the value contradicts the observation.', scope:'Named unit plus dependent outputs to recompute.', fg:N, bd:'#B9CBE6', bg:'#F0F4FA'},
+        {tier:'R2', t:'Quarantine · publish or limit · scoped reprocess · duplicate decision', pattern:'Modal, e2 elevation, scope enumerated as a real table, rationale required, cheaper alternative offered beside the recommendation.', scope:'Per-entity counts, per-capability change, cost estimate, recompute list.', fg:A, bd:'#E6CE9A', bg:'#FDF6E8'},
+        {tier:'R3', t:'Takedown · purge · security hard-block · benchmark supersession', pattern:'Two steps: read the scope, then type the record identity. Destructive verb never on the first button. Focus trapped and restored. No rise animation.', scope:'Every observation, mirror, asset, published output and App artefact — plus what is retained as audit-only metadata.', fg:SEC, bd:'#D18E8E', bg:'#FBEDED'}
+      ],
+      resultStates: [
+        {t:'Succeeded', m:'●', fg:G, bd:'#BFD8CB', bg:'#F1F7F4', d:'“Structure analytics published for EX-2291 · 6 tasks · 58 items. Next blocker: 2 Q0 findings.” A factual summary and the next thing — no celebration.'},
+        {t:'Partially succeeded', m:'◑', fg:A, bd:'#E6CE9A', bg:'#FDF6E8', d:'“Applied to 9 of 12 items. 3 are locked by run 0817-03.” The remainder is listed and separately retryable; nothing is silently dropped.'},
+        {t:'Conflict', m:'⚠', fg:A, bd:'#E6CE9A', bg:'#FDF6E8', d:'“A reprocess finished while you were deciding. Your curated value is retained; the new candidate is recorded beside it.” Both are shown; you choose explicitly.'},
+        {t:'Failed', m:'✕', fg:R, bd:'#E2B6B6', bg:'#FBEDED', d:'“Nothing was written. The eligibility service did not respond — this is ours, not your data.” Ownership named: system, automation, source or decision.'},
+        {t:'Refused by a stronger rule', m:'⛔', fg:SEC, bd:'#D18E8E', bg:'#FBEDED', d:'“This source carries a takedown fingerprint. Allowing it cannot re-admit the content.” A strong block cannot be undone by a weaker control.'},
+        {t:'Draft preserved', m:'◐', fg:S, bd:'#C6CFDD', bg:'#F5F7FA', d:'“Your session ended mid-rationale. The draft is held and listed in the header.” No decision was submitted, and nothing was guessed on your behalf.'}
+      ],
+      railIcons: icons(0),
+      railIconsSrc: icons(1),
+      railIconsRuns: icons(3),
+      reprocStages: [
+        {n:'01', t:'Discover', fg:'#5F6980', bd:'#DDE3EC', bg:'#F5F7FA'},
+        {n:'02', t:'Fetch', fg:'#5F6980', bd:'#DDE3EC', bg:'#F5F7FA'},
+        {n:'03', t:'Normalize', fg:'#5F6980', bd:'#DDE3EC', bg:'#F5F7FA'},
+        {n:'04', t:'Parse', fg:'#1D6F50', bd:'#2A9D6F', bg:'#EAF3EE'},
+        {n:'05', t:'Segment', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'06', t:'Classify', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'07', t:'Answers', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'08', t:'Assets', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'09', t:'Enrich', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8'},
+        {n:'10', t:'Validate', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'11', t:'Dedup', fg:'#5F6980', bd:'#DDE3EC', bg:'#FFFFFF'},
+        {n:'12', t:'Review', fg:'#5F6980', bd:'#DDE3EC', bg:'#FFFFFF'},
+        {n:'13', t:'Publish', fg:'#5F6980', bd:'#DDE3EC', bg:'#FFFFFF'}
+      ],
+      dims: [
+        {t:'Provider reputation / provenance', v:'2 / 4', m:'', w:'50%', bar:'#2F4A7C', fg:'#3E4A63', note:'A partner site, not the awarding body. The claim of official status is the site’s, not telc’s.'},
+        {t:'Similarity to known exam structure', v:'3 / 4', m:'', w:'75%', bar:'#2F4A7C', fg:'#3E4A63', note:'Section order and timings match; one task format does not.'},
+        {t:'Language quality', v:'4 / 4', m:'', w:'100%', bar:'#2F4A7C', fg:'#3E4A63', note:'Native-level, register-appropriate, no translation artefacts.'},
+        {t:'Answer-key presence', v:'4 / 4', m:'', w:'100%', bar:'#2F4A7C', fg:'#3E4A63', note:'Complete key for every objective task.'},
+        {t:'Answer-key consistency', v:'3 / 4', m:'', w:'75%', bar:'#2F4A7C', fg:'#3E4A63', note:'One item’s key is defensible but debatable; logged as Q2, not Q0.'},
+        {t:'Similarity to trusted material', v:'2 / 4', m:'', w:'50%', bar:'#2F4A7C', fg:'#3E4A63', note:'Shares topics with verified releases, but not their distractor patterns.'},
+        {t:'Internal structural consistency', v:'Unknown', m:'○', w:'0%', bar:'#C6CFDD', fg:F, note:'The package is partial, so internal consistency cannot be assessed. Stays in the denominator; contributes no evidence.'},
+        {t:'Independent corroboration', v:'Unknown', m:'○', w:'0%', bar:'#C6CFDD', fg:F, note:'No independent source confirms this exists as an official telc product. Unknown, not absent — and never read as zero.'}
+      ],
+      corrob: [
+        {src:'SRC-0521 · lernportal.example', d:'Same PDF, different host', tier:'C · 52', tfg:N, ind:'dependent', ifg:F},
+        {src:'SRC-0533 · kursmaterial.example', d:'Same PDF, renamed file', tier:'C · 50', tfg:N, ind:'dependent', ifg:F},
+        {src:'SRC-0540 · forum attachment', d:'Same PDF, re-uploaded', tier:'D · 34', tfg:N, ind:'dependent', ifg:F},
+        {src:'SRC-0544 · blog download', d:'Same PDF, embedded', tier:'D · 31', tfg:N, ind:'dependent', ifg:F},
+        {src:'SRC-0355 · goethe-material', d:'Different exam, similar topics', tier:'B · 71', tfg:N, ind:'independent', ifg:G},
+        {src:'SRC-0511 · sprachschule', d:'Teacher summary referencing it', tier:'C · 47', tfg:N, ind:'independent', ifg:G}
+      ],
+      affected: [
+        {t:'Decision-grade TELC pattern claims', v:'excluded', fg:R},
+        {t:'Exploratory pattern intelligence', v:'included', fg:G},
+        {t:'Structure analytics', v:'unaffected', fg:G},
+        {t:'Prevalence denominators', v:'excluded', fg:A},
+        {t:'Rights status', v:'unchanged', fg:F}
+      ],
+      confActions: [
+        {t:'Mark disputed', d:'Two credible readings of the claim; both stay visible', tier:'R1', fg:N},
+        {t:'Quarantine', d:'Holds all use. Heavier than this evidence warrants.', tier:'R2', fg:A},
+        {t:'Reclassify as practice material', d:'Drops the official claim, keeps the material as generic B1', tier:'R2', fg:A},
+      ],
+      rightsDiff: [
+        {t:'Redistribution', before:'not permitted', after:'not permitted · takedown', fg:SEC},
+        {t:'Derivative / adaptation', before:'not permitted', after:'not permitted · takedown', fg:SEC},
+        {t:'Retention of the payload', before:'permitted', after:'to be removed within 7 days', fg:SEC},
+        {t:'Abstract intelligence', before:'permitted', after:'permitted for existing analysis · recomputed without this source', fg:A},
+        {t:'Provenance record', before:'retained', after:'retained · observation is never erased', fg:G},
+        {t:'Re-ingestion', before:'possible', after:'prevented by content fingerprint', fg:SEC}
+      ],
+      takedownScope: [
+        {t:'Source observations in the notice scope', v:'1 + 3 mirrors', fg:SEC, d:'Two mirrors were found by fingerprint, not named in the notice.'},
+        {t:'Retained raw payloads', v:'4', fg:SEC, d:'Scheduled for removal on completion.'},
+        {t:'Assets (audio, scans)', v:'2 audio · 1 scan', fg:SEC, d:'Suppressed immediately under the existing hold.'},
+        {t:'Published outputs', v:'6', fg:SEC, d:'Invalidated and withdrawn from the App with a reason code.'},
+        {t:'Analytics results to recompute', v:'14', fg:A, d:'Recomputed without this source; the denominator drops honestly.'},
+        {t:'Retained after completion', v:'hash + decision', fg:S, d:'Prevention metadata and audit only.'}
+      ],
+      takedownSteps: [
+        {t:'1 · Notice recorded and use held', m:'●', fg:G, when:'11:04 · automatic', d:'Use was suspended the moment the notice was recorded: holding is cheap and reversible.'},
+        {t:'3 · Governed decision', m:'◐', fg:A, when:'awaiting you', d:'Comply in full, comply for the named scope, or dispute — each a different audit event.'},
+        {t:'4 · Suppression, purge and prevention', m:'○', fg:F, when:'not started', d:'Payload removal, suppression, and a prevention fingerprint.'},
+        {t:'5 · Recomputation and completion record', m:'○', fg:F, when:'not started', d:'14 results recomputed, 6 App artefacts withdrawn, one completion entry.'}
+      ],
+      clusterMembers: [
+        {id:'SRC-0330', host:'oesd.example', what:'ÖSD Modellsatz B1 — Hörverstehen Teil 2, publisher PDF', tier:'A', score:'· 84', rights:'Reference only', rfg:P, ext:'Scan · 0.94', role:'Anchor candidate', rolefg:G, bg:'#E6EEF9', mark:'#2F4A7C'},
+        {id:'SRC-0347', host:'lernraum.example', what:'Same task set as digital text, layout differs', tier:'B', score:'· 68', rights:'Unknown', rfg:P, ext:'Text · 1.00', role:'Best extraction', rolefg:G, bg:'#FFFFFF', mark:'transparent'},
+        {id:'SRC-0361', host:'archiv-b1.example', what:'Identical PDF, renamed file', tier:'C', score:'· 51', rights:'Unknown', rfg:P, ext:'Scan · 0.91', role:'Exact copy', rolefg:F, bg:'#FFFFFF', mark:'transparent'},
+        {id:'SRC-0374', host:'hoerkurs.example', what:'Same script, newly recorded audio — different speakers, different tempo', tier:'C', score:'· 49', rights:'Conditions', rfg:P, ext:'Audio · ASR 0.88', role:'Unresolved', rolefg:A, bg:'#FDF6E8', mark:'#D89A2A'}
+      ],
+      simRows: [
+        {t:'Normalised text similarity', v:'0.99', w:'99%', bar:'#2F4A7C', note:'Members 1–3 are textually identical after whitespace normalisation.'},
+        {t:'Audio fingerprint similarity', v:'0.11', w:'11%', bar:'#2F7D8C', note:'Member 4 shares almost no acoustic signal: different voices, different room, 8% slower.'},
+        {t:'Transcript similarity (member 4)', v:'0.97', w:'97%', bar:'#2F4A7C', note:'The script is the same. The recording is not.'},
+      ],
+      diffs: [
+        {k:'Tested proposition', t:'Identical across all four members', imp:'decisive', fg:S, bd:'#DDE3EC', bg:'#F5F7FA', why:'The same language knowledge is being tested, so lexical and grammatical evidence must count once.'},
+        {k:'Acoustic realisation', t:'Member 4: two new speakers, 8% slower, different acoustics', imp:'decisive', fg:G, bd:'#BFD8CB', bg:'#F1F7F4', why:'For listening difficulty this is genuinely new evidence — a second sample of how this text sounds at B1.'},
+        {k:'Instruction wording', t:'„Kreuzen Sie an“ vs „Markieren Sie“', imp:'minor', fg:F, bd:'#DDE3EC', bg:'#FFFFFF', why:'Recorded as a variant of the instruction, not as a different task.'},
+      ],
+      relOptions: [
+        {t:'Re-recorded variant · recommended', d:'Same script, new recording: dependent for language, independent for acoustics.', m:'●', fg:G, bd:'#BFD8CB', bg:'#F1F7F4'},
+        {t:'Leave unresolved', d:'Prevalence stays held rather than guessed.', m:'○', fg:A, bd:'#E6CE9A', bg:'#FDF6E8'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

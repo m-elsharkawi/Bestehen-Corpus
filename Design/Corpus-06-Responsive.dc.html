@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#E4E9F0;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1600px;margin:0 auto;padding:0 32px 140px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 06</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Laptop, tablet, and responsive behaviour</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      1440 primary · 1280 laptop proof · 1024 tablet proof · 390 read-only<br>
+      Some tasks stay desktop-only, and the design says why
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:20px 24px;margin-top:24px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">The rule</div>
+        <div style="font-size:13.5px;color:#3E4A63;line-height:1.6;margin-top:7px;">Corpus is desktop-first because governed review needs two things side by side. Narrowing never removes information — it changes how information is <em>reached</em>. Columns become a second line, panes become drawers, and matrices become lists.</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">The limit</div>
+        <div style="font-size:13.5px;color:#3E4A63;line-height:1.6;margin-top:7px;">Three surfaces are desktop-only: duplicate comparison, rights and takedown, and the reprocess composer. On a narrower screen they open read-only with a stated reason — not a squeezed version that makes a consequential decision feel casual.</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Breakpoints</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;line-height:1.9;margin-top:7px;">≥ 1400 · full · rail 240 + evidence rail<br>1320–1399 · evidence rail becomes a drawer<br>1140–1319 · rail collapses to 64<br>900–1139 · top rail, tables lose 4 columns<br>&lt; 900 · read-only companion only</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:52px;margin-top:40px;">
+
+    <!-- 1280 -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">1280 × 800</div>
+        <div style="font-size:19px;font-weight:600;">Compact laptop · Inbox with the detail drawer</div>
+        <div style="font-size:13px;color:#5A6478;">Rail collapses, four columns fold into the record cell, and the drawer overlays instead of splitting.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1280px 1fr;gap:20px;align-items:start;">
+        <div style="width:1280px;height:800px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);display:grid;grid-template-columns:64px 1fr;background:#EFF2F6;">
+          <div style="background:#14213D;display:flex;flex-direction:column;align-items:center;padding:12px 0;gap:10px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:#E9EEF5;">B/C</div>
+            <sc-for list="{{ railIcons }}" as="r" hint-placeholder-count="5">
+              <div style="width:40px;height:40px;border-radius:5px;background:{{ r.bg }};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ r.fg }};">{{ r.i }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;letter-spacing:.04em;text-transform:uppercase;color:{{ r.fg }};">{{ r.l }}</div>
+              </div>
+            </sc-for>
+            <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:4px;">
+              <div style="width:7px;height:7px;border-radius:2px;background:#4CC492;"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:7px;color:#8FA6C4;">1 job</div>
+            </div>
+          </div>
+
+          <div style="display:flex;flex-direction:column;overflow:hidden;position:relative;">
+            <div style="height:52px;background:#FFFFFF;border-bottom:1px solid #DDE3EC;padding:0 18px;display:flex;align-items:center;gap:12px;">
+              <div style="display:flex;align-items:center;gap:7px;font-size:12.5px;">
+                <span style="color:#5A6478;">…</span><span style="color:#C6CFDD;">/</span><span style="color:#5A6478;">Extraction failures</span>
+              </div>
+              <div style="width:32px;height:32px;border:1px solid #DDE3EC;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5F6980;">⌕</div>
+              <div style="margin-left:auto;display:flex;align-items:center;gap:6px;border:1px solid #E6CE9A;background:#FDF6E8;border-radius:4px;padding:4px 8px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#8A5A0B;">◐ 1 draft</div>
+              </div>
+              <div style="width:32px;height:32px;border:1px solid #DDE3EC;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5568;">◈</div>
+            </div>
+
+            <div style="padding:14px 18px 0;">
+              <div style="font-size:20px;font-weight:600;">9 extraction failures</div>
+              <div style="display:flex;gap:6px;margin-top:10px;overflow:hidden;">
+                <sc-for list="{{ compactViews }}" as="v" hint-placeholder-count="6">
+                  <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid {{ v.bd }};background:{{ v.bg }};border-radius:999px;padding:5px 10px;white-space:nowrap;">
+                    <div style="font-size:12px;font-weight:{{ v.w }};color:{{ v.fg }};">{{ v.t }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ v.cfg }};">{{ v.c }}</div>
+                  </div>
+                </sc-for>
+                <div style="display:inline-flex;align-items:center;border:1px solid #C6CFDD;border-radius:999px;padding:5px 10px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5A6478;white-space:nowrap;">+3</div>
+              </div>
+            </div>
+
+            <div style="margin:12px 18px 0;background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+              <div style="display:grid;grid-template-columns:56px 1fr 116px;gap:10px;padding:8px 14px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+                <div>Impact</div><div>Record · reason · scope</div><div>Category</div>
+              </div>
+              <sc-for list="{{ compactRows }}" as="r" hint-placeholder-count="7">
+                <div style="display:grid;grid-template-columns:56px 1fr 116px;gap:10px;padding:9px 14px;border-bottom:1px solid #EDF0F4;align-items:center;background:{{ r.bg }};border-left:3px solid {{ r.mark }};">
+                  <div style="display:flex;align-items:center;gap:5px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ r.pfg }};">{{ r.pm }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ r.pfg }};">{{ r.p }}</div>
+                  </div>
+                  <div style="min-width:0;">
+                    <div style="display:flex;align-items:baseline;gap:7px;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">{{ r.id }}</div>
+                      <div style="font-size:12.5px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" lang="de">{{ r.t }}</div>
+                    </div>
+                    <div style="font-size:11px;color:#5A6478;line-height:1.4;">{{ r.meta }}</div>
+                  </div>
+                  <div style="font-size:11.5px;color:#3E4A63;line-height:1.35;">{{ r.cat }}</div>
+                </div>
+              </sc-for>
+            </div>
+
+            <div style="position:absolute;top:52px;right:0;bottom:0;width:560px;background:#FFFFFF;border-left:1px solid #C6CFDD;box-shadow:-10px 0 30px rgba(20,33,61,.14);display:flex;flex-direction:column;">
+              <div style="padding:14px 18px;border-bottom:1px solid #EDF0F4;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">ITEM-44112 · item</div>
+                  <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Overlay · Esc restores focus</div>
+                </div>
+                <div style="font-size:17px;font-weight:600;margin-top:5px;" lang="de">Aufgabe 12 — Kurznachricht zuordnen</div>
+                <div style="display:flex;flex-wrap:wrap;gap:5px;margin-top:8px;">
+                  <sc-for list="{{ drawerChips }}" as="c" hint-placeholder-count="6">
+                    <div style="display:inline-flex;align-items:center;gap:5px;border:1px solid {{ c.bd }};background:{{ c.bg }};border-radius:4px;padding:3px 6px;">
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:{{ c.fg }};">{{ c.m }}</div>
+                      <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ c.fg }};">{{ c.l }}</div>
+                    </div>
+                  </sc-for>
+                </div>
+              </div>
+              <div style="flex:1;padding:14px 18px;display:flex;flex-direction:column;gap:11px;">
+                <div style="border:1px solid #E2B6B6;background:#FBEDED;border-radius:6px;padding:11px 13px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A83F3F;">✕ Q0 · key conflict · items 9–12</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Correctness held for 4 of 58 items. Structure, taxonomy and difficulty are unaffected.</div>
+                </div>
+                <div style="border:1px solid #DDE3EC;border-radius:6px;overflow:hidden;">
+                  <div style="padding:7px 11px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;">▤ Inert source region · p.7</div>
+                  <div style="padding:10px;background:repeating-linear-gradient(135deg,#F7F9FB 0 8px,#F2F5F9 8px 16px);">
+                    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:4px;padding:9px 11px;font-size:12px;color:#14213D;" lang="de">Lösungsschlüssel Teil 2 · 9 a · 10 c · 11 b · 12 —</div>
+                  </div>
+                </div>
+                <div style="border:1px solid #DDE3EC;border-radius:6px;padding:11px 13px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">Suggested · not authoritative</div>
+                  <div style="font-size:13px;font-weight:600;margin-top:4px;">Keep partial extraction · mark the key unknown</div>
+                  <div style="display:flex;gap:7px;margin-top:9px;">
+                    <div style="font-size:12px;font-weight:600;color:#FFFFFF;background:#1D6F50;border-radius:4px;padding:7px 11px;">Apply and open next</div>
+                    <div style="font-size:12px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:7px 11px;">Other actions</div>
+                  </div>
+                </div>
+              </div>
+              <div style="border-top:1px solid #DDE3EC;padding:11px 18px;display:flex;align-items:center;">
+                <div style="font-size:12px;color:#5A6478;">Queue position, filters and scroll are preserved beneath.</div>
+                <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">2 of 9</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+          <div style="font-size:15.5px;font-weight:600;">What changed from 1440</div>
+          <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+            <sc-for list="{{ change1280 }}" as="c" hint-placeholder-count="8">
+              <div style="padding:8px 0;border-bottom:1px solid #EDF0F4;">
+                <div style="font-size:12.5px;font-weight:600;">{{ c.t }}</div>
+                <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:2px;">{{ c.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1024 -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">1024 × 768</div>
+        <div style="font-size:19px;font-weight:600;">Tablet · triage, health, and inspection — with honest refusals</div>
+        <div style="font-size:13px;color:#5A6478;">Top rail, card list, stacked panels. Comparison workbenches open read-only.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:1024px 1024px;gap:20px;align-items:start;">
+
+        <div style="width:1024px;height:768px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);background:#EFF2F6;display:flex;flex-direction:column;">
+          <div style="background:#14213D;padding:10px 16px;display:flex;align-items:center;gap:14px;">
+            <div style="font-size:13.5px;font-weight:600;color:#E9EEF5;">Bestehen <span style="color:#6E86A8;">/</span> Corpus</div>
+            <div style="display:flex;gap:4px;margin-left:8px;">
+              <sc-for list="{{ topNav }}" as="n" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:4px;background:{{ n.bg }};min-height:44px;">
+                  <div style="font-size:12.5px;font-weight:{{ n.w }};color:{{ n.fg }};">{{ n.t }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ n.cc }};">{{ n.c }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+              <div style="width:44px;height:44px;border:1px solid #3A4A6B;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:13px;color:#8FA6C4;">⌕</div>
+              <div style="width:44px;height:44px;border:1px solid #3A4A6B;border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:12px;color:#4CC492;">◈</div>
+            </div>
+          </div>
+
+          <div style="padding:14px 16px 0;">
+            <div style="display:flex;align-items:baseline;gap:10px;">
+              <div style="font-size:19px;font-weight:600;">Inbox · 34 open</div>
+              <div style="font-size:12.5px;color:#5A6478;">Card list keeps reason, capability and age. Nothing is dropped.</div>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:12px 16px 16px;display:flex;flex-direction:column;gap:9px;">
+            <sc-for list="{{ tabletCards }}" as="c" hint-placeholder-count="5">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-left:3px solid {{ c.mark }};border-radius:6px;padding:12px 14px;min-height:44px;">
+                <div style="display:flex;align-items:baseline;gap:9px;">
+                  <div style="display:flex;align-items:center;gap:5px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ c.pfg }};">{{ c.pm }}</div>
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;color:{{ c.pfg }};">{{ c.p }}</div>
+                  </div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">{{ c.id }}</div>
+                  <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5A6478;">{{ c.age }}</div>
+                </div>
+                <div style="font-size:13.5px;font-weight:500;margin-top:4px;" lang="de">{{ c.t }}</div>
+                <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;">
+                  <div style="font-size:12px;color:#3E4A63;">{{ c.reason }}</div>
+                  <div style="font-size:12px;color:#C6CFDD;">·</div>
+                  <div style="font-size:12px;color:{{ c.cfg }};">{{ c.cap }}</div>
+                  <div style="font-size:12px;color:#C6CFDD;">·</div>
+                  <div style="font-size:12px;color:#5A6478;">{{ c.scope }}</div>
+                </div>
+              </div>
+            </sc-for>
+            <div style="background:#FFFFFF;border:1px dashed #C6CFDD;border-radius:6px;padding:11px 14px;">
+              <div style="font-size:12.5px;color:#5A6478;line-height:1.5;">Rows continue below. Paging controls are 44px tall and the position marker survives opening a record.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:1024px;height:768px;border:1px solid #C6CFDD;border-radius:8px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);background:#EFF2F6;display:flex;flex-direction:column;">
+          <div style="background:#14213D;padding:10px 16px;display:flex;align-items:center;gap:14px;">
+            <div style="font-size:13.5px;font-weight:600;color:#E9EEF5;">Bestehen <span style="color:#6E86A8;">/</span> Corpus</div>
+            <div style="display:flex;gap:4px;margin-left:8px;">
+              <sc-for list="{{ topNavHealth }}" as="n" hint-placeholder-count="5">
+                <div style="display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:4px;background:{{ n.bg }};min-height:44px;">
+                  <div style="font-size:12.5px;font-weight:{{ n.w }};color:{{ n.fg }};">{{ n.t }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ n.cc }};">{{ n.c }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+
+          <div style="flex:1;overflow:hidden;padding:14px 16px 16px;display:flex;flex-direction:column;gap:11px;">
+            <div style="display:flex;align-items:baseline;gap:10px;">
+              <div style="font-size:19px;font-weight:600;">Health · 2 hard blockers</div>
+              <div style="font-size:12.5px;color:#5A6478;">Blockers stay first at every width.</div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div style="background:#FBEDED;border:1px solid #E2B6B6;border-left:3px solid #B64B4B;border-radius:6px;padding:12px 14px;">
+                <div style="font-size:14px;font-weight:600;color:#A83F3F;">2 Q0 correctness findings</div>
+                <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Blocks correctness publication and the benchmark development slice.</div>
+              </div>
+              <div style="background:#FBEDED;border:1px solid #D18E8E;border-left:3px solid #8E2F2F;border-radius:6px;padding:12px 14px;">
+                <div style="font-size:14px;font-weight:600;color:#8E2F2F;">1 takedown notice · 4 h</div>
+                <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Use is already held. The governed decision is desktop-only.</div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <sc-for list="{{ tabletVectors }}" as="v" hint-placeholder-count="4">
+                <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:6px;padding:12px 14px;">
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ v.fg }};">{{ v.m }}</div>
+                    <div style="font-size:13.5px;font-weight:600;">{{ v.t }}</div>
+                    <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ v.fg }};">{{ v.st }}</div>
+                  </div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">{{ v.find }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="background:#FFFFFF;border:1px solid #C6CFDD;border-radius:6px;padding:13px 15px;">
+              <div style="display:flex;align-items:center;gap:9px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5568;">■</div>
+                <div style="font-size:13.5px;font-weight:600;">Duplicate cluster CL-118 · read-only here</div>
+              </div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:6px;">You can read every member, its similarity evidence and its meaningful differences. The three decisions are not offered at this width, because they need two panes side by side to be made safely — and a wrong relationship decision silently distorts every prevalence figure.</div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:10px 13px;min-height:44px;display:flex;align-items:center;">Read the evidence</div>
+                <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:10px 13px;min-height:44px;display:flex;align-items:center;">Defer · flag for desktop</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- mobile + rules -->
+    <div>
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:12px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">390 × 844</div>
+        <div style="font-size:19px;font-weight:600;">Read-only companion and the full transformation table</div>
+        <div style="font-size:13px;color:#5A6478;">Three surfaces, no decision controls, no rationale entry.</div>
+      </div>
+      <div style="display:grid;grid-template-columns:390px 390px 1fr;gap:20px;align-items:start;">
+
+        <div style="width:390px;height:700px;border:1px solid #C6CFDD;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);background:#EFF2F6;display:flex;flex-direction:column;">
+          <div style="background:#14213D;padding:14px 16px;">
+            <div style="font-size:13px;font-weight:600;color:#E9EEF5;">Bestehen <span style="color:#6E86A8;">/</span> Corpus</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;color:#8FA6C4;margin-top:3px;">Read-only companion</div>
+          </div>
+          <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:11px;overflow:hidden;">
+            <div style="font-size:17px;font-weight:600;">Hard blockers</div>
+            <div style="background:#FBEDED;border:1px solid #E2B6B6;border-left:3px solid #B64B4B;border-radius:6px;padding:12px 13px;">
+              <div style="font-size:13.5px;font-weight:600;color:#A83F3F;">2 Q0 correctness findings</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:4px;">telc Modelltest 3 · items 9–12 · 2 days old</div>
+            </div>
+            <div style="background:#FBEDED;border:1px solid #D18E8E;border-left:3px solid #8E2F2F;border-radius:6px;padding:12px 13px;">
+              <div style="font-size:13.5px;font-weight:600;color:#8E2F2F;">1 takedown notice</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:4px;">SRC-0412 · use already held automatically · 4 h old</div>
+            </div>
+            <div style="font-size:17px;font-weight:600;margin-top:4px;">Vectors</div>
+            <sc-for list="{{ mobileVectors }}" as="v" hint-placeholder-count="5">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:6px;padding:11px 13px;">
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ v.fg }};">{{ v.m }}</div>
+                  <div style="font-size:13px;font-weight:600;">{{ v.t }}</div>
+                  <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:11px;color:#14213D;">{{ v.v }}</div>
+                </div>
+              </div>
+            </sc-for>
+            <div style="margin-top:auto;background:#FFFFFF;border:1px dashed #C6CFDD;border-radius:6px;padding:11px 13px;">
+              <div style="font-size:12px;color:#3E4A63;line-height:1.55;">No decisions can be made here. Nothing is queued for later, and nothing is half-submitted — you are reading, not deciding.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="width:390px;height:700px;border:1px solid #C6CFDD;border-radius:12px;overflow:hidden;box-shadow:0 12px 32px rgba(20,33,61,.10);background:#EFF2F6;display:flex;flex-direction:column;">
+          <div style="background:#FFFFFF;border-bottom:1px solid #DDE3EC;padding:12px 16px;display:flex;align-items:center;gap:10px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">← Blockers</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Read-only</div>
+          </div>
+          <div style="flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:11px;overflow:hidden;">
+            <div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">ITEM-44112 · item</div>
+              <div style="font-size:17px;font-weight:600;line-height:1.3;margin-top:4px;" lang="de">Aufgabe 12 — Kurznachricht zuordnen</div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+              <sc-for list="{{ drawerChips }}" as="c" hint-placeholder-count="6">
+                <div style="display:inline-flex;align-items:center;gap:5px;border:1px solid {{ c.bd }};background:{{ c.bg }};border-radius:4px;padding:4px 7px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:{{ c.fg }};">{{ c.m }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ c.fg }};">{{ c.l }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="border:1px solid #E2B6B6;background:#FBEDED;border-radius:6px;padding:11px 13px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#A83F3F;">✕ Q0 · key conflict</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:5px;">Correctness held for 4 of 58 items. The exam’s other capabilities are unaffected.</div>
+            </div>
+            <div style="border:1px solid #DDE3EC;background:#FFFFFF;border-radius:6px;padding:11px 13px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Capability eligibility</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;line-height:1.9;margin-top:5px;">structure · E<br>correctness · B blocked<br>taxonomy · P provisional<br>pattern · L limited<br>reuse · B blocked<br>prevalence · H held</div>
+            </div>
+            <div style="margin-top:auto;background:#F5F7FA;border:1px solid #C6CFDD;border-radius:6px;padding:11px 13px;">
+              <div style="font-size:12px;color:#3E4A63;line-height:1.55;">To act on this, open it on the desktop console. The reason is not screen size alone: a correctness decision needs the source region and the competing key side by side.</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:150px 1fr 1fr 1fr;gap:14px;padding:10px 18px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#5A6478;">
+            <div>Element</div><div>1280 laptop</div><div>1024 tablet</div><div>&lt; 900 companion</div>
+          </div>
+          <sc-for list="{{ transform }}" as="t" hint-placeholder-count="14">
+            <div style="display:grid;grid-template-columns:150px 1fr 1fr 1fr;gap:14px;padding:10px 18px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ t.bg }};">
+              <div style="font-size:12.5px;font-weight:600;line-height:1.35;">{{ t.el }}</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.45;">{{ t.a }}</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.45;">{{ t.b }}</div>
+              <div style="font-size:12px;color:#5A6478;line-height:1.45;">{{ t.c }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G='#1D6F50', A='#8A5A0B', R='#A83F3F', S='#4A5568', F='#5F6980', N='#24396B', P='#6A4A7C', T='#26697A', SEC='#8E2F2F';
+    return {
+      railIcons: [
+        {i:'▤', l:'Inbox', bg:'#1C2B4A', fg:'#4CC492'},
+        {i:'◉', l:'Src', bg:'transparent', fg:'#8FA6C4'},
+        {i:'▦', l:'Corp', bg:'transparent', fg:'#8FA6C4'},
+        {i:'◈', l:'Runs', bg:'transparent', fg:'#8FA6C4'},
+        {i:'◍', l:'Hlth', bg:'transparent', fg:'#8FA6C4'}
+      ],
+      compactViews: [
+        {t:'Failures', c:'9', bg:'#14213D', bd:'#14213D', fg:'#FFFFFF', cfg:'#9FB4CE', w:'600'},
+        {t:'All work', c:'34', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Duplicates', c:'7', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Rights', c:'5', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Low conf.', c:'11', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Taxonomy', c:'6', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'}
+      ],
+      compactRows: [
+        {id:'ITEM-44112', t:'Aufgabe 12 — Kurznachricht zuordnen', meta:'Q0 key conflict · correctness · 4 of 58 items · 2 d', p:'P0', pm:'✕', pfg:R, cat:'Key conflict', bg:'#E6EEF9', mark:'#2F4A7C'},
+        {id:'DOC-9188', t:'materialsammlung.zip', meta:'Security hold · never processed · 1 d', p:'P0', pm:'⛔', pfg:SEC, cat:'Security', bg:'#FFFFFF', mark:'#8E2F2F'},
+        {id:'TASK-9903', t:'Sprachbausteine Teil 1 — Lückentext', meta:'Parser/classifier disagreement · structure · 11 d', p:'P1', pm:'▲', pfg:A, cat:'Disagreement', bg:'#FFFFFF', mark:'transparent'},
+        {id:'DOC-8902', t:'ÖSD Modellsatz — Seiten 3, 9 fehlen', meta:'Incomplete source · 4 tasks locally valid · 7 d', p:'P1', pm:'▲', pfg:A, cat:'Incomplete', bg:'#FFFFFF', mark:'transparent'},
+        {id:'STIM-5512', t:'Anzeigentext „Wohnungsanzeigen A–F“', meta:'OCR 0.58 on prices and times · 6 items · 14 d', p:'P2', pm:'△', pfg:A, cat:'OCR quality', bg:'#FAFBFD', mark:'transparent'},
+        {id:'ASSET-7731', t:'hoerverstehen-teil2.mp3', meta:'ASR above the gate · repeated failure 3rd · 23 d', p:'P2', pm:'△', pfg:A, cat:'ASR quality', bg:'#FAFBFD', mark:'transparent'},
+        {id:'DOC-9101', t:'b1-uebungssatz.pdf — passwortgeschützt', meta:'Encrypted · not bypassed · rights unknown · 4 d', p:'P3', pm:'·', pfg:S, cat:'Unsupported', bg:'#FAFBFD', mark:'transparent'}
+      ],
+      drawerChips: [
+        {m:'▣', l:'Mirror', fg:S, bg:'#F5F7FA', bd:'#DDE3EC'},
+        {m:'B', l:'74 capped', fg:N, bg:'#E6EEF9', bd:'#B9CBE6'},
+        {m:'§', l:'Ref only', fg:P, bg:'#F4EFF7', bd:'#D8C7E2'},
+        {m:'◇', l:'TELC high', fg:T, bg:'#EAF4F6', bd:'#BCDAE0'},
+        {m:'✕', l:'Q0', fg:R, bg:'#FBEDED', bd:'#E2B6B6'},
+        {m:'⧉', l:'Independent', fg:G, bg:'#EAF3EE', bd:'#BFD8CB'}
+      ],
+      change1280: [
+        {t:'Rail 240 → 64', d:'Icon plus a three-letter label, never icon-only. Full names stay available as accessible names and tooltips.'},
+        {t:'Header search collapses', d:'Becomes a 32px icon button that opens a labelled dialog. The “/” shortcut still works but is never required.'},
+        {t:'Table loses four columns', d:'Queue reason, blocked capability, scope and age fold into a second line inside the record cell. No information is removed — only re-arranged.'},
+        {t:'Detail becomes an overlay', d:'The 620px split pane becomes a 560px overlay drawer with e1 elevation. The queue keeps its position, filters and scroll underneath.'},
+        {t:'Saved views scroll', d:'Six fit; the rest collapse into a “+3” control. The active view is always scrolled into view on load.'},
+        {t:'Breadcrumb truncates from the left', d:'The current record is never the part that disappears; the elided ancestors move into a popover.'},
+        {t:'Evidence rail becomes a tab', d:'On review surfaces the 380px rail becomes a second tab inside the drawer, so nothing is squeezed to 200px.'},
+        {t:'Nothing shrinks below 12px', d:'Density can tighten row height; type size is fixed. Compact is achieved with space, never with smaller text.'}
+      ],
+      topNav: [
+        {t:'Inbox', c:'34', bg:'#1C2B4A', fg:'#FFFFFF', cc:'#C3CEDE', w:'600'},
+        {t:'Sources', c:'12', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Corpus', c:'', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Runs', c:'3', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Health', c:'2', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'}
+      ],
+      topNavHealth: [
+        {t:'Inbox', c:'34', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Sources', c:'12', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Corpus', c:'', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Runs', c:'3', bg:'transparent', fg:'#C3CEDE', cc:'#8FA6C4', w:'400'},
+        {t:'Health', c:'2', bg:'#1C2B4A', fg:'#FFFFFF', cc:'#C3CEDE', w:'600'}
+      ],
+      tabletCards: [
+        {id:'ITEM-44112', t:'Aufgabe 12 — Kurznachricht zuordnen', p:'P0', pm:'✕', pfg:R, reason:'Q0 key conflict', cap:'Correctness blocked', cfg:R, scope:'4 of 58 items', age:'2 d', mark:'#B64B4B'},
+        {id:'SRC-0412', t:'deutsch-pruefung.example / archiv', p:'P0', pm:'⛔', pfg:SEC, reason:'Takedown notice', cap:'All direct use held', cfg:SEC, scope:'1 src · 3 mirrors', age:'4 h', mark:'#8E2F2F'},
+        {id:'CL-118', t:'ÖSD Zertifikat B1 — Modellsatz mirror family', p:'P1', pm:'▲', pfg:A, reason:'Unresolved dependency', cap:'Prevalence held', cfg:A, scope:'4 observations', age:'9 d', mark:'#D89A2A'},
+        {id:'TASK-9903', t:'Sprachbausteine Teil 1 — Lückentext', p:'P1', pm:'▲', pfg:A, reason:'Ambiguous structure', cap:'Structure held', cfg:A, scope:'1 task · 10 items', age:'11 d', mark:'#D89A2A'},
+        {id:'EX-2291', t:'telc Deutsch B1 Modelltest 3 — authenticity', p:'P1', pm:'▲', pfg:A, reason:'Confidence below gate', cap:'Pattern limited', cfg:A, scope:'1 exam', age:'6 d', mark:'#D89A2A'}
+      ],
+      tabletVectors: [
+        {t:'Backlog', m:'▲', fg:A, st:'Warning', find:'34 open, 6 in one repeated-failure slice, oldest 31 days.'},
+        {t:'QA vector', m:'✕', fg:R, st:'Blocked', find:'2 Q0 · 4 Q1 · 11 Q2 · 18 Q3. The Q0s decide the verdict.'},
+        {t:'Independence', m:'▲', fg:A, st:'Warning', find:'Top two providers carry 61% of decision-grade support.'},
+        {t:'Cost', m:'●', fg:G, st:'Healthy', find:'€18.40 of €25 · €2.60 per 1 000 items · 1 job held.'}
+      ],
+      mobileVectors: [
+        {t:'Backlog', m:'▲', fg:A, v:'34 open'},
+        {t:'QA vector', m:'✕', fg:R, v:'2 Q0'},
+        {t:'Eligibility', m:'●', fg:G, v:'4 normal'},
+        {t:'Independence', m:'▲', fg:A, v:'61% top-2'},
+        {t:'Benchmark', m:'○', fg:F, v:'not instantiated'},
+        {t:'Cost', m:'●', fg:G, v:'€18.40 / €25'}
+      ],
+      transform: [
+        {el:'Primary rail', a:'64px icon + label', b:'Top rail, 44px targets', c:'No navigation — three fixed surfaces', bg:'#FFFFFF'},
+        {el:'Header', a:'Search collapses to a dialog', b:'Search and job tray only', c:'Title bar with a back link', bg:'#FAFBFD'},
+        {el:'Queue table', a:'8 columns → 4 + second line', b:'Card list keeping reason, capability, scope, age', c:'Blocker list only, newest first', bg:'#FFFFFF'},
+        {el:'Saved views', a:'6 visible + overflow control', b:'Horizontal scroll, active scrolled into view', c:'Not present', bg:'#FAFBFD'},
+        {el:'Filter bar', a:'Two rows max, then a dialog', b:'One row + “Filters (3)” dialog', c:'Not present', bg:'#FFFFFF'},
+        {el:'Record Detail', a:'3 columns → 2 + drawer tab', b:'Single column, panels stacked in axis order', c:'Read-only summary: identity, blockers, eligibility', bg:'#FAFBFD'},
+        {el:'Eligibility matrix', a:'Table, reasons in-row', b:'Stacked list: capability, code, reason', c:'Six lines of code + word', bg:'#FFFFFF'},
+        {el:'Confidence dimensions', a:'Table with bars', b:'Table, bars dropped', c:'Tier and score only', bg:'#FAFBFD'},
+        {el:'Sanitized preview', a:'Full width, fixed max height', b:'Fixed max height, internal scroll', c:'Not rendered — described in text', bg:'#FFFFFF'},
+        {el:'Comparison workbench', a:'Two panes, decisions available', b:'Read-only evidence · decisions refused with a reason', c:'Not available', bg:'#FDF6E8'},
+        {el:'Rights / takedown', a:'Full workbench', b:'Read-only · R3 refused with a reason', c:'Not available', bg:'#FDF6E8'},
+        {el:'Reprocess composer', a:'Full composer', b:'“Open on desktop” with the reason stated', c:'Not available', bg:'#FDF6E8'},
+        {el:'Confirmation dialogs', a:'Modal 640 / 720', b:'Full-height sheet, scope table scrolls inside', c:'Not available', bg:'#FFFFFF'},
+        {el:'Charts', a:'As designed', b:'Finding sentence + table; graphics optional', c:'Numbers only', bg:'#FAFBFD'},
+        {el:'200% zoom (any width)', a:'Reflows to the tablet layout; table body scrolls with a pinned header; action bars move above the content', b:'Reflows to the companion layout', c:'Already single-column', bg:'#F1F7F4'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

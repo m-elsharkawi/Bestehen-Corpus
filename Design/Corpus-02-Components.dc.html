@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EFF2F6;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1560px;margin:0 auto;padding:0 32px 120px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 02</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Components and variants</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      34 components · 8 groups · composed, never forked per queue<br>
+      Specimens below are the live source the screens on 04 / 05 reuse
+    </div>
+  </div>
+
+  <div id="c1" style="margin-top:36px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.1</div>
+      <div style="font-size:22px;font-weight:600;">Component index</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:14px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:44px 210px 1fr 240px 230px;gap:14px;padding:10px 18px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>#</div><div>Component</div><div>Variants and states</div><div>Accessibility contract</div><div>Responsive behaviour</div>
+      </div>
+      <sc-for list="{{ index }}" as="c" hint-placeholder-count="34">
+        <div style="display:grid;grid-template-columns:44px 210px 1fr 240px 230px;gap:14px;padding:10px 18px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ c.bg }};">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5F6980;">{{ c.n }}</div>
+          <div>
+            <div style="font-size:13px;font-weight:600;line-height:1.35;">{{ c.t }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;margin-top:2px;">{{ c.g }}</div>
+          </div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ c.v }}</div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.5;">{{ c.a }}</div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.5;">{{ c.r }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="c2" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.2</div>
+      <div style="font-size:22px;font-weight:600;">Shell and navigation</div>
+    </div>
+    <div style="display:grid;grid-template-columns:280px 1fr;gap:16px;margin-top:16px;align-items:start;">
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01 · Primary rail · 240px</div>
+        <div style="margin-top:10px;background:#14213D;border-radius:6px;padding:16px 0 12px;width:240px;">
+          <div style="padding:0 16px 14px;border-bottom:1px solid #2A3A5C;">
+            <div style="font-size:15px;font-weight:600;color:#E9EEF5;letter-spacing:-.01em;">Bestehen <span style="color:#6E86A8;">/</span> Corpus</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8FA6C4;margin-top:3px;">Owner console · local</div>
+          </div>
+          <div style="padding:10px 8px 0;display:flex;flex-direction:column;gap:2px;">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:20px 1fr auto;gap:10px;align-items:center;padding:9px 10px;border-radius:4px;background:{{ n.bg }};border-left:3px solid {{ n.mark }};">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ n.ic }};">{{ n.i }}</div>
+                <div style="font-size:13.5px;font-weight:{{ n.w }};color:{{ n.fg }};">{{ n.t }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ n.cc }};">{{ n.c }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin:12px 8px 0;padding:10px;border-top:1px solid #2A3A5C;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8FA6C4;">Background work</div>
+            <div style="display:flex;align-items:center;gap:8px;margin-top:7px;">
+              <div style="width:7px;height:7px;border-radius:2px;background:#4CC492;"></div>
+              <div style="font-size:12px;color:#C3CEDE;">Run 0817-03 · normalizing</div>
+            </div>
+            <div style="font-size:11.5px;color:#8FA6C4;line-height:1.5;margin-top:5px;">Safe to leave. Result appears in Runs.</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.55;margin-top:10px;">Counts are open exceptions, not totals. The rail never turns red: escalation lives in the Inbox and in Health, where the operator can act.</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02 · Header · 56px sticky</div>
+          <div style="margin-top:10px;border:1px solid #DDE3EC;border-radius:6px;background:#FFFFFF;padding:0 16px;height:56px;display:grid;grid-template-columns:1fr 340px auto auto auto;gap:16px;align-items:center;">
+            <div style="display:flex;align-items:center;gap:8px;font-size:13px;">
+              <span style="color:#5A6478;">Corpus</span>
+              <span style="color:#C6CFDD;">/</span>
+              <span style="color:#5A6478;">EX-2291</span>
+              <span style="color:#C6CFDD;">/</span>
+              <span style="font-weight:600;">Hörverstehen Teil 2</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;border:1px solid #DDE3EC;border-radius:6px;background:#F5F7FA;padding:7px 10px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">⌕</div>
+              <div style="font-size:12.5px;color:#5F6980;">ID, provider, title, URL, hash</div>
+              <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;border:1px solid #DDE3EC;border-radius:3px;padding:1px 5px;">/</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;border:1px solid #E6CE9A;background:#FDF6E8;border-radius:4px;padding:5px 9px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#8A5A0B;">◐</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">Draft held · 1</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:7px;border:1px solid #DDE3EC;border-radius:4px;padding:5px 9px;">
+              <div style="width:7px;height:7px;border-radius:2px;background:#2A9D6F;"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;">1 job running</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border-left:1px solid #DDE3EC;padding-left:14px;">bench 1.0.0-rc · owner</div>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:12px;">
+            <sc-for list="{{ headerNotes }}" as="h" hint-placeholder-count="4">
+              <div>
+                <div style="font-size:12.5px;font-weight:600;">{{ h.t }}</div>
+                <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:3px;">{{ h.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03 · Saved views and filter bar</div>
+          <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:7px;align-items:center;">
+            <sc-for list="{{ views }}" as="v" hint-placeholder-count="9">
+              <div style="display:inline-flex;align-items:center;gap:7px;border:1px solid {{ v.bd }};background:{{ v.bg }};border-radius:999px;padding:6px 12px;">
+                <div style="font-size:12.5px;font-weight:{{ v.w }};color:{{ v.fg }};">{{ v.t }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ v.cfg }};">{{ v.c }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #EDF0F4;padding-top:12px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">Filters</div>
+            <sc-for list="{{ filters }}" as="f" hint-placeholder-count="6">
+              <div style="display:inline-flex;align-items:center;gap:7px;border:1px solid #C6CFDD;background:#FFFFFF;border-radius:4px;padding:5px 9px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">{{ f.k }}</div>
+                <div style="font-size:12.5px;color:#14213D;">{{ f.v }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">✕</div>
+              </div>
+            </sc-for>
+            <div style="display:inline-flex;align-items:center;gap:6px;border:1px dashed #C6CFDD;border-radius:4px;padding:5px 9px;font-size:12.5px;color:#5A6478;">+ Add filter</div>
+            <div style="margin-left:auto;display:flex;align-items:center;gap:10px;">
+              <div style="font-size:12.5px;color:#5A6478;">34 open · showing 1–34</div>
+              <div style="display:flex;border:1px solid #DDE3EC;border-radius:4px;overflow:hidden;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;background:#E6EEF9;color:#24396B;">Dense</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;color:#5A6478;">Comfort</div>
+              </div>
+            </div>
+          </div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.55;margin-top:11px;">Saved views are tabs, not a dropdown, because their counts are the operator's morning briefing. Filter state, sort, density and scroll position are one persisted object per view — restored after a detail visit, a reload and a session expiry.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c3" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.3</div>
+      <div style="font-size:22px;font-weight:600;">Queue table — anatomy and every state</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:34px 74px 1fr 150px 190px 132px 96px 74px;gap:12px;padding:9px 16px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#5A6478;">
+        <div>Sel</div><div>Impact ↓</div><div>Record</div><div>Queue reason</div><div>Blocked capability</div><div>Provider · format</div><div>Scope</div><div>Age</div>
+      </div>
+      <sc-for list="{{ rows }}" as="r" hint-placeholder-count="8">
+        <div style="display:grid;grid-template-columns:34px 74px 1fr 150px 190px 132px 96px 74px;gap:12px;padding:0 16px;height:44px;align-items:center;border-bottom:1px solid #EDF0F4;background:{{ r.bg }};border-left:3px solid {{ r.mark }};">
+          <div style="width:14px;height:14px;border:1px solid #C6CFDD;border-radius:3px;background:{{ r.selbg }};"></div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ r.pfg }};">{{ r.pm }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:{{ r.pfg }};">{{ r.p }}</div>
+          </div>
+          <div style="overflow:hidden;">
+            <div style="display:flex;align-items:baseline;gap:8px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5F6980;">{{ r.id }}</div>
+              <div style="font-size:13px;font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" lang="de">{{ r.t }}</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:#3E4A63;">{{ r.reason }}</div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ r.cfg }};">{{ r.cm }}</div>
+            <div style="font-size:12.5px;color:{{ r.cfg }};">{{ r.cap }}</div>
+          </div>
+          <div style="font-size:12px;color:#5A6478;">{{ r.prov }}</div>
+          <div style="font-size:12px;color:#5A6478;">{{ r.scope }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ r.agefg }};">{{ r.age }}</div>
+        </div>
+      </sc-for>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px;background:#F5F7FA;">
+        <div style="font-size:12.5px;color:#5A6478;">2 selected · bulk actions limited to <strong style="font-weight:600;color:#14213D;">Defer</strong> and <strong style="font-weight:600;color:#14213D;">Add note</strong> — no bulk publish, quarantine, rights or takedown action exists.</div>
+        <div style="display:flex;align-items:center;gap:10px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;">Page 1 of 1 · 50 rows/page · position kept</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;">
+      <sc-for list="{{ tableStates }}" as="s" hint-placeholder-count="9">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="font-size:14px;font-weight:600;">{{ s.t }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ s.fg }};">{{ s.tag }}</div>
+          </div>
+          <div style="margin-top:10px;border:1px {{ s.bstyle }} {{ s.bd }};border-radius:6px;background:{{ s.bg }};padding:14px;min-height:96px;display:flex;flex-direction:column;justify-content:center;gap:7px;">
+            <div style="font-size:13px;font-weight:600;color:{{ s.fg }};">{{ s.head }}</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ s.body }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#1D6F50;margin-top:3px;">{{ s.act }}</div>
+          </div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:9px;">{{ s.note }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="c4" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.4</div>
+      <div style="font-size:22px;font-weight:600;">Evidence and record inspection</div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start;">
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">08 · Identity header</div>
+        <div style="margin-top:12px;border:1px solid #DDE3EC;border-radius:6px;padding:16px;">
+          <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5F6980;">ITEM-44112</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;border:1px solid #DDE3EC;border-radius:3px;padding:2px 6px;">Item scope</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">rev 4 · active</div>
+          </div>
+          <div style="font-size:22px;font-weight:600;line-height:1.3;margin-top:8px;" lang="de">Aufgabe 12 — Kurznachricht zuordnen</div>
+          <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:9px;font-size:12.5px;color:#5A6478;">
+            <span>SRC-0412</span><span style="color:#C6CFDD;">›</span><span>DOC-8841</span><span style="color:#C6CFDD;">›</span><span>EX-2291</span><span style="color:#C6CFDD;">›</span><span lang="de">Hörverstehen</span><span style="color:#C6CFDD;">›</span><span lang="de">Teil 2</span><span style="color:#C6CFDD;">›</span><span style="color:#14213D;font-weight:600;">Item 12</span>
+          </div>
+          <div style="display:flex;gap:7px;flex-wrap:wrap;margin-top:12px;">
+            <sc-for list="{{ headerChips }}" as="h" hint-placeholder-count="6">
+              <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid {{ h.bd }};background:{{ h.bg }};border-radius:4px;padding:4px 8px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ h.fg }};">{{ h.m }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ h.fg }};">{{ h.l }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.55;margin-top:10px;">Six chips maximum, one per axis, in fixed axis order — so the eye learns position, not colour. The seventh state goes into its panel, never into the header.</div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">09 · Provenance observation card</div>
+        <div style="margin-top:12px;border:1px solid #DDE3EC;border-radius:6px;padding:14px;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#4A5568;">▣</div>
+            <div style="font-size:14px;font-weight:600;">Source observation SRC-0412</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;border:1px solid #DDE3EC;border-radius:3px;padding:2px 6px;">Mirror · not the anchor</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:0;margin-top:10px;">
+            <sc-for list="{{ provRows }}" as="p" hint-placeholder-count="7">
+              <div style="display:grid;grid-template-columns:132px 1fr;gap:12px;padding:6px 0;border-bottom:1px solid #EDF0F4;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">{{ p.k }}</div>
+                <div style="font-size:12.5px;color:{{ p.fg }};line-height:1.45;">{{ p.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#1D6F50;border:1px solid #BFD8CB;border-radius:4px;padding:5px 9px;">Copy source URL</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;border:1px solid #DDE3EC;border-radius:4px;padding:5px 9px;">Open externally ↗ warns</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.55;margin-top:10px;">Access history stays visible even when the URL is dead: an observation is a permanent fact about where evidence was seen, subject only to takedown and security deletion.</div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">11 · Confidence dimensions</div>
+        <div style="margin-top:12px;border:1px solid #DDE3EC;border-radius:6px;overflow:hidden;">
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 14px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;">
+            <div style="display:flex;align-items:center;gap:9px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#24396B;background:#E6EEF9;border:1px solid #B9CBE6;border-radius:4px;padding:2px 8px;">B</div>
+              <div style="font-size:14px;font-weight:600;">Trusted · 74 / 100</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">Capped: local key dispute</div>
+          </div>
+          <sc-for list="{{ dims }}" as="d" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:1fr 46px 96px 74px;gap:10px;align-items:center;padding:7px 14px;border-bottom:1px solid #EDF0F4;">
+              <div style="font-size:12.5px;color:#14213D;">{{ d.t }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ d.fg }};text-align:right;">{{ d.v }}</div>
+              <div style="height:6px;background:#EDF0F4;border-radius:2px;overflow:hidden;position:relative;">
+                <div style="height:6px;width:{{ d.w }};background:{{ d.bar }};"></div>
+              </div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#5F6980;text-align:right;">{{ d.wt }}</div>
+            </div>
+          </sc-for>
+          <div style="padding:10px 14px;background:#F5F7FA;font-size:12px;color:#3E4A63;line-height:1.5;">Two <em>Unknown</em> dimensions stay in the denominator and contribute no evidence; <em>Answer-key consistency</em> is genuinely N/A for a productive task and is removed from it. The score is an internal aid — the tier and the hard gates decide use.</div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">12 · Rights panel with action permissions</div>
+        <div style="margin-top:12px;border:1px solid #D8C7E2;border-radius:6px;overflow:hidden;">
+          <div style="display:flex;align-items:center;gap:9px;padding:11px 14px;background:#F4EFF7;border-bottom:1px solid #D8C7E2;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#6A4A7C;">§</div>
+            <div style="font-size:14px;font-weight:600;color:#6A4A7C;">Reference only</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#6A4A7C;">Source scope · asset override present</div>
+          </div>
+          <sc-for list="{{ rights }}" as="r" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;padding:8px 14px;border-bottom:1px solid #EDF0F4;">
+              <div>
+                <div style="font-size:12.5px;color:#14213D;">{{ r.t }}</div>
+                <div style="font-size:11.5px;color:#5A6478;line-height:1.4;">{{ r.d }}</div>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:flex-end;gap:6px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ r.fg }};">{{ r.m }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ r.fg }};">{{ r.v }}</div>
+              </div>
+            </div>
+          </sc-for>
+          <div style="padding:10px 14px;background:#FAF7FC;font-size:12px;color:#3E4A63;line-height:1.5;">Unknown is not permission. This record supports structure, taxonomy, difficulty and prevalence intelligence; exact expression and close derivatives remain blocked until documented permission exists.</div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">14 · Capability eligibility matrix</div>
+        <div style="margin-top:12px;border:1px solid #DDE3EC;border-radius:6px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:1fr 62px 1fr;gap:10px;padding:8px 14px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5A6478;">
+            <div>Capability</div><div style="text-align:center;">State</div><div>Reason and remaining restriction</div>
+          </div>
+          <sc-for list="{{ elig }}" as="e" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:1fr 62px 1fr;gap:10px;align-items:center;padding:9px 14px;border-bottom:1px solid #EDF0F4;">
+              <div style="font-size:12.5px;color:#14213D;">{{ e.t }}</div>
+              <div style="display:flex;justify-content:center;">
+                <div style="display:inline-flex;align-items:center;gap:5px;border:1px solid {{ e.bd }};background:{{ e.bg }};border-radius:4px;padding:2px 7px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;font-weight:600;color:{{ e.fg }};">{{ e.code }}</div>
+                </div>
+              </div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.45;">{{ e.r }}</div>
+            </div>
+          </sc-for>
+          <div style="padding:9px 14px;background:#F5F7FA;display:flex;gap:14px;flex-wrap:wrap;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">
+            <div>E eligible</div><div>L limited</div><div>P provisional</div><div>H held</div><div>B blocked</div><div>— n/a</div><div>○ never assessed</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">16 · Sanitized preview · three states</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:12px;">
+          <div style="border:1px solid #DDE3EC;border-radius:6px;overflow:hidden;">
+            <div style="display:flex;align-items:center;gap:8px;padding:7px 12px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;">▤ Inert preview · scripts and embeds removed</div>
+              <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">DOC-8841 · p.4</div>
+            </div>
+            <div style="padding:12px;background:repeating-linear-gradient(135deg,#F7F9FB 0 8px,#F2F5F9 8px 16px);">
+              <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:4px;padding:11px 13px;" lang="de">
+                <div style="font-size:12.5px;font-weight:600;">Teil 2 — Sie hören ein Gespräch.</div>
+                <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:5px;">Kreuzen Sie die richtige Antwort an. Sie hören den Text zweimal.</div>
+              </div>
+            </div>
+          </div>
+          <div style="border:1px solid #C6CFDD;border-radius:6px;padding:12px;background:#F5F7FA;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;">▤ Unsupported for preview</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:6px;">DOCX with embedded objects. Inspected as data, never executed. Text extraction succeeded; layout fidelity is not shown.</div>
+          </div>
+          <div style="border:1px solid #D18E8E;border-radius:6px;padding:12px;background:#FBEDED;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8E2F2F;">⛔ Security hold · payload not processed</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:6px;">Archive expands beyond the bounded ratio (declared 41 MB → 2.7 GB). Held, not retried. This is a security state, not an extraction failure, and no reprocess control clears it.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;margin-top:16px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">10 · Observed versus active interpretation</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:12px;">
+        <sc-for list="{{ diffCols }}" as="d" hint-placeholder-count="3">
+          <div style="border:1px solid {{ d.bd }};border-radius:6px;padding:14px;background:{{ d.bg }};">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:{{ d.fg }};">{{ d.k }}</div>
+            <div style="font-size:14px;font-weight:600;margin-top:7px;" lang="de">{{ d.val }}</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:7px;">{{ d.meta }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;line-height:1.6;margin-top:8px;border-top:1px solid #EDF0F4;padding-top:7px;">{{ d.origin }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-size:12.5px;color:#5A6478;line-height:1.55;margin-top:11px;">The observed column is never editable and never disappears. A correction adds an interpretation with an actor, a rationale and a version; the derivation column explains which of the two a downstream capability consumes, and why.</div>
+    </div>
+  </div>
+
+  <div id="c5" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.5</div>
+      <div style="font-size:22px;font-weight:600;">Review and decision controls</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">18 · Decision panel · recommendation plus alternatives</div>
+        <div style="margin-top:12px;border:1px solid #DDE3EC;border-radius:6px;overflow:hidden;">
+          <div style="padding:13px 15px;border-bottom:1px solid #EDF0F4;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">Suggested by rule · not authoritative</div>
+            <div style="font-size:14px;font-weight:600;margin-top:6px;">Keep partial extraction · mark answer key unknown</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:5px;">Structure, language and topic evidence stay eligible. Correctness use is held for 4 of 12 items. No paid processing.</div>
+            <div style="display:flex;gap:8px;margin-top:11px;">
+              <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#1D6F50;border-radius:4px;padding:7px 13px;">Apply and continue</div>
+              <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:7px 13px;">Apply and open next</div>
+            </div>
+          </div>
+          <div style="padding:12px 15px;background:#F5F7FA;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">Other safe actions</div>
+            <div style="display:flex;flex-direction:column;gap:8px;margin-top:8px;">
+              <sc-for list="{{ altActions }}" as="a" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;background:#FFFFFF;border:1px solid #DDE3EC;border-radius:4px;padding:8px 11px;">
+                  <div>
+                    <div style="font-size:12.5px;font-weight:600;">{{ a.t }}</div>
+                    <div style="font-size:11.5px;color:#5A6478;line-height:1.4;">{{ a.d }}</div>
+                  </div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:{{ a.fg }};">{{ a.tier }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">19 · Rationale field and decision draft states</div>
+        <div style="margin-top:12px;border:1px solid #DDE3EC;border-radius:6px;padding:14px;">
+          <div style="display:flex;align-items:baseline;justify-content:space-between;">
+            <div style="font-size:12.5px;font-weight:600;">Rationale <span style="color:#A83F3F;">· required at R2</span></div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">142 / 240</div>
+          </div>
+          <div style="margin-top:7px;border:1px solid #C6CFDD;border-radius:6px;padding:10px 12px;font-size:12.5px;line-height:1.55;color:#14213D;outline:2px solid #1D6F50;outline-offset:2px;">Key for items 9–12 is missing in the scan; the ÖSD mirror shows a different key for item 11. Holding correctness until the publisher PDF is acquired.</div>
+          <div style="display:flex;gap:8px;margin-top:9px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#1D6F50;border:1px solid #BFD8CB;border-radius:4px;padding:5px 9px;">+ Attach finding QA-3391</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;border:1px solid #DDE3EC;border-radius:4px;padding:5px 9px;">+ Attach source region</div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:12px;">
+          <sc-for list="{{ decisionStates }}" as="d" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;align-items:start;border:1px solid {{ d.bd }};background:{{ d.bg }};border-radius:4px;padding:8px 11px;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ d.fg }};">{{ d.m }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ d.fg }};">{{ d.t }}</div>
+              </div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.45;">{{ d.d }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">21 · R2 confirmation · exact scope</div>
+        <div style="margin-top:12px;border:1px solid #C6CFDD;border-radius:10px;overflow:hidden;box-shadow:0 18px 44px rgba(20,33,61,.18);">
+          <div style="padding:16px 18px;border-bottom:1px solid #EDF0F4;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8A5A0B;">Risk R2 · reversible by a governed inverse action</div>
+            <div style="font-size:18px;font-weight:600;margin-top:6px;">Quarantine EX-2291 for suspected misrepresentation</div>
+          </div>
+          <div style="padding:14px 18px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">This affects</div>
+            <div style="display:flex;flex-direction:column;gap:0;margin-top:7px;">
+              <sc-for list="{{ scopeRows }}" as="s" hint-placeholder-count="5">
+                <div style="display:grid;grid-template-columns:1fr auto;gap:12px;padding:6px 0;border-bottom:1px solid #EDF0F4;">
+                  <div style="font-size:12.5px;color:#14213D;">{{ s.t }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ s.fg }};">{{ s.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="background:#F5F7FA;border:1px solid #DDE3EC;border-radius:6px;padding:10px 12px;margin-top:11px;font-size:12px;color:#3E4A63;line-height:1.5;">Provenance and all 4 observations remain. Rights status is unchanged. Structure analytics stay eligible; correctness, direct reuse and independent prevalence are held until the dispute resolves.</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#F5F7FA;border-top:1px solid #DDE3EC;">
+            <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#8A5A0B;border-radius:4px;padding:8px 14px;">Quarantine exam scope</div>
+            <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:8px 14px;">Quarantine item 11 only</div>
+            <div style="font-size:12.5px;color:#5A6478;margin-left:auto;">Esc cancels · focus returns to the row</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">22 · R3 confirmation · typed identity</div>
+        <div style="margin-top:12px;border:1px solid #D18E8E;border-radius:10px;overflow:hidden;box-shadow:0 18px 44px rgba(20,33,61,.18);">
+          <div style="padding:16px 18px;border-bottom:1px solid #F0DADA;background:#FBEDED;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8E2F2F;">Risk R3 · not reversible by discovery or ordinary controls</div>
+            <div style="font-size:18px;font-weight:600;margin-top:6px;color:#8E2F2F;">Takedown hold and source-expression suppression</div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:6px;">Step 2 of 2 · you have read the affected scope</div>
+          </div>
+          <div style="padding:14px 18px;">
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <sc-for list="{{ takedownScope }}" as="s" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:1fr auto;gap:12px;padding:6px 0;border-bottom:1px solid #EDF0F4;">
+                  <div style="font-size:12.5px;color:#14213D;">{{ s.t }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ s.fg }};">{{ s.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="margin-top:12px;">
+              <div style="font-size:12.5px;color:#3E4A63;">Type <span style="font-family:'IBM Plex Mono',monospace;font-weight:600;color:#14213D;">SRC-0412</span> to confirm</div>
+              <div style="margin-top:6px;border:1px solid #C6CFDD;border-radius:6px;padding:9px 11px;font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#5F6980;">SRC-04|</div>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;padding:13px 18px;background:#F5F7FA;border-top:1px solid #DDE3EC;">
+            <div style="font-size:12.5px;font-weight:600;color:#FFFFFF;background:#C79C9C;border-radius:4px;padding:8px 14px;">Hold and suppress</div>
+            <div style="font-size:12.5px;font-weight:600;color:#14213D;background:#FFFFFF;border:1px solid #C6CFDD;border-radius:4px;padding:8px 14px;">Back to scope</div>
+            <div style="font-size:12px;color:#5A6478;margin-left:auto;">Disabled until the identity matches</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c6" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.6</div>
+      <div style="font-size:22px;font-weight:600;">Pipeline, runs, health, and cost</div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;margin-top:16px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">24 · Conceptual lifecycle stepper · 13 stages, partial success by scope</div>
+      <div style="display:flex;gap:4px;margin-top:14px;overflow:hidden;">
+        <sc-for list="{{ stages }}" as="s" hint-placeholder-count="13">
+          <div style="flex:1;min-width:0;border:1px solid {{ s.bd }};background:{{ s.bg }};border-radius:4px;padding:9px 8px;">
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:{{ s.fg }};">{{ s.m }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:#5F6980;">{{ s.n }}</div>
+            </div>
+            <div style="font-size:11.5px;font-weight:600;color:{{ s.fg }};margin-top:4px;line-height:1.25;">{{ s.t }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;color:#5F6980;margin-top:4px;">{{ s.v }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:14px;">
+        <div style="border:1px solid #E6CE9A;background:#FDF6E8;border-radius:6px;padding:12px 14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;">◑ Partial success · Extract Answers</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:6px;">8 of 12 items linked to a key. 4 items keep <em>key unknown</em>; the stage is complete, not failed, and the affected capability is named rather than the whole run.</div>
+        </div>
+        <div style="border:1px solid #DDE3EC;background:#F5F7FA;border-radius:6px;padding:12px 14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;">Method and version summary</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;line-height:1.7;margin-top:6px;">parser deterministic-pdf 2.3<br>ocr tesseract-de 5.3 · pages 4,7<br>asr not run · taxonomy v4.2 · dedup 1.6</div>
+        </div>
+        <div style="border:1px solid #DDE3EC;background:#FFFFFF;border-radius:6px;padding:12px 14px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#4A5568;">Downstream after this run</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.6;margin-top:6px;">2 outputs newly eligible · 1 limited · <strong style="font-weight:600;">82 stale since taxonomy v4.2</strong> · 0 invalidated. Recompute is proposed, never automatic.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px;">
+      <div style="background:#FFFFFF;border:1px solid #E2B6B6;border-radius:8px;padding:16px 18px;border-top:3px solid #B64B4B;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#A83F3F;">28 · Hard blocker card</div>
+        <div style="font-size:15.5px;font-weight:600;margin-top:7px;">2 Q0 correctness findings</div>
+        <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:6px;">Cannot be averaged into any vector. Blocks correctness publication for EX-2291 and the benchmark development slice.</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#A83F3F;margin-top:10px;">Open the 2 findings →</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">29 · Health vector card</div>
+        <div style="font-size:15.5px;font-weight:600;margin-top:7px;">Independence</div>
+        <div style="display:flex;align-items:flex-end;gap:6px;margin-top:9px;">
+          <sc-for list="{{ bars }}" as="b" hint-placeholder-count="6">
+            <div style="flex:1;">
+              <div style="height:{{ b.h }};background:{{ b.c }};border-radius:2px 2px 0 0;"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:9px;color:#5F6980;text-align:center;margin-top:3px;">{{ b.l }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:9px;">Two providers carry 61% of decision-grade support. Concentration warning, not a failure.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">31 · Cost card</div>
+        <div style="display:flex;align-items:baseline;gap:8px;margin-top:7px;">
+          <div style="font-size:26px;font-weight:600;">€2.60</div>
+          <div style="font-size:12px;color:#5A6478;">/ 1 000 Items · target ≤ €3</div>
+        </div>
+        <div style="height:8px;background:#EDF0F4;border-radius:3px;margin-top:10px;overflow:hidden;display:flex;">
+          <div style="width:37%;background:#2A9D6F;"></div>
+          <div style="width:5%;background:#D89A2A;"></div>
+        </div>
+        <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:8px;">€18.40 of the €25 monthly envelope used. 1 paid job waiting at the gate (€1.20).</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">32 · Coverage cell · unknown is not zero</div>
+        <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:10px;">
+          <sc-for list="{{ cover }}" as="c" hint-placeholder-count="12">
+            <div style="height:30px;border:1px solid {{ c.bd }};background:{{ c.bg }};border-radius:3px;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:{{ c.fg }};">{{ c.v }}</div>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:9px;">Hatched cells are <em>never assessed</em>; they are excluded from every denominator and named in the table alternative.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="c7" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">02.7</div>
+      <div style="font-size:22px;font-weight:600;">Feedback and system states</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:16px;">
+      <sc-for list="{{ sysStates }}" as="s" hint-placeholder-count="12">
+        <div style="border:1px {{ s.bstyle }} {{ s.bd }};background:{{ s.bg }};border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;align-items:center;gap:9px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ s.fg }};">{{ s.m }}</div>
+            <div style="font-size:13.5px;font-weight:600;color:{{ s.fg }};">{{ s.t }}</div>
+            <div style="margin-left:auto;font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">{{ s.own }}</div>
+          </div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:7px;">{{ s.d }}</div>
+          <div style="display:flex;align-items:center;gap:12px;margin-top:9px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#1D6F50;">{{ s.act }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;">{{ s.live }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const alt = (i) => (i % 2 ? '#FAFBFD' : '#FFFFFF');
+    const idx = [
+      ['Application shell','Shell','Rail 240 / collapsed 64 / top-rail tablet. States: default, offline, job running, session warning.','Landmarks: banner, navigation, main, contentinfo. Skip link to main. Rail is a nav list, current page aria-current.','≤1320 rail collapses to icon+tooltip; ≤1024 becomes a top rail with a menu for areas 4–5.'],
+      ['Primary navigation','Shell','5 destinations × {rest, hover, active, has-count}. Count is open exceptions.','Counts are read as “Inbox, 34 open exceptions”. Never colour-only escalation.','Labels persist at 64px width via tooltip + aria-label; never icon-only without a name.'],
+      ['Header bar','Shell','Breadcrumb, search, draft-held, job tray, environment, session. Sticky at 56px.','Search is a labelled combobox with listbox results; “/” shortcut documented and not required.','≤1280 breadcrumb truncates from the left, keeping the current record; search collapses to an icon-button dialog.'],
+      ['Breadcrumb / back context','Shell','Full path, truncated path, cross-area return ("← 12 in Duplicate review").','Ordered list of links; the current item is not a link and carries aria-current="page".','Below 1024 shows only parent + current with a popover for the rest.'],
+      ['Global search','Shell','Empty, typing, results grouped by entity, no result, unsafe-query refused.','Results announce count politely; each result names its entity type in text.','Full-screen dialog below 1024.'],
+      ['Background job tray','Shell','Idle, 1–n running, completed-while-away, failed, budget-held.','Completion is announced politely once; never steals focus. “Safe to leave” is text, not a tooltip.','Becomes a header icon with a badge below 1280; the panel is a dialog.'],
+      ['Environment / version tag','Shell','Local, benchmark release, contract version, taxonomy version.','Static text, no interaction. Version strings are selectable and copyable.','Truncates to the benchmark release below 1280; full set in the About popover.'],
+      ['Split pane','Layout','Queue+detail 320/fluid, detail+evidence fluid/380, three-pane workbench.','Panes are regions with accessible names; a keyboard-resizable splitter with arrow-key support.','Below 1320 the third pane becomes an overlay drawer; below 1024 panes stack with a segmented switch.'],
+      ['Drawer','Layout','Right overlay 560, sizes {sm 420, md 560, lg 720}. States: open, dirty, blocked-by-draft.','Focus trapped, Esc closes, trigger regains focus, background inert. A dirty drawer confirms before discarding.','Full-width sheet below 1024 with a sticky action footer.'],
+      ['Tabs','Layout','Underline tabs for record panels; pill tabs for saved views. With and without counts.','Roving tabindex, arrow keys, Home/End. Panel is labelled by its tab.','Overflow scrolls horizontally with edge fades; never wraps into two rows.'],
+      ['Queue table','Table','Dense/comfortable × {loaded, loading, empty, stale, partial, error, offline, permission-blocked}. Row states: rest, hover, keyboard cursor, selected, acted-upon, muted-deferred.','Real table semantics with th scope, sortable headers as buttons with aria-sort, row actions reachable without hover, no color-only priority.','Below 1280 four columns collapse into a two-line primary cell; below 1024 becomes a card list retaining reason, capability and age.'],
+      ['Priority / impact cell','Table','P0–P3 with reason string. Marker + word + hue.','The reason is text in the row, not a tooltip: “Q0 correctness · telc B1 target · 4 items”.','Reason moves under the title in the card list; never dropped.'],
+      ['Filter bar','Table','Chip filters, add-filter menu, saved-view save/dirty, density switch, column visibility.','Each chip is a button with “Remove filter, provider telc”. Filter results announce the new count.','Chips wrap to two rows maximum, then collapse into “+3 filters” with a dialog.'],
+      ['Saved views','Table','9 default views × {rest, active, dirty, count, empty}.','Tab semantics with counts in the accessible name.','Horizontally scrolling; the active view is always scrolled into view on load.'],
+      ['Pagination','Table','50-row pages, position marker, jump-to, end-of-list.','Nav landmark with current page announced; position restored after a detail visit.','Below 1024 becomes prev/next with a position label.'],
+      ['Identity header','Evidence','10 scopes (Source Observation → Asset) × {clean, mixed, disputed, quarantined, prohibited, incomplete}. Max 6 axis chips.','h1 is the human title; the stable ID is a copyable adjacent string, announced once.','Chips wrap; the hierarchy breadcrumb collapses to parent+current with a popover.'],
+      ['Provenance card','Evidence','Live, redirected, dead, withdrawn, manual upload, archive snapshot, mirror-not-anchor.','External links warn before leaving and state the destination host in text.','Full width below 1280; access-history table becomes a disclosure.'],
+      ['Observed vs active diff','Evidence','Identical, corrected, disputed, superseded, override-retained-after-rerun.','Diff is underline + label, never colour alone; a text summary precedes the panes.','Panes stack vertically below 1280 with the observed value first.'],
+      ['Confidence dimensions','Evidence','8 dimensions × {0–4, unknown, N/A} + tier + cap + inherited + corroboration + contradiction.','Table with a row per dimension; bars are decorative, values are text. Weight column explains the score.','Bars drop below 1024; the table remains.'],
+      ['Rights panel','Evidence','5 statuses × action permissions {redistribution, derivative, commercial, attribution, share-alike, territory, custom} × scope override.','Each permission is a labelled row with an explicit value word; “unknown” is never blank.','Two-column permissions collapse to one; the panel never hides conditions behind a tooltip.'],
+      ['QA findings list','Evidence','Q0–Q3 × {open, accepted, corrected, deferred, waived-with-reason} grouped by scope.','Severity is word + marker; each finding links to its exact scope and its expected-vs-actual detail.','Grouping headers persist while scrolling; findings become cards below 1024.'],
+      ['Eligibility matrix','Evidence','6 capabilities × 7 states, at 5 scopes, plus inherited/local indicator.','A real table with letter codes and a legend; each cell has a text reason in the row or a linked detail.','Below 1280 becomes a stacked list of capability + state + reason.'],
+      ['Relationship summary','Evidence','8 relationship classes, cluster size, anchor, processing representation, independence per metric.','List view is primary; the graph is an optional alternate view with the same links.','Graph is desktop-only; the list is the tablet and mobile representation.'],
+      ['Taxonomy assignment list','Evidence','Assignment × {role, confidence, origin, version, review state} × {current, proposed, provisional, deprecated}.','No drag-only editing: assignment changes use select-then-apply controls.','Proposed and current stack vertically below 1280.'],
+      ['Difficulty / relevance signals','Evidence','L/R/T/A/P bands with ranges, CEFR scope, GB1, TELC, all with uncertainty and derivation version.','Each value is text with its range; bars are aria-hidden.','Grid of five becomes a list below 1024.'],
+      ['Sanitized preview','Evidence','Inert render, text-only, unsupported, encrypted, unsafe held, rights-suppressed, asset missing.','Preview region is labelled “quoted source evidence, inert”; nothing inside is focusable.','Fixed max height with internal scroll; never full-bleed on tablet.'],
+      ['Decision panel','Review','Recommendation + alternatives, R0–R3 tiering, rationale required/optional, evidence attachment.','Recommendation is labelled as suggested; alternatives are equally reachable; no destructive default.','Becomes a sticky footer sheet below 1024 for read-only surfaces only.'],
+      ['Rationale field','Review','Empty, typing, 240-char limit, validation error, draft held, restored after session expiry.','Labelled textarea with a live character count announced at 90%; errors summarised above the field.','Full width; never below 3 visible lines.'],
+      ['Confirmation dialog','Review','R1 inline, R2 modal with scope table, R3 two-step typed confirm, conflict, partial-success result.','Focus trapped and restored; the scope table is a real table; the destructive verb is never the default button.','Modal becomes a full-height sheet below 1024; the scope table scrolls inside it.'],
+      ['Comparison workbench','Comparison','Pair, cluster (3–8), revision-vs-revision, expected-vs-actual benchmark diff.','Synchronised panes are two regions; a “differences only” list gives a non-visual path.','Desktop-only by design; tablet shows the differences list and blocks the decision with a stated reason.'],
+      ['Lifecycle stepper','Pipeline','13 stages × {not run, running, done, partial, failed, blocked, skipped-not-applicable}.','Ordered list; each stage states its scope counts as text.','Wraps to two rows at 1280; becomes a vertical list below 1024.'],
+      ['Reprocess composer','Pipeline','Scope picker, earliest-affected-stage lock, method/version change, override policy, cost estimate, impact preview.','Every choice is a labelled control with its consequence in text; the estimate updates politely.','Desktop-only; the tablet offers “open on desktop” with the reason.'],
+      ['Health vector card','Health','7 vectors × {healthy, warning, blocked, insufficient data, stale}. Never an aggregate score.','Finding sentence precedes the graphic; “Show as table” is always present.','Four-up becomes two-up at 1280, one-up at 1024.'],
+      ['Audit timeline entry','Audit','Actor {human, rule, model, import, reprocess} × {state change, correction, decision, supersession} with diff disclosure.','Chronological list with dates as text; disclosure buttons name what they reveal.','Compact by default; the diff opens in a drawer below 1280.']
+    ];
+    return {
+      index: idx.map((r,i) => ({n: String(i+1).padStart(2,'0'), t:r[0], g:r[1], v:r[2], a:r[3], r:r[4], bg: alt(i)})),
+      nav: [
+        {i:'▤', t:'Inbox', c:'34', bg:'#1C2B4A', mark:'#2A9D6F', fg:'#FFFFFF', ic:'#4CC492', cc:'#C3CEDE', w:'600'},
+        {i:'◉', t:'Sources', c:'12', bg:'transparent', mark:'transparent', fg:'#C3CEDE', ic:'#8FA6C4', cc:'#8FA6C4', w:'400'},
+        {i:'▦', t:'Corpus', c:'', bg:'transparent', mark:'transparent', fg:'#C3CEDE', ic:'#8FA6C4', cc:'#8FA6C4', w:'400'},
+        {i:'◈', t:'Runs', c:'3', bg:'transparent', mark:'transparent', fg:'#C3CEDE', ic:'#8FA6C4', cc:'#8FA6C4', w:'400'},
+        {i:'◍', t:'Health', c:'2', bg:'transparent', mark:'transparent', fg:'#C3CEDE', ic:'#8FA6C4', cc:'#8FA6C4', w:'400'}
+      ],
+      headerNotes: [
+        {t:'Breadcrumb is the hierarchy', d:'Source → Document → Exam → Section → Task → Item. It never shows navigation history.'},
+        {t:'Draft held', d:'A rationale in progress survives navigation, reload and session expiry. The count is a link back to it.'},
+        {t:'Job tray, not a spinner', d:'Long work reports here. Every long action states that leaving is safe.'},
+        {t:'Environment and versions', d:'Benchmark release, contract and taxonomy versions live in the header because they change what a screen means.'}
+      ],
+      views: [
+        {t:'All work', c:'34', bg:'#14213D', bd:'#14213D', fg:'#FFFFFF', cfg:'#9FB4CE', w:'600'},
+        {t:'Discovery', c:'12', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Ingestion', c:'3', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Extraction failures', c:'9', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Duplicates', c:'7', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Authenticity', c:'4', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Rights', c:'5', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Low confidence', c:'11', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'},
+        {t:'Taxonomy', c:'6', bg:'#FFFFFF', bd:'#C6CFDD', fg:'#14213D', cfg:'#5F6980', w:'400'}
+      ],
+      filters: [
+        {k:'Impact', v:'P0 · P1'},
+        {k:'Provider', v:'telc · Goethe'},
+        {k:'Section', v:'Hörverstehen'},
+        {k:'Capability', v:'Correctness'},
+        {k:'Format', v:'PDF scan'},
+        {k:'Age', v:'> 14 days'}
+      ],
+      rows: [
+        {id:'ITEM-44112', t:'Aufgabe 12 — Kurznachricht zuordnen', p:'P0', pm:'✕', pfg:'#A83F3F', reason:'Q0 · key conflict', cap:'Correctness · scoring', cm:'B', cfg:'#A83F3F', prov:'telc · PDF scan', scope:'4 items', age:'2 d', agefg:'#3E4A63', bg:'#FFFFFF', mark:'#B64B4B', selbg:'#FFFFFF'},
+        {id:'SRC-0412', t:'deutsch-pruefung.example / modellsatz-b1', p:'P0', pm:'⛔', pfg:'#8E2F2F', reason:'Takedown notice', cap:'All direct use · held', cm:'B', cfg:'#8E2F2F', prov:'mirror · HTML', scope:'1 src · 3 mirrors', age:'4 h', agefg:'#3E4A63', bg:'#FFFFFF', mark:'#8E2F2F', selbg:'#FFFFFF'},
+        {id:'CL-118', t:'ÖSD Zertifikat B1 — Modellsatz (4 observations)', p:'P1', pm:'▲', pfg:'#8A5A0B', reason:'Unresolved dependency', cap:'Independent prevalence', cm:'B', cfg:'#8A5A0B', prov:'4 hosts · mixed', scope:'1 cluster', age:'9 d', agefg:'#3E4A63', bg:'#E6EEF9', mark:'#2F4A7C', selbg:'#2F4A7C'},
+        {id:'TASK-9903', t:'Sprachbausteine Teil 1 — Lückentext', p:'P1', pm:'▲', pfg:'#8A5A0B', reason:'Ambiguous structure', cap:'Structure analytics', cm:'H', cfg:'#8A5A0B', prov:'Hueber · DOCX', scope:'1 task · 10 items', age:'11 d', agefg:'#3E4A63', bg:'#E6EEF9', mark:'#2F4A7C', selbg:'#2F4A7C'},
+        {id:'ASSET-7731', t:'hoerverstehen-teil2.mp3 — ASR quality below gate', p:'P2', pm:'△', pfg:'#8A5A0B', reason:'Repeated failure · 3rd', cap:'Fine audio alignment', cm:'L', cfg:'#8A5A0B', prov:'ÖSD · audio', scope:'1 asset', age:'23 d', agefg:'#8A5A0B', bg:'#FFFFFF', mark:'transparent', selbg:'#FFFFFF'},
+        {id:'EX-3140', t:'Goethe-Zertifikat B1 — Übungssatz 02 (Leseverstehen)', p:'P2', pm:'△', pfg:'#8A5A0B', reason:'Taxonomy proposal', cap:'Fine taxonomy publish', cm:'P', cfg:'#8A5A0B', prov:'Goethe · PDF', scope:'6 items', age:'6 d', agefg:'#3E4A63', bg:'#FFFFFF', mark:'transparent', selbg:'#FFFFFF'},
+        {id:'SRC-0511', t:'sprachschule-rheinland.example / b1-uebungen', p:'P3', pm:'·', pfg:'#4A5568', reason:'Rights unknown', cap:'Direct reuse only', cm:'B', cfg:'#4A5568', prov:'school · HTML', scope:'1 src', age:'31 d', agefg:'#8A5A0B', bg:'#FAFBFD', mark:'transparent', selbg:'#FFFFFF'},
+        {id:'DOC-9002', t:'DTZ A2–B1 Modelltest — deferred by budget', p:'P3', pm:'·', pfg:'#4A5568', reason:'Budget deferred', cap:'Semantic enrichment', cm:'H', cfg:'#4A5568', prov:'BAMF · PDF', scope:'1 doc', age:'5 d', agefg:'#3E4A63', bg:'#FAFBFD', mark:'transparent', selbg:'#FFFFFF'}
+      ],
+      tableStates: [
+        {t:'Loading', tag:'Skeleton', fg:'#4A5568', bstyle:'solid', bd:'#DDE3EC', bg:'#F5F7FA', head:'Loading 34 rows', body:'Row skeletons keep the real column widths so nothing jumps when data lands. Header and filters are already interactive.', act:'', note:'Never a centred spinner over an empty page: the operator can already read the filters and the count.'},
+        {t:'Empty queue', tag:'Good news', fg:'#1D6F50', bstyle:'dashed', bd:'#BFD8CB', bg:'#F1F7F4', head:'Nothing needs attention in this view', body:'Last cleared 2026-08-17 14:02. 3 items are deferred to next week and 1 background run is in progress.', act:'Show deferred · Open runs', note:'States what is deliberately hidden, so “empty” is never mistaken for “broken filter”.'},
+        {t:'Empty Corpus', tag:'First run', fg:'#14213D', bstyle:'dashed', bd:'#C6CFDD', bg:'#FFFFFF', head:'No sources registered yet', body:'Two safe first steps: submit a URL you already have the right to fetch, or upload a file. Discovery stays off until a source family exists.', act:'Submit URL · Upload file', note:'No marketing copy, no illustration, no “Welcome!”. Two actions and the reason discovery is idle.'},
+        {t:'Stale cache', tag:'Trust warning', fg:'#8A5A0B', bstyle:'solid', bd:'#E6CE9A', bg:'#FDF6E8', head:'Showing results from 14:02 · 38 min old', body:'Reason: the last refresh ran during a budget hold. Counts may understate new work.', act:'Refresh now', note:'Staleness always names its cause and its age. It never silently self-refreshes under the cursor.'},
+        {t:'Partial data', tag:'Scoped failure', fg:'#8A5A0B', bstyle:'solid', bd:'#E6CE9A', bg:'#FDF6E8', head:'32 of 34 rows loaded', body:'Two rows could not be read: the duplicate-cluster index is rebuilding. Their queue reasons are known and shown in grey.', act:'Retry the 2 rows', note:'A partial table stays usable; the missing part is named, counted and separately retryable.'},
+        {t:'Error', tag:'System-owned', fg:'#A83F3F', bstyle:'solid', bd:'#E2B6B6', bg:'#FBEDED', head:'Queue could not be built', body:'The index service did not respond. This is ours, not your data. Nothing was changed and no draft was lost.', act:'Retry · Copy diagnostic', note:'Ownership is explicit: system, automation, source or operator. Never “Something went wrong”.'},
+        {t:'Offline / reconnecting', tag:'Session', fg:'#4A5568', bstyle:'solid', bd:'#C6CFDD', bg:'#F5F7FA', head:'Reconnecting · showing the last loaded page', body:'Your rationale draft for ITEM-44112 is held locally. Decisions are disabled until the connection returns.', act:'Keep working offline', note:'Actions that need the server disable with a reason; reading and drafting continue.'},
+        {t:'Repeated-failure slice', tag:'Pattern', fg:'#8A5A0B', bstyle:'solid', bd:'#E6CE9A', bg:'#FEFAF1', head:'6 rows share one cause', body:'Scanned ÖSD PDFs, OCR below the meaning-critical gate. Fixing the method once clears the slice; retrying individually will not.', act:'Open as a slice', note:'The queue surfaces the shared cause instead of six identical rows in a row.'},
+        {t:'Permission blocked', tag:'Authority', fg:'#4A5568', bstyle:'solid', bd:'#C6CFDD', bg:'#F5F7FA', head:'This action needs owner authority', body:'Automation proposed a rights upgrade for SRC-0511 and stopped. It cannot weaken a hard block or overwrite a curated decision.', act:'Review the proposal', note:'Shows what automation wanted and why it could not proceed — the boundary is visible, not implicit.'}
+      ],
+      headerChips: [
+        {m:'▣', l:'Observed · mirror', fg:'#4A5568', bg:'#F5F7FA', bd:'#DDE3EC'},
+        {m:'B', l:'Trusted 74 · capped', fg:'#24396B', bg:'#E6EEF9', bd:'#B9CBE6'},
+        {m:'§', l:'Reference only', fg:'#6A4A7C', bg:'#F4EFF7', bd:'#D8C7E2'},
+        {m:'◇', l:'TELC high · ±14', fg:'#26697A', bg:'#EAF4F6', bd:'#BCDAE0'},
+        {m:'✕', l:'Q0 · correctness', fg:'#A83F3F', bg:'#FBEDED', bd:'#E2B6B6'},
+        {m:'⧉', l:'Derivative of ITEM-41008', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB'}
+      ],
+      provRows: [
+        {k:'Observed at', v:'deutsch-pruefung.example/archiv/telc-b1-modelltest-3.pdf', fg:'#14213D'},
+        {k:'First / last seen', v:'2026-03-04 · 2026-08-11 (HTTP 200, unchanged hash)', fg:'#14213D'},
+        {k:'Access route', v:'Discovery crawl · 1 req/host · robots allowed · no login', fg:'#14213D'},
+        {k:'Claimed', v:'“telc Deutsch B1 Modelltest 3, offizieller Modelltest”', fg:'#14213D'},
+        {k:'Claim status', v:'Claimed official — unverified. Anchor is SRC-0301 (publisher).', fg:'#8A5A0B'},
+        {k:'Content hash', v:'sha256:4f1c…9ab7 · identical to SRC-0301 after normalisation', fg:'#14213D'},
+        {k:'Rights evidence', v:'No licence statement found. Footer: „Alle Rechte vorbehalten.“', fg:'#6A4A7C'}
+      ],
+      dims: [
+        {t:'Provider reputation / provenance quality', v:'3 / 4', w:'75%', bar:'#2F4A7C', wt:'20%', fg:'#14213D'},
+        {t:'Similarity to known exam structure', v:'4 / 4', w:'100%', bar:'#2F4A7C', wt:'15%', fg:'#14213D'},
+        {t:'Language quality', v:'3 / 4', w:'75%', bar:'#2F4A7C', wt:'10%', fg:'#14213D'},
+        {t:'Answer-key presence', v:'2 / 4', w:'50%', bar:'#2F4A7C', wt:'5%', fg:'#14213D'},
+        {t:'Answer-key consistency', v:'1 / 4', w:'25%', bar:'#B64B4B', wt:'15% gate', fg:'#A83F3F'},
+        {t:'Similarity to trusted material', v:'4 / 4', w:'100%', bar:'#2F4A7C', wt:'10%', fg:'#14213D'},
+        {t:'Internal structural consistency', v:'Unknown', w:'0%', bar:'#C6CFDD', wt:'10% in denom.', fg:'#5F6980'},
+        {t:'Corroboration across independent sources', v:'Unknown', w:'0%', bar:'#C6CFDD', wt:'15% in denom.', fg:'#5F6980'}
+      ],
+      rights: [
+        {t:'Redistribution', d:'Sharing the source expression outside Corpus', m:'✕', v:'Not permitted', fg:'#8E2F2F'},
+        {t:'Derivative / adaptation', d:'Close or reconstructive rewriting', m:'✕', v:'Not permitted', fg:'#8E2F2F'},
+        {t:'Commercial use', d:'Any paid product surface', m:'?', v:'Unknown', fg:'#6A4A7C'},
+        {t:'Attribution', d:'Required wording if any use is approved', m:'§', v:'Required', fg:'#6A4A7C'},
+        {t:'Abstract intelligence', d:'Structure, taxonomy, difficulty, prevalence', m:'§', v:'Permitted', fg:'#6A4A7C'},
+        {t:'Asset override · ASSET-7731', d:'Audio carries a stricter publisher notice', m:'⛔', v:'Prohibited', fg:'#8E2F2F'}
+      ],
+      elig: [
+        {t:'Structure analytics', code:'E', fg:'#1D6F50', bg:'#EAF3EE', bd:'#BFD8CB', r:'Structural extraction passed at 98.6% precision on this slice.'},
+        {t:'Correctness / scoring', code:'B', fg:'#A83F3F', bg:'#FBEDED', bd:'#E2B6B6', r:'Q0 key conflict on items 9–12. Blocked at item scope; items 1–8 unaffected.'},
+        {t:'Taxonomy publication', code:'P', fg:'#8A5A0B', bg:'#FEFAF1', bd:'#EEDFBB', r:'Fine assignment at 91% precision — below the 95% gate, so the qualified parent publishes instead.'},
+        {t:'Pattern intelligence', code:'L', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A', r:'Eligible as exploratory only: C-tier mass 22% exceeds the decision-grade cap.'},
+        {t:'Exact source reuse', code:'B', fg:'#A83F3F', bg:'#FBEDED', bd:'#E2B6B6', r:'Rights are REFERENCE_ONLY and the asset override is PROHIBITED.'},
+        {t:'Independent prevalence', code:'H', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD', r:'Held: cluster CL-118 dependency unresolved. Counting stays conservative until decided.'}
+      ],
+      diffCols: [
+        {k:'Observed in source', val:'„nur werktags“', meta:'Item 12 stem, DOC-8841 page 4, region 2. Read by the deterministic parser; unchanged since first fetch.', origin:'immutable · parser deterministic-pdf 2.3 · 2026-08-11', bd:'#DDE3EC', bg:'#F5F7FA', fg:'#4A5568'},
+        {k:'Active interpretation', val:'„nur werktags 8–12 Uhr“', meta:'Curated correction: the time restriction appears in the adjacent notice and is required to score the item.', origin:'owner · 2026-08-17 09:12 · rationale attached · rev 4', bd:'#BFD8CB', bg:'#F1F7F4', fg:'#1D6F50'},
+        {k:'What consumes which', val:'Split by capability', meta:'Correctness and scoring use the active value. Lexical prevalence uses the observed value, because the correction adds words the source did not print in this region.', origin:'derivation rule DR-07 · analytics v2.1', bd:'#B9CBE6', bg:'#F0F4FA', fg:'#24396B'}
+      ],
+      altActions: [
+        {t:'Reprocess from Parse with OCR escalation', d:'Estimated €0.40 · 1 document · may resolve items 9–12', tier:'R2 · cost', fg:'#8A5A0B'},
+        {t:'Mark answer key disputed', d:'Keeps both key assertions visible; blocks correctness until resolved', tier:'R1', fg:'#24396B'},
+        {t:'Defer 14 days', d:'Returns to this queue with the reason and age preserved', tier:'R0', fg:'#4A5568'},
+        {t:'Quarantine the exam', d:'Not recommended — the defect is local to 4 items of 12', tier:'R2 · broad', fg:'#A83F3F'}
+      ],
+      decisionStates: [
+        {t:'Draft', m:'◐', d:'Rationale in progress. Held locally, listed in the header, survives reload and session expiry.', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8'},
+        {t:'Validation error', m:'▲', d:'“A rationale is required to hold a capability.” Summary above the field, focus moves to the field.', fg:'#A83F3F', bd:'#E2B6B6', bg:'#FBEDED'},
+        {t:'Pending', m:'◐', d:'Submitted, awaiting the write. The row is muted, not removed; the action buttons disable with a reason.', fg:'#4A5568', bd:'#C6CFDD', bg:'#F5F7FA'},
+        {t:'Succeeded', m:'●', d:'Factual summary plus what changed downstream. No celebration, no animation.', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {t:'Partially succeeded', m:'◑', d:'“Applied to 9 of 12 items. 3 failed: asset lock held by run 0817-03.” The remainder is separately retryable.', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8'},
+        {t:'Failed', m:'✕', d:'Nothing was written. States whether the cause is system, automation, source or the decision itself.', fg:'#A83F3F', bd:'#E2B6B6', bg:'#FBEDED'},
+        {t:'Conflict', m:'⚠', d:'“A reprocess completed while you were deciding. Compare your rationale against the new automated result.” Both versions shown; the curated override is retained by default.', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8'}
+      ],
+      scopeRows: [
+        {t:'Exam EX-2291 · telc Deutsch B1 Modelltest 3', v:'1 exam', fg:'#14213D'},
+        {t:'Tasks and items below it', v:'6 tasks · 58 items', fg:'#14213D'},
+        {t:'Published outputs to be held', v:'3 capabilities', fg:'#8A5A0B'},
+        {t:'Decision-grade analytics to recompute', v:'11 results', fg:'#8A5A0B'},
+        {t:'App-facing blueprints affected', v:'2 · contract v3', fg:'#8A5A0B'}
+      ],
+      takedownScope: [
+        {t:'Source observations to suppress', v:'1 primary + 3 mirrors', fg:'#8E2F2F'},
+        {t:'Raw payloads scheduled for removal', v:'4 · within 7 days', fg:'#8E2F2F'},
+        {t:'Assets suppressed', v:'2 audio · 1 scan', fg:'#8E2F2F'},
+        {t:'Published outputs invalidated', v:'6 · App notified', fg:'#8E2F2F'},
+        {t:'Analytics to recompute without this source', v:'14 results', fg:'#8A5A0B'},
+        {t:'Retained as audit and prevention metadata', v:'hash + decision only', fg:'#4A5568'}
+      ],
+      stages: [
+        {n:'01', t:'Discover', m:'●', v:'1 src', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'02', t:'Fetch', m:'●', v:'1 doc', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'03', t:'Normalize', m:'●', v:'1 doc', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'04', t:'Parse', m:'●', v:'42 p', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'05', t:'Segment', m:'●', v:'6 tasks', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'06', t:'Classify', m:'●', v:'6 tasks', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'07', t:'Answers', m:'◑', v:'8/12', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8'},
+        {n:'08', t:'Assets', m:'◑', v:'5/6', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8'},
+        {n:'09', t:'Enrich', m:'●', v:'58 it', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4'},
+        {n:'10', t:'Validate', m:'✕', v:'2 Q0', fg:'#A83F3F', bd:'#E2B6B6', bg:'#FBEDED'},
+        {n:'11', t:'Deduplicate', m:'■', v:'blocked', fg:'#4A5568', bd:'#C6CFDD', bg:'#F5F7FA'},
+        {n:'12', t:'Review', m:'○', v:'not run', fg:'#5F6980', bd:'#C6CFDD', bg:'#FFFFFF'},
+        {n:'13', t:'Publish', m:'○', v:'not run', fg:'#5F6980', bd:'#C6CFDD', bg:'#FFFFFF'}
+      ],
+      bars: [
+        {h:'34px', c:'#2F4A7C', l:'telc'},
+        {h:'26px', c:'#2F4A7C', l:'Goe'},
+        {h:'14px', c:'#6B7789', l:'ÖSD'},
+        {h:'9px', c:'#6B7789', l:'DTZ'},
+        {h:'7px', c:'#6B7789', l:'pub'},
+        {h:'4px', c:'#6B7789', l:'oth'}
+      ],
+      cover: [
+        {v:'42', bg:'#EAF3EE', bd:'#BFD8CB', fg:'#1D6F50'},
+        {v:'18', bg:'#F1F7F4', bd:'#BFD8CB', fg:'#1D6F50'},
+        {v:'6', bg:'#FDF6E8', bd:'#E6CE9A', fg:'#8A5A0B'},
+        {v:'○', bg:'#F5F7FA', bd:'#C6CFDD', fg:'#5F6980'},
+        {v:'31', bg:'#EAF3EE', bd:'#BFD8CB', fg:'#1D6F50'},
+        {v:'11', bg:'#F1F7F4', bd:'#BFD8CB', fg:'#1D6F50'},
+        {v:'2', bg:'#FDF6E8', bd:'#E6CE9A', fg:'#8A5A0B'},
+        {v:'○', bg:'#F5F7FA', bd:'#C6CFDD', fg:'#5F6980'},
+        {v:'9', bg:'#F1F7F4', bd:'#BFD8CB', fg:'#1D6F50'},
+        {v:'4', bg:'#FDF6E8', bd:'#E6CE9A', fg:'#8A5A0B'},
+        {v:'0', bg:'#FBEDED', bd:'#E2B6B6', fg:'#A83F3F'},
+        {v:'○', bg:'#F5F7FA', bd:'#C6CFDD', fg:'#5F6980'}
+      ],
+      sysStates: [
+        {t:'Background job pending', m:'◐', own:'System', d:'“Reprocess 0817-03 is running · Parse 4 of 13 · started 09:14. Safe to leave this page; the result appears in Runs and in the job tray.”', act:'View run', live:'polite', fg:'#4A5568', bd:'#C6CFDD', bg:'#F5F7FA', bstyle:'solid'},
+        {t:'Completed while you were away', m:'●', own:'System', d:'“Run 0817-03 finished with partial success: 2 outputs newly eligible, 82 stale. Nothing was published automatically.”', act:'Review results', live:'polite', fg:'#1D6F50', bd:'#BFD8CB', bg:'#F1F7F4', bstyle:'solid'},
+        {t:'Budget hold', m:'■', own:'Operator decision', d:'“Paid semantic enrichment is deferred: €18.40 of €25 used this month and this job estimates €1.20. Nothing was lost — the record keeps a provisional taxonomy.”', act:'Approve this job · Raise the ceiling', live:'polite', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8', bstyle:'solid'},
+        {t:'Retry exhausted', m:'▲', own:'Source', d:'“Three fetch attempts failed with HTTP 403 since 2026-08-02. Negative-cached until the input, the method or your decision changes — retrying now would repeat the same request.”', act:'Mark source dead · Try a mirror', live:'polite', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8', bstyle:'solid'},
+        {t:'Security block', m:'⛔', own:'Security gate', d:'“Payload held: archive expansion beyond the bounded ratio. This is not an extraction failure and no reprocess control clears it. The provenance observation is kept.”', act:'Read the gate report', live:'assertive', fg:'#8E2F2F', bd:'#D18E8E', bg:'#FBEDED', bstyle:'solid'},
+        {t:'Unsupported / encrypted input', m:'▤', own:'Source', d:'“Password-protected PDF. Not brute-forced, not bypassed. Structure and rights evidence remain unknown rather than assumed.”', act:'Attach a supplied copy', live:'polite', fg:'#4A5568', bd:'#C6CFDD', bg:'#F5F7FA', bstyle:'solid'},
+        {t:'Session expired with a draft', m:'◐', own:'System', d:'“Your session ended. Your rationale for ITEM-44112 is held locally and will be restored after sign-in. No decision was submitted.”', act:'Sign in and continue', live:'assertive', fg:'#4A5568', bd:'#C6CFDD', bg:'#F5F7FA', bstyle:'solid'},
+        {t:'Conflicting change', m:'⚠', own:'Automation', d:'“An automated result arrived for this item after you opened it. Your curated override is retained; compare and decide explicitly.”', act:'Compare both', live:'polite', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8', bstyle:'solid'},
+        {t:'Partial action success', m:'◑', own:'System', d:'“Applied to 9 of 12 items. 3 are locked by run 0817-03 and are listed below — retry just those, or wait for the run.”', act:'Retry the 3', live:'polite', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8', bstyle:'solid'},
+        {t:'Source changed or removed', m:'▣', own:'Source', d:'“The source now returns HTTP 410. The observation, the retained payload and every derived record stay; only re-fetching is impossible.”', act:'Find mirrors', live:'polite', fg:'#4A5568', bd:'#C6CFDD', bg:'#F5F7FA', bstyle:'solid'},
+        {t:'App contract incompatibility', m:'▲', own:'System', d:'“Corpus publishes contract v3.1; the App consumer reports v3.0. Taxonomy migration v4.2 is not understood downstream — 2 blueprints are withheld rather than sent.”', act:'Open contract status', live:'polite', fg:'#8A5A0B', bd:'#E6CE9A', bg:'#FDF6E8', bstyle:'solid'},
+        {t:'No decision-grade result', m:'○', own:'Evidence', d:'“Not enough independent support to publish this pattern: 2 independent sources, cap requires more. The exploratory result stays visible and labelled.”', act:'See what would resolve it', live:'polite', fg:'#5F6980', bd:'#C6CFDD', bg:'#FFFFFF', bstyle:'dashed'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

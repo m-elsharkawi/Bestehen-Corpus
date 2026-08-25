@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EFF2F6;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1560px;margin:0 auto;padding:0 32px 120px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 01</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Foundations, variables, and tokens</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      74 tokens · 8 state families · light mode complete<br>
+      Naming: <span style="color:#14213D;">corpus.&lt;group&gt;.&lt;name&gt;.&lt;role&gt;</span>
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:22px 26px;margin-top:24px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Relationship to the App system</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#3E4A63;margin-top:8px;">Same ink, same green, same Plex family, same 4-base spacing. Three deliberate divergences: the surface family is <strong style="font-weight:600;color:#14213D;">cool Mist-derived</strong> rather than Warm Paper, the display face (Bricolage) is <strong style="font-weight:600;color:#14213D;">not used at all</strong>, and status colour is split into <strong style="font-weight:600;color:#14213D;">eight axis-specific families</strong> instead of one three-step risk scale.</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Why cool surfaces</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#3E4A63;margin-top:8px;">Warm Paper is the learner's study surface and carries the App's welcome. Corpus is an instrument: the operator reads dense evidence for an hour a week, and warm cream under twelve columns of tabular data reads as fatigue. Mist keeps the family resemblance and lets amber and plum stay legible.</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Contrast policy</div>
+        <div style="font-size:13.5px;line-height:1.6;color:#3E4A63;margin-top:8px;">Every text token meets 4.5:1 on its intended surface; graphic tokens meet 3:1. Two hues per family — a <strong style="font-weight:600;color:#14213D;">graphic</strong> hue for dots, bars and borders, and a darker <strong style="font-weight:600;color:#14213D;">text</strong> hue for words. Using a graphic hue as text is a defect, not a preference.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t1" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01.1</div>
+      <div style="font-size:22px;font-weight:600;">Core tokens — surface, text, border, interactive</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px;">
+      <sc-for list="{{ coreGroups }}" as="g" hint-placeholder-count="4">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">{{ g.k }}</div>
+          <div style="font-size:16px;font-weight:600;margin-top:5px;">{{ g.t }}</div>
+          <div style="display:flex;flex-direction:column;gap:0;margin-top:12px;">
+            <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="7">
+              <div style="display:grid;grid-template-columns:22px 1fr 74px;gap:9px;align-items:center;padding:7px 0;border-bottom:1px solid #EDF0F4;">
+                <div style="width:22px;height:22px;border-radius:4px;background:{{ r.v }};border:1px solid #C6CFDD;"></div>
+                <div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ r.n }}</div>
+                  <div style="font-size:11.5px;color:#5F6980;line-height:1.4;">{{ r.u }}</div>
+                </div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;text-align:right;">{{ r.v }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="t2" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01.2</div>
+      <div style="font-size:22px;font-weight:600;">State-token families — one family per truth axis</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:105ch;margin-top:8px;">Eight families. A family owns a hue pair, a marker glyph, and a closed vocabulary. Marker and word are always present, so every state survives greyscale printing, colour-blind vision and a 200% zoom that clips the hue away.</div>
+
+    <div style="display:flex;flex-direction:column;gap:14px;margin-top:18px;">
+      <sc-for list="{{ families }}" as="f" hint-placeholder-count="8">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 22px;border-left:3px solid {{ f.graphic }};">
+          <div style="display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start;">
+            <div>
+              <div style="font-size:16px;font-weight:600;">{{ f.t }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;line-height:1.7;margin-top:6px;">{{ f.token }}</div>
+              <div style="display:flex;gap:8px;margin-top:10px;">
+                <div style="display:flex;align-items:center;gap:6px;border:1px solid #DDE3EC;border-radius:4px;padding:4px 7px;">
+                  <div style="width:12px;height:12px;border-radius:3px;background:{{ f.graphic }};"></div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">{{ f.graphic }}</div>
+                </div>
+                <div style="display:flex;align-items:center;gap:6px;border:1px solid #DDE3EC;border-radius:4px;padding:4px 7px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;font-weight:600;color:{{ f.text }};">Aa</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">{{ f.text }}</div>
+                </div>
+              </div>
+              <div style="font-size:12.5px;color:#5A6478;line-height:1.5;margin-top:10px;">{{ f.rule }}</div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;">
+              <sc-for list="{{ f.chips }}" as="c" hint-placeholder-count="6">
+                <div style="display:inline-flex;align-items:center;gap:7px;border:1px solid {{ c.bd }};background:{{ c.bg }};border-radius:4px;padding:5px 9px 5px 8px;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ c.fg }};width:11px;text-align:center;">{{ c.m }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:{{ c.fg }};">{{ c.l }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="t3" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01.3</div>
+      <div style="font-size:22px;font-weight:600;">Typography</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 420px;gap:16px;margin-top:18px;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:150px 1fr 190px 150px;gap:16px;padding:10px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+          <div>Token</div><div>Specimen</div><div>Spec</div><div>Used for</div>
+        </div>
+        <sc-for list="{{ type }}" as="t" hint-placeholder-count="11">
+          <div style="display:grid;grid-template-columns:150px 1fr 190px 150px;gap:16px;padding:12px 20px;border-bottom:1px solid #EDF0F4;align-items:center;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ t.n }}</div>
+            <div style="font-family:{{ t.fam }};font-size:{{ t.px }};font-weight:{{ t.w }};letter-spacing:{{ t.ls }};text-transform:{{ t.tt }};color:#14213D;line-height:1.3;">{{ t.spec }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">{{ t.meta }}</div>
+            <div style="font-size:12px;color:#5A6478;line-height:1.45;">{{ t.use }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+          <div style="font-size:16px;font-weight:600;">Faces and licences</div>
+          <div style="font-size:13px;color:#3E4A63;line-height:1.6;margin-top:8px;"><strong style="font-weight:600;">IBM Plex Sans</strong> 400/500/600 — all UI text and all numbers. <strong style="font-weight:600;">IBM Plex Mono</strong> 400/500/600 — identifiers, URLs, hashes, versions, eyebrow labels, state chips. Both SIL OFL 1.1, self-hostable, no display face in Corpus.</div>
+          <div style="font-size:13px;color:#3E4A63;line-height:1.6;margin-top:8px;">Chosen for German behaviour: unambiguous <span style="font-family:'IBM Plex Mono',monospace;">Il1 0O</span>, full umlaut and ß coverage at 12px, and true tabular figures so 47 231 columns align without manual width juggling. Fallback stack: Helvetica Neue, Helvetica, Arial.</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5F6980;margin-top:10px;">font-variant-numeric: tabular-nums — set on <span style="color:#14213D;">body</span>, never per component.</div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+          <div style="font-size:16px;font-weight:600;">German and source-text rules</div>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-top:10px;">
+            <sc-for list="{{ germanRules }}" as="g" hint-placeholder-count="7">
+              <div style="display:grid;grid-template-columns:14px 1fr;gap:9px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#2F7D8C;">▪</div>
+                <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ g }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:20px 24px;margin-top:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Long identifier · middle truncation</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-top:8px;border:1px solid #DDE3EC;border-radius:6px;padding:8px 10px;background:#F5F7FA;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:#14213D;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">sha256:4f1c…9ab7</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#1D6F50;border:1px solid #BFD8CB;border-radius:4px;padding:3px 7px;">Copy hash</div>
+          </div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:7px;">Accessible name is “Copy content hash, value four f one c … nine a b seven”. The visible glyph string is never read twice.</div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">German compound · no anywhere-break</div>
+          <div style="width:190px;margin-top:8px;border:1px solid #DDE3EC;border-radius:6px;padding:10px;background:#FFFFFF;" lang="de">
+            <div style="font-size:13px;line-height:1.5;hyphens:auto;color:#14213D;">Sprachbausteine — Wortschatzerkennung und Grammatikanwendung</div>
+          </div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:7px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;">lang="de"</span> plus <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;">hyphens:auto</span>. Provider, section and task names never truncate — the row grows instead.</div>
+        </div>
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Source quotation · inert evidence</div>
+          <div style="margin-top:8px;border:1px solid #DDE3EC;border-left:3px solid #6B7789;border-radius:0 6px 6px 0;padding:10px 12px;background:#F5F7FA;" lang="de">
+            <div style="font-size:13px;line-height:1.55;color:#14213D;">„Lesen Sie die Anzeigen A–F. Welche Anzeige passt zu welcher Person?“</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;margin-top:7px;">DOC-8841 · p.4 · region 2 · quoted, not rendered</div>
+          </div>
+          <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:7px;">German quotation marks preserved. The block is a quotation with a provenance line, never a live rendering of source HTML.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t4" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01.4</div>
+      <div style="font-size:22px;font-weight:600;">Density, grid, and structure</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:20px 22px;">
+        <div style="font-size:16px;font-weight:600;">Two densities, one component</div>
+        <div style="font-size:13px;color:#5A6478;line-height:1.55;margin-top:6px;">Dense is the default in queues and matrices; comfortable is the default in review surfaces where rationale text lives beside the row. The token pair changes row height, cell padding and divider weight — never the type size.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5F6980;">density.dense · 32px</div>
+            <div style="border:1px solid #DDE3EC;border-radius:6px;margin-top:6px;overflow:hidden;">
+              <sc-for list="{{ densityRows }}" as="d" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:1fr 54px;gap:8px;align-items:center;height:32px;padding:0 10px;border-bottom:1px solid #EDF0F4;font-size:13px;">
+                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ d.t }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5A6478;text-align:right;">{{ d.n }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5F6980;">density.comfortable · 40px</div>
+            <div style="border:1px solid #DDE3EC;border-radius:6px;margin-top:6px;overflow:hidden;">
+              <sc-for list="{{ densityRows }}" as="d" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:1fr 54px;gap:8px;align-items:center;height:40px;padding:0 14px;border-bottom:1px solid #EDF0F4;font-size:13px;">
+                  <div style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">{{ d.t }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5A6478;text-align:right;">{{ d.n }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5F6980;line-height:1.8;margin-top:14px;border-top:1px solid #EDF0F4;padding-top:10px;">space scale · 4 8 12 16 20 24 32 40 48 64<br>card padding · 20 dense / 24 comfortable · panel gap 16<br>divider · 1px #EDF0F4 inside cards, #DDE3EC between regions</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:20px 22px;">
+        <div style="font-size:16px;font-weight:600;">1440 × 1024 frame</div>
+        <div style="margin-top:12px;border:1px solid #C6CFDD;border-radius:6px;overflow:hidden;background:#F5F7FA;">
+          <div style="display:flex;height:150px;">
+            <div style="width:88px;background:#14213D;color:#9FB4CE;font-family:'IBM Plex Mono',monospace;font-size:10px;padding:8px;line-height:1.5;">rail<br>240px</div>
+            <div style="flex:1;display:flex;flex-direction:column;">
+              <div style="height:26px;background:#FFFFFF;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10px;color:#5F6980;padding:7px 10px;">header 56px · sticky</div>
+              <div style="flex:1;display:flex;padding:8px;gap:6px;">
+                <sc-for list="{{ cols }}" as="c" hint-placeholder-count="12">
+                  <div style="flex:1;background:rgba(47,74,124,.09);border:1px solid rgba(47,74,124,.18);"></div>
+                </sc-for>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:12px;">
+          <sc-for list="{{ layout }}" as="l" hint-placeholder-count="8">
+            <div style="display:grid;grid-template-columns:190px 1fr;gap:12px;padding:7px 0;border-bottom:1px solid #EDF0F4;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ l.n }}</div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ l.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t5" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01.5</div>
+      <div style="font-size:22px;font-weight:600;">Radii, elevation, focus, selection, and diff</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Radii</div>
+        <div style="display:flex;flex-direction:column;gap:8px;margin-top:10px;">
+          <sc-for list="{{ radii }}" as="r" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:34px;height:24px;background:#EDF0F4;border:1px solid #C6CFDD;border-radius:{{ r.px }};"></div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ r.px }}</div>
+              <div style="font-size:12px;color:#5A6478;">{{ r.u }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:10px;">Nothing above 10px. A pill radius is reserved for filter chips and saved-view tabs.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Elevation</div>
+        <div style="display:flex;flex-direction:column;gap:12px;margin-top:12px;">
+          <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:6px;padding:10px 12px;font-size:12.5px;">e0 · border only — every card, panel, table</div>
+          <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:6px;padding:10px 12px;font-size:12.5px;box-shadow:0 6px 18px rgba(20,33,61,.10);">e1 · drawer, sticky action bar, popover</div>
+          <div style="background:#FFFFFF;border:1px solid #C6CFDD;border-radius:8px;padding:10px 12px;font-size:12.5px;box-shadow:0 18px 44px rgba(20,33,61,.20);">e2 · modal and confirmation only</div>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:12px;">Three levels total. Rows, chips and cards never cast a shadow; hover is a background change.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Focus & selection</div>
+        <div style="display:flex;flex-direction:column;gap:11px;margin-top:12px;">
+          <div style="border:1px solid #DDE3EC;border-radius:4px;padding:8px 10px;font-size:12.5px;outline:2px solid #1D6F50;outline-offset:2px;">Focus ring · 2px #1D6F50 @ 2px offset</div>
+          <div style="background:#14213D;border-radius:4px;padding:8px 10px;font-size:12.5px;color:#E9EEF5;outline:2px solid #4CC492;outline-offset:2px;">On ink · 2px #4CC492</div>
+          <div style="background:#E6EEF9;border-left:3px solid #2F4A7C;border-radius:0 4px 4px 0;padding:8px 10px;font-size:12.5px;">Row selected · tint + left marker</div>
+          <div style="background:#F5F7FA;border:1px dashed #C6CFDD;border-radius:4px;padding:8px 10px;font-size:12.5px;color:#5A6478;">Keyboard cursor row · dashed, no tint</div>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:11px;"><span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;">outline:none</span> without a replacement is a defect. Selection is tint <em>plus</em> marker, never tint alone.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Diff & derivation</div>
+        <div style="display:flex;flex-direction:column;gap:9px;margin-top:12px;font-size:12.5px;">
+          <div style="border:1px solid #DDE3EC;border-radius:4px;padding:8px 10px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">Observed</div>
+            <div style="background:#F5F7FA;border-bottom:2px solid #6B7789;padding:2px 4px;display:inline-block;margin-top:4px;" lang="de">nur werktags</div>
+          </div>
+          <div style="border:1px solid #DDE3EC;border-radius:4px;padding:8px 10px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">Active · curated correction</div>
+            <div style="background:#EAF3EE;border-bottom:2px solid #2A9D6F;padding:2px 4px;display:inline-block;margin-top:4px;" lang="de">nur werktags 8–12 Uhr</div>
+          </div>
+        </div>
+        <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:11px;">Diff is underline weight + label, not red/green fill: the observed value is not “wrong”, it is what the source said.</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="t6" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">01.6</div>
+      <div style="font-size:22px;font-weight:600;">Icons, motion, and visualization</div>
+    </div>
+    <div style="display:grid;grid-template-columns:340px 340px 1fr;gap:16px;margin-top:18px;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-size:16px;font-weight:600;">Icons</div>
+        <div style="font-size:13px;color:#3E4A63;line-height:1.6;margin-top:8px;">A 22-glyph Lucide subset (ISC licence, self-hosted, tree-shaken). 1.75px stroke on a 24 grid; rendered at 16 (inline), 20 (control), 24 (rail). Minimum hit target 32×32 in dense rows, 44×44 on tablet.</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;line-height:1.9;margin-top:10px;border-top:1px solid #EDF0F4;padding-top:10px;">inbox · link · file-text · database · activity<br>shield-alt · scale · copy · git-branch · tag<br>gauge · euro · flask-conical · history · search<br>filter · chevron · alert-triangle · circle-slash<br>lock · download · external-link</div>
+        <div style="font-size:12.5px;color:#5A6478;line-height:1.55;margin-top:10px;">Rules: an icon depicts the noun or verb it stands for; a geometric marker in a chip is a <em>marker</em>, not an icon; status icons always sit beside their word and are <span style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;">aria-hidden</span>; no emoji; nothing celebratory.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-size:16px;font-weight:600;">Motion</div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:10px;">
+          <sc-for list="{{ motion }}" as="m" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:96px 1fr;gap:10px;padding:7px 0;border-bottom:1px solid #EDF0F4;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#14213D;">{{ m.d }}</div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.45;">{{ m.t }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:12.5px;color:#5A6478;line-height:1.55;margin-top:10px;"><strong style="font-weight:600;color:#14213D;">Never animated:</strong> a status change, a publication, a passing gate, a chart on load. <strong style="font-weight:600;color:#14213D;">Reduced motion:</strong> opacity only, ≤80ms; progress remains numeric; the running-job indicator becomes a static dot with the word <em>Running</em>.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-size:16px;font-weight:600;">Visualization rules</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:10px;">
+          <div style="display:flex;flex-direction:column;gap:9px;">
+            <sc-for list="{{ vizRules }}" as="v" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:14px 1fr;gap:8px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#2F4A7C;">▪</div>
+                <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ v }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5F6980;">Series palette · pattern-differentiated</div>
+            <div style="display:flex;flex-direction:column;gap:6px;margin-top:8px;">
+              <sc-for list="{{ series }}" as="s" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:14px 1fr 62px;gap:8px;align-items:center;">
+                  <div style="width:14px;height:14px;background:{{ s.c }};border-radius:2px;"></div>
+                  <div style="font-size:12px;color:#3E4A63;">{{ s.n }}</div>
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;">{{ s.c }}</div>
+                </div>
+              </sc-for>
+            </div>
+            <div style="font-size:12px;color:#5A6478;line-height:1.5;margin-top:9px;">Unknown is never a colour: it is a hatched cell with the word <em>unknown</em> and it never enters a total.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      cols: [1,2,3,4,5,6,7,8,9,10,11,12],
+      coreGroups: [
+        {k:'Group 01', t:'Surface', rows:[
+          {n:'surface.canvas', v:'#EFF2F6', u:'page behind every card'},
+          {n:'surface.card', v:'#FFFFFF', u:'cards, tables, panels'},
+          {n:'surface.sunken', v:'#F5F7FA', u:'table headers, source quotes'},
+          {n:'surface.hover', v:'#F2F5F9', u:'row hover'},
+          {n:'surface.selected', v:'#E6EEF9', u:'selected row / active view'},
+          {n:'surface.ink', v:'#14213D', u:'rail, dark panels'},
+          {n:'surface.ink.raised', v:'#1C2B4A', u:'rail active item'}
+        ]},
+        {k:'Group 02', t:'Text', rows:[
+          {n:'text.primary', v:'#14213D', u:'values, titles — 12.6:1'},
+          {n:'text.secondary', v:'#3E4A63', u:'prose, descriptions — 8.6:1'},
+          {n:'text.muted', v:'#5A6478', u:'labels, meta — 5.1:1'},
+          {n:'text.faint', v:'#5F6980', u:'identifiers, counts — 4.6:1'},
+          {n:'text.on.ink', v:'#E9EEF5', u:'text on surface.ink'},
+          {n:'text.on.ink.muted', v:'#9FB4CE', u:'rail labels — 5.9:1'},
+          {n:'text.inverse.faint', v:'#8FA6C4', u:'rail eyebrows — 4.7:1'}
+        ]},
+        {k:'Group 03', t:'Border & structure', rows:[
+          {n:'border.subtle', v:'#EDF0F4', u:'row dividers inside a card'},
+          {n:'border.default', v:'#DDE3EC', u:'card and control edges'},
+          {n:'border.strong', v:'#C6CFDD', u:'region edges, modal edge'},
+          {n:'border.ink', v:'#2A3A5C', u:'dividers on surface.ink'},
+          {n:'border.dashed', v:'#C6CFDD', u:'empty / unknown containers'},
+          {n:'hatch.unknown', v:'#DCE3EB', u:'unknown matrix cells'},
+          {n:'sticky.edge', v:'#C6CFDD', u:'sticky region hairline'}
+        ]},
+        {k:'Group 04', t:'Interactive & focus', rows:[
+          {n:'action.primary', v:'#1D6F50', u:'primary button fill'},
+          {n:'action.primary.hover', v:'#185C42', u:'hover / active'},
+          {n:'action.secondary', v:'#FFFFFF', u:'secondary fill, ink border'},
+          {n:'action.quiet', v:'#F2F5F9', u:'tertiary / icon button'},
+          {n:'action.destructive', v:'#A83F3F', u:'R3 confirm only'},
+          {n:'focus.ring', v:'#1D6F50', u:'2px @ 2px offset'},
+          {n:'focus.ring.ink', v:'#4CC492', u:'focus on surface.ink'}
+        ]}
+      ],
+      families: [
+        {t:'Pipeline state', token:'state.pipeline.{graphic,text,bg}', graphic:'#6B7789', text:'#4A5568', rule:'Neutral by design. Where a record sits in the lifecycle is never itself good or bad news.', chips:[
+          {m:'▣', l:'Queued', fg:'#4A5568', bg:'#F5F7FA', bd:'#DDE3EC'},
+          {m:'◐', l:'Running', fg:'#4A5568', bg:'#F5F7FA', bd:'#DDE3EC'},
+          {m:'◑', l:'Partial success', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD'},
+          {m:'▣', l:'Superseded', fg:'#4A5568', bg:'#F5F7FA', bd:'#DDE3EC'},
+          {m:'○', l:'Not run', fg:'#5F6980', bg:'#FFFFFF', bd:'#C6CFDD'},
+          {m:'◌', l:'Stale', fg:'#4A5568', bg:'#FFFFFF', bd:'#C6CFDD'}
+        ]},
+        {t:'Authenticity & confidence', token:'state.confidence.{tier,graphic,text}', graphic:'#2F4A7C', text:'#24396B', rule:'Tier letter is the marker. A capped or inherited value carries a superscript rule; unknown never scores as zero.', chips:[
+          {m:'A', l:'Anchor · 88', fg:'#24396B', bg:'#E6EEF9', bd:'#B9CBE6'},
+          {m:'B', l:'Trusted · 74', fg:'#24396B', bg:'#E6EEF9', bd:'#B9CBE6'},
+          {m:'C', l:'Conditional · 61', fg:'#24396B', bg:'#F0F4FA', bd:'#C6CFDD'},
+          {m:'D', l:'Weak · 38', fg:'#24396B', bg:'#F5F7FA', bd:'#C6CFDD'},
+          {m:'◐', l:'Capped by local defect', fg:'#24396B', bg:'#F0F4FA', bd:'#B9CBE6'},
+          {m:'△', l:'Disputed', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A'},
+          {m:'○', l:'Unknown dimension', fg:'#5F6980', bg:'#FFFFFF', bd:'#C6CFDD'},
+          {m:'—', l:'Not applicable', fg:'#5F6980', bg:'#FFFFFF', bd:'#DDE3EC'},
+          {m:'✕', l:'Quarantined', fg:'#8E2F2F', bg:'#FBEDED', bd:'#E2B6B6'}
+        ]},
+        {t:'Rights & usage', token:'state.rights.{graphic,text}', graphic:'#8A6AA0', text:'#6A4A7C', rule:'Plum is only ever rights. PROHIBITED borrows the security red because it is a block, not a shade of permission.', chips:[
+          {m:'§', l:'Reusable', fg:'#6A4A7C', bg:'#F4EFF7', bd:'#D8C7E2'},
+          {m:'§', l:'Reusable · conditions', fg:'#6A4A7C', bg:'#F4EFF7', bd:'#D8C7E2'},
+          {m:'§', l:'Reference only', fg:'#6A4A7C', bg:'#FAF7FC', bd:'#D8C7E2'},
+          {m:'?', l:'Unknown · review required', fg:'#6A4A7C', bg:'#FFFFFF', bd:'#C6B0D2'},
+          {m:'✕', l:'Prohibited', fg:'#8E2F2F', bg:'#FBEDED', bd:'#E2B6B6'},
+          {m:'⛔', l:'Takedown hold', fg:'#8E2F2F', bg:'#FBEDED', bd:'#D18E8E'}
+        ]},
+        {t:'Difficulty & relevance', token:'state.signal.{graphic,text}', graphic:'#2F7D8C', text:'#26697A', rule:'Teal marks estimates, never verdicts. Every value ships with its uncertainty and its derivation version.', chips:[
+          {m:'L', l:'Linguistic 58 · moderate', fg:'#26697A', bg:'#EAF4F6', bd:'#BCDAE0'},
+          {m:'R', l:'Reasoning 71 · high', fg:'#26697A', bg:'#EAF4F6', bd:'#BCDAE0'},
+          {m:'A', l:'Audio — N/A', fg:'#5F6980', bg:'#FFFFFF', bd:'#DDE3EC'},
+          {m:'◇', l:'TELC relevance high · ±14', fg:'#26697A', bg:'#EAF4F6', bd:'#BCDAE0'},
+          {m:'◇', l:'GB1 moderate · wide range', fg:'#26697A', bg:'#F3F8F9', bd:'#C6CFDD'},
+          {m:'○', l:'CEFR A2/B1 mixed', fg:'#5F6980', bg:'#FFFFFF', bd:'#C6CFDD'}
+        ]},
+        {t:'QA severity & readiness', token:'state.qa.{q0,q1,q2,q3}', graphic:'#D89A2A', text:'#8A5A0B', rule:'Amber is attention; Q0 escalates into the destructive red because it can teach or score wrongly.', chips:[
+          {m:'✕', l:'Q0 correctness', fg:'#A83F3F', bg:'#FBEDED', bd:'#E2B6B6'},
+          {m:'▲', l:'Q1 major', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A'},
+          {m:'△', l:'Q2 minor', fg:'#8A5A0B', bg:'#FEFAF1', bd:'#EEDFBB'},
+          {m:'·', l:'Q3 advisory', fg:'#4A5568', bg:'#F5F7FA', bd:'#DDE3EC'},
+          {m:'◐', l:'Incomplete', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A'},
+          {m:'■', l:'Blocked dependency', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD'},
+          {m:'○', l:'Gate not run', fg:'#5F6980', bg:'#FFFFFF', bd:'#C6CFDD'}
+        ]},
+        {t:'Identity & independence', token:'state.identity.{graphic,text}', graphic:'#2A9D6F', text:'#1D6F50', rule:'Green here means “counts once, honestly” — never “trusted” and never “published”.', chips:[
+          {m:'⧉', l:'Independent', fg:'#1D6F50', bg:'#EAF3EE', bd:'#BFD8CB'},
+          {m:'⧉', l:'Exact copy · 0 evidence', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB'},
+          {m:'⧉', l:'Reformatted · 0 evidence', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB'},
+          {m:'⤳', l:'Derivative · partial', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB'},
+          {m:'◱', l:'Fragment of', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB'},
+          {m:'≈', l:'Related variant', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB'},
+          {m:'?', l:'Unresolved dependency', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A'}
+        ]},
+        {t:'Capability eligibility', token:'state.eligibility.{normal,limited,held,blocked}', graphic:'#2A9D6F', text:'#1D6F50', rule:'Always per capability, always six cells, never one badge. A matrix cell carries its letter code so the grid reads without colour.', chips:[
+          {m:'E', l:'Eligible · normal', fg:'#1D6F50', bg:'#EAF3EE', bd:'#BFD8CB'},
+          {m:'L', l:'Eligible · limited', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A'},
+          {m:'P', l:'Provisional', fg:'#8A5A0B', bg:'#FEFAF1', bd:'#EEDFBB'},
+          {m:'H', l:'Held for review', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD'},
+          {m:'B', l:'Blocked', fg:'#A83F3F', bg:'#FBEDED', bd:'#E2B6B6'},
+          {m:'—', l:'Not applicable', fg:'#5F6980', bg:'#FFFFFF', bd:'#DDE3EC'},
+          {m:'○', l:'Never assessed', fg:'#5F6980', bg:'#FFFFFF', bd:'#C6CFDD'}
+        ]},
+        {t:'Security & governance', token:'state.security.{graphic,text} · state.governance.*', graphic:'#8E2F2F', text:'#8E2F2F', rule:'The only family that may use a hatched fill. A security state never renders as an ordinary extraction failure, and no R0–R2 control can clear it.', chips:[
+          {m:'⛔', l:'Security hold', fg:'#8E2F2F', bg:'#FBEDED', bd:'#D18E8E'},
+          {m:'⛔', l:'Hard block · fingerprint', fg:'#8E2F2F', bg:'#FBEDED', bd:'#D18E8E'},
+          {m:'⚠', l:'Unsafe payload', fg:'#8E2F2F', bg:'#FBEDED', bd:'#D18E8E'},
+          {m:'▤', l:'Unsupported · inspected as data', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD'},
+          {m:'■', l:'Owner exclusion · reversible', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD'},
+          {m:'§', l:'Legal review required', fg:'#6A4A7C', bg:'#F4EFF7', bd:'#D8C7E2'}
+        ]}
+      ],
+      type: [
+        {n:'type.page', spec:'Corpus Health', fam:"'IBM Plex Sans'", px:'34px', w:'600', ls:'-.02em', tt:'none', meta:'34 / 40 / 600 / −2%', use:'Document titles only'},
+        {n:'type.h1', spec:'Duplicate cluster CL-118', fam:"'IBM Plex Sans'", px:'24px', w:'600', ls:'-.01em', tt:'none', meta:'24 / 30 / 600', use:'Screen title, record identity'},
+        {n:'type.h2', spec:'Capability eligibility', fam:"'IBM Plex Sans'", px:'20px', w:'600', ls:'0', tt:'none', meta:'20 / 26 / 600', use:'Section heading'},
+        {n:'type.h3', spec:'Answer-key consistency', fam:"'IBM Plex Sans'", px:'16px', w:'600', ls:'0', tt:'none', meta:'16 / 22 / 600', use:'Panel and card heading'},
+        {n:'type.h4', spec:'Affected downstream outputs', fam:"'IBM Plex Sans'", px:'14px', w:'600', ls:'0', tt:'none', meta:'14 / 20 / 600', use:'Sub-panel, field group'},
+        {n:'type.body', spec:'Correctness use is held for this item only.', fam:"'IBM Plex Sans'", px:'14px', w:'400', ls:'0', tt:'none', meta:'14 / 21.7 / 400', use:'Prose, rationale, help'},
+        {n:'type.body.sm', spec:'Recommended: keep partial extraction, mark key unknown.', fam:"'IBM Plex Sans'", px:'13px', w:'400', ls:'0', tt:'none', meta:'13 / 19.5 / 400', use:'Dense prose in panels'},
+        {n:'type.cell', spec:'Hörverstehen Teil 2 · 12 Items', fam:"'IBM Plex Sans'", px:'13px', w:'500', ls:'0', tt:'none', meta:'13 / 18 / 500', use:'Table cell value'},
+        {n:'type.num', spec:'47 231 · 98.4% · €2.60', fam:"'IBM Plex Sans'", px:'13px', w:'500', ls:'0', tt:'none', meta:'13 / 18 / 500 tabular', use:'All numeric cells'},
+        {n:'type.mono', spec:'EX-2291 · run 2026-08-17-03', fam:"'IBM Plex Mono'", px:'12.5px', w:'400', ls:'0', tt:'none', meta:'12.5 / 18 / 400', use:'IDs, URLs, hashes, versions'},
+        {n:'type.label', spec:'Affected scope', fam:"'IBM Plex Mono'", px:'11.5px', w:'500', ls:'.09em', tt:'uppercase', meta:'11.5 / 16 / 500 / +9%', use:'Eyebrow labels, chip text'},
+        {n:'type.micro', spec:'Computed 2026-08-17 · taxonomy v4.2', fam:"'IBM Plex Sans'", px:'12px', w:'400', ls:'0', tt:'none', meta:'12 / 17 / 400 — floor', use:'Provenance lines. Nothing smaller exists.'}
+      ],
+      germanRules: [
+        'Every source-derived string carries lang="de"; operator chrome stays lang="en". Mixed rows label the language switch for screen readers.',
+        'hyphens:auto on German content. overflow-wrap:anywhere is forbidden on German — it breaks compounds at meaningless points.',
+        'Provider, section and task names never truncate. If the row is too narrow the row grows; a two-line cell is acceptable, a lost umlaut is not.',
+        'URLs, hashes and IDs truncate in the middle, keep a full-value title, and pair with a copy button whose accessible name contains the value once.',
+        'Numbers, dates, prices, times, negation and option cardinality are meaning-critical: never normalised away in a preview, never abbreviated in a diff.',
+        'Source quotations render as bordered quotations with a provenance line, in the source language, with original quotation marks and orthography.',
+        'At 200% zoom nothing horizontally scrolls except a table body whose header stays pinned; action bars reflow above the content rather than off-screen.'
+      ],
+      densityRows: [
+        {t:'EX-2291 · telc Deutsch B1 Modelltest 3', n:'Q0 · 2'},
+        {t:'DOC-8841 · Hörverstehen Teil 2 Antwortbogen', n:'Q1 · 1'},
+        {t:'CL-118 · ÖSD Modellsatz mirror family', n:'4 obs'},
+        {t:'ASSET-7731 · hoerverstehen-teil2.mp3', n:'held'}
+      ],
+      layout: [
+        {n:'rail', v:'240px fixed, surface.ink, five destinations + job tray. Collapses to 64px at ≤1320.'},
+        {n:'header', v:'56px sticky: breadcrumb, global search, environment tag, background-job tray, session.'},
+        {n:'content field', v:'1200px = 12 columns × 74px + 24px gutters, 24px page padding, no max-width cap on tables.'},
+        {n:'queue + detail', v:'Split pane 320 / fluid. Queue keeps position, filters and scroll when a record opens.'},
+        {n:'evidence rail', v:'380px right pane on review surfaces; becomes an overlay drawer below 1320.'},
+        {n:'drawer', v:'560px right overlay, e1, focus-trapped, Esc closes, trigger regains focus.'},
+        {n:'modal', v:'640px R1–R2, 720px R3 with the scope table scrollable inside a fixed footer.'},
+        {n:'long-form measure', v:'78ch maximum for rationale, findings and source quotations.'}
+      ],
+      radii: [
+        {px:'4px', u:'chips, buttons, cells, badges'},
+        {px:'6px', u:'inputs, selects, inline panels'},
+        {px:'8px', u:'cards, tables, panels'},
+        {px:'10px', u:'modals and drawers'},
+        {px:'999px', u:'filter chips, saved-view tabs'}
+      ],
+      motion: [
+        {d:'0ms', t:'Any change to a status, tier, eligibility or QA finding — it appears, it does not animate.'},
+        {d:'100ms', t:'Hover, focus, selection, disclosure chevron rotation.'},
+        {d:'140ms', t:'Row expand, inline panel open, filter chip add/remove.'},
+        {d:'180ms', t:'Drawer slide from the right; content already painted underneath.'},
+        {d:'200ms', t:'Modal fade + 4px rise. R3 modals do not rise — they appear instantly.'},
+        {d:'≥1s', t:'Only the running-job indicator: a 1.6s two-step opacity pulse, replaced by a static dot under reduced motion.'}
+      ],
+      vizRules: [
+        'Bars, dot plots and small multiples only. No pie, no donut, no gauge, no aggregate speedometer — a single number cannot represent a vector.',
+        'Every graphic is preceded in the DOM by a sentence stating its finding, and followed by a real table behind “Show as table”.',
+        'Series are labelled directly on the graphic; the legend is a fallback, not the key. No series is identified by colour alone.',
+        'Confidence and independence render as a range with the point marked, never as a bare point. A range crossing a gate line is annotated with the gate.',
+        'Distribution charts print their denominator and its coverage next to the title; a denominator below the sufficiency threshold suppresses the chart and shows the reason.',
+        'Trend lines need at least four comparable points; three or fewer render as a table. Nothing is extrapolated forward.',
+        'Similarity and lineage graphs always ship a keyboard-navigable list view with the same relationships and the same evidence links.'
+      ],
+      series: [
+        {n:'Series 1 · primary', c:'#2F4A7C'},
+        {n:'Series 2', c:'#2F7D8C'},
+        {n:'Series 3', c:'#8A6AA0'},
+        {n:'Series 4', c:'#D89A2A'},
+        {n:'Series 5', c:'#1D6F50'},
+        {n:'Series 6 · other', c:'#6B7789'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

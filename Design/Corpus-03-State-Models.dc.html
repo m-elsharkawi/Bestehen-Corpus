@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EFF2F6;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1560px;margin:0 auto;padding:0 32px 120px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 03</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Data, governance, and state models</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      UI state contracts · not schemas, not endpoints<br>
+      Every state below has a designed visual on pages 02, 04, 05
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:20px 24px;margin-top:24px;">
+    <div style="font-size:14px;color:#3E4A63;line-height:1.65;max-width:120ch;">This page is the contract between the design and whatever implements it. It states what the UI must be able to <em>say</em> about a record — which values exist, which combinations are legal, which transitions the interface offers, and what each state looks like. It deliberately says nothing about storage, services, queues or model providers.</div>
+  </div>
+
+  <div id="m1" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.1</div>
+      <div style="font-size:22px;font-weight:600;">Canonical hierarchy and the ten inspectable scopes</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:105ch;margin-top:8px;">One Record Detail framework serves all ten. Scope decides which panels appear, which actions are offered, and — critically — the smallest unit an action may touch.</div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:220px 130px 1fr 1fr;gap:16px;padding:10px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>Scope</div><div>Identity</div><div>Panels shown in Record Detail</div><div>Smallest action available here</div>
+      </div>
+      <sc-for list="{{ scopes }}" as="s" hint-placeholder-count="10">
+        <div style="display:grid;grid-template-columns:220px 130px 1fr 1fr;gap:16px;padding:11px 20px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ s.bg }};">
+          <div style="display:flex;align-items:baseline;gap:8px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">{{ s.lvl }}</div>
+            <div>
+              <div style="font-size:13px;font-weight:600;">{{ s.t }}</div>
+              <div style="font-size:12px;color:#5A6478;line-height:1.4;margin-top:2px;">{{ s.d }}</div>
+            </div>
+          </div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;">{{ s.id }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ s.panels }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ s.act }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;">
+      <sc-for list="{{ localityRules }}" as="l" hint-placeholder-count="3">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:16px 18px;border-left:3px solid #2F4A7C;">
+          <div style="font-size:14px;font-weight:600;">{{ l.t }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:6px;">{{ l.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="m2" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.2</div>
+      <div style="font-size:22px;font-weight:600;">State model tables</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;margin-top:16px;">
+      <sc-for list="{{ models }}" as="m" hint-placeholder-count="8">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+          <div style="display:grid;grid-template-columns:1fr 380px;gap:24px;padding:16px 20px;border-bottom:1px solid #DDE3EC;background:#F5F7FA;align-items:start;">
+            <div>
+              <div style="display:flex;align-items:baseline;gap:10px;">
+                <div style="font-size:18px;font-weight:600;">{{ m.t }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;">{{ m.token }}</div>
+              </div>
+              <div style="font-size:13px;color:#3E4A63;line-height:1.55;margin-top:5px;max-width:90ch;">{{ m.d }}</div>
+            </div>
+            <div style="border-left:1px solid #DDE3EC;padding-left:20px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">Invariant</div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:5px;">{{ m.inv }}</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:180px 250px 1fr 1fr;gap:16px;padding:9px 20px;background:#FFFFFF;border-bottom:1px solid #EDF0F4;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#5F6980;">
+            <div>Value</div><div>Meaning</div><div>Visual treatment</div><div>Legal transitions offered in the UI</div>
+          </div>
+          <sc-for list="{{ m.rows }}" as="r" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:180px 250px 1fr 1fr;gap:16px;padding:9px 20px;border-bottom:1px solid #EDF0F4;align-items:start;">
+              <div style="display:flex;align-items:center;gap:7px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ r.fg }};width:11px;text-align:center;">{{ r.m }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.03em;color:{{ r.fg }};">{{ r.v }}</div>
+              </div>
+              <div style="font-size:12.5px;color:#14213D;line-height:1.45;">{{ r.mean }}</div>
+              <div style="font-size:12px;color:#5A6478;line-height:1.45;">{{ r.vis }}</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.45;">{{ r.tr }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="m3" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.3</div>
+      <div style="font-size:22px;font-weight:600;">Uncertainty vocabulary — one word, one meaning, everywhere</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:190px 1fr 1fr 220px;gap:16px;padding:10px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>Word</div><div>Means exactly</div><div>Rendering rule</div><div>Never confused with</div>
+      </div>
+      <sc-for list="{{ uncertainty }}" as="u" hint-placeholder-count="8">
+        <div style="display:grid;grid-template-columns:190px 1fr 1fr 220px;gap:16px;padding:11px 20px;border-bottom:1px solid #EDF0F4;align-items:start;">
+          <div style="display:flex;align-items:center;gap:8px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ u.fg }};">{{ u.m }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:{{ u.fg }};">{{ u.w }}</div>
+          </div>
+          <div style="font-size:12.5px;color:#14213D;line-height:1.5;">{{ u.mean }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ u.render }}</div>
+          <div style="font-size:12.5px;color:#8A5A0B;line-height:1.5;">{{ u.not }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="m4" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.4</div>
+      <div style="font-size:22px;font-weight:600;">Capability eligibility — the six gates</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:105ch;margin-top:8px;">Each capability reads a different subset of the axes. This table is why a universal “production ready” switch cannot exist: the inputs differ, so the answers differ.</div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;gap:16px;padding:10px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>Capability</div><div>Reads which axes</div><div>Normal requires</div><div>Limited / held / blocked when</div>
+      </div>
+      <sc-for list="{{ caps }}" as="c" hint-placeholder-count="6">
+        <div style="display:grid;grid-template-columns:200px 1fr 1fr 1fr;gap:16px;padding:12px 20px;border-bottom:1px solid #EDF0F4;align-items:start;">
+          <div>
+            <div style="font-size:13px;font-weight:600;">{{ c.t }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5F6980;margin-top:2px;">{{ c.k }}</div>
+          </div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ c.axes }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ c.normal }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ c.limited }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#14213D;color:#E9EEF5;border-radius:8px;padding:20px 24px;margin-top:16px;">
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+        <sc-for list="{{ eligRules }}" as="e" hint-placeholder-count="4">
+          <div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#8FA6C4;">{{ e.k }}</div>
+            <div style="font-size:13px;line-height:1.6;color:#C3CEDE;margin-top:6px;">{{ e.d }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div id="m5" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.5</div>
+      <div style="font-size:22px;font-weight:600;">Governance model — allow, block, exclude, take down</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:16px;">
+      <sc-for list="{{ gov }}" as="g" hint-placeholder-count="5">
+        <div style="background:#FFFFFF;border:1px solid {{ g.bd }};border-radius:8px;overflow:hidden;">
+          <div style="padding:13px 16px;background:{{ g.bg }};border-bottom:1px solid {{ g.bd }};">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:{{ g.fg }};">{{ g.m }}</div>
+              <div style="font-size:14.5px;font-weight:600;color:{{ g.fg }};">{{ g.t }}</div>
+            </div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ g.fg }};margin-top:4px;">{{ g.tier }}</div>
+          </div>
+          <div style="padding:14px 16px;">
+            <div style="display:flex;flex-direction:column;gap:0;">
+              <sc-for list="{{ g.rows }}" as="r" hint-placeholder-count="5">
+                <div style="padding:7px 0;border-bottom:1px solid #EDF0F4;">
+                  <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">{{ r.k }}</div>
+                  <div style="font-size:12.5px;color:#3E4A63;line-height:1.45;margin-top:3px;">{{ r.v }}</div>
+                </div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #E2B6B6;border-radius:8px;padding:18px 22px;margin-top:16px;border-left:3px solid #B64B4B;">
+      <div style="font-size:15px;font-weight:600;color:#8E2F2F;">The four sentences the governance UI must never let a reader believe</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px 32px;margin-top:10px;">
+        <sc-for list="{{ govNever }}" as="n" hint-placeholder-count="4">
+          <div style="display:grid;grid-template-columns:16px 1fr;gap:9px;padding:6px 0;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#8E2F2F;">✕</div>
+            <div style="font-size:13px;color:#3E4A63;line-height:1.5;">{{ n }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div id="m6" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.6</div>
+      <div style="font-size:22px;font-weight:600;">Duplicate and independence model</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 400px;gap:16px;margin-top:16px;align-items:start;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:170px 1fr 130px 130px;gap:14px;padding:10px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+          <div>Relationship</div><div>Test the operator applies</div><div>Lexical / grammar</div><div>Acoustic / visual</div>
+        </div>
+        <sc-for list="{{ dupClasses }}" as="d" hint-placeholder-count="8">
+          <div style="display:grid;grid-template-columns:170px 1fr 130px 130px;gap:14px;padding:10px 20px;border-bottom:1px solid #EDF0F4;align-items:start;">
+            <div style="display:flex;align-items:center;gap:7px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ d.fg }};">{{ d.m }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ d.fg }};">{{ d.t }}</div>
+            </div>
+            <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ d.test }}</div>
+            <div style="font-size:12px;color:{{ d.lfg }};line-height:1.45;">{{ d.lex }}</div>
+            <div style="font-size:12px;color:{{ d.afg }};line-height:1.45;">{{ d.ac }}</div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+          <div style="font-size:15px;font-weight:600;">Three decisions, never one</div>
+          <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+            <sc-for list="{{ dupDecisions }}" as="d" hint-placeholder-count="3">
+              <div style="border:1px solid #DDE3EC;border-radius:6px;padding:11px 13px;">
+                <div style="font-size:13px;font-weight:600;">{{ d.t }}</div>
+                <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:4px;">{{ d.d }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:#5F6980;margin-top:6px;">{{ d.k }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div style="background:#FFFFFF;border:1px solid #BFD8CB;border-radius:8px;padding:18px 20px;border-left:3px solid #2A9D6F;">
+          <div style="font-size:15px;font-weight:600;">Neutrality guarantees</div>
+          <div style="display:flex;flex-direction:column;gap:8px;margin-top:9px;">
+            <sc-for list="{{ dupNeutral }}" as="n" hint-placeholder-count="4">
+              <div style="display:grid;grid-template-columns:14px 1fr;gap:9px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#1D6F50;">▪</div>
+                <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ n }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="m7" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.7</div>
+      <div style="font-size:22px;font-weight:600;">Audit event contract</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;align-items:start;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-size:15px;font-weight:600;">Every entry carries these fields</div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:10px;">
+          <sc-for list="{{ auditFields }}" as="a" hint-placeholder-count="11">
+            <div style="display:grid;grid-template-columns:170px 1fr;gap:12px;padding:7px 0;border-bottom:1px solid #EDF0F4;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#14213D;">{{ a.k }}</div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.45;">{{ a.v }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:12.5px;color:#5A6478;line-height:1.55;margin-top:11px;">Append-only. There is no edit and no delete. A mistake is corrected by a new event that supersedes the previous one and says so.</div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-size:15px;font-weight:600;">Actor classes and how they read</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:10px;">
+          <sc-for list="{{ actors }}" as="a" hint-placeholder-count="5">
+            <div style="border:1px solid #DDE3EC;border-left:3px solid {{ a.c }};border-radius:0 6px 6px 0;padding:11px 13px;">
+              <div style="display:flex;align-items:center;gap:9px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.05em;text-transform:uppercase;color:{{ a.c }};">{{ a.k }}</div>
+                <div style="font-size:13px;font-weight:600;">{{ a.t }}</div>
+              </div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:5px;">{{ a.d }}</div>
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#5F6980;line-height:1.5;margin-top:6px;">{{ a.ex }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="m8" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">03.8</div>
+      <div style="font-size:22px;font-weight:600;">Change-impact model — what a decision propagates</div>
+    </div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:230px 1fr 1fr 200px;gap:16px;padding:10px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>Change</div><div>Invalidates</div><div>Leaves untouched</div><div>App-facing effect</div>
+      </div>
+      <sc-for list="{{ impact }}" as="i" hint-placeholder-count="9">
+        <div style="display:grid;grid-template-columns:230px 1fr 1fr 200px;gap:16px;padding:11px 20px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ i.bg }};">
+          <div style="font-size:13px;font-weight:600;line-height:1.4;">{{ i.t }}</div>
+          <div style="font-size:12.5px;color:#8A5A0B;line-height:1.5;">{{ i.inv }}</div>
+          <div style="font-size:12.5px;color:#1D6F50;line-height:1.5;">{{ i.keep }}</div>
+          <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;">{{ i.app }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:13px;color:#5A6478;line-height:1.6;max-width:120ch;margin-top:12px;">The distinction in the middle two columns is the whole point of this table. A rights change is not a trust change; a taxonomy migration is not a correctness failure; a takedown removes expression without erasing the fact that the expression was once observed. Every confirmation dialog on page 05 renders its row of this table verbatim before the operator commits.</div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G='#1D6F50', A='#8A5A0B', R='#A83F3F', S='#4A5568', F='#5F6980', N='#24396B', P='#6A4A7C', T='#26697A';
+    return {
+      scopes: [
+        {lvl:'L0', t:'Source Observation', d:'A place where evidence was seen', id:'SRC-nnnn', panels:'Provenance · access history · rights evidence · mirrors · governance · discovered assets · downstream records', act:'Allow, exclude, block, take down — at host, path or fingerprint scope', bg:'#FFFFFF'},
+        {lvl:'L1', t:'Document / Package', d:'One retrieved artefact', id:'DOC-nnnn', panels:'All L0 panels plus format, preflight, parse result, completeness, run history', act:'Reprocess from a stage · mark incomplete · quarantine the document', bg:'#FAFBFD'},
+        {lvl:'L2', t:'Exam / Model test', d:'A coherent exam instance', id:'EX-nnnn', panels:'Identity · confidence · rights · QA roll-up · eligibility · lineage · taxonomy roll-up · audit', act:'Quarantine, restore, publish or limit a capability at exam scope', bg:'#FFFFFF'},
+        {lvl:'L3', t:'Section / Part', d:'Hörverstehen, Leseverstehen, Sprachbausteine, Schreiben, Sprechen', id:'SEC-nnnn', panels:'Structure · completeness · QA by task · eligibility · difficulty profile', act:'Reclassify the section · flag incomplete · limit a capability here', bg:'#FAFBFD'},
+        {lvl:'L4', t:'Task', d:'A task with its instruction and format', id:'TASK-nnnn', panels:'Observed vs active · format classification · taxonomy · difficulty · QA · assets · lineage', act:'Reclassify format · remap taxonomy · correct instruction · hold a capability', bg:'#FFFFFF'},
+        {lvl:'L5', t:'Item', d:'A single scorable question', id:'ITEM-nnnnn', panels:'Stem · options · answer · scoring · confidence · QA findings · taxonomy · difficulty · lineage', act:'Correct the stem, options or key · mark key unknown or disputed · quarantine this item', bg:'#FAFBFD'},
+        {lvl:'L5a', t:'Stimulus', d:'Shared text, audio or image an item depends on', id:'STIM-nnnn', panels:'Content · sanitized preview · rights (own scope) · dependent items · media quality', act:'Replace derivation · mark unusable · suppress under rights, without touching the items', bg:'#FFFFFF'},
+        {lvl:'L5b', t:'Option', d:'One answer choice', id:'OPT-nnnnn', panels:'Observed vs active text · distractor role · plausibility evidence · QA', act:'Correct option text · reclassify distractor role', bg:'#FAFBFD'},
+        {lvl:'L5c', t:'Answer / Scoring', d:'The key and how it scores', id:'KEY-nnnnn', panels:'Key assertion(s) · source of each · agreement · consistency gate · dispute state', act:'Accept a key · mark unknown · mark disputed · record a competing assertion', bg:'#FFFFFF'},
+        {lvl:'L6', t:'Asset', d:'Audio, image or file bound to a record', id:'ASSET-nnnn', panels:'Technical quality · ASR/OCR result · rights override · security state · dependent records', act:'Suppress the asset · re-run ASR/OCR · mark unusable — leaving the task eligible', bg:'#FAFBFD'}
+      ],
+      localityRules: [
+        {t:'Defects travel up as counts, never as verdicts', d:'An exam with two Q0 items shows “2 Q0 findings in 58 items” and keeps every unaffected capability eligible. It never shows a red exam badge.'},
+        {t:'Trust travels down as an inherited value, marked as inherited', d:'A child may inherit its parent tier, but the chip says “inherited”. A child may cap below its parent; it may never exceed it without its own local evidence.'},
+        {t:'Rights travel down and can only tighten', d:'An asset override may be stricter than its document. It may never be looser. The panel shows both the source scope and the override, side by side.'}
+      ],
+      models: [
+        {t:'Pipeline state', token:'pipeline.state', d:'Where a unit sits in the 13-stage conceptual lifecycle. Neutral by design — position is not quality.', inv:'A stage is complete, partially complete, or not complete. “Partial” always names its scope counts and its affected capability; it is never rounded up to done or down to failed.', rows:[
+          {v:'QUEUED', m:'▣', fg:S, mean:'Accepted, not started', vis:'Slate chip, no motion', tr:'→ RUNNING · → deferred by budget · → cancelled by operator'},
+          {v:'RUNNING', m:'◐', fg:S, mean:'In progress now', vis:'Slate chip with a 1.6s pulse; a static dot under reduced motion', tr:'→ COMPLETE · → PARTIAL · → FAILED · → BLOCKED'},
+          {v:'COMPLETE', m:'●', fg:G, mean:'Every unit in scope succeeded', vis:'Green filled dot + count', tr:'→ SUPERSEDED by a later run · → STALE on a dependency change'},
+          {v:'PARTIAL', m:'◑', fg:A, mean:'Some units succeeded; the rest have named reasons', vis:'Amber half dot + “8 of 12”', tr:'→ scoped reprocess of the remainder · → accept as-is with capability limits'},
+          {v:'FAILED', m:'✕', fg:R, mean:'No usable output at this stage', vis:'Red mark + normalized failure category', tr:'→ retry (if the input, method or decision changed) · → review · → mark source dead'},
+          {v:'BLOCKED', m:'■', fg:S, mean:'A dependency, budget or governance gate stops it', vis:'Slate square + the blocking reason as a link', tr:'→ resolve the dependency · → approve the cost · → operator decision'},
+          {v:'STALE', m:'◌', fg:S, mean:'Computed before a change you made', vis:'Hollow dot + the cause: “stale since taxonomy v4.2”', tr:'→ recompute (proposed, never automatic) · → accept as historical'},
+          {v:'SUPERSEDED', m:'▣', fg:F, mean:'A later run replaced this one', vis:'Muted chip + link to the successor', tr:'Read-only. Kept for comparison and audit.'}
+        ]},
+        {t:'Authenticity and confidence', token:'confidence.tier · confidence.dimension', d:'Eight weighted dimensions produce a tier. The tier gates use; the score is an internal aid and is never shown without its tier.', inv:'Rights, popularity and mirror count can never raise a tier. Unknown contributes no evidence but stays in the denominator. A local defect caps the parent value rather than deleting it.', rows:[
+          {v:'TIER_A', m:'A', fg:N, mean:'Anchor evidence · publisher-grade', vis:'Navy A chip + score', tr:'→ capped by a local defect · → disputed · → quarantined'},
+          {v:'TIER_B', m:'B', fg:N, mean:'Trusted for decision-grade use', vis:'Navy B chip + score', tr:'→ TIER_A on corroboration · → capped · → disputed'},
+          {v:'TIER_C', m:'C', fg:N, mean:'Conditional · exploratory influence only', vis:'Navy C chip, paler fill', tr:'→ TIER_B only with new independent corroboration'},
+          {v:'TIER_D', m:'D', fg:N, mean:'Weak · excluded from decision-grade denominators', vis:'Navy D chip, palest fill', tr:'→ restricted influence · → rejected · → reclassified'},
+          {v:'CAPPED', m:'◐', fg:N, mean:'A local defect limits the effective value', vis:'Tier chip + “capped by …” in text', tr:'→ uncapped when the local finding closes'},
+          {v:'DISPUTED', m:'△', fg:A, mean:'Two credible assertions conflict; both retained', vis:'Amber triangle; both assertions listed side by side', tr:'→ resolved to one · → stays disputed with restricted influence'},
+          {v:'UNKNOWN_DIM', m:'○', fg:F, mean:'This dimension was not assessable', vis:'Hollow circle, the word Unknown, no bar', tr:'→ scored when evidence arrives. Never defaults to 0.'},
+          {v:'NOT_APPLICABLE', m:'—', fg:F, mean:'The dimension cannot apply to this unit', vis:'Em dash + N/A, removed from the denominator', tr:'Structural. Changes only if the unit is reclassified.'},
+          {v:'QUARANTINED', m:'✕', fg:R, mean:'Held out of all use pending a decision', vis:'Red cross chip; the record stays fully readable', tr:'→ restored · → reclassified · → rejected'}
+        ]},
+        {t:'Rights and usage', token:'rights.status · rights.permission', d:'A status plus an explicit permission per action. Scope is source-level with tighter component and asset overrides.', inv:'Unknown is never permission. Public accessibility is not a licence. An override may only tighten. Rights never influence confidence, and confidence never influences rights.', rows:[
+          {v:'REUSABLE', m:'§', fg:P, mean:'Documented permission covering the intended use', vis:'Plum chip + the licence name and its scope', tr:'→ WITH_CONDITIONS on closer reading · → PROHIBITED on a takedown'},
+          {v:'REUSABLE_WITH_CONDITIONS', m:'§', fg:P, mean:'Permitted subject to named conditions', vis:'Plum chip; every condition listed as a row, never a tooltip', tr:'→ condition satisfied · → blocked where a condition cannot be met'},
+          {v:'REFERENCE_ONLY', m:'§', fg:P, mean:'Analysis permitted; expression may not be reused', vis:'Pale plum chip + “abstract intelligence only”', tr:'→ REUSABLE only with documented permission'},
+          {v:'UNKNOWN_REVIEW_REQUIRED', m:'?', fg:P, mean:'No rights evidence found', vis:'Outlined chip, white fill, question marker', tr:'→ any status once evidence exists. Blocks direct use meanwhile.'},
+          {v:'PROHIBITED', m:'✕', fg:R, mean:'Use is refused or forbidden', vis:'Red chip — the one place rights borrow the block red', tr:'→ takedown hold · → reversal only by a governed R3 decision'},
+          {v:'LEGAL_REVIEW_REQUIRED', m:'§', fg:P, mean:'Beyond the operator’s competence to decide', vis:'Plum chip + “not a legal opinion” note', tr:'→ resolved by a recorded external answer. Never auto-cleared.'},
+          {v:'TAKEDOWN_HOLD', m:'⛔', fg:R, mean:'A notice is being acted on', vis:'Security red, hatched left edge', tr:'→ suppression → prevention → completion. R3 throughout.'}
+        ]},
+        {t:'QA severity and readiness', token:'qa.severity · qa.gate', d:'Findings are graded by what they would break, at the smallest scope where they occur.', inv:'Severity describes consequence, not volume. Q0 is never averaged with Q3. A gate that never ran is not a gate that passed.', rows:[
+          {v:'Q0', m:'✕', fg:R, mean:'Would teach or score something wrong', vis:'Red chip; blocks correctness at its own scope; listed as a hard blocker in Health', tr:'→ corrected · → key marked unknown · → item quarantined. Cannot be waived.'},
+          {v:'Q1', m:'▲', fg:A, mean:'Major structural or extraction defect', vis:'Amber filled triangle + affected capability', tr:'→ corrected · → reprocessed · → accepted with a capability limit'},
+          {v:'Q2', m:'△', fg:A, mean:'Minor defect, use still safe', vis:'Amber outline triangle', tr:'→ corrected · → deferred · → waived with a recorded reason'},
+          {v:'Q3', m:'·', fg:S, mean:'Advisory or cosmetic', vis:'Slate dot; excluded from queue priority', tr:'→ batch corrected · → waived silently in bulk (the only bulk waiver allowed)'},
+          {v:'INCOMPLETE', m:'◐', fg:A, mean:'Source itself is partial', vis:'Amber half circle + what is missing', tr:'→ completed from another observation · → accepted as locally valid'},
+          {v:'BLOCKED_DEPENDENCY', m:'■', fg:S, mean:'A gate cannot run until something else resolves', vis:'Slate square + link to the blocker', tr:'→ runs when the dependency clears'},
+          {v:'NOT_RUN', m:'○', fg:F, mean:'The gate has never executed here', vis:'Hollow circle + “not run”, never green', tr:'→ scheduled · → run within a reprocess'}
+        ]},
+        {t:'Identity and independence', token:'identity.relationship · independence.metric', d:'Content identity is per metric: two records may be dependent for one measure and independent for another.', inv:'Confirming a duplicate never deletes an observation. Mirrors never increase prevalence. Independence is stated per metric or not at all.', rows:[
+          {v:'INDEPENDENT', m:'⧉', fg:G, mean:'Adds new underlying evidence', vis:'Green chip, counted once in every metric', tr:'→ reclassified when new similarity evidence appears'},
+          {v:'EXACT', m:'⧉', fg:G, mean:'Byte- or text-identical after normalisation', vis:'Green chip + “0 additional evidence”', tr:'→ anchor chosen · → representation chosen'},
+          {v:'REFORMATTED', m:'⧉', fg:G, mean:'Same content, different layout or format', vis:'Green chip + the differing dimension named', tr:'→ preferred representation chosen for processing'},
+          {v:'DERIVATIVE', m:'⤳', fg:G, mean:'Adapted from another record', vis:'Green arrow chip + parent link', tr:'→ partial independence recorded per metric'},
+          {v:'FRAGMENT', m:'◱', fg:G, mean:'A part of a larger record', vis:'Green chip + the whole it belongs to', tr:'→ merged into the whole · → kept as a standalone observation'},
+          {v:'RELATED_VARIANT', m:'≈', fg:G, mean:'Shares a template or generator, differs materially', vis:'Green chip + “tested proposition differs”', tr:'→ independent for content, dependent for format'},
+          {v:'UNRESOLVED', m:'?', fg:A, mean:'Similar, but the operator has not decided', vis:'Amber chip; conservative counting applies meanwhile', tr:'→ any class. Independent prevalence is held until then.'}
+        ]}
+      ],
+      uncertainty: [
+        {w:'unknown', m:'○', fg:F, mean:'No evidence either way', render:'Hollow circle + the word. No bar, no number, no colour fill.', not:'zero, false, or failed'},
+        {w:'not_applicable', m:'—', fg:F, mean:'The question does not apply to this unit', render:'Em dash + N/A. Removed from denominators.', not:'unknown'},
+        {w:'disputed', m:'△', fg:A, mean:'Two credible assertions conflict', render:'Both assertions shown with their sources. Neither is greyed out.', not:'wrong, or unknown'},
+        {w:'review_required', m:'▲', fg:A, mean:'A human decision is owed before use', render:'Amber chip + which capability waits on it.', not:'in progress'},
+        {w:'unresolved_dependency', m:'?', fg:A, mean:'Blocked on another decision, named and linked', render:'Amber chip naming the blocking record.', not:'failed'},
+        {w:'incomplete', m:'◐', fg:A, mean:'The source itself is partial', render:'Half circle + exactly what is missing, and what remains locally valid.', not:'extraction failure'},
+        {w:'provisional', m:'P', fg:A, mean:'Usable now, expected to change', render:'Amber P chip + what would confirm it.', not:'published, or eligible'},
+        {w:'not_run', m:'○', fg:F, mean:'Never assessed', render:'Hollow circle + “not run”. Never a green tick.', not:'passed'}
+      ],
+      caps: [
+        {t:'Structure analytics', k:'cap.structure', axes:'QA readiness · identity (representation) · difficulty scope', normal:'Segmentation and classification gates passed at this scope; no open Q0 or Q1 on structure.', limited:'Limited when a sibling task is ambiguous; held while segmentation is disputed; blocked on a Q1 structure finding.'},
+        {t:'Correctness / scoring', k:'cap.correctness', axes:'QA readiness · confidence (key consistency) · identity', normal:'A key exists, is consistent, and passes the answer-key gate at item scope.', limited:'Blocked by any Q0. Held when the key is unknown or disputed. Never limited-but-usable — a half-right key is not publishable.'},
+        {t:'Taxonomy publication', k:'cap.taxonomy', axes:'QA readiness · confidence · difficulty/relevance · taxonomy version', normal:'Fine-grained assignment precision at or above the gate, with a current taxonomy version.', limited:'Provisional below the fine gate — the qualified parent skill publishes instead. Held during a migration.'},
+        {t:'Pattern intelligence', k:'cap.pattern', axes:'All six. Reads confidence mass, independence, rights and QA together.', normal:'Sufficient independent decision-grade support, C-tier mass under the cap, no unresolved cluster in the denominator.', limited:'Exploratory-only when support is thin; held while a cluster is unresolved; blocked when the denominator is dominated by one provider.'},
+        {t:'Exact source reuse', k:'cap.reuse', axes:'Rights first, then confidence and QA', normal:'REUSABLE or conditions satisfied, plus no asset override, plus QA clean.', limited:'Blocked by REFERENCE_ONLY, UNKNOWN, PROHIBITED or any takedown. This is the exceptional capability, not the default.'},
+        {t:'Independent prevalence', k:'cap.prevalence', axes:'Identity/independence · confidence · coverage sufficiency', normal:'Every cluster member classified, anchors chosen, denominator above the sufficiency floor.', limited:'Held while any member is UNRESOLVED. Counted conservatively — never optimistically — meanwhile.'}
+      ],
+      eligRules: [
+        {k:'Rule 1', d:'Eligibility is computed per capability, per scope, and shown as a matrix cell with a letter code and a reason. There is no aggregate.'},
+        {k:'Rule 2', d:'A cell states whether its value is local or inherited. An inherited limit links to the ancestor that caused it.'},
+        {k:'Rule 3', d:'Publication is an explicit operator decision per capability. Nothing becomes eligible by the passage of time or the completion of a run.'},
+        {k:'Rule 4', d:'Every eligibility change writes an audit event naming the capability, the scope, the previous state and the rationale.'}
+      ],
+      gov: [
+        {t:'Allow', m:'●', tier:'R1 · reversible', fg:'#1D6F50', bg:'#F1F7F4', bd:'#BFD8CB', rows:[
+          {k:'Means', v:'Corpus may fetch from this host or path.'},
+          {k:'Does not mean', v:'Trustworthy, licensed, or relevant. Nothing about the other five axes changes.'},
+          {k:'Scope', v:'Smallest practical: path before host, host before family.'},
+          {k:'Reversal', v:'Ordinary — remove the allow.'}
+        ]},
+        {t:'Owner exclusion', m:'■', tier:'R1 · reversible', fg:'#4A5568', bg:'#F5F7FA', bd:'#C6CFDD', rows:[
+          {k:'Means', v:'“Not interesting to me right now.” A preference, not a judgement.'},
+          {k:'Effect', v:'Removed from discovery; existing records untouched.'},
+          {k:'Scope', v:'Host, path or source family.'},
+          {k:'Reversal', v:'One click. No confirmation beyond a toast.'}
+        ]},
+        {t:'Ordinary block', m:'■', tier:'R2 · governed', fg:'#8A5A0B', bg:'#FDF6E8', bd:'#E6CE9A', rows:[
+          {k:'Means', v:'Acquisition refused: robots policy, rate limits, low quality, or repeated failure.'},
+          {k:'Effect', v:'No fetching; re-discovery is suppressed with the reason attached.'},
+          {k:'Scope', v:'Host or path, with the triggering rule named.'},
+          {k:'Reversal', v:'Governed, with a rationale and an audit event.'}
+        ]},
+        {t:'Security hard-block', m:'⛔', tier:'R3 · not casually reversible', fg:'#8E2F2F', bg:'#FBEDED', bd:'#D18E8E', rows:[
+          {k:'Means', v:'The payload or host is unsafe: archive-bomb ratio, malware signal, hostile redirect chain.'},
+          {k:'Effect', v:'Content is never processed. Fingerprint recorded. Provenance observation retained.'},
+          {k:'Visual', v:'Security family only. Never rendered as an extraction failure.'},
+          {k:'Reversal', v:'A separate R3 decision with typed confirmation. No reprocess control touches it.'}
+        ]},
+        {t:'Takedown / prevention', m:'⛔', tier:'R3 · strongest', fg:'#8E2F2F', bg:'#FBEDED', bd:'#D18E8E', rows:[
+          {k:'Means', v:'A rights holder or legal requirement forbids retention or use.'},
+          {k:'Effect', v:'Immediate use hold → suppression → payload removal → prevention fingerprint → completion audit.'},
+          {k:'Discovery', v:'Re-ingestion is prevented by content fingerprint, so mirrors cannot reintroduce it.'},
+          {k:'Retained', v:'Hash and decision metadata only — enough to prevent, not enough to reconstruct.'}
+        ]}
+      ],
+      govNever: [
+        'That allowing a domain says anything about whether its content is trustworthy or reusable.',
+        'That an ordinary block and a security hard-block are the same kind of “off”.',
+        'That a takedown is a delete — it is a governed sequence with a suppression scope and a completion record.',
+        'That removing an owner exclusion could ever re-admit content that a takedown fingerprint has blocked.'
+      ],
+      dupClasses: [
+        {t:'INDEPENDENT', m:'⧉', fg:G, test:'Different underlying content: a different text, a different tested proposition.', lex:'Counts once', ac:'Counts once', lfg:'#1D6F50', afg:'#1D6F50'},
+        {t:'EXACT', m:'⧉', fg:G, test:'Identical after whitespace and encoding normalisation.', lex:'0 additional', ac:'0 additional', lfg:'#5F6980', afg:'#5F6980'},
+        {t:'REFORMATTED', m:'⧉', fg:G, test:'Same content, different container: PDF vs HTML, scan vs digital text.', lex:'0 additional', ac:'0 additional', lfg:'#5F6980', afg:'#5F6980'},
+        {t:'DERIVATIVE', m:'⤳', fg:G, test:'Adapted: shortened, re-levelled, or partially rewritten from a parent.', lex:'Partial', ac:'Assess separately', lfg:'#8A5A0B', afg:'#8A5A0B'},
+        {t:'RE_RECORDED', m:'⤳', fg:G, test:'Same script, new recording. The worked example the specification calls out.', lex:'0 additional', ac:'Counts once', lfg:'#5F6980', afg:'#1D6F50'},
+        {t:'FRAGMENT', m:'◱', fg:G, test:'A part of a larger record already held.', lex:'Within the whole', ac:'Within the whole', lfg:'#5F6980', afg:'#5F6980'},
+        {t:'RELATED_VARIANT', m:'≈', fg:G, test:'Same generator or template, materially different proposition.', lex:'Counts once', ac:'Counts once', lfg:'#1D6F50', afg:'#1D6F50'},
+        {t:'UNRESOLVED', m:'?', fg:A, test:'Similarity found, decision not made. Counting stays conservative.', lex:'Held', ac:'Held', lfg:'#8A5A0B', afg:'#8A5A0B'}
+      ],
+      dupDecisions: [
+        {t:'1 · Canonical provenance anchor', d:'Which observation is the citation of record. Usually the publisher, not the best-parsed copy.', k:'Affects: citation, rights inheritance, takedown scope'},
+        {t:'2 · Preferred processing representation', d:'Which copy the pipeline extracts from. Often the cleanest digital text, even when the anchor is a scan.', k:'Affects: extraction quality, reprocess target'},
+        {t:'3 · Independence per metric', d:'Whether the members add evidence for lexical, grammatical, structural, acoustic or visual measures — decided one metric at a time.', k:'Affects: prevalence denominators, decision-grade support'}
+      ],
+      dupNeutral: [
+        'All observations stay listed and openable, whatever the relationship decision.',
+        'The anchor is a citation choice; it is not a quality ranking and does not raise anyone’s tier.',
+        'Prevalence counts underlying content, never observations. Four mirrors of one text is one occurrence.',
+        'An unresolved cluster suppresses decision-grade prevalence rather than guessing in either direction.'
+      ],
+      auditFields: [
+        {k:'event_id · timestamp', v:'Immutable identity and an exact time, shown in the operator’s locale with an ISO value on copy.'},
+        {k:'actor_class · actor', v:'human · rule · model · import · reprocess, plus the specific rule, model or run identity.'},
+        {k:'scope', v:'The exact record and level the event applies to, as a link.'},
+        {k:'action', v:'The governed verb: quarantine, remap, suppress, publish-limited, supersede…'},
+        {k:'previous_state → new_state', v:'Per affected axis. A rights change never prints a confidence delta.'},
+        {k:'rationale', v:'Required at R2 and above. Free text plus attached findings and source regions.'},
+        {k:'versions', v:'Method, model, rule, taxonomy, dedup, analytics and contract versions in force.'},
+        {k:'linked', v:'The review, finding, dispute, cluster or run this event answers.'},
+        {k:'supersedes', v:'The event this one replaces, if any. Both remain readable.'},
+        {k:'downstream_effect', v:'Capabilities changed, outputs invalidated, results marked stale, App artefacts affected.'},
+        {k:'risk_tier', v:'R0–R3 as recorded at the time of the decision.'}
+      ],
+      actors: [
+        {k:'Human', t:'The owner', c:'#1D6F50', d:'A decision with authority. Always carries a rationale at R2 and above, and is never overwritten by automation.', ex:'owner · 2026-08-17 09:12 · R2 · rationale attached'},
+        {k:'Rule', t:'Deterministic automation', c:'#2F4A7C', d:'A named rule fired on a named version. Proposes; may set provisional state; may not clear a hard block or a curated override.', ex:'rule DR-07 · dedup 1.6 · proposed'},
+        {k:'Model', t:'Probabilistic automation', c:'#2F7D8C', d:'A model result with its version and its confidence. Always labelled as a candidate, never as a verdict.', ex:'classifier de-task 2.1 · conf 0.71 · candidate'},
+        {k:'Import', t:'Migration or backfill', c:'#8A6AA0', d:'A bulk event with its batch identity, so a strange value can be traced to the day it arrived.', ex:'import batch 2026-06-02-a · 1 412 records'},
+        {k:'Reprocess', t:'A run', c:'#8A5A0B', d:'A run event that names what it recomputed and, importantly, which curated overrides it retained rather than replaced.', ex:'run 0817-03 · 4 overrides retained'}
+      ],
+      impact: [
+        {t:'Curated correction to an item', inv:'Correctness output for that item · analytics that used the observed value', keep:'Provenance · rights · confidence tier · sibling items · parent eligibility', app:'One blueprint marked stale; nothing withdrawn', bg:'#FFFFFF'},
+        {t:'Confidence downgrade', inv:'Decision-grade results that relied on this support · pattern eligibility', keep:'Rights · structure extraction · taxonomy · the observation itself', app:'Affected patterns drop to exploratory, with the reason sent', bg:'#FAFBFD'},
+        {t:'Rights change to REFERENCE_ONLY', inv:'Exact-reuse eligibility · any published source expression', keep:'Confidence · QA · taxonomy · difficulty · prevalence · all analytics', app:'Direct-use artefacts suppressed; abstract blueprints unaffected', bg:'#FFFFFF'},
+        {t:'Takedown completion', inv:'Every direct use · retained payloads · derived expression · 6 published outputs', keep:'Audit record · prevention fingerprint · the fact of observation', app:'Artefacts withdrawn with a reason code; recomputation without this source', bg:'#FAFBFD'},
+        {t:'Duplicate decision', inv:'Prevalence denominators · independent-support counts · concentration metrics', keep:'Every observation · per-member rights and confidence · extraction output', app:'Prevalence-derived priorities recomputed; no exercise withdrawn', bg:'#FFFFFF'},
+        {t:'Taxonomy migration', inv:'Assignments on the affected branch · taxonomy-scoped analytics', keep:'Item content · correctness · confidence · rights · difficulty', app:'Retag with a mapping. Split never clones mastery — the App is told which side is evidence-backed.', bg:'#FAFBFD'},
+        {t:'Reprocess with a new method', inv:'Superseded run outputs · stale downstream results', keep:'Curated overrides (retained by default and reported) · provenance · audit', app:'Newly eligible, limited or invalidated outputs listed before the run starts', bg:'#FFFFFF'},
+        {t:'Benchmark supersession', inv:'Qualification claims tied to the old release', keep:'Historical results, still readable and comparable', app:'Contract note: capability claims now reference the new immutable release', bg:'#FAFBFD'},
+        {t:'Quarantine an exam', inv:'Correctness, reuse and independent-prevalence use of that scope', keep:'Structure analytics if unaffected · provenance · rights · the full record', app:'Held rather than withdrawn where the App can tolerate a gap', bg:'#FFFFFF'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

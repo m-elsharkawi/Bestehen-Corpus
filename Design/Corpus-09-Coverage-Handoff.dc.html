@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EFF2F6;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1560px;margin:0 auto;padding:0 32px 120px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 09</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Coverage matrix and engineering handoff</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      32 specification areas mapped · 41 surfaces · 34 components · 8 flows<br>
+      Committable companion: <span style="color:#14213D;">Corpus/DESIGN-HANDOFF.md</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:24px;">
+    <sc-for list="{{ summary }}" as="s" hint-placeholder-count="4">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;border-top:3px solid {{ s.c }};">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#5A6478;">{{ s.k }}</div>
+        <div style="font-size:28px;font-weight:600;margin-top:5px;">{{ s.v }}</div>
+        <div style="font-size:12.5px;color:#3E4A63;line-height:1.5;margin-top:5px;">{{ s.d }}</div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div id="cm" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">09.1</div>
+      <div style="font-size:22px;font-weight:600;">Coverage matrix — specification area to design</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:110ch;margin-top:8px;"><strong style="color:#14213D;font-weight:600;">Complete</strong> means a designed surface exists with its states. <strong style="color:#14213D;font-weight:600;">Variant</strong> means the requirement is met by a designed variant of a shared surface rather than its own screen. <strong style="color:#14213D;font-weight:600;">Deferred</strong> means the specification itself defers it, and the design deliberately does not build it.</div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:230px 168px 200px 116px 132px 84px 92px;gap:12px;padding:10px 18px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#5A6478;">
+        <div>Specification area</div><div>Screen(s)</div><div>Component / pattern</div><div>Responsive</div><div>Accessibility</div><div>Flow</div><div>Status</div>
+      </div>
+      <sc-for list="{{ matrix }}" as="m" hint-placeholder-count="32">
+        <div style="display:grid;grid-template-columns:230px 168px 200px 116px 132px 84px 92px;gap:12px;padding:10px 18px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ m.bg }};">
+          <div style="font-size:12.5px;font-weight:600;line-height:1.4;">{{ m.area }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E4A63;line-height:1.5;">{{ m.screens }}</div>
+          <div style="font-size:12px;color:#3E4A63;line-height:1.45;">{{ m.comp }}</div>
+          <div style="font-size:11.5px;color:#5A6478;line-height:1.45;">{{ m.resp }}</div>
+          <div style="font-size:11.5px;color:#5A6478;line-height:1.45;">{{ m.a11y }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:#3E4A63;">{{ m.flow }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:{{ m.fg }};">{{ m.st }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="qc" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">09.2</div>
+      <div style="font-size:22px;font-weight:600;">Quality-control checklist, answered with evidence</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:16px;">
+      <sc-for list="{{ checks }}" as="c" hint-placeholder-count="4">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;overflow:hidden;">
+          <div style="padding:14px 18px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;">
+            <div style="font-size:16px;font-weight:600;">{{ c.t }}</div>
+          </div>
+          <div style="padding:6px 0;">
+            <sc-for list="{{ c.items }}" as="i" hint-placeholder-count="10">
+              <div style="display:grid;grid-template-columns:18px 1fr;gap:10px;padding:9px 18px;border-bottom:1px solid #EDF0F4;align-items:start;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;color:{{ i.fg }};">{{ i.m }}</div>
+                <div>
+                  <div style="font-size:12.5px;font-weight:600;line-height:1.4;">{{ i.t }}</div>
+                  <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:2px;">{{ i.e }}</div>
+                </div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="lb" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">09.3</div>
+      <div style="font-size:22px;font-weight:600;">Launch-required versus deferred</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+      <div style="background:#FFFFFF;border:1px solid #BFD8CB;border-radius:8px;padding:18px 20px;border-left:3px solid #2A9D6F;">
+        <div style="font-size:16px;font-weight:600;color:#1D6F50;">Launch-required and designed</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;margin-top:11px;">
+          <sc-for list="{{ launchReq }}" as="l" hint-placeholder-count="14">
+            <div style="display:grid;grid-template-columns:14px 1fr;gap:8px;padding:5px 0;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#1D6F50;">●</div>
+              <div style="font-size:12.5px;color:#3E4A63;line-height:1.45;">{{ l }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;border-left:3px solid #6B7789;">
+        <div style="font-size:16px;font-weight:600;">Deferred — labelled, not designed as launch scope</div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+          <sc-for list="{{ deferred }}" as="d" hint-placeholder-count="10">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:7px 0;border-bottom:1px solid #EDF0F4;">
+              <div style="font-size:12.5px;font-weight:600;line-height:1.4;">{{ d.t }}</div>
+              <div style="font-size:12px;color:#5A6478;line-height:1.45;">{{ d.why }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="ho" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">09.4</div>
+      <div style="font-size:22px;font-weight:600;">What an implementer must not re-decide</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:110ch;margin-top:8px;">These are the load-bearing decisions. Changing one of them changes what the product means, not how it looks — so each is repeated verbatim in the Markdown handoff.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:16px;">
+      <sc-for list="{{ loadBearing }}" as="l" hint-placeholder-count="12">
+        <div style="background:#14213D;border-radius:8px;padding:16px 18px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#8FA6C4;">{{ l.k }}</div>
+          <div style="font-size:14px;font-weight:600;color:#E9EEF5;line-height:1.4;margin-top:6px;">{{ l.t }}</div>
+          <div style="font-size:12.5px;color:#C3CEDE;line-height:1.55;margin-top:6px;">{{ l.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="op" style="margin-top:48px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">09.5</div>
+      <div style="font-size:22px;font-weight:600;">Open assumptions and honest gaps</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:18px 20px;">
+        <div style="font-size:16px;font-weight:600;">Assumptions an architect may accept or replace</div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+          <sc-for list="{{ assumptions }}" as="a" hint-placeholder-count="9">
+            <div style="padding:8px 0;border-bottom:1px solid #EDF0F4;">
+              <div style="font-size:12.5px;font-weight:600;line-height:1.4;">{{ a.t }}</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:2px;">{{ a.d }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <div style="background:#FFFFFF;border:1px solid #E6CE9A;border-radius:8px;padding:18px 20px;border-left:3px solid #D89A2A;">
+        <div style="font-size:16px;font-weight:600;">What this design does not include</div>
+        <div style="display:flex;flex-direction:column;gap:0;margin-top:11px;">
+          <sc-for list="{{ gaps }}" as="g" hint-placeholder-count="6">
+            <div style="padding:8px 0;border-bottom:1px solid #EDF0F4;">
+              <div style="font-size:12.5px;font-weight:600;line-height:1.4;">{{ g.t }}</div>
+              <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:2px;">{{ g.d }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="font-size:12.5px;color:#3E4A63;line-height:1.55;margin-top:12px;padding-top:11px;border-top:1px solid #EDF0F4;">No genuine blocker remains. Nothing above prevents implementation of the launch scope; each item is either explicitly deferred by the specification or a presentation choice recorded for a later decision.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G='#1D6F50', A='#8A5A0B', R='#A83F3F', S='#4A5568', F='#5F6980';
+    const alt = (i) => (i % 2 ? '#FAFBFD' : '#FFFFFF');
+    const M = [
+      ['Owner access and session','04 E1','Sign-in, session expiry with draft held','06 companion read-only','Focus to prompt; draft named','—','Complete'],
+      ['Empty Corpus first run','04 E2','Two safe first actions + idle reasons','06 stacked','Two actions, no illustration','A','Complete'],
+      ['Prioritized operations Inbox','04 I1','Queue table, impact cell, reason string','06 1280 + 1024 cards','Table semantics, j/k, no colour-only','A–H','Complete'],
+      ['Eight specialized queues','04 I2 · 02','Saved views + per-view columns','06 scroll + overflow','Tabs, counts in names','B,C,D,E,F','Complete'],
+      ['Queue → detail without losing context','04 I3','Drawer, preserved position/filters','06 overlay then sheet','Focus return to row','A–H','Complete'],
+      ['Discovery and triage','04 S1','Candidate table + candidate detail','06 card list','Route and rationale as text','A','Complete'],
+      ['Manual URL intake','04 S2','Preflight state list (7 states)','06 stacked','Each refusal states its rule','A','Complete'],
+      ['File / archive intake','04 S3','Preflight, archive bounds, unsafe hold','06 stacked','Security state ≠ failure','A','Complete'],
+      ['Source registry','04 S4','Registry table, 3 independent columns','06 1280 proof','Sort never changes meaning','D','Complete'],
+      ['Source detail, mirrors, dead links','04 S5','Provenance card, access history','06 disclosure','History retained after death','D','Complete'],
+      ['Allow / block / exclude / takedown','04 S6 · 03 · 05 W4','Governance model, 4 strengths','Desktop-only for R3','Strong block never retryable','D','Complete'],
+      ['Ingestion and processing runs','04 R1','Runs table with 8 run states','06 card list','State word + marker','A,B','Complete'],
+      ['Run detail, 13 stages, partial success','04 R2','Lifecycle stepper, per-scope table','06 vertical list','Ordered list with counts','A,B','Complete'],
+      ['Run comparison','05 R3','Before/after measures + reading','Desktop-only','Table, no chart needed','B,G','Complete'],
+      ['Scoped reprocessing','05 R4','Composer, stage lock, override policy','Desktop-only, stated','Every choice labelled','B','Complete'],
+      ['Extraction and QA failures','04 W1 · 02','Failure detail, prior attempts, slice','06 1280 drawer','Severity word + scope','B,H','Complete'],
+      ['Canonical Record / Review Detail','04 C2–C4 · 05','One framework, 10 scopes','06 single column','Panels in axis order','A,C,F','Complete'],
+      ['Record Detail difficult variants','05 C4–C6','Disputed child, prohibited asset, incomplete package','06 stacked','Local defect stays local','—','Variant'],
+      ['Observed vs active interpretation','02 · 04 C3','Diff by underline + label','06 stacked, observed first','No red/green diff','B,F','Complete'],
+      ['Authenticity and confidence review','05 W2','8 dimensions, corroboration, contradiction','Desktop-only decisions','Unknown never zero','C','Complete'],
+      ['Rights review, 5 statuses','05 W3','Action-permission rows + overrides','Read-only at 1024','Unknown never blank','D','Complete'],
+      ['Takedown and prevention','05 W4','5-step sequence + R3 typed confirm','Desktop-only','Focus trapped, restored','D','Complete'],
+      ['Duplicate pair and cluster review','05 W5 · W6','Similarity, differences, 3 decisions','Read-only at 1024','List primary, graph optional','E','Complete'],
+      ['Taxonomy correction','05 W7','Current vs proposed + evidence','Stacked at 1280','Select-then-apply only','F','Complete'],
+      ['Governed taxonomy migration','05 W8','5 operations with risk levels','Desktop-only','No mastery cloning','F','Variant'],
+      ['Capability-scoped publication','03 · 04 C3','6 gates, 7 states, matrix','06 stacked list','Letter code + reason','A','Complete'],
+      ['Corpus Health, no aggregate','04 H1','Blockers first, 7 vectors','06 both proofs','Finding sentence first','H','Complete'],
+      ['Coverage and freshness','04 H2','Matrix with hatched unknown','06 table only','Real table + CSV','H','Complete'],
+      ['Cost, budget, paid gates','04 H3 · 02','Cost ledger, gate card','06 vector card','Sentence before bar','B,H','Complete'],
+      ['Benchmark and regression','04 H4','16 slots, qualification matrix','Desktop-only','“Not run” ≠ “passed”','G','Complete'],
+      ['Analytics result envelope','04 H5','Grade, denominator, independence','06 table','Grade as word','C,E','Complete'],
+      ['Corpus → App impact and contract','04 H6','6 impact cards + contract state','06 stacked','Version as text','A,D,F','Complete'],
+      ['Append-only audit history','04 A1','Timeline, 5 actor classes, diff','06 drawer diff','Chronological table','all','Complete'],
+      ['Confirmation and result states','05 A2 · 02','R0–R3 family, 6 result states','06 sheet','Scope table, focus trap','all','Complete'],
+      ['Loading, empty, stale, offline','02 · 08','9 table states + 12 system states','06 same set','Politeness by consequence','all','Complete'],
+      ['Dark mode','—','Token structure ready','—','Contrast pairs unverified','—','Deferred'],
+      ['Comfortable density everywhere','01 · 02','Token pair exists, applied in review surfaces','—','Type size never changes','—','Variant']
+    ];
+    return {
+      summary: [
+        {k:'Specification areas mapped', v:'32', d:'Every launch-critical area of the Stage 17 specification has a designed home and a named state set.', c:'#2A9D6F'},
+        {k:'Surfaces designed', v:'41', d:'22 full 1440×1024 frames plus 19 states proven as variants at component fidelity.', c:'#2F4A7C'},
+        {k:'Components documented', v:'34', d:'Each with variants, states, content limits, an accessibility contract and a responsive rule.', c:'#2F7D8C'},
+        {k:'Flows with recovery', v:'8 · 23 exits', d:'Every flow names its recovery branches; none ends on a congratulation screen.', c:'#8A6AA0'}
+      ],
+      matrix: M.map((r,i) => ({
+        area:r[0], screens:r[1], comp:r[2], resp:r[3], a11y:r[4], flow:r[5], st:r[6],
+        fg: r[6]==='Complete' ? G : (r[6]==='Variant' ? A : F), bg: alt(i)
+      })),
+      checks: [
+        {t:'Product truth', items:[
+          {m:'●', fg:G, t:'Six axes remain separately visible', e:'Eight state-token families on page 01, one hue and one marker each; six chips maximum in a record header, in fixed axis order.'},
+          {m:'●', fg:G, t:'Unknown, N/A, disputed, incomplete, provisional are explicit', e:'A closed vocabulary on page 03 with a rendering rule and a “never confused with” column for each word.'},
+          {m:'●', fg:G, t:'Local defects do not invalidate the parent', e:'EX-2291 keeps Tier A and four eligible capabilities while four of 58 items hold correctness. The exam header shows a count, not a verdict.'},
+          {m:'●', fg:G, t:'Publication is capability-scoped', e:'Six gates with different axis inputs (page 03); a six-cell matrix with letter codes and reasons; no aggregate cell exists.'},
+          {m:'●', fg:G, t:'Rights never upgrade confidence; allow grants neither', e:'Source detail shows three independent readings side by side, each stating what it does not mean.'},
+          {m:'●', fg:G, t:'Duplicates preserve observations and prevalence', e:'All four CL-118 members stay openable; the denominator falls from 214 to 187 after the decision.'},
+          {m:'●', fg:G, t:'Corrections preserve observed truth', e:'The observed column is never editable and never disappears; a derivation column names which capability consumes which value.'},
+          {m:'●', fg:G, t:'Takedown and security outrank ordinary blocks', e:'Four visibly different strengths of “no”; R3 typed confirmation; prevention fingerprints that no weaker control can clear.'},
+          {m:'●', fg:G, t:'Corpus → App stays pattern-first', e:'Blueprint inspection only; no learner account, attempt, Readiness or progress surface exists anywhere in 41 surfaces.'},
+          {m:'●', fg:G, t:'No public, learner, collaboration or enterprise features', e:'Page 00 lists them as deliberately absent, with the reason each would misrepresent a commitment.'}
+        ]},
+        {t:'Experience completeness', items:[
+          {m:'●', fg:G, t:'All five primary areas designed', e:'Inbox, Sources, Corpus, Runs, Health — each with a full frame at 1440 and a documented transformation at 1280 and 1024.'},
+          {m:'●', fg:G, t:'All eight specialized queues represented', e:'Nine saved views including “All work”, each with its own columns, queue reasons and filter set.'},
+          {m:'●', fg:G, t:'Intake through publication covered', e:'Flow A traverses discovery, preflight, run, partial success, review, capability publication and App impact in seven steps.'},
+          {m:'●', fg:G, t:'Authenticity, rights, duplicate, taxonomy, QA, benchmark, analytics, contract', e:'Seven workbenches on page 05 plus four Health tabs on page 04.'},
+          {m:'●', fg:G, t:'Every flow includes failure and recovery branches', e:'23 named recovery exits, three per flow minimum, each tied to a designed state.'},
+          {m:'●', fg:G, t:'Desktop and laptop complete; tablet documented', e:'Page 06 proves 1280 and 1024 and states which three surfaces stay desktop-only, with the reason.'},
+          {m:'●', fg:G, t:'Destructive actions show exact scope', e:'R2 modal enumerates counts and recomputation; R3 requires typed identity and states what survives.'},
+          {m:'●', fg:G, t:'Empty, loading, stale, partial, offline, conflict states', e:'Nine table states and twelve system states on page 02, each with copy and an ownership label.'},
+          {m:'●', fg:G, t:'Realistic content throughout', e:'German provider, exam, section and task names preserved verbatim; no lorem ipsum in any surface.'},
+          {m:'○', fg:F, t:'Dark mode', e:'Deliberately not designed. Complete light-mode coverage was prioritised; the token structure is mode-ready.'}
+        ]},
+        {t:'Design-system quality', items:[
+          {m:'●', fg:G, t:'Tokens with verified contrast', e:'74 tokens on page 01; every text token ≥ 4.5:1 on its intended surface, graphic tokens ≥ 3:1, with the value printed beside each swatch.'},
+          {m:'●', fg:G, t:'Components reused, not forked per queue', e:'One queue table serves nine views; one Record Detail framework serves ten scopes; one confirmation family serves every governed action.'},
+          {m:'●', fg:G, t:'Complete states for tables, panels, comparisons, timelines', e:'Page 02 documents anatomy, variants, states, content limits, accessibility and responsive behaviour for all 34.'},
+          {m:'●', fg:G, t:'Responsive rules explicit', e:'A 15-row transformation table covering 1280, 1024, the read-only companion, and 200% zoom.'},
+          {m:'●', fg:G, t:'WCAG 2.2 AA annotated', e:'21 criteria reviewed with the specific design decision that satisfies each, plus a keyboard map and an announcement table.'},
+          {m:'●', fg:G, t:'No status relies on colour', e:'Page 08.3 renders all eight families with no hue at all; each remains identifiable from marker and word.'},
+          {m:'●', fg:G, t:'Calm, credible, part of Bestehen', e:'Shared ink, green and Plex family; cooler surfaces and no display face; three elevation levels; zero-duration status changes.'},
+          {m:'●', fg:G, t:'No mascot, gamification, fake certainty or endorsement', e:'No success illustration exists; “not a legal opinion” and “claimed, unverified” appear where a lesser design would assert.'},
+          {m:'●', fg:G, t:'No scalar score hides a blocker', e:'Health has no aggregate anywhere; two hard blockers sit above seven vectors and cannot be averaged.'},
+          {m:'●', fg:G, t:'No always-on AI or enterprise implication', e:'Batched and cached results, background jobs that are safe to leave, per-action cost estimates, a €25 monthly envelope on screen.'}
+        ]},
+        {t:'Restraint and cost discipline', items:[
+          {m:'●', fg:G, t:'One operator, one inbox', e:'No roles, assignments, approvals, comments, SLA clocks or collaboration feed appear in any surface.'},
+          {m:'●', fg:G, t:'Bulk actions deliberately minimal', e:'Only Defer, Add note and Open as a slice. No bulk publish, quarantine, rights or takedown action exists.'},
+          {m:'●', fg:G, t:'Cost is visible before spending', e:'Every R2/R3 confirmation that can incur spend states the estimate and the remaining envelope; a paid-job gate holds one job at €1.20.'},
+          {m:'●', fg:G, t:'Human review time tracked as a cost', e:'The cost ledger records 2.1 hours per week beside the money, because attention is the scarcer input.'},
+          {m:'●', fg:G, t:'No expensive re-analysis on navigation', e:'Health states its computation time; stale results name their cause and wait for a proposed recompute rather than recomputing on view.'},
+          {m:'●', fg:G, t:'Deferred conveniences labelled, not built', e:'Page 09.3 lists ten deferred items with the reason each is out of launch scope.'},
+          {m:'●', fg:G, t:'Nothing celebrates', e:'Publication returns a factual summary and the next blocker. No confetti, no tick animation, no tone change.'},
+          {m:'●', fg:G, t:'Every long action is leavable', e:'“Safe to leave” is text, not a tooltip, and completion reports through the job tray.'}
+        ]}
+      ],
+      launchReq: [
+        'Owner-only access with session recovery',
+        'Empty Corpus first-run state',
+        'Impact-ranked Inbox with reason strings',
+        'Eight specialized queues as saved views',
+        'Discovery triage and owner intake',
+        'Security and access preflight states',
+        'Source registry with three independent columns',
+        'Allow, exclude, block, hard-block, takedown',
+        'Runs with 13-stage partial success',
+        'Scoped reprocessing with override policy',
+        'Extraction and QA failure review',
+        'One Record Detail framework, ten scopes',
+        'Authenticity and confidence review',
+        'Rights review and takedown sequence',
+        'Duplicate pair and cluster review',
+        'Taxonomy correction and migration entry',
+        'Capability-scoped publication, six gates',
+        'Corpus Health with hard blockers first',
+        'Coverage, freshness and cost ledger',
+        'Benchmark release and qualification matrix',
+        'Analytics envelope and App contract state',
+        'Append-only audit with five actor classes',
+        'R0–R3 confirmation family',
+        'Complete loading, empty, stale, failure states'
+      ],
+      deferred: [
+        {t:'Dark mode', why:'Explicitly conditional in the run configuration; complete light-mode coverage came first.'},
+        {t:'Bulk governed actions', why:'The specification restricts bulk work to the smallest safe set; anything more would invite unreviewed decisions.'},
+        {t:'Automated rights inference', why:'Rights must rest on documented evidence. Automation may only propose a review, never a status.'},
+        {t:'Public or shared corpus browsing', why:'Out of product scope. Corpus has one human user.'},
+        {t:'Learner-facing anything', why:'App-owned. Corpus stores no learner state, so there is nothing to show.'},
+        {t:'Multi-user roles and approvals', why:'One-owner scope. Adding roles would imply a governance model the product does not have.'},
+        {t:'Cross-record batch editing', why:'Corrections are curated and per-scope; a batch editor would make provenance-preserving edits harder to audit.'},
+        {t:'Custom report builder', why:'Enterprise BI. The Health tabs and CSV export cover the operational need.'},
+        {t:'Notification channels (email, push)', why:'The job tray and the Inbox are sufficient for a weekly-cadence single operator.'},
+        {t:'Comfortable density on every surface', why:'Token pair exists and is applied where rationale text sits beside rows; a global switch was not needed for launch.'}
+      ],
+      loadBearing: [
+        {k:'Truth axes', t:'Never merge two axes into one badge', d:'Eight token families, each with its own hue, marker and closed vocabulary. A shared green across “trusted”, “rights-cleared” and “published” is the single most damaging change possible here.'},
+        {k:'Uncertainty', t:'Unknown is a value, not a missing value', d:'Unknown stays in denominators and contributes no evidence; N/A leaves the denominator. Neither ever renders as 0, false, blank, passed or failed.'},
+        {k:'Locality', t:'Defects travel up as counts, trust travels down as inheritance', d:'A child may cap below its parent and never exceed it. A parent shows a count and a link, never its child’s verdict.'},
+        {k:'Eligibility', t:'Six gates, six answers, no seventh', d:'Each capability reads a different subset of axes. Any aggregate “ready” state contradicts the product.'},
+        {k:'Rights', t:'Unknown is not permission, and overrides only tighten', d:'Public accessibility is not a licence; an asset override may be stricter than its document and never looser.'},
+        {k:'Governance', t:'Four visibly different strengths of “no”', d:'Exclusion, ordinary block, security hard-block, takedown fingerprint. A weaker control may never clear a stronger one.'},
+        {k:'Duplicates', t:'Three decisions, and independence is per metric', d:'Relationship class, provenance anchor, processing representation — plus per-metric independence. Anchor choice is not a quality ranking.'},
+        {k:'Automation', t:'Propose, never decide', d:'A rule or model may raise a finding or set provisional state. It may not clear a hard block, overwrite a curated override, or publish.'},
+        {k:'Audit', t:'Append-only, with the axes that did not change', d:'No edit, no delete. A rights event never prints a confidence delta; a rerun reports which overrides it retained.'},
+        {k:'Security', t:'Source content has no authority', d:'Previews are inert and non-focusable; extracted text can never reach a control that sets a status. Security states are never rendered as failures.'},
+        {k:'Actions', t:'Risk tier decides the confirmation', d:'R0 inline with undo; R1 inline panel; R2 modal with enumerated scope; R3 two-step typed confirmation. The tier belongs to the action, not to the screen.'},
+        {k:'Health', t:'No aggregate score, ever', d:'Hard blockers sit above the vectors and cannot be averaged. “Insufficient data” and “not instantiated” are valid terminal states.'}
+      ],
+      assumptions: [
+        {t:'Impact ranking is a five-factor sort with a printed reason', d:'Severity, capability breadth, target relevance, evidence uniqueness, age. The reason string is always shown, so weights can change without redesign.'},
+        {t:'8-second undo for R0 only', d:'No undo for anything that changes eligibility, rights or the audit record; those get a governed inverse action.'},
+        {t:'50-row pages with a persistent position marker', d:'Chosen over infinite scroll because a queue position must survive a detail visit and a reload.'},
+        {t:'Rationale required at R2 and above, 240 characters', d:'Optional at R1 unless the change contradicts the observed value. Two-click evidence attachment.'},
+        {t:'Staleness is expressed as its cause', d:'“Stale since taxonomy v4.2 · 82 outputs”, never an age alone.'},
+        {t:'Cost shown per action before commit', d:'Estimate plus the current month envelope in every confirmation that can incur spend.'},
+        {t:'Three surfaces are desktop-only', d:'Duplicate comparison, rights/takedown, reprocess composer. Below 1140 they open read-only with the reason stated.'},
+        {t:'Mobile companion is three read-only surfaces', d:'Health vector, hard blockers, single record. No decision controls and no rationale entry at any width below 900.'},
+        {t:'Benchmark release is presented as not instantiated', d:'Eleven of sixteen seed slots acquired, nothing adjudicated. The design refuses to imply a dataset that does not yet exist.'}
+      ],
+      gaps: [
+        {t:'Dark mode', d:'Not designed. Token structure is mode-ready; contrast pairs would need re-verification for the eight state families.'},
+        {t:'Interactive prototype wiring', d:'Flows are documented as step maps naming screens and states, not as clickable transitions. Every step points at a designed surface.'},
+        {t:'Icon set drawn', d:'A 22-glyph Lucide subset is specified by name, licence and size rules; glyphs are represented by geometric markers in these pages rather than redrawn.'},
+        {t:'Real exam content', d:'All German copy is original or safely abstracted. No substantial protected exam material is reproduced, and no telc affiliation is implied.'},
+        {t:'German UI localisation', d:'Readiness rules are documented (expansion budget, no fragment assembly, locale-aware numbers); the translated string set is not produced.'},
+        {t:'Chart implementations', d:'Visualization semantics, series palette and accessible-alternative rules are specified; only the small multiples needed to prove the rules are drawn.'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

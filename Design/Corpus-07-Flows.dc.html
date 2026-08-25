@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EFF2F6;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1560px;margin:0 auto;padding:0 32px 120px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 07</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Prototype flows and recovery branches</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      Eight flows · 47 steps · 23 named recovery exits<br>
+      Each step names its screen, its state, and what the operator can safely leave
+    </div>
+  </div>
+
+  <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:8px;padding:20px 24px;margin-top:24px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:28px;">
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">How to read a flow</div>
+        <div style="font-size:13.5px;color:#3E4A63;line-height:1.6;margin-top:7px;">Each numbered step names the screen it happens on (page 04 or 05), the state that screen is in, and the decision available. Amber blocks are recovery branches — not error handling bolted on, but paths the product expects to take.</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Two rules every flow obeys</div>
+        <div style="font-size:13.5px;color:#3E4A63;line-height:1.6;margin-top:7px;">Nothing publishes itself, and nothing traps the operator. Every long step states that leaving is safe and reports back through the job tray; every decision step can be deferred without losing work.</div>
+      </div>
+      <div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Where flows end</div>
+        <div style="font-size:13.5px;color:#3E4A63;line-height:1.6;margin-top:7px;">Not on a success screen. Each flow ends on the updated state it changed — the record, the health vector, the cost line — and, where relevant, on the next blocker. There is no congratulation step in this product.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:24px;margin-top:32px;">
+    <sc-for list="{{ flows }}" as="f" hint-placeholder-count="8">
+      <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;overflow:hidden;">
+        <div style="display:grid;grid-template-columns:1fr 460px;gap:24px;padding:18px 22px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;align-items:start;">
+          <div>
+            <div style="display:flex;align-items:baseline;gap:12px;">
+              <div style="font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:#1D6F50;">{{ f.k }}</div>
+              <div style="font-size:21px;font-weight:600;">{{ f.t }}</div>
+            </div>
+            <div style="font-size:13.5px;color:#3E4A63;line-height:1.6;margin-top:6px;max-width:90ch;">{{ f.d }}</div>
+          </div>
+          <div style="border-left:1px solid #DDE3EC;padding-left:22px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#5F6980;">Ends on</div>
+            <div style="font-size:13px;color:#3E4A63;line-height:1.55;margin-top:5px;">{{ f.ends }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:#5A6478;line-height:1.7;margin-top:9px;border-top:1px solid #EDF0F4;padding-top:8px;">{{ f.screens }}</div>
+          </div>
+        </div>
+
+        <div style="padding:6px 0;">
+          <sc-for list="{{ f.steps }}" as="s" hint-placeholder-count="7">
+            <div style="display:grid;grid-template-columns:44px 200px 1fr 300px;gap:16px;padding:12px 22px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ s.bg }};">
+              <div style="display:flex;align-items:center;gap:6px;">
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:{{ s.nfg }};">{{ s.n }}</div>
+              </div>
+              <div>
+                <div style="font-size:12.5px;font-weight:600;line-height:1.35;">{{ s.screen }}</div>
+                <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.04em;text-transform:uppercase;color:{{ s.stfg }};margin-top:3px;">{{ s.state }}</div>
+              </div>
+              <div style="font-size:13px;color:#3E4A63;line-height:1.55;">{{ s.what }}</div>
+              <div style="font-size:12.5px;color:{{ s.nfg }};line-height:1.5;">{{ s.note }}</div>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="padding:14px 22px;background:#FDF6E8;border-top:1px solid #E6CE9A;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:#8A5A0B;">Recovery branches designed for this flow</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:10px;">
+            <sc-for list="{{ f.branches }}" as="b" hint-placeholder-count="3">
+              <div style="background:#FFFFFF;border:1px solid #E6CE9A;border-left:3px solid {{ b.fg }};border-radius:0 6px 6px 0;padding:11px 13px;">
+                <div style="font-size:12.5px;font-weight:600;color:{{ b.fg }};">{{ b.t }}</div>
+                <div style="font-size:12px;color:#3E4A63;line-height:1.5;margin-top:4px;">{{ b.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="background:#14213D;color:#E9EEF5;border-radius:9px;padding:26px 30px;margin-top:32px;">
+    <div style="font-size:20px;font-weight:600;">Cross-flow guarantees</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:16px;">
+      <sc-for list="{{ guarantees }}" as="g" hint-placeholder-count="8">
+        <div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;color:#8FA6C4;">{{ g.k }}</div>
+          <div style="font-size:13px;color:#C3CEDE;line-height:1.6;margin-top:6px;">{{ g.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G='#1D6F50', A='#8A5A0B', R='#A83F3F', S='#4A5568', F='#5F6980', N='#24396B', P='#6A4A7C', SEC='#8E2F2F';
+    const st = (n, screen, state, what, note, kind) => {
+      const map = {ok:{bg:'#FFFFFF', nfg:S, stfg:F}, alt:{bg:'#FAFBFD', nfg:S, stfg:F}, warn:{bg:'#FEFAF1', nfg:A, stfg:A}, stop:{bg:'#FDF3F3', nfg:R, stfg:R}, sec:{bg:'#FDF3F3', nfg:SEC, stfg:SEC}, end:{bg:'#F5FAF7', nfg:G, stfg:G}};
+      return {n, screen, state, what, note, ...(map[kind] || map.ok)};
+    };
+    return {
+      flows: [
+        {k:'A', t:'Discover to capability-scoped publication', d:'The spine of the product: a candidate becomes eligible intelligence, and exactly one capability is published while three others stay held.', ends:'Record Detail with a six-cell eligibility matrix, and an App-impact summary naming the one artefact that changed.', screens:'S1 → S2 → R2 → C3 → H6', steps:[
+          st('01','S1 Discovery candidates','12 awaiting triage','Candidate CAND-2201 is inspected: discovery route, claimed provider, relevance rationale, format, mirror hints, prior matches. Rights read UNKNOWN and stay that way.','Accepting is not fetching. It enters preflight.','ok'),
+          st('02','S2 Security preflight','4 checks pass, 1 warns','Format, access policy, fingerprint and duplicate checks pass; the host is rate-limited, so the fetch is queued for 14 minutes rather than pressed.','Rate limiting is a queue, not an error.','ok'),
+          st('03','R2 Run detail','Running · stages 01–06 complete','Fetch, normalise, parse, segment and classify complete for 42 pages and 6 tasks. The job tray says the run is safe to leave.','Operator leaves and returns; the tray reports completion.','alt'),
+          st('04','R2 Run detail','Partial success · stage 07','Answer extraction links 8 of 12 items in Hörverstehen. Four items keep “key unknown”. The stage is complete, not failed, and the affected capability is named.','Partial is a first-class outcome here.','warn'),
+          st('05','C3 Record Detail','Mixed eligibility','Structure passes; correctness is blocked at item scope for four items; taxonomy is provisional at 91% against a 95% gate; pattern intelligence is limited by an unresolved cluster.','54 of 58 items remain usable — the exam is not condemned.','ok'),
+          st('06','C3 → R2 confirmation','R2 · scope enumerated','Publish structure analytics only. The dialog lists 6 tasks, 58 items, one capability, and the three capabilities that remain held with their reasons.','Four separate decisions, not one switch.','ok'),
+          st('07','H6 Corpus → App impact','Contract v3.1 vs consumer v3.0','One new decision-grade blueprint is available. Two others are withheld because the consumer does not understand taxonomy v4.2.','Ends on state, not on a success screen.','end')
+        ], branches:[
+          {t:'Preflight hold', d:'A blocked fingerprint or an unsafe archive stops the flow at step 02 with a security state — never as an extraction failure, and never retryable.', fg:SEC},
+          {t:'Publication is limited, not normal', d:'If C-tier mass is too high, publication offers “eligible · limited” with the reason, and the App is told the result is exploratory.', fg:A},
+          {t:'Consumer version mismatch', d:'Step 07 can end with nothing sent: Corpus withholds rather than emit a blueprint the App would misread, and says so.', fg:A}
+        ]},
+
+        {k:'B', t:'Extraction failure and scoped reprocessing', d:'A repeated failure is recognised as a slice, fixed once at the earliest affected stage, and the four human corrections in scope survive the rerun.', ends:'Run comparison showing before and after, and the two capabilities that became eligible.', screens:'I2 → W1 → R4 → R2 → R3', steps:[
+          st('01','I1 Inbox · all work','Repeated-failure slice surfaced','Six ÖSD scans share one cause: OCR below the meaning-critical gate. The queue groups them instead of showing six near-identical rows.','“Open as a slice” is the affordance.','ok'),
+          st('02','W1 Failure detail','3rd unchanged failure','Prior attempts are listed with their methods. Retrying the same method would repeat the same request, which the screen states plainly.','Blocked capability named: correctness.','warn'),
+          st('03','R4 Reprocess composer','Earliest stage locked to 04 Parse','Stages 01–03 are locked out with an explanation: nothing before Parse can fix an OCR defect. Method moves from tesseract-de 5.3 to 5.4 with escalation.','No “retry everything” control exists.','ok'),
+          st('04','R4 Composer · override policy','4 curated overrides in scope','“Retain curated overrides” is the default. The rerun will record its own candidate beside each, changing nothing.','Replacing them is possible, audited, and not recommended.','ok'),
+          st('05','R4 Cost and impact gate','€0.40 · envelope €18.40 / €25','The estimate, the envelope, the two capabilities that could become eligible, and the one document that cannot be reprocessed at all (security hold).','Confirmed at R2 with a rationale.','ok'),
+          st('06','R2 Run detail','Background · safe to leave','The run reports through the job tray. The operator moves to another queue and comes back after completion.','Nothing is held hostage to a spinner.','alt'),
+          st('07','R3 Run comparison','Partial success','OCR 0.62 → 0.91, keys 8/12 → 12/12, two Q0 findings resolved, two new Q2 findings appear, and all four overrides were retained.','Two new minor findings are an honest consequence of reading more text.','end')
+        ], branches:[
+          {t:'Override conflict', d:'If the rerun disagrees with a curated value, the curated value stays active and the disagreement arrives as a reviewable row with both readings side by side.', fg:A},
+          {t:'Partial success again', d:'The remainder is listed with its own reason and is separately retryable. The successful part is not rolled back.', fg:A},
+          {t:'Budget refusal', d:'If the estimate exceeds the envelope, the run is deferred with the cost stated. The record keeps a provisional value and loses nothing.', fg:A}
+        ]},
+
+        {k:'C', t:'Authenticity uncertainty', d:'A highly TELC-relevant record with thin support. The flow ends with the material usable for some things and excluded from others — and with rights untouched.', ends:'The record showing Tier C with restricted influence, and an analytics envelope where it no longer inflates any denominator.', screens:'I2 → W2 → A1 → H5', steps:[
+          st('01','I2 Authenticity review','4 in queue','EX-3140 claims official telc status. Impact ranking put it high because TELC relevance is high — not because confidence is low.','The queue reason states both facts.','ok'),
+          st('02','W2 Confidence dimensions','6 scored, 2 unknown','Two dimensions cannot be assessed. They stay in the denominator and contribute no evidence; they never read as zero.','Unknown is a value here.','ok'),
+          st('03','W2 Corroboration panel','8 observations, 2 independent','Six of eight supporting observations are copies of one another. Effective independent support is two C-tier sources, below the decision-grade cap.','Twenty mirrors would change nothing.','warn'),
+          st('04','W2 Contradiction panel','Structural conflict','Option cardinality contradicts three verified releases. This does not prove forgery; it does mean the official claim cannot be accepted.','Evidence, not verdict.','warn'),
+          st('05','W2 Decision','Accept with restricted influence','Usable for structure and exploratory work; excluded from decision-grade TELC claims and from prevalence denominators. Rationale required.','The alternative — quarantine — is offered and labelled as heavier than the evidence warrants.','ok'),
+          st('06','A1 Audit entry','Human · R2','The event records which axis changed and, explicitly, that rights and QA did not.','Rights are visibly absent from the effect list.','ok'),
+          st('07','H5 Analytics envelope','Two results re-graded','Two decision-grade results become exploratory; their reason strings name this decision.','Nothing was withdrawn from the App — the grade changed.','end')
+        ], branches:[
+          {t:'Disputed instead of accepted', d:'Both readings of the claim stay visible, influence is restricted, and the record returns to the queue only when new evidence arrives.', fg:A},
+          {t:'Reclassify as practice material', d:'Drops the official claim and keeps the material as generic B1 — a reclassification, not a rejection.', fg:A},
+          {t:'Rights unchanged, always', d:'No step in this flow can alter the rights status. A separate flow exists for that, with a separate audit event.', fg:P}
+        ]},
+
+        {k:'D', t:'Rights takedown', d:'The strongest sequence in the product: hold, discover scope, decide, suppress, prevent, recompute, complete. Never a generic delete.', ends:'A completion record stating exactly what was removed, what was retained, and what was recomputed without this source.', screens:'I2 → W3 → W4 → R2 → A1', steps:[
+          st('01','I1 Inbox','P0 · 4 h old','A takedown notice for SRC-0412 is the second-highest item in the Inbox. Direct use was held automatically the moment the notice was recorded.','Holding is cheap and reversible; deciding is not.','sec'),
+          st('02','W3 Rights review','Observed evidence quoted','The publisher footer and the notice are both shown as quoted evidence. The panel states plainly that Corpus records a decision, not a legal opinion.','Legal certainty is never implied.','sec'),
+          st('03','W4 Scope discovery','1 primary + 3 mirrors','Fingerprint search finds two mirrors the notice did not name. Eight rows of scope: observations, payloads, assets, derived records, published outputs, analytics, benchmark slot, and what is retained.','The benchmark slot loss is surfaced here, not later.','sec'),
+          st('04','W4 Governed decision','R3 · step 1 of 2','Comply in full, comply for the named scope only, or dispute. Each writes a different audit event and a different downstream path.','The destructive verb is not on the first button.','sec'),
+          st('05','W4 Confirmation','R3 · step 2 of 2','The operator types SRC-0412. The dialog restates what survives: audit record, rationale, and a content hash for prevention.','Focus trapped; cancel returns to the row.','sec'),
+          st('06','R2 Background sequence','Suppress → purge → prevent','Payloads removed, expression suppressed, prevention fingerprint set so re-discovery cannot reintroduce the material. 14 analytics results recomputed without this source.','Recomputation lowers a denominator honestly.','warn'),
+          st('07','A1 Completion record','Append-only','One entry states what was removed, what was kept, which six App artefacts were withdrawn with a reason code, and which benchmark slice was invalidated.','The fact of observation is never erased.','end')
+        ], branches:[
+          {t:'Purge required beyond suppression', d:'If the notice demands deletion rather than suppression, the payload-removal step is mandatory and the retained metadata shrinks to hash plus decision.', fg:SEC},
+          {t:'Mirror reappearance', d:'A later discovery matching the prevention fingerprint is refused before fetching and shown as a security state — no ordinary allow control can re-admit it.', fg:SEC},
+          {t:'Benchmark slice invalidated', d:'Slot 07 is marked invalid rather than quietly dropped, so no qualification claim silently rests on a smaller set.', fg:A}
+        ]},
+
+        {k:'E', t:'Duplicate family decision', d:'A four-member mirror family with one re-recorded audio member. One relationship class, then three separate canonical decisions.', ends:'Corrected prevalence denominators — smaller for language, larger for acoustics — and eleven previously held results becoming computable.', screens:'I2 → W6 → R2 → H5', steps:[
+          st('01','I2 Duplicate review','7 in queue · CL-118 is P1','The cluster blocks independent prevalence for eleven results, which is why it outranks five older items.','The queue prints that reason.','ok'),
+          st('02','W6 Cluster review','4 members listed','Each member shows its own confidence, rights and extraction quality. All four stay openable; none is hidden by the decision.','Duplicate neutrality is visible, not promised.','ok'),
+          st('03','W6 Similarity evidence','Text 0.99 · audio 0.11','Members 1–3 are textually identical. Member 4 shares the script and almost no acoustic signal: different voices, 8% slower, different room.','A list view, not a graph-only view.','ok'),
+          st('04','W6 Meaningful differences','Tested proposition identical','The same language knowledge is tested, so lexical and grammatical evidence must count once. The acoustic realisation is genuinely new evidence.','This is what decides the class.','ok'),
+          st('05','W6 Decision 1','Re-recorded variant','Neither “exact copy” (which would erase real acoustic evidence) nor “independent” (which would let one text count four times).','Both wrong answers are shown and explained.','ok'),
+          st('06','W6 Decisions 2 and 3','Anchor ≠ representation','Provenance anchor is the ÖSD publisher scan; the preferred processing representation is the digital-text mirror. Independence is set per metric: dependent for lexical, grammar and structure; independent for acoustic.','Three controls, three questions.','ok'),
+          st('07','H5 Analytics impact','Recomputed','Lexical denominator falls from 214 to 187 — the honest number. Acoustic difficulty gains one independent sample. Eleven held results become computable.','A smaller denominator is a better one here.','end')
+        ], branches:[
+          {t:'Keep unresolved', d:'A legitimate ending. Prevalence stays held and conservative rather than guessing, and the cluster returns to the queue with its age preserved.', fg:A},
+          {t:'Acoustic independence retained', d:'Even under a dependent relationship, the acoustic metric keeps its independent sample. Independence is per metric or not at all.', fg:G},
+          {t:'Late similarity evidence', d:'A new member arriving after the decision reopens the cluster as a review item; the previous decision stays in audit and is superseded, not edited.', fg:A}
+        ]},
+
+        {k:'F', t:'Taxonomy correction', d:'A proposed split with one child above the assignment gate and one below. The flow ends with a provisional secondary and no cloned mastery.', ends:'The task showing one approved split assignment and one provisional one, with the App told which side is evidence-backed.', screens:'I2 → W7 → A1 → H6', steps:[
+          st('01','I2 Taxonomy corrections','6 in queue','TASK-9917 has a v4.2 candidate proposing a housing-vocabulary child of „Wortschatz · Alltag“.','Automation proposed; nothing is applied.','ok'),
+          st('02','W7 Evidence pane','Instruction, stems, reasoning','Five of six stems name a housing requirement; correct answers require matching a stated constraint to an advertisement detail.','Evidence first, proposal second.','ok'),
+          st('03','W7 Current vs proposed','v4.1 vs v4.2 candidate','Primary at 0.88 is above the gate. Secondary at 0.57 is below the 0.75 assignment gate.','Two candidates, two different answers.','ok'),
+          st('04','W7 Four signals panel','CEFR · difficulty · GB1 · TELC','CEFR B1 is a declaration; difficulty is an estimate with ranges; the two relevance signals answer different questions. None is a trust signal.','No signal is collapsed into another.','ok'),
+          st('05','W7 Decision','Approve primary · keep secondary provisional','The qualified parent publishes for the secondary. Approving both is available, and audited as an override of the gate.','Precision Corpus has not earned is not claimed.','ok'),
+          st('06','A1 Audit entry','Human · R1','Records the previous assignments, the taxonomy version, and that the split does not imply mastery transfer.','Corpus holds no learner state to clone.','ok'),
+          st('07','H6 App impact','2 blueprints stale','Six items retagged. Two blueprints marked stale; two withheld because the consumer reports contract v3.0.','The App is told which side of the split is evidence-backed.','end')
+        ], branches:[
+          {t:'Keep provisional', d:'The whole proposal can stay provisional. Provisional is a designed state with its own chip, not a limbo.', fg:A},
+          {t:'Broaden to the parent', d:'Safer and less specific. Available as a first-class action, not buried in a menu.', fg:A},
+          {t:'Governed migration entry', d:'A rename, merge, split, deprecate or retire is entered from here, with its risk level and its retag consequence stated up front.', fg:A}
+        ]},
+
+        {k:'G', t:'Benchmark regression', d:'A candidate method looks better on development material and worse on a disjoint holdout slice. Promotion is blocked, and the diff is required reading.', ends:'A blocked promotion with a named failing slice, and a re-run that qualifies against an immutable release reference.', screens:'H4 → R3 → H4', steps:[
+          st('01','H4 Benchmark','Not instantiated · 11 of 16 slots','Today, no capability is qualified. Every cell reads “not run”, which is visually distinct from “failed”.','The flow cannot start honestly until the gold core is adjudicated.','warn'),
+          st('02','H4 After adjudication','Development slice ready','Twelve gold-core packages adjudicated; a content-family-disjoint holdout constituted. Only now can a claim mean anything.','Disjointness is the precondition, stated.','ok'),
+          st('03','R3 Candidate comparison','Dev improved','A new answer-key extraction method improves development precision from 94.1% to 96.8%.','Promising, not promoted.','ok'),
+          st('04','H4 Slice regression','Holdout failed','On scanned ÖSD material the candidate is worse: 91.2% against 93.6%. One slice, clearly named, with the diff available.','An average would have hidden this.','stop'),
+          st('05','H4 Promotion gate','Blocked','Promotion is refused. The screen states which slice failed and by how much, and offers the incident replay rather than an override.','No override path exists for a failed holdout.','stop'),
+          st('06','R3 Incident replay','Diff inspected','Expected-versus-actual on twelve failing items shows the candidate mis-reads two-column key layouts.','A specific, fixable cause.','ok'),
+          st('07','H4 Re-run and qualify','Qualified · release referenced','The revised method passes both slices. The qualification claim cites the immutable benchmark release it was measured against.','Claims always name their release.','end')
+        ], branches:[
+          {t:'Ambiguous truth', d:'Where the gold answer itself is debatable, the item is marked ambiguous and excluded from the slice — with the exclusion visible, not silent.', fg:A},
+          {t:'Benchmark source taken down', d:'A lost slot invalidates its slice rather than shrinking the denominator, and every claim resting on it is re-labelled.', fg:SEC},
+          {t:'Release superseded', d:'Old results stay readable and comparable; new claims reference the new release. Nothing is retroactively rewritten.', fg:A}
+        ]},
+
+        {k:'H', t:'Corpus health triage', d:'From a warning to a hard blocker to the smallest safe action — and back to a health view that has actually changed.', ends:'The Health overview with one blocker cleared, one still standing, and the cost line updated.', screens:'H1 → I2 → W1 → H1', steps:[
+          st('01','H1 Health overview','2 hard blockers · 7 vectors','No aggregate score exists, so the two blockers cannot hide behind five healthy vectors. They are listed above everything else.','This is the whole reason there is no score.','ok'),
+          st('02','H1 Blocker card','2 Q0 correctness findings','The card names the exam, the four items, the cause, and the two things blocked: correctness publication and the benchmark development slice.','One click to the findings, not to a filtered list of everything.','stop'),
+          st('03','I2 Queue slice','2 rows, pre-filtered','The Inbox opens filtered to exactly those findings, with the filter chip visible and removable.','Context is inherited, not reconstructed.','ok'),
+          st('04','W1 Failure detail','Key conflict, both assertions','Two observations assert different keys for item 11. Both are retained; the source region for each is one click away.','Neither assertion is greyed out.','ok'),
+          st('05','W1 Smallest safe action','Mark the key disputed','Blocks correctness for four items and nothing else. The heavier alternative — quarantining the exam — is shown and labelled as disproportionate.','54 of 58 items keep working.','ok'),
+          st('06','H1 Updated health','1 blocker cleared','The QA vector moves from Blocked to Warning. The takedown blocker is still there, still first, still unaveraged.','Progress without pretending.','ok'),
+          st('07','H1 Cost line','€18.40 · unchanged','The action cost nothing, which the screen says. The paid job still waits at the gate, deferring nothing important.','A cheap fix is worth naming as cheap.','end')
+        ], branches:[
+          {t:'A blocker cannot be averaged away', d:'Clearing one blocker never turns the other into a percentage. Health remains a vector with a blocker list on top.', fg:R},
+          {t:'Cost hold reached', d:'If the smallest safe action needed paid processing beyond the envelope, the flow would end at the budget gate with the record in a stated provisional state.', fg:A},
+          {t:'Insufficient data is not failure', d:'Vectors reading “insufficient data” or “not instantiated” stay in that state rather than being nudged toward a verdict.', fg:F}
+        ]}
+      ],
+      guarantees: [
+        {k:'Leavability', d:'Every step that can take more than a few seconds runs in the background, states that leaving is safe, and reports through the job tray. No indefinite spinner appears anywhere in these eight flows.'},
+        {k:'Draft survival', d:'A rationale in progress survives navigation, reload, network loss and session expiry. It is listed in the header until it is submitted or discarded deliberately.'},
+        {k:'Queue context', d:'Opening a record from any queue preserves position, filters, sort and density. Closing returns focus to the row that was opened.'},
+        {k:'Scope before commit', d:'No R2 or R3 action commits without an enumerated scope: entity counts, capability changes, recompute list, and estimated cost where money is involved.'},
+        {k:'Automation never wins', d:'A rule or model may propose, mark provisional, or raise a finding. It may never clear a hard block, overwrite a curated override, or publish anything.'},
+        {k:'Strong blocks stay strong', d:'Security and takedown states are never reversible by discovery, allow controls, or reprocessing. Reversal is its own governed R3 decision.'},
+        {k:'Honest endings', d:'Flows end on changed state and, where one exists, the next blocker. There is no success illustration, no confetti, and no tone change on completion.'},
+        {k:'No learner data, ever', d:'Not one step in any flow reads or writes learner state. The App boundary is crossed only by abstract blueprints, eligibility and provenance summaries.'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

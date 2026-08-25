@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;padding:0;background:#EFF2F6;}
+  body{font-family:'IBM Plex Sans',Helvetica,Arial,sans-serif;color:#14213D;-webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums;}
+  *{box-sizing:border-box;}
+  a{color:#1D6F50;text-decoration:none;border-bottom:1px solid rgba(29,111,80,.35);}
+  a:hover{color:#14213D;border-bottom-color:#14213D;}
+</style>
+</helmet>
+
+<div style="max-width:1560px;margin:0 auto;padding:0 32px 120px;">
+
+  <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px;padding:28px 0 20px;border-bottom:1px solid #C6CFDD;">
+    <div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Bestehen / Corpus · Operations design · Page 00</div>
+      <div style="font-size:34px;font-weight:600;letter-spacing:-.02em;margin-top:8px;">Cover, product truth, and design principles</div>
+    </div>
+    <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#5A6478;text-align:right;line-height:1.7;">
+      Source authority · Stage&nbsp;17 spec → Identity → Overview<br>
+      Primary viewport 1440×1024 · light mode · WCAG 2.2 AA
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 420px;gap:24px;margin-top:24px;">
+    <div style="background:#14213D;color:#E9EEF5;border-radius:9px;padding:36px 40px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#8FA6C4;">The console this design describes</div>
+      <div style="font-size:30px;font-weight:600;line-height:1.25;margin-top:14px;max-width:44ch;">One operator, one prioritized inbox, and evidence that never pretends to be more certain than it is.</div>
+      <div style="font-size:15px;line-height:1.6;color:#C3CEDE;margin-top:18px;max-width:70ch;">Corpus turns provenance-preserving German A2/B1 exam evidence into rights-aware, deduplicated exam intelligence for Bestehen&nbsp;/&nbsp;App. The console exists so ordinary maintenance never needs database surgery — and so no maintenance action can quietly collapse provenance, confidence, rights, difficulty, QA readiness, or content independence into one green tick.</div>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:26px;">
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #3A4A6B;border-radius:999px;padding:7px 13px;color:#9FB4CE;">Calm scientific operations</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #3A4A6B;border-radius:999px;padding:7px 13px;color:#9FB4CE;">Compact, not cramped</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #3A4A6B;border-radius:999px;padding:7px 13px;color:#9FB4CE;">Smallest safe action</div>
+        <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;border:1px solid #3A4A6B;border-radius:999px;padding:7px 13px;color:#9FB4CE;">One owner, one hour a week</div>
+      </div>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:24px 26px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">Artifact index</div>
+      <div style="display:flex;flex-direction:column;gap:2px;margin-top:14px;">
+        <sc-for list="{{ artifacts }}" as="f" hint-placeholder-count="10">
+          <div style="display:grid;grid-template-columns:34px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #EDF0F4;align-items:baseline;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5F6980;">{{ f.n }}</div>
+            <div>
+              <div style="font-size:13.5px;font-weight:600;">{{ f.t }}</div>
+              <div style="font-size:12.5px;color:#5A6478;line-height:1.5;margin-top:2px;">{{ f.d }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="font-size:12.5px;color:#5A6478;line-height:1.6;margin-top:14px;">All ten pages open directly in a browser. <code style="font-family:'IBM Plex Mono',monospace;font-size:12px;background:#EDF0F4;padding:1px 5px;border-radius:4px;">DESIGN-HANDOFF.md</code> in this folder is the committable engineering handoff.</div>
+    </div>
+  </div>
+
+  <div id="s1" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.1</div>
+      <div style="font-size:22px;font-weight:600;">Run configuration — defaults honoured and defaults enhanced</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:100ch;margin-top:8px;">No run values were supplied with the brief, so every recommended default is in force. Four were enhanced by professional judgement; each enhancement and its rationale is recorded here and in the handoff.</div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:220px 260px 1fr 96px;gap:16px;padding:11px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>Variable</div><div>Value in force</div><div>Design consequence</div><div>Status</div>
+      </div>
+      <sc-for list="{{ runVars }}" as="r" hint-placeholder-count="13">
+        <div style="display:grid;grid-template-columns:220px 260px 1fr 96px;gap:16px;padding:12px 20px;border-bottom:1px solid #EDF0F4;align-items:start;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#14213D;">{{ r.v }}</div>
+          <div style="font-size:13px;line-height:1.5;">{{ r.d }}</div>
+          <div style="font-size:13px;line-height:1.55;color:#3E4A63;">{{ r.c }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:{{ r.col }};">{{ r.s }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="s2" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.2</div>
+      <div style="font-size:22px;font-weight:600;">The six truth axes — separate tokens, separate marks, separate words</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:100ch;margin-top:8px;">This is the load-bearing rule of the whole system. Each axis owns a hue family, a marker shape and a vocabulary; no axis may borrow another's green. A reader must be able to tell <em>which question</em> a badge answers before reading its value.</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:18px;">
+      <sc-for list="{{ axes }}" as="a" hint-placeholder-count="6">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:20px 22px;border-top:3px solid {{ a.hue }};">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5F6980;">Axis {{ a.n }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:{{ a.hue }};">{{ a.marker }}</div>
+          </div>
+          <div style="font-size:16px;font-weight:600;margin-top:8px;">{{ a.name }}</div>
+          <div style="font-size:13px;color:#5A6478;line-height:1.55;margin-top:6px;min-height:60px;">{{ a.q }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;line-height:1.7;border-top:1px solid #EDF0F4;padding-top:10px;margin-top:10px;">{{ a.states }}</div>
+          <div style="font-size:12.5px;color:#5A6478;line-height:1.5;margin-top:10px;"><strong style="color:#14213D;font-weight:600;">Never:</strong> {{ a.never }}</div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:22px 24px;margin-top:16px;">
+      <div style="font-size:16px;font-weight:600;">Combinations the interface must render without contradiction</div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:0 32px;margin-top:12px;">
+        <sc-for list="{{ combos }}" as="c" hint-placeholder-count="6">
+          <div style="display:grid;grid-template-columns:20px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid #EDF0F4;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5F6980;">{{ c.i }}</div>
+            <div style="font-size:13.5px;line-height:1.55;color:#3E4A63;">{{ c.t }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div id="s3" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.3</div>
+      <div style="font-size:22px;font-weight:600;">Design principles</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px;">
+      <sc-for list="{{ principles }}" as="p" hint-placeholder-count="8">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:20px 22px;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;color:#5F6980;">{{ p.n }}</div>
+          <div style="font-size:15.5px;font-weight:600;line-height:1.35;margin-top:8px;">{{ p.t }}</div>
+          <div style="font-size:13px;color:#5A6478;line-height:1.6;margin-top:8px;">{{ p.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="s4" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.4</div>
+      <div style="font-size:22px;font-weight:600;">Information architecture</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:100ch;margin-top:8px;">Five primary destinations. Everything else is a saved view, a tab, or a contextual route reached from a record — because eight top-level areas would be eight products for one operator.</div>
+
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:18px;">
+      <sc-for list="{{ ia }}" as="n" hint-placeholder-count="5">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;overflow:hidden;">
+          <div style="background:#14213D;color:#E9EEF5;padding:14px 18px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8FA6C4;">{{ n.k }}</div>
+            <div style="font-size:17px;font-weight:600;margin-top:4px;">{{ n.t }}</div>
+          </div>
+          <div style="padding:14px 18px 18px;">
+            <div style="font-size:13px;color:#3E4A63;line-height:1.55;">{{ n.d }}</div>
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5F6980;margin-top:14px;">Contains</div>
+            <div style="display:flex;flex-direction:column;gap:5px;margin-top:7px;">
+              <sc-for list="{{ n.items }}" as="i" hint-placeholder-count="5">
+                <div style="font-size:12.5px;color:#3E4A63;line-height:1.45;padding-left:12px;border-left:2px solid #DDE3EC;">{{ i }}</div>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:22px 24px;margin-top:16px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div>
+          <div style="font-size:16px;font-weight:600;">Deliberately not top-level</div>
+          <div style="display:flex;flex-direction:column;gap:9px;margin-top:12px;">
+            <sc-for list="{{ notNav }}" as="x" hint-placeholder-count="5">
+              <div style="display:grid;grid-template-columns:150px 1fr;gap:12px;font-size:13px;line-height:1.5;">
+                <div style="font-weight:600;">{{ x.t }}</div>
+                <div style="color:#5A6478;">{{ x.d }}</div>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:16px;font-weight:600;">Deliberately absent</div>
+          <div style="font-size:13px;color:#5A6478;line-height:1.65;margin-top:12px;">No learner accounts, attempts, Readiness, coaching, practice delivery or progress. No public corpus browser, no source mirror, no public API console, no submissions from anyone but the owner. No roles, assignments, approvals, comments, SLA clocks, billing, or collaboration feed. No enterprise BI. Each of these is either App-owned or explicitly deferred by §7.2 of the specification; designing a surface for it would imply a commitment the product has not made.</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#A83F3F;line-height:1.7;margin-top:12px;border-top:1px solid #EDF0F4;padding-top:10px;">No universal “production ready” switch · no scalar Corpus health score · no generic “Retry everything” · no generic Delete</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="s5" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.5</div>
+      <div style="font-size:22px;font-weight:600;">Screen and state inventory</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:100ch;margin-top:8px;">Forty-one designed surfaces. <strong style="color:#14213D;font-weight:600;">Full</strong> means a complete 1440×1024 screen exists; <strong style="color:#14213D;font-weight:600;">Variant</strong> means the surface is the same designed screen in another state, proven at component fidelity on page 02 or 05. Page 09 maps every specification area to these entries.</div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:52px 1fr 300px 130px 92px;gap:16px;padding:11px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>ID</div><div>Surface</div><div>States designed</div><div>Where</div><div>Fidelity</div>
+      </div>
+      <sc-for list="{{ inventory }}" as="s" hint-placeholder-count="20">
+        <div style="display:grid;grid-template-columns:52px 1fr 300px 130px 92px;gap:16px;padding:10px 20px;border-bottom:1px solid #EDF0F4;align-items:start;background:{{ s.bg }};">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:12px;color:#5F6980;">{{ s.id }}</div>
+          <div style="font-size:13px;font-weight:500;line-height:1.45;">{{ s.t }}</div>
+          <div style="font-size:12.5px;color:#5A6478;line-height:1.5;">{{ s.st }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#3E4A63;">{{ s.w }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:{{ s.col }};">{{ s.f }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="s6" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.6</div>
+      <div style="font-size:22px;font-weight:600;">Action-risk matrix</div>
+    </div>
+    <div style="font-size:14px;color:#5A6478;line-height:1.6;max-width:100ch;margin-top:8px;">Risk tier decides the confirmation pattern, not the designer's mood. R0 actions are one click with an undo window; R3 actions require typed confirmation of the exact scope and can never be reversed by ordinary discovery.</div>
+    <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;margin-top:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:56px 200px 1fr 260px 150px;gap:16px;padding:11px 20px;background:#F5F7FA;border-bottom:1px solid #DDE3EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#5A6478;">
+        <div>Tier</div><div>Actions</div><div>Confirmation pattern</div><div>Scope shown before commit</div><div>Reversal</div>
+      </div>
+      <sc-for list="{{ risk }}" as="r" hint-placeholder-count="4">
+        <div style="display:grid;grid-template-columns:56px 200px 1fr 260px 150px;gap:16px;padding:14px 20px;border-bottom:1px solid #EDF0F4;align-items:start;">
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:{{ r.col }};">{{ r.tier }}</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#14213D;">{{ r.acts }}</div>
+          <div style="font-size:13px;line-height:1.55;color:#3E4A63;">{{ r.pattern }}</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#5A6478;">{{ r.scope }}</div>
+          <div style="font-size:12.5px;line-height:1.5;color:#5A6478;">{{ r.rev }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="s7" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.7</div>
+      <div style="font-size:22px;font-weight:600;">Prototype map — flows A to H</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:18px;">
+      <sc-for list="{{ flows }}" as="f" hint-placeholder-count="8">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:18px 20px;">
+          <div style="display:flex;align-items:baseline;gap:8px;">
+            <div style="font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:#1D6F50;">{{ f.k }}</div>
+            <div style="font-size:14.5px;font-weight:600;">{{ f.t }}</div>
+          </div>
+          <div style="font-size:12.5px;color:#5A6478;line-height:1.55;margin-top:8px;">{{ f.d }}</div>
+          <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:#8A5A0B;margin-top:10px;border-top:1px solid #EDF0F4;padding-top:9px;">Recovery: {{ f.r }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+
+  <div id="s8" style="margin-top:52px;">
+    <div style="display:flex;align-items:baseline;gap:14px;">
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:#5A6478;">00.8</div>
+      <div style="font-size:22px;font-weight:600;">Assumptions this design records rather than invents</div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:18px;">
+      <sc-for list="{{ assumptions }}" as="a" hint-placeholder-count="8">
+        <div style="background:#FFFFFF;border:1px solid #DDE3EC;border-radius:9px;padding:16px 20px;border-left:3px solid #D89A2A;">
+          <div style="font-size:14px;font-weight:600;line-height:1.4;">{{ a.t }}</div>
+          <div style="font-size:13px;color:#5A6478;line-height:1.55;margin-top:6px;">{{ a.d }}</div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="font-size:13px;color:#5A6478;line-height:1.6;max-width:110ch;margin-top:16px;">None of these blocks implementation. Each is a presentation default chosen where the specification deliberately left design open; each is repeated in <code style="font-family:'IBM Plex Mono',monospace;font-size:12px;background:#EDF0F4;padding:1px 5px;border-radius:4px;">DESIGN-HANDOFF.md §9</code> so an architect can accept or replace it knowingly.</div>
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1620,&quot;height&quot;:1024}}">
+class Component extends DCLogic {
+  renderVals() {
+    const G = '#1D6F50', A = '#8A5A0B', R = '#A83F3F', S = '#5A6478', P = '#6A4A7C', N = '#2F4A7C';
+    return {
+      artifacts: [
+        {n:'00', t:'Cover, product truth, design principles', d:'Run config, six axes, IA, screen inventory, action-risk matrix, flow map, assumptions'},
+        {n:'01', t:'Foundations, variables, tokens', d:'Colour and state-token families, type, density, grid, motion, German/source text rules'},
+        {n:'02', t:'Components and variants', d:'34 components with anatomy, variants, states, content limits, a11y and responsive notes'},
+        {n:'03', t:'Data, governance, state models', d:'Canonical hierarchy, lifecycle, confidence, rights, dedup, QA severity, eligibility, audit'},
+        {n:'04', t:'Desktop operations screens', d:'Inbox, Sources, Runs, Record Detail, Health, Benchmark, Analytics, Audit at 1440×1024'},
+        {n:'05', t:'Workbenches and destructive actions', d:'Authenticity, rights/takedown, duplicate cluster, taxonomy, reprocess composer, confirmations'},
+        {n:'06', t:'Laptop, tablet, responsive behaviour', d:'1280×800 and 1024×768 proofs, mobile read-only triage, transformation rules'},
+        {n:'07', t:'Prototype flows and recovery branches', d:'Flows A–H as step maps with every failure and recovery exit'},
+        {n:'08', t:'Accessibility, content, security guidance', d:'WCAG 2.2 AA contract, keyboard map, announcements, copy rules, sanitized-preview rules'},
+        {n:'09', t:'Coverage matrix and handoff', d:'Specification area → screen → component → responsive → a11y → flow → status'}
+      ],
+      runVars: [
+        {v:'DESIGN_ENVIRONMENT', d:'Claude Design components', c:'Ten inspectable Design Components plus a Markdown handoff; tokens expressed as named values in page 01 and repeated literally in every screen.', s:'Default', col:S},
+        {v:'ARTIFACT_ORGANIZATION', d:'One Corpus/ folder, ten pages', c:'Split by the required 00–09 structure so each page stays reviewable; cross-page references are anchor links.', s:'Default', col:S},
+        {v:'BRAND_RELATIONSHIP', d:'Shared Bestehen identity, cooler operations surface', c:'Enhanced: Warm Paper stays the learner surface; Corpus uses a Mist-derived cool neutral family and drops the display face. Same ink, same green, denser type.', s:'Enhanced', col:G},
+        {v:'PRIMARY_VIEWPORT', d:'1440 × 1024', c:'Every full screen on page 04 is drawn at this size, 1:1, with the 240px rail and a 12-column content field.', s:'Default', col:S},
+        {v:'COMPACT_DESKTOP_VIEWPORT', d:'1280 × 800', c:'Proofs on page 06: rail collapses to 64px icons+labels, evidence rail becomes an overlay drawer.', s:'Default', col:S},
+        {v:'TABLET_VIEWPORT', d:'1024 × 768', c:'Inbox, Health and Record Detail proven; duplicate, rights and taxonomy workbenches are explicitly desktop-only with a stated reason.', s:'Default', col:S},
+        {v:'MOBILE_SCOPE', d:'Read-only health and urgent triage', c:'Enhanced narrowly: three mobile surfaces (health vector, hard blockers, single record read-only). No decision controls, no rationale entry.', s:'Enhanced', col:G},
+        {v:'DENSITY', d:'Compact but calm', c:'Two row heights (32 dense / 40 comfortable) as a token pair, switchable per table; type never below 12px.', s:'Enhanced', col:G},
+        {v:'COLOR_MODES', d:'Complete light mode', c:'Dark mode deliberately not designed — coverage of required light-mode states came first and consumed the budget. Token structure is mode-ready.', s:'Default', col:S},
+        {v:'PROTOTYPE_DEPTH', d:'High fidelity for flows A–H', c:'Step maps with every recovery exit named; no decorative transitions were designed.', s:'Default', col:S},
+        {v:'COPY_LANGUAGE', d:'English operations UI, German source verbatim', c:'German provider, section and task labels preserved exactly (Sprachbausteine, Hörverstehen); operator copy is English. Localisation readiness noted on page 08.', s:'Default', col:S},
+        {v:'HANDOFF_FORMAT', d:'Design pages + DESIGN-HANDOFF.md', c:'Enhanced: state contracts and the coverage matrix live as structured arrays in the page logic so they can be lifted directly.', s:'Enhanced', col:G},
+        {v:'ARTIFACT_ROOT', d:'Corpus/', c:'Requested explicitly. The existing Bestehen / App design pages at the project root are untouched.', s:'Default', col:S}
+      ],
+      axes: [
+        {n:'1', name:'Source & provenance', hue:'#5A6478', marker:'▣  slate', q:'Where did this evidence come from, and what does it claim to be?', states:'observed · redirected · mirrored · dead · withdrawn · manually supplied', never:'a trust signal. Allowing a domain grants neither rights nor authenticity.'},
+        {n:'2', name:'Authenticity & confidence', hue:'#2F4A7C', marker:'A B C D  navy', q:'How strongly should Corpus trust this for a stated use?', states:'Tier A / B / C / D · Quarantine · disputed · unknown · not applicable · capped', never:'raised by open rights, provider fame, or twenty mirrors.'},
+        {n:'3', name:'Rights & usage', hue:'#6A4A7C', marker:'§  plum', q:'What may be done with this source expression?', states:'REUSABLE · WITH_CONDITIONS · REFERENCE_ONLY · UNKNOWN_REVIEW_REQUIRED · PROHIBITED', never:'implied by public accessibility, and unknown is never permission.'},
+        {n:'4', name:'Difficulty & relevance', hue:'#2F7D8C', marker:'L R T A P  teal', q:'How demanding is it, and how target-relevant?', states:'L/R/T/A/P 0–100 + band · CEFR scope · GB1 · TELC · uncertainty range', never:'CEFR restated as difficulty, or TELC relevance read as trust.'},
+        {n:'5', name:'Extraction & QA readiness', hue:'#8A5A0B', marker:'Q0–Q3  amber', q:'Did Corpus recover this accurately enough for a specific capability?', states:'passed · Q0 · Q1 · Q2 · Q3 · incomplete · not run · blocked dependency', never:'a single pass/fail. Readiness is per capability, at the smallest scope.'},
+        {n:'6', name:'Identity & independence', hue:'#1D6F50', marker:'⧉  green', q:'Does this add new underlying evidence, or repeat existing evidence?', states:'independent · exact · reformatted · derivative · fragment · related variant · unresolved', never:'deletion of an observation, and never a way to multiply prevalence.'}
+      ],
+      combos: [
+        {i:'01', t:'Tier A verified official telc material that is REFERENCE_ONLY — full analytical weight, zero direct reuse.'},
+        {i:'02', t:'CC-licensed teacher worksheet that is openly reusable and still Tier C evidence.'},
+        {i:'03', t:'High TELC relevance on an item whose confidence is too low to influence App priorities.'},
+        {i:'04', t:'A perfectly parsed exam quarantined on suspected misrepresentation — structure eligible, correctness held.'},
+        {i:'05', t:'A trusted parent exam containing one disputed answer key: correctness blocked for that item only.'},
+        {i:'06', t:'A re-recorded listening script: dependent for lexical prevalence, independent for acoustic difficulty.'}
+      ],
+      principles: [
+        {n:'P1', t:'One question per badge', d:'Every state chip carries a marker, a word and a hue that belong to exactly one truth axis. If a reader has to ask “green for what?”, the design has failed.'},
+        {n:'P2', t:'Missing is a value', d:'Unknown, N/A, disputed, incomplete, provisional and unresolved get their own visible treatment. They never render as 0, false, blank, passed or failed.'},
+        {n:'P3', t:'Smallest safe scope', d:'Actions default to the narrowest affected unit and state the exact count they touch. A defective item never visually condemns its exam.'},
+        {n:'P4', t:'Evidence before verdict', d:'Detail surfaces read observed → interpreted → decided, in that order, with derivation origin and rationale attached. Corrections never overwrite the observation.'},
+        {n:'P5', t:'Recommendation, not authority', d:'Automation proposes; the operator decides. Recommended actions are labelled as suggestions and always sit beside the alternative safe action.'},
+        {n:'P6', t:'Strong blocks stay strong', d:'Takedown and security states are visually and interactively distinct from ordinary rejection, and no casual control reverses them.'},
+        {n:'P7', t:'Source content has no authority', d:'Every source preview is inert, sanitized and framed as quoted evidence. Text that looks like an instruction is still text.'},
+        {n:'P8', t:'Calm at one operator scale', d:'One prioritized inbox, reusable detail surfaces, honest counts, no vanity charts, no always-on inference, no work invented to fill a dashboard.'}
+      ],
+      ia: [
+        {k:'01', t:'Inbox', d:'The default landing surface. Prioritized by product impact, never FIFO, with eight specialized saved views.', items:['All work (impact-ranked)','Discovery triage','Ingestion status','Extraction failures','Duplicate review','Authenticity review','Rights review','Low confidence','Taxonomy corrections']},
+        {k:'02', t:'Sources', d:'Everything about where evidence comes from and whether Corpus may fetch it again.', items:['Discovered candidates','Manual URL intake','Manual file / archive intake','Source registry','Source detail (mirrors, dead links)','Allow / block governance','Takedown & security blocks']},
+        {k:'03', t:'Corpus', d:'Search and browse canonical records; the doorway to the one reusable Record / Review Detail.', items:['Search by stable identity','Hierarchy browse','Record Detail (10 scopes)','Comparison workbenches','Taxonomy explorer (read)','Audit history (record-scoped)']},
+        {k:'04', t:'Runs', d:'What the pipeline did, what it half-did, and what is now stale because of a change.', items:['Runs overview','Run detail with stage map','Partial success by scope','Failure & retry history','Reprocess composer','Downstream impact preview','Budget holds & paid gates']},
+        {k:'05', t:'Health', d:'Decision-oriented state of the whole Corpus. Hard blockers first; no aggregate score anywhere.', items:['Hard blockers','Backlog & stuck work','Eligibility & governance','QA vector & regression','Benchmark releases','Independence & analytics','Coverage & freshness','Cost ledger & budget']}
+      ],
+      notNav: [
+        {t:'Benchmark', d:'A tab inside Health. It is a quality instrument, not a daily destination.'},
+        {t:'Audit history', d:'Record-scoped tab plus a filtered global view reached from Health. Never a browsing hobby.'},
+        {t:'Taxonomy', d:'Read-only explorer under Corpus; governed rename/merge/split enters from a taxonomy correction.'},
+        {t:'App impact', d:'A tab inside Health and a panel inside publication confirmations, where the consequence is decided.'},
+        {t:'Global search', d:'Header control across the five areas. Searches stable IDs, provider labels, titles, URLs and hashes only — it never replaces a navigable queue.'}
+      ],
+      inventory: [
+        {id:'E1', t:'Owner sign-in / session entry', st:'Idle · authenticating · failed · session expired with draft held', w:'04 · 08', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'E2', t:'Empty Corpus first run', st:'No sources · no benchmark · safe next actions', w:'04', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'E3', t:'Unavailable / maintenance / permission denied', st:'Three system-owned states', w:'02 · 08', f:'Variant', col:S, bg:'#FFFFFF'},
+        {id:'I1', t:'Inbox — all work', st:'Loaded · loading · empty · stale cache · offline reconnecting · sparse high-impact · large low-impact backlog', w:'04 · 06', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'I2', t:'Inbox — eight specialized views', st:'Per-view columns, filters, queue reasons, repeated-failure slice', w:'04 · 02', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'I3', t:'Queue → preview drawer', st:'Position and filters preserved · draft retained on close', w:'04 · 07', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'S1', t:'Discovery candidates', st:'Triage list · candidate detail · accept/defer/reject/mirror lead', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'S2', t:'Manual URL intake', st:'Entry · duplicate submission · blocked domain · robots hold · rate-limited · budget deferred', w:'04 · 02', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'S3', t:'Manual file / archive intake', st:'Preflight · unsupported · encrypted · archive limit · unsafe payload held', w:'04 · 02', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'S4', t:'Source registry', st:'Search · family grouping · access history · concentration warning', w:'04 · 06', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'S5', t:'Source detail', st:'Provenance · mirrors · dead links · discovered assets · downstream records', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'S6', t:'Allow / block governance', st:'Allow · owner exclusion · ordinary block · security hard-block · takedown fingerprint', w:'04 · 05', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'R1', t:'Runs overview', st:'Running · partial · failed · retry exhausted · budget held · blocked dependency', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'R2', t:'Run detail with stage map', st:'13-stage lifecycle · per-scope counts · partial success · version summary', w:'04', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'R3', t:'Run comparison', st:'Previous vs current run diff · newly eligible / invalidated / stale', w:'05', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'R4', t:'Reprocess composer', st:'Scope · earliest affected stage · override policy · cost · impact preview', w:'05 · 07', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'C1', t:'Corpus search & browse', st:'Results by stable identity · hierarchy browse · no result', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'C2', t:'Record Detail — clean eligible record', st:'All eight panels passing, capability matrix all normal', w:'04', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'C3', t:'Record Detail — mixed eligibility', st:'Normal / limited / held across six capabilities', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'C4', t:'Record Detail — disputed child, trusted parent', st:'Local dispute, parent unaffected, correctness held at item scope', w:'04 · 05', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'C5', t:'Record Detail — prohibited asset in usable task', st:'Asset suppressed, task structure still eligible', w:'05', f:'Variant', col:S, bg:'#FFFFFF'},
+        {id:'C6', t:'Record Detail — incomplete package', st:'Source incompleteness with locally valid tasks', w:'05', f:'Variant', col:S, bg:'#FAFBFD'},
+        {id:'C7', t:'Observed vs active interpretation diff', st:'Curated correction with rationale and origin', w:'02 · 05', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'C8', t:'Sanitized asset / media preview', st:'Rendered inert · unsupported · unsafe held · rights-suppressed', w:'02 · 08', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'W1', t:'Extraction failure detail', st:'Category · input quality · prior attempts · slice recurrence · blocked capability', w:'04 · 05', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'W2', t:'Authenticity & confidence review', st:'8 dimensions with unknown/N–A · tier · cap · corroboration · contradiction', w:'05', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'W3', t:'Rights review', st:'Five statuses · action permissions · component override · legal review required', w:'05', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'W4', t:'Takedown workbench', st:'Scope · mirrors · immediate hold · suppression · purge · prevention · completion', w:'05 · 07', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'W5', t:'Duplicate pair comparison', st:'Similarity evidence · meaningful differences · three separate decisions', w:'05', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'W6', t:'Duplicate cluster review', st:'Four-member mirror family · per-member rights/confidence · independence effect', w:'05', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'W7', t:'Taxonomy correction', st:'Current vs proposed · role · confidence · version · approve/remap/broaden/provisional', w:'05', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'W8', t:'Governed taxonomy migration entry', st:'Rename / merge / split / deprecate / retire with mastery-cloning warning', w:'05', f:'Variant', col:S, bg:'#FAFBFD'},
+        {id:'H1', t:'Corpus Health', st:'Hard blockers · seven vectors · no aggregate score', w:'04 · 06', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'H2', t:'Coverage & freshness matrix', st:'Provider × CEFR × Section with unknown cells and staleness', w:'04', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'H3', t:'Cost ledger', st:'Per-1k item cost · monthly envelope · budget hold · paid-job gate', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'H4', t:'Benchmark & regression', st:'Release · 16 slots · gold core · qualification matrix · slice regression · not instantiated', w:'04 · 07', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'H5', t:'Analytics result envelope', st:'Decision-grade vs exploratory · denominator · independence · sufficiency', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'H6', t:'Corpus → App impact', st:'Contract version · compatibility · invalidation · no decision-grade pattern', w:'04 · 07', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'A1', t:'Audit timeline', st:'Human · automated · import · reprocessing actors, with diff detail', w:'04', f:'Full', col:G, bg:'#FFFFFF'},
+        {id:'A2', t:'Confirmation dialog family', st:'R0–R3, exact scope, typed confirmation, conflict, partial success', w:'05', f:'Full', col:G, bg:'#FAFBFD'},
+        {id:'A3', t:'System state family', st:'Loading · stale · background job · conflict · session expiry · partial success · offline', w:'02 · 08', f:'Full', col:G, bg:'#FFFFFF'}
+      ],
+      risk: [
+        {tier:'R0', col:'#5A6478', acts:'Defer · note · change saved view · request revisit · mark reviewed', pattern:'Immediate, inline, no dialog. Toast with Undo for 8 seconds. Focus stays on the row.', scope:'Row count only, in the toast.', rev:'Undo, or repeat the action.'},
+        {tier:'R1', col:'#2F4A7C', acts:'Accept candidate · curated correction · taxonomy remap · confidence update · allow source', pattern:'Inline confirmation panel inside the detail surface. Rationale optional, prompted when the value contradicts the observation.', scope:'Named unit plus a count of dependent outputs to recompute.', rev:'Editable afterwards; previous value stays in audit.'},
+        {tier:'R2', col:'#8A5A0B', acts:'Quarantine · restore · publish or limit a capability · scoped reprocess · duplicate decision · ordinary block', pattern:'Modal with the exact affected scope enumerated, rationale required, and the cheaper alternative offered beside the recommendation.', scope:'Per-entity counts, per-capability eligibility change, estimated cost, recompute list.', rev:'Reversible by a governed inverse action, logged as a separate event.'},
+        {tier:'R3', col:'#A83F3F', acts:'Takedown hold & suppression · purge · security hard-block · prevention fingerprint · benchmark supersession', pattern:'Two-step modal: read the scope, then type the record identity to confirm. Destructive verb never appears on the first button. Keyboard focus is trapped and restored.', scope:'Every affected observation, mirror, asset, published output, App-facing artefact, and what remains as audit-only metadata.', rev:'Not reversible by discovery or by ordinary controls. Reversal is a separate governed decision with its own R3 confirmation.'}
+      ],
+      flows: [
+        {k:'A', t:'Discover → publish', d:'Candidate triage, security preflight, run with one partial scope, review, capability eligibility, App impact summary.', r:'Preflight hold · partial scope · limited-not-normal publication'},
+        {k:'B', t:'Failure → reprocess', d:'Inbox priority, failure detail, prior methods, earliest affected stage, cost gate, background run.', r:'Override conflict · partial success · budget refusal'},
+        {k:'C', t:'Authenticity uncertainty', d:'High TELC relevance, low confidence: inspect local and corroborating evidence, then limit or dispute.', r:'Disputed · restricted influence · rights unchanged'},
+        {k:'D', t:'Rights takedown', d:'Scope and mirrors, immediate hold, governed decision, suppression, prevention, recomputation, completion.', r:'Purge required · mirror reappearance · benchmark slot lost'},
+        {k:'E', t:'Duplicate family', d:'Cluster inspection, relationship class, then three separate canonical decisions and an independence preview.', r:'Unresolved dependency · acoustic independence retained'},
+        {k:'F', t:'Taxonomy correction', d:'Evidence inspection, remap or broaden or keep provisional, version and impact, downstream retag.', r:'Keep provisional · split without mastery cloning'},
+        {k:'G', t:'Benchmark regression', d:'Candidate method, slice regression, holdout failure, incident replay, blocked promotion, re-run.', r:'Blocked promotion · ambiguous truth · superseded release'},
+        {k:'H', t:'Health triage', d:'Warning to hard blocker to affected queue slice to smallest safe action, then back to updated health and cost.', r:'Blocker cannot be averaged away · cost hold'}
+      ],
+      assumptions: [
+        {t:'Impact ranking is a five-factor sort, shown as a reason string', d:'Severity, capability breadth, target relevance, evidence uniqueness and age. The UI always prints the reason ("Q0 correctness · telc B1 target · 4 items"), so the weighting can change without redesign.'},
+        {t:'Undo window is 8 seconds for R0 only', d:'No undo is offered for anything that changes eligibility, rights, or the audit record. Those get a governed inverse action instead.'},
+        {t:'Queue paging over infinite scroll', d:'Fixed 50-row pages with a persistent position marker, because a queue position must survive a detail visit and a browser reload.'},
+        {t:'Rationale is required at R2 and above', d:'Free text, 240 characters, with two-click evidence attachment. Optional at R1 unless the change contradicts the observed value.'},
+        {t:'Background jobs are always leavable', d:'Every long action states "safe to leave" and reports completion in the header job tray, because a one-owner console cannot hold a person hostage to a spinner.'},
+        {t:'Cost is shown per action before commit', d:'Estimated paid cost appears in every R2/R3 confirmation that can incur spend, with the current month envelope beside it.'},
+        {t:'Stale means "computed before a change you made"', d:'Staleness is expressed as the cause, never as an age alone: "stale since taxonomy v4 · 82 outputs".'},
+        {t:'Nothing celebrates', d:'Successful publication returns a factual summary and the next blocker. No success illustration, no tick animation, no tone change.'}
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
