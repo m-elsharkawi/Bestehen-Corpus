@@ -1,0 +1,46 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 25 of 28
+## Define Testing, Evaluation, and Quality Gates
+
+You are the quality-engineering architect responsible for **Stage 25: Testing, Evaluation, and Quality Gates**.
+
+Define the claim-based verification architecture that proves Corpus preserves provenance, rights, confidence, independence, security, processing quality, App compatibility and recoverability before release. This is **architecture decision work, not implementation**. Do not write tests/workflows, create CI/provider resources/keys, deploy/configure systems or run live provider tests.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`, current App implementation handoff/runbook and current App CI/testing baseline. Reuse **GitHub Actions** and the existing repository/CI account; do not add CircleCI/Buildkite/TestRail/BrowserStack/security SaaS by default. Follow Stage 03's selected runtime, including Python; select idiomatic language tooling without forcing App’s pnpm/Vitest stack if Python won. Docker/Compose/PostgreSQL/OCI-compatible checks and Coolify deployment constraints remain shared. Live paid providers must not be required for ordinary CI. New testing/CI vendor/account requires measured need, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Tests prove semantic invariants, not just code coverage. Six axes remain independent; capability failures are local; rights/trust do not mutate each other; mirror independence is metric-specific; reprocessing preserves overrides/history; unsafe source cannot execute; App contract contains no learner data; benchmark qualification gates automated claims.
+
+## Mandatory reads
+
+Read Architecture 01–24, with hard focus 17,19,21–24; full Stage 25 checklist; all design handoff/flow/accessibility/security/coverage artifacts; reuse policy/App implementation handoff and App testing/CI architecture/implementation docs; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define test pyramid/suite classes appropriate to selected runtime: pure domain/property/state tests, parser/extraction fixtures, DB/integration, job/idempotency, security/adversarial, contract/bundle, benchmark/evaluation, UI/browser/accessibility and restore/recovery evidence.
+2. Define claim-to-gate matrix: each critical product/architecture claim maps to one or more deterministic test/evidence IDs.
+3. Define GitHub Actions structure using current account: fast PR gate, heavier integration/benchmark/security jobs, scheduled/manual expensive suites where appropriate; no always-on CI service.
+4. Define pinned/reproducible environments: runtime/package lock, system/native dependencies, containers, PostgreSQL version, OCR/ASR/model artifacts and rights-safe fixtures.
+5. Define provider fakes/recorded schema fixtures by default; live Gemini/OpenAI/R2/Auth0/SES checks only as bounded manual/staging evidence when the owning stage admits them.
+6. Define benchmark qualification from Stage 21 as a release gate for OCR/ASR/model/dedup capabilities; failed slice blocks only affected capability.
+7. Define contract compatibility tests against App bundle schemas/fixtures and last-known-compatible behavior.
+8. Define security negatives: SSRF, archive bomb/path traversal, prompt injection, inert preview, authz, cross-product DB/R2 denial, secret scan, supply-chain/advisory policy.
+9. Define data/history invariants: stable IDs, append/supersede, override survival, six-axis separation, rights/takedown restore replay, metric-specific independence.
+10. Define operations UI test matrix from design: desktop states, `<900px` read-only, keyboard/focus/live regions, contrast/non-color semantics, stale edits, governed actions.
+11. Define migration/backup/restore and release compatibility evidence.
+12. Define quality evidence manifest tied to exact commit, schema/rule/model/benchmark versions and CI run.
+13. Define cost/time budgets for CI and benchmark suites; move expensive work to scheduled/manual lanes before buying faster CI.
+
+## Alternatives / cost
+
+Compare GitHub Actions reuse + local containers with a dedicated CI/test platform. Prefer existing GitHub. If Python is selected, compare a single simple Python test/lint/type stack and avoid redundant tools. Include **App implementation reuse assessment**.
+
+## Deliverable
+
+Create/amend `Architecture/25-testing-evaluation-and-quality-gates.md` with normal 17-part structure. Include claim-to-gate matrix, suite/CI diagram, environment/fixture contract, benchmark/security/App compatibility gates, UI/a11y matrix, evidence manifest, cost strategy and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 25 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report test/CI baseline, language-specific tooling direction, reused GitHub account, ADRs, expensive/manual gates, risks and commits.
