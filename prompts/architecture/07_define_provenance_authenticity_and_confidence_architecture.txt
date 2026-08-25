@@ -1,0 +1,71 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 07 of 28
+## Define Provenance, Authenticity, and Confidence Architecture
+
+You are the evidence/data architect responsible for **Stage 07: Provenance, Authenticity, and Confidence Architecture**.
+
+Define how Corpus preserves provenance and evaluates authenticity/evidence confidence without confusing either with rights, QA readiness, difficulty, TELC relevance, or duplicate independence. This is **architecture decision work, not implementation**. Do not write production code/schema/migrations, deploy/configure services, create provider accounts/resources/keys, enter dashboards, or make live calls.
+
+## Mandatory global rules
+
+Read and obey:
+
+- `Architecture/00-architecture-shaping-plan.md`
+- `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`
+- current App implementation handoff `m-elsharkawi/Bestehen-App/Implementation/Personal/02-provider-service-setup/handoff.md`
+- current App provider runbook `m-elsharkawi/Bestehen-App/docs/setup/personal/README.md`
+
+**App implementation reuse/no-provisioning:** default to no new service, then reuse current App technology/account/control-plane family, then isolate a Corpus resource inside the same account, and introduce a new vendor/account only with measured justification, incremental cost/ops, ADR and exit. Current App implementation family includes GitHub/GitHub Actions, two-VM Coolify + Pangolin, Node/TypeScript/pnpm, PostgreSQL/Kysely/pg-boss, R2 EU, Auth0 EU, SES Frankfurt, Gemini and OpenAI. This stage normally needs no new external service. Do not provision anything.
+
+## Product invariants
+
+Corpus is learner-data-free. Six axes remain independent. `unknown`, `disputed`, `review_required`, local defects and provisional assessments are first-class. Mirrors do not create independent corroboration. Trust does not grant usage rights. High-confidence parent evidence does not repair a defective child.
+
+## GitHub execution
+
+Read Shaping/App current `main`; write only Corpus `main`; fetch current content/SHA before updates; never parallel-write checklist/same path; never modify Shaping/App/Design; commit output/justified ADRs/checklist.
+
+## Mandatory reads
+
+Read current:
+
+- Corpus product Stages 02,03,05,09,10,11,12,16,17;
+- Architecture 01,02,04,05,06;
+- full Stage 07 checklist;
+- `Design/DESIGN-HANDOFF.md`, `Design/Corpus-03-State-Models.dc.html`, `Design/Corpus-05-Workbenches.dc.html`, `Design/Corpus-07-Flows.dc.html`;
+- ADR index/current ADRs;
+- reuse policy and App implementation artifacts above.
+
+## Decisions this stage owns
+
+Settle every Stage 07 checklist item and at minimum:
+
+1. **Provenance graph.** Define durable relationships from discovery candidate/location → Source Observation → fetched artifact/version → normalized/extracted records, preserving redirects, mirrors, detached assets/keys and evidence references.
+2. **Authenticity/confidence state model.** Define A/B/C/D/review/quarantine semantics and how confidence dimensions are represented separately from the overall tier.
+3. **Local scope.** Define source/document/exam/task/item/asset-level confidence and inheritance rules. Inherited values must be distinguishable from local observations and unknown remains in the denominator where product rules require it.
+4. **Evidence dimensions.** Map provider reputation, structural similarity, language quality, answer-key presence/consistency, trusted-material similarity, internal consistency and independent corroboration to architecture-owned evidence inputs without hardcoding mutable calibration weights.
+5. **Corroboration independence.** Consume Stage 06 observations and future Stage 16 identity/independence without treating URL/host count as support count. Define provisional behavior before Stage 16 resolves clusters.
+6. **Conflicting evidence.** Define how conflicting answer keys, claimed-official labels, structural contradictions and weak provenance create reviewable evidence rather than destructive overwrite.
+7. **Decision lineage.** Every manual/automated trust decision carries evidence references, rule/method/model version, actor, time and supersession/review lineage.
+8. **Influence gates.** Architecture must support separate eligibility for exploratory structure, difficulty input, learning-priority influence, TELC-specific claims, direct App surfacing and other product uses; do not implement one trust threshold.
+9. **Reassessment/reprocessing.** New evidence may supersede a confidence decision without erasing historical observations or silently changing downstream published artifacts.
+10. **Operations/query needs.** Support design workbench dimensions, corroboration view, contradicting evidence, downstream-use effects and rationale-required decisions without a special backend per screen.
+
+## Alternatives / simplicity / cost
+
+Compare an append-only evidence graph/projection model with a single mutable trust score. Reject complexity that adds a graph database/search service unless Stage 05 evidence proves PostgreSQL cannot satisfy the needed relationships/querying. Trust calculation should be deterministic/rule-based where possible; model assistance is a candidate input, not authority.
+
+Include an **App implementation reuse assessment**. Expected default: current relational/runtime stack is sufficient and no new paid service/account is needed.
+
+## Failure, security and testing
+
+Define missing/corrupt provenance link, contradictory evidence, stale source, unresolved mirror lineage, rule-version migration and bad model-candidate behavior. Source text/model output cannot execute tools or grant authority. Define property/invariant tests for no trust→rights side effect, no mirror inflation, locality, history/supersession and deterministic replay.
+
+## Deliverable
+
+Create/amend `Architecture/07-provenance-authenticity-and-confidence-architecture.md` using normal 17-part structure. Include provenance/evidence Mermaid graph, confidence/locality tables, inheritance matrix, conflict/supersession state machine, influence-gate table, failure matrix, operations query map and reuse assessment.
+
+Create ADR only for a durable architectural evidence/lineage decision.
+
+## Checklist / handoff
+
+Read full Stage 07 section before work; check only committed decisions; sequential current-SHA writes; use exact deferral/blocker phrases; re-fetch/reconcile. Report decisions, ADRs, uncertainty/calibration needs, reuse/no-new-service result, cost, risks, downstream dependencies and commits.
