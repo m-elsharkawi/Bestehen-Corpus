@@ -1,0 +1,49 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 22 of 28
+## Define the AI and Automation Gateway, Model Governance, and Cost Controls
+
+You are the AI/automation architect responsible for **Stage 22: AI and Automation Gateway, Model Governance, and Cost Controls**.
+
+Define the narrowest AI/model boundary that supports unresolved OCR/ASR/semantic/QA work after deterministic/local methods, while keeping models out of source truth and bounding spend. This is **architecture decision work, not implementation**. Do not write prompts/adapters, create API projects/keys, configure billing, deploy or make live model calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`, current App implementation provider handoff/runbook, and current App AI/STT/TTS setup/architecture. Reuse existing **Gemini** and **OpenAI** account/project families first. Follow Stage 03's selected runtime, including Python; provider SDK choice is adapter-local and must not force a language. New LLM/ASR/provider/account requires benchmark evidence, explicit incremental cost/ops, ADR and exit. Polly remains `not_admitted` unless a benchmark proves a Corpus need. Do not provision anything.
+
+## Product invariants
+
+AI never becomes provenance, rights, answer truth, QA authority, publication authority or analytics denominator policy. Source text is untrusted data and may contain prompt injection. Only benchmark-qualified capabilities may use a promoted model release. Expensive work escalates from deterministic/local methods and stops/degrades cleanly at budget limits.
+
+## Mandatory reads
+
+Read Corpus product Stages 08,10,14–17; Architecture 03,11,13–18,21; full Stage 22 checklist; design evaluator/reprocess/security/health artifacts; reuse policy/App implementation handoff/runbook and AI guide; current App Architecture 19 for provider-governance patterns; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define capability registry/gateway: each capability owns typed input/output, allowed provider/model release, prompt/rule/schema version, payload allowlist, timeout, retry/escalation, benchmark evidence, cost policy and fallback.
+2. Define allowed capabilities only where earlier stages prove need: difficult OCR/layout interpretation, bounded semantic classification/answer mapping, difficult duplicate/derivative adjudication candidates, ASR fallback or other explicitly owned tasks.
+3. Define prohibited AI uses: rights/legal conclusions, automatic trust/publication, learner data, unbounded crawling, routine analytics, per-screen chat, unsupervised tool use, policy changes and arbitrary code execution.
+4. Define provider selection order: deterministic/local → existing Gemini/OpenAI capability → new provider only if benchmark/cost/privacy evidence proves material advantage.
+5. Define model-release pinning and aliases: no mutable alias silently changes production behavior.
+6. Define minimum payload, pseudonymization where relevant, no secrets, no App learner data, no unnecessary source bytes, and provider retention/training/settings review handoff to Stage 23.
+7. Define prompt-injection/tool isolation: model has no network/tools/credentials/publish authority; output is schema-validated candidate data with evidence/span references.
+8. Define one bounded escalation policy; no retry/vote/agent loops. Network retries are idempotent and do not create multiple semantic candidates/cost receipts.
+9. Define budget ledger: request/capability/model/provider units, estimated/actual spend, daily/rolling envelope, 50/80/100% actions or equivalent versioned policy, cache hit/avoided-call measurement.
+10. Define circuits/bulkheads and capability-local Pending/deferred/review fallback.
+11. Define benchmark promotion, shadow/offline comparison, rollback and drift triggers using Stage 21.
+12. Define provider exit with typed fixtures/replay and no provider SDK/type leakage above adapters.
+
+## Alternatives / cost
+
+Compare no-model/local-only, reuse Gemini/OpenAI, and at least one credible new provider only for capabilities where existing routes may fail. Reuse must be first row. Quantify cost per 1,000 items/pages/audio-hour/review where applicable and owner maintenance. Include **App implementation reuse assessment**.
+
+## Failure/security/testing
+
+Cover timeout/quota, malformed output, unsupported schema, hallucinated evidence, prompt injection, provider outage, budget exhaustion, model deprecation and benchmark regression. Failure keeps affected work unresolved/review-required; it never lowers confidence or creates false content truth.
+
+## Deliverable
+
+Create/amend `Architecture/22-ai-automation-gateway-model-governance-and-cost-controls.md` with normal 17-part structure. Include capability registry, routing/escalation matrix, provider-reuse comparison, model-release contract, security/data boundary, cost/circuit table, benchmark promotion state machine, failure matrix and exit strategy.
+
+## Checklist / handoff
+
+Read full Stage 22 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report admitted capabilities/providers, reused accounts, any new-provider exception, ADRs, benchmark gaps, spend policy, fallback and commits.
