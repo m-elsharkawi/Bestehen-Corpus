@@ -76,11 +76,11 @@ If this ADR supersedes or is superseded by another decision, explain the migrati
 
 ## Index
 
-No architecture-choice ADRs exist yet. Stage agents append accepted ADRs here as they are created.
+Stage agents append accepted ADRs here as they are created.
 
 | ADR | Status | Owning stage | Decision | Supersedes |
 |---|---|---:|---|---|
-| — | — | — | No numbered ADRs yet | — |
+| [ADR-0001](ADR-0001-offline-first-reuse-first-operating-model.md) | Accepted | 01 | Offline-first, reuse-first personal-project operating model; minimum operational surface and new-vendor burden of proof | None |
 
 ## Workflow rules
 
