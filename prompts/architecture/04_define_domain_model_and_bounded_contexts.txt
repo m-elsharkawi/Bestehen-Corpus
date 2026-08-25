@@ -1,0 +1,88 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 04 of 28
+## Define the Domain Model and Bounded Contexts
+
+You are the domain/data architect responsible for **Stage 04: Domain Model and Bounded Contexts** of Bestehen / Corpus.
+
+This stage establishes the architecture language, ownership boundaries and anti-corruption rules that prevent acquisition, evidence, rights, processing, QA, deduplication, analytics and publication from overwriting one another’s truth. This is **architecture decision work, not production implementation**. Do not create production schemas, ORM entities, services or APIs.
+
+## Project context
+
+Corpus is the A2/B1 German exam-data/intelligence product behind Bestehen / App. It is a one-owner personal project. The App consumes versioned pattern intelligence and owns learner state/Readiness/original practice. The architecture must preserve six independent axes: provenance; authenticity/confidence; rights; difficulty/relevance; capability-specific QA readiness; and identity/derivative lineage/metric-specific independence. Unknown/local/provisional states are first-class, capability publication is scoped, all source/model input is untrusted, and normal App usage is learner-data-free and precomputed rather than live Corpus inference.
+
+## GitHub execution
+
+Read `Bestehen-Shaping/main` and relevant `Bestehen-App/main` sources; write only `Bestehen-Corpus/main`. Fetch current files/SHA before update, do not parallel-write the same path/checklist, and never modify Shaping/App/Design. Commit actual output/ADRs/checklist.
+
+## Mandatory reads
+
+Read exact current paths:
+
+- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
+- `corpus/02-source-strategy.md`
+- `corpus/03-trust-authenticity-confidence.md`
+- `corpus/04-rights-and-usage-metadata.md`
+- `corpus/05-canonical-exam-model.md`
+- `corpus/06-exam-and-skill-taxonomy.md`
+- `corpus/07-difficulty-and-relevance-models.md`
+- `corpus/08-ingestion-and-extraction-pipeline.md`
+- `corpus/09-deduplication-strategy.md`
+- `corpus/10-validation-and-quality-assurance.md`
+- `corpus/11-corpus-analytics.md`
+- `corpus/12-corpus-app-contract.md`
+- `corpus/13-operations-and-review-experience.md`
+- `m-elsharkawi/Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md`
+- `Architecture/01-architecture-charter-and-quality-attributes.md`
+- `Architecture/02-system-context-and-product-boundaries.md`
+- `Bestehen_Corpus_Architecture_Checklist.md` — entire Stage 04 section
+- `Design/DESIGN-HANDOFF.md`
+- `Design/Corpus-03-State-Models.dc.html` — ten scopes, uncertainty and six gates
+- `Design/Corpus-05-Workbenches.dc.html` — governed review/identity/taxonomy interactions
+- `Architecture/adr/README.md` and current ADRs.
+
+Stage 03 may be executing in parallel. Do not depend on an undecided Stage 03 implementation technology. Stage 05 will reconcile the selected stack with this domain model.
+
+## Decisions not to reopen
+
+The six axes are product truth, not optional bounded contexts to merge for convenience. Observed source expression, curated interpretation/correction and derived intelligence remain distinct. Manual overrides survive reruns. Dedup must preserve observations. No domain object may own learner mastery/readiness. No domain-level `ready` boolean may replace capability eligibility.
+
+## Decisions this stage owns
+
+1. **Bounded contexts/modules.** Define clear ownership for Source Acquisition; Provenance/Evidence; Rights/Governance; Canonical Content; Taxonomy/Relevance; Processing; Quality/Findings; Identity/Independence; Analytics; Publication/Contracts; Operations/Audit; Benchmark/Qualification; and Cost/Automation. Merge only where ownership stays unambiguous and personal-project simplicity improves.
+2. **Ubiquitous language.** Define precise meanings for Source Family, Source Observation, Document, Exam, Section, Part, Task, Item, Instruction, Stimulus, Response Option, Answer/Scoring, Asset, Evidence, Finding, Decision, Derivation, Revision, Capability Eligibility, Cluster, Independence and Publication.
+3. **Ownership matrix.** State which context may create/change each authoritative concept and which contexts consume immutable IDs/references/projections.
+4. **Aggregate/value-object/policy boundaries.** Identify transactionally coherent concepts without forcing a physical database schema.
+5. **Anti-corruption rules.** Prevent model candidates from becoming curated truth automatically; prevent rights from changing confidence; prevent dedup from deleting observations; prevent QA from rewriting provenance; prevent analytics from becoming source truth.
+6. **Stable identity/revision ownership.** Decide which domain concern issues stable IDs and how mutable revisions/versioned interpretations relate without designing storage keys yet.
+7. **Uncertainty/state composition.** Define how unknown/disputed/provisional/stale/held/superseded states cross context boundaries and how local child findings influence parent views without invalidating unrelated siblings.
+8. **Cross-context communication shape.** Define conceptual commands/events/queries or application-service boundaries only enough to show ownership and dependency direction; Stage 11/19 own physical jobs/contracts.
+9. **Audit ownership.** Identify which consequential domain changes require append-only decision/audit entries and which context owns the authoritative record.
+
+## Alternatives
+
+Compare a single undifferentiated domain model with a modular bounded-context model and, if useful, a service-per-context extreme. Recommend the minimum separation that prevents semantic corruption without creating operational service sprawl.
+
+## Research
+
+Stable domain semantics come from repository sources; external web research is normally unnecessary. If you cite a mutable domain-design library/framework feature, use current official docs, but do not let framework capabilities drive domain boundaries.
+
+## Cross-cutting requirements
+
+- **Failure/recovery:** ownership must make it possible to keep known-good sibling/capability state when one local context operation fails.
+- **Security/rights/privacy:** identify internal trust-sensitive boundaries and prohibited writes; source/model text never gains domain authority.
+- **Cost:** boundaries must be coarse enough for one owner; name future split triggers rather than assuming distributed services.
+- **Testing:** define domain invariants/property/state-machine tests Stage 25 must later implement.
+- **App:** Publication/Contracts may consume Corpus intelligence but must not own learner state or accept learner profiles.
+
+## Deliverable
+
+Create/amend `Architecture/04-domain-model-and-bounded-contexts.md` using the normal 17-part architecture structure. Include a Mermaid context map, an ownership matrix, ubiquitous-language table, allowed/prohibited dependency directions, aggregate/policy candidates, and explicit cross-context invariants.
+
+Create an ADR only if a durable domain/context ownership choice genuinely benefits later stages; update the ADR index sequentially.
+
+## Checklist workflow
+
+Fetch/read the full Stage 04 checklist section; mark `[x]` only after committed evidence; use current SHA sequentially; leave true implementation work as `Deferred — architecture/implementation decision:`; leave owner blockers as `Blocked — owner decision required:` with a recommended default; re-fetch and reconcile at end; avoid unrelated stage edits.
+
+## Handoff
+
+Report context/ownership decisions, ADRs, assumptions, unresolved risks, cost/simplicity choices, downstream dependencies, contradictions/resolution authority and commits. Stage 04 is done only when Stage 05 and all later data/processing stages can answer “who owns this truth?” without guessing.
