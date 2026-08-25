@@ -1,0 +1,81 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 06 of 28
+## Define the Source Registry, Discovery, and Acquisition Architecture
+
+You are the acquisition/data-platform architect responsible for **Stage 06: Source Registry, Discovery, and Acquisition Architecture**.
+
+Your job is to turn the settled source strategy into bounded, auditable discovery/acquisition architecture without equating accessibility with trust or rights. This is **architecture decision work, not production implementation**. Do not write crawler code, provider adapters, browser automation or deployment scripts.
+
+## Project context
+
+Corpus gathers broad German A2/B1 exam evidence for Bestehen / App. One owner operates it. Six independent axes must survive: provenance, authenticity/confidence, rights, difficulty/relevance, capability QA readiness, identity/metric independence. Source acquisition policy is not a trust decision and not a rights grant. Unknown is first-class. Every source location and file is untrusted and must pass security preflight before deep processing. Corpus is cost-bounded and coverage-driven rather than an unbounded internet crawler.
+
+## GitHub execution
+
+Use current GitHub `main`: Shaping/App read-only; Corpus write-only. No local checkout assumptions. Fetch current contents/SHA before update, keep checklist writes sequential, do not modify `Design/`, Shaping or App, and commit actual output/ADRs/checklist.
+
+## Mandatory reads
+
+- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
+- `corpus/01-product-mission-and-boundaries.md`
+- `corpus/02-source-strategy.md`
+- `corpus/04-rights-and-usage-metadata.md`
+- `corpus/08-ingestion-and-extraction-pipeline.md`
+- `corpus/14-cost-scale-and-automation.md`
+- `corpus/15-security-privacy-and-abuse-boundaries.md`
+- `Architecture/00-architecture-shaping-plan.md`
+- `Architecture/02-system-context-and-product-boundaries.md`
+- `Architecture/04-domain-model-and-bounded-contexts.md`
+- `Architecture/05-data-ownership-persistence-storage-and-schema-evolution.md`
+- `Bestehen_Corpus_Architecture_Checklist.md` — full Stage 06 section
+- `Design/DESIGN-HANDOFF.md`
+- `Design/Corpus-04-Desktop-Screens.dc.html` — first-run/source intake/source registry/discovery screens
+- `Design/Corpus-07-Flows.dc.html` — Flow A preflight/acquisition path
+- `Design/Corpus-08-Accessibility-Content-Security.dc.html` — source content security wording
+- `Architecture/adr/README.md` and current ADRs.
+
+## Product/design truths not to reopen
+
+Initial acquisition may include official/unofficial A2/B1/mixed sources. TELC is highest target relevance, not the only family. Launch does not include authenticated paid/private crawling. An owner-submitted URL/file does not bypass preflight or imply rights. Source Observations are preserved even when mirrors/dead locations are consolidated operationally. Discovery acceptance means “may enter acquisition,” not “trusted,” “lawful for reuse,” or “publishable.”
+
+## Decisions this stage owns
+
+1. **Source registry model.** Define Source Family/provider/location/Source Observation/discovery candidate/acquisition-policy concepts, ownership and state transitions.
+2. **Discovery paths.** Define automated discovery versus owner-submitted URL/file/media intake and how each becomes a candidate without fetching prematurely.
+3. **Prioritization.** Translate provider/source value, coverage gaps, target relevance, confidence opportunity, format diversity and review cost into scheduling priorities without fabricating trust.
+4. **Allow/block scopes.** Define host/path/source-family/content-fingerprint policy scopes, precedence and audit. Clarify that allow/block grants neither confidence nor rights.
+5. **URL/location normalization.** Canonicalize retrieval locations while preserving every observation/redirect/mirror relationship and provenance.
+6. **Access behavior.** Define robots/access-policy, rate limit, backoff, redirect and dead-source rules; hand network-security enforcement to Stage 12.
+7. **Mirror/dead-source behavior.** Preserve observations, avoid repeated fetches, track preferred processing location separately from provenance anchor, and never count hosts as independent evidence.
+8. **Discovery/acquisition budgets.** Bound crawl depth, pages/host, retries, concurrent fetches, backfills and low-value candidates; define defer/stop states rather than hidden loops.
+9. **Source health.** Define acquisition-oriented health signals—reachable, rate-limited, blocked, changed, stale, dead—without reusing authenticity/rights vocabulary.
+10. **Revisit/change detection.** Define when/how sources are rechecked and how content changes create new observations/revisions rather than rewriting history.
+
+## Current research
+
+Use current primary official sources when architecture relies on robots/access standards, provider-specific public access policies or selected scheduler/fetch platform limits. Record access date. Do not treat robots permission as copyright/rights permission.
+
+## Alternatives
+
+Compare broad crawler-first acquisition with coverage-driven bounded discovery plus owner intake. Recommend the lowest-ops design that meets source breadth and benchmark needs. State future triggers for wider crawling rather than prebuilding it.
+
+## Failure/security/cost/testing
+
+- Define dead source, redirect loop, host rate limit, transient network error, changed content and policy block behavior.
+- Stage 12 must remain a mandatory security gate; no acquisition path may bypass it.
+- Track productive acquisition yield and duplicate/blocked fetch avoidance; human source review is cost.
+- Define tests for allow/block precedence, rate limits, observation preservation, idempotent discovery, change detection and no confidence/rights side effects.
+- Include observability needs for source backlog, age, retries and yield without logging unnecessary source payloads.
+
+## Deliverable
+
+Create/amend `Architecture/06-source-registry-discovery-and-acquisition-architecture.md` with normal 17-part structure. Include source-state diagram, discovery/acquisition sequence, registry ownership table, allow/block precedence table, failure/retry matrix, crawl-budget table and cost/yield metrics.
+
+Create ADR only for a durable acquisition/scheduling topology choice; update ADR index sequentially.
+
+## Checklist workflow
+
+Read the complete Stage 06 section first; check only committed decisions; use current-SHA sequential updates; mark implementation deferrals/blockers with the exact required phrases and recommended default; re-fetch/reconcile; avoid unrelated stage edits.
+
+## Handoff
+
+Report acquisition architecture decisions, ADRs, assumptions, access-policy research, cost/cheap fallback, unresolved risks, exact downstream dependencies (especially Stage 12), contradictions/authority and commits. Stage 06 is complete only when later stages can discover/fetch broadly without confusing “found” with “trusted” or “permitted.”
