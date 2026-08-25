@@ -1,0 +1,44 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 10 of 28
+## Define Taxonomy, Difficulty, Relevance, and Versioning Architecture
+
+You are the taxonomy/data architect responsible for **Stage 10: Taxonomy, Difficulty, Relevance, and Versioning Architecture**.
+
+Define how Corpus represents exam/skill taxonomy, multidimensional difficulty, Generic-B1 versus TELC relevance, mappings and version evolution without turning one label into learner mastery or immutable truth. This is **architecture decision work, not implementation**. Do not write production code/migrations, configure providers, create accounts/resources/keys, deploy or make live calls.
+
+## App implementation reuse and no-provisioning rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation provider handoff/runbook. Reuse existing infrastructure/accounts by default; prefer no new service, then reuse, then least-privilege Corpus resource in the same account. New vendor/account requires measured justification, incremental cost/ops, ADR and exit. **Python or TypeScript may be the Stage 03-selected Corpus runtime; do not force the App language.** Container/Coolify deployability remains mandatory. This stage should need no new external service.
+
+## Product invariants
+
+Taxonomy is multi-axis and versioned. CEFR difficulty, Generic-B1 relevance and TELC-specific relevance remain distinct. Corpus frequency/relevance are content priors, never learner weakness/mastery. Unknown/ambiguous mappings are first-class. Taxonomy changes must not silently rewrite historical interpretations or break App compatibility.
+
+## Mandatory reads
+
+Read current Corpus shaping Stages 05,06,07,09,10,11,12,16,17; Architecture 04,05,07,09; full Stage 10 checklist; design state/workbench/coverage artifacts; reuse policy; App implementation handoff/runbook; current App Corpus-integration architecture for shared-contract implications; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define versioned taxonomy dimensions for exam family/provider/level, skill, task type, subskill, language phenomenon, topic/theme, communicative function, format, response type and other settled product axes.
+2. Define independent difficulty dimensions and aggregation policy without one opaque difficulty score.
+3. Define Generic-B1 relevance and TELC relevance as separate evidence-backed dimensions with confidence/unknown states.
+4. Define mappings from source/provider-specific labels to canonical nodes, including ambiguous/multi-label cases and reviewer overrides.
+5. Define stable taxonomy IDs, node revisions, deprecation/supersession, aliases and split/merge semantics.
+6. Define versioned mapping releases and how historical records retain the mapping/taxonomy version used at the time while current projections may recompute.
+7. Define migration/reclassification triggers and scoped reprocessing rather than destructive global relabeling.
+8. Define cross-product contract behavior when App consumes taxonomy IDs/labels and a node splits/merges/deprecates; Corpus still receives no learner data.
+9. Define how analytics and benchmark partitions avoid mixing incompatible taxonomy versions.
+10. Define operations review and audit requirements for consequential remaps.
+11. Prove taxonomy/relevance querying is feasible in the selected PostgreSQL-based direction without a graph/search service at current scale.
+
+## Alternatives / cost / testing
+
+Compare versioned relational taxonomy/mapping tables with hardcoded enums and a graph/ontology platform. Prefer the simplest structure that preserves history and mappings. Include an **App implementation reuse assessment**; expected default is no new service/account. Tests must cover stable IDs, split/merge/deprecation, unknown mappings, historical version replay, no learner-state semantics and no implicit TELC=Generic-B1 coupling.
+
+## Deliverable
+
+Create/amend `Architecture/10-taxonomy-difficulty-relevance-and-versioning-architecture.md` using the normal 17-part structure. Include taxonomy/version Mermaid view, dimension table, mapping/uncertainty model, split/merge migration table, App compatibility consequences, failure matrix and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 10 before work; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report decisions, ADRs, calibration needs, reuse result, risks, downstream dependencies and commits.
