@@ -1,0 +1,49 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 13 of 28
+## Define Document, Image, OCR, Layout, and Structure Extraction
+
+You are the document-processing architect responsible for **Stage 13: Document, Image, OCR, Layout, and Structure Extraction**.
+
+Define the cheapest reliable extraction architecture for PDFs, images, office-like documents and scanned material, preserving layout/coordinates/confidence and partial success. This is **architecture decision work, not implementation**. Do not install parsers/models, write extraction code, create provider resources/keys, deploy/configure services or process live source files.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse GitHub/Coolify/Pangolin/PostgreSQL/R2/provider accounts by default. **If Stage 03 selected Python, treat Python's mature PDF/image/OCR/data-processing ecosystem as a primary advantage, not as a deviation.** If Stage 03 selected TypeScript, compare bounded Python/local CLI processing only when benchmark value justifies the second runtime. Everything must remain reproducibly containerized/deployable on Coolify. New OCR SaaS/cloud account is exceptional and requires benchmark evidence, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product invariants
+
+Extraction output is evidence/candidate data, not curated truth. Preserve original artifact/checksum, page/region coordinates, ordering/layout cues, method/model/version and uncertainty. Partial page/task extraction must survive failures. Rights/trust/QA remain independent. Security preflight from Stage 12 is mandatory.
+
+## Mandatory reads
+
+Read Corpus product Stages 05,08,10,14,15,16,17; Architecture 03,05,09,11,12; full Stage 13 checklist; design record/diff/reprocess/flow artifacts; reuse policy/App handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define document-type routing: native PDF text, scanned PDF, images, DOCX/ODT/other supported types, unsupported/unsafe types.
+2. Define cheap-first ladder: deterministic/native parser → local OCR/layout processing when needed → benchmark-qualified paid/model escalation only for unresolved scope.
+3. Compare Python libraries/tooling and system/native dependencies if Python is selected; pin licenses/versions/model artifacts and define container reproducibility.
+4. Define page/region/block/line/token representation with coordinates, reading order, tables/forms/images and links back to original artifact.
+5. Define OCR confidence/quality signals and when low confidence triggers alternate preprocessing/OCR/review rather than silent acceptance.
+6. Define image preprocessing boundaries (deskew/rotation/crop/contrast/resolution) as derived artifacts with lineage, never overwrite original.
+7. Define table/form/layout extraction and task boundary candidates without promoting them to canonical structure automatically.
+8. Define page/task-level partial success, fallback and review states.
+9. Define deterministic cache/content-hash reuse so unchanged pages/artifacts are not repeatedly OCRed or sent to paid providers.
+10. Define reprocessing/version behavior when parser/OCR/model changes and comparison/diff against prior output.
+11. Define resource limits for CPU/RAM/disk/process time on existing VM/Coolify capacity and measured trigger for dedicated worker capacity.
+12. Define output contract for Stage 15 semantic enrichment and Stage 21 benchmark evaluation.
+
+## Alternatives / benchmark / cost
+
+Compare local/open-source deterministic+OCR stack, paid managed OCR/document AI and model/vision extraction. The recommended default must be benchmark-driven and cheap-first. Estimate cost per 1,000 pages/items plus owner maintenance. Include **App implementation reuse assessment** and show how Python may reduce paid-provider dependence.
+
+## Failure/security/testing
+
+Cover malformed PDF, encrypted/password PDF, missing fonts/text encoding, huge pages, OCR crash/OOM, mixed orientation, duplicate pages, unsupported scripts, poor scan quality and native-text/OCR disagreement. Tests need rights-safe fixtures, golden page/layout outputs, confidence thresholds, partial-success and reproducibility checks.
+
+## Deliverable
+
+Create/amend `Architecture/13-document-image-ocr-layout-and-structure-extraction.md` with normal 17-part structure. Include routing/cheap-first diagrams, parser/OCR alternative matrix, data contract, confidence/escalation table, resource/cost budget, failure matrix, version/reprocess model and reuse assessment.
+
+## Checklist / handoff
+
+Read full Stage 13 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report selected extraction direction, Python/TypeScript implications, provider reuse/avoidance, ADRs, benchmark needs, cost/fallback, risks and commits.
