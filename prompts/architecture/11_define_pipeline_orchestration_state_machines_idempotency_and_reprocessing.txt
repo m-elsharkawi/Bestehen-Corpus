@@ -1,0 +1,49 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 11 of 28
+## Define Pipeline Orchestration, State Machines, Idempotency, and Reprocessing
+
+You are the workflow/platform architect responsible for **Stage 11: Pipeline Orchestration, State Machines, Idempotency, and Reprocessing**.
+
+Define the smallest durable orchestration architecture that can ingest, preflight, extract, enrich, deduplicate, validate, publish and reprocess Corpus material while preserving partial success and curated decisions. This is **architecture decision work, not implementation**. Do not write worker code, migrations, deployment/configuration, create resources/accounts/keys, enter dashboards or make live calls.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation provider handoff/runbook. Reuse GitHub/Coolify/Pangolin/PostgreSQL/R2/provider accounts by default. New vendor/account requires measured justification, incremental cost/ops, ADR and exit. **Follow the primary runtime selected by Stage 03, including Python if selected.** Do not add Redis, Kafka, Temporal, cloud workflow/queue SaaS, another VM or another language simply because orchestration libraries exist. The implementation must remain containerized/Coolify-deployable. Do not provision anything.
+
+## Product invariants
+
+Pipeline stages preserve observed/curated/derived separation, six-axis independence, local uncertainty, manual overrides and immutable history. Reruns never erase curator corrections. A failed stage blocks only affected scope/capability. Paid/provider work is bounded and deferrable. Security preflight precedes deep parsing/model use.
+
+## Mandatory reads
+
+Read Architecture 03–10; Corpus product Stages 08–10,13–17; full Stage 11 checklist; design run/inbox/flow/state artifacts; reuse policy and App handoff/runbook; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define pipeline stage graph and explicit state machine from candidate/acquired/quarantined through safe processing, enrichment, identity/QA/publication states.
+2. Define durable job/work-unit identity, idempotency keys, leases/claims, retries, retry budgets, terminal/deferred/blocked/review states and cancellation.
+3. Select the simplest job mechanism compatible with Stage 03. Start with PostgreSQL-backed orchestration. If Python is selected, compare an application-owned jobs table/`FOR UPDATE SKIP LOCKED` approach or a small PostgreSQL-native Python job library before adding Redis/managed queue. If TypeScript is selected, evaluate pg-boss reuse.
+4. Define transaction/outbox boundaries so facts and follow-up jobs cannot silently diverge.
+5. Define partial-success behavior at document/task/item/asset/capability scope and preservation of known-good sibling outputs.
+6. Define scoped reprocessing from the earliest invalidated stage using dependency/version fingerprints rather than full destructive reruns.
+7. Define curated override precedence and conflict creation when rerun candidates disagree with owner decisions.
+8. Define concurrency/deduplication behavior so duplicate submissions/reruns do not double-charge providers or create duplicate truth.
+9. Define priority/fairness for benchmark work, owner review, acquisition backfill, takedown/security urgent work and ordinary processing.
+10. Define on-demand/scheduled worker posture on existing Coolify/VM capacity and when an always-on worker is actually required.
+11. Define dead-letter/review recovery, operator replay, pause/circuit controls and safe shutdown/deploy behavior.
+12. Define job/version observability and cost attribution without logging source payloads unnecessarily.
+
+## Alternatives / simplicity
+
+Compare PostgreSQL-native job orchestration, a language-specific lightweight PostgreSQL queue, and a dedicated workflow/queue platform. Prefer the first/second unless measured load or correctness requires more. Include an **App implementation reuse assessment** and idle-cost comparison.
+
+## Failure/security/testing
+
+Cover worker crash, lease expiry, duplicate delivery, provider timeout, malformed candidate, version incompatibility, partial artifact loss, migration during jobs, budget circuit and security hold. Tests must prove idempotency, replay, exact-once semantic effects despite at-least-once execution, override survival, local failure and cost non-duplication.
+
+## Deliverable
+
+Create/amend `Architecture/11-pipeline-orchestration-state-idempotency-and-reprocessing.md` using normal 17-part structure. Include pipeline/state Mermaid diagrams, job contract/state table, reprocessing dependency matrix, concurrency/idempotency table, failure/recovery matrix, deployment/worker posture, cost/reuse assessment and upgrade triggers.
+
+## Checklist / handoff
+
+Read full Stage 11 first; check only committed decisions; sequential current-SHA updates; use exact deferral/blocker phrases; re-fetch/reconcile. Report selected orchestration mechanism, runtime implications, reuse/no-new-service decision, ADRs, risks, cost/fallback, downstream dependencies and commits.
