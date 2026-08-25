@@ -1,0 +1,74 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 27 of 28
+## Validate the End-to-End Architecture
+
+You are the principal architect responsible for **Stage 27: End-to-End Architecture Validation**.
+
+Your job is to re-fetch and validate Stages 01–26 as one coherent architecture, detect gaps/contradictions/cycles/overbuilding, and amend the owning earlier architecture artifact when necessary before final consolidation. This is **architecture validation, not implementation**. Do not write production code/tests/infrastructure, create resources/accounts/keys, deploy/configure systems, enter dashboards or make live calls.
+
+## App implementation reuse and Python/Coolify rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Validate that every stage follows the owner’s reuse intent: existing GitHub/GitHub Actions, two-VM Coolify/Pangolin, PostgreSQL/R2 and existing provider account families first; no new vendor/account without measured justification/ADR/exit; least-privilege separate Corpus resources where required. Validate that the selected **Python or TypeScript** runtime is justified by Corpus total complexity and remains containerized/deployable on Coolify. Python is not a deviation merely because App is TypeScript.
+
+## Mandatory reads
+
+Read:
+
+- Corpus product Stage 17 plus every detailed shaping Stage 01–16 needed to resolve contradictions;
+- `Architecture/00-architecture-shaping-plan.md` and reuse policy;
+- **every Architecture/01–26 artifact and current ADR index/ADRs**;
+- the entire `Bestehen_Corpus_Architecture_Checklist.md`, especially Stage 27;
+- all Corpus design handoff artifacts/coverage;
+- current App Architecture 10/12/28 and current App implementation/provider handoff/runbook/setup README;
+- all Stage 01–26 prompts only when needed to verify an artifact fulfilled its contract.
+
+Record current repository heads and relevant blob SHAs.
+
+## Validation obligations
+
+Prove, with exact owning artifacts, all completeness questions in `Architecture/00-architecture-shaping-plan.md`, including:
+
+1. reference-only official material can preserve authenticity evidence without unsafe reuse;
+2. disputed answer blocks correctness but does not destroy usable structure/topic evidence;
+3. mirrors are preserved yet metric-specific independence prevents inflated counts;
+4. re-recorded listening content may be lexically dependent but acoustically independent;
+5. stable IDs/revisions survive reprocessing/taxonomy/analytics/App publication;
+6. curated overrides survive reruns and conflicts become reviewable;
+7. scoped reprocessing starts at earliest affected stage;
+8. rights-only removal differs from trust/correctness invalidation and propagates to App correctly;
+9. takedown fingerprinting prevents prohibited mirror re-ingestion when required;
+10. untrusted URL/PDF/DOCX/ZIP/HTML/media reaches parsers/models only after bounded preflight without active execution/uncontrolled egress;
+11. source prompt injection cannot invoke tools/read secrets/change policy/publish;
+12. capability publication survives bundle/cache/import boundaries and App keeps last compatible data;
+13. shared taxonomy changes do not send learner data to Corpus;
+14. `corpus-benchmark-1.0.0` architecture is instantiated/versioned and candidate promotion is benchmark-gated;
+15. failed benchmark slices block only affected capability/scope;
+16. OCR/ASR/model spend circuits defer/stop safely;
+17. owner can operate without raw DB edits and design governed actions/a11y/mobile restrictions are preserved;
+18. health remains vector + blockers;
+19. data lifecycle distinguishes backed-up truth, reproducible derivatives, ephemera, suppression, retention and physical deletion.
+
+## Reuse/simplicity validation
+
+Create a cross-stage **tool/account/resource inventory** and verify:
+
+- no duplicate CI/deployment/network/object-storage/identity/email/AI/observability provider was introduced without ADR/evidence;
+- every new external dependency has incremental cost, owner-ops cost, fallback and exit;
+- existing App account reuse does not share broad credentials or mix learner/source data;
+- Python/TypeScript selection remains one primary runtime where possible; hybrid has a measured reason;
+- no Redis, vector DB, search cluster, warehouse, workflow SaaS, observability SaaS, feature-flag SaaS or extra VM survives without a measured trigger/need;
+- existing Coolify/Pangolin deployment remains feasible for every selected process/native dependency/container;
+- low/base/high cost remains within the product’s personal-project posture or has an explicit owner blocker before implementation.
+
+## Architecture consistency checks
+
+Validate single semantic writer/owner for each truth; dependency directions; contract/version compatibility; state vocabularies; error/failure locality; security/rights precedence; benchmark/AI promotion; App contract; design traceability; testing claims; release ordering; backup/restore; and ADR consistency. Detect stale vendor assumptions, especially any Render/Vercel/Supabase/new-account assumption that conflicts with the current implementation reuse policy.
+
+If an earlier artifact is wrong/incomplete, amend that **owning artifact** and justified ADR/checklist items with current SHAs; do not hide the fix only in Stage 27. Preserve valid earlier decisions and record supersession.
+
+## Deliverable
+
+Create/amend `Architecture/27-end-to-end-architecture-validation.md` using the normal 17-part structure. Include source manifest, completeness-question evidence matrix, concern-owner matrix, end-to-end flows, contradiction/fix register, risk register, design traceability, App compatibility proof, tool/account/resource reuse audit, total-cost/simplicity audit, implementation-readiness gaps and exact amended artifacts/ADRs.
+
+## Checklist / handoff
+
+Read full Stage 27 before work. Check `[x]` only for committed validation evidence. Reconcile any corrected earlier checklist items sequentially using current SHA. Leave true owner blockers explicit with recommended default. Re-fetch final checklist and all amended files. Report commits and whether Stage 28 may safely consolidate. Stage 27 is not complete if an uncovered question has no primary owner or if an unjustified duplicate provider/operations system remains.
