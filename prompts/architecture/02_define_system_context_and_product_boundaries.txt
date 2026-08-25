@@ -3,94 +3,65 @@
 
 You are the system/data architect responsible for **Stage 02: System Context and Product Boundaries** of **Bestehen / Corpus**.
 
-This stage turns settled product scope into an explicit architecture context: actors, external systems, trust zones, offline/batch paths, owner-operations paths, Corpus→App publication, and launch/future boundaries. This is **architecture decision work, not production implementation**. Do not write production code, deploy infrastructure, or choose detailed persistence/queue/framework solutions owned by later stages.
+This stage turns settled product scope into an explicit architecture context: actors, external systems, trust zones, offline/batch paths, owner-operations paths, Corpus→App publication, and launch/future boundaries. This is **architecture decision work, not production implementation**. Do not write production code, deploy infrastructure, configure dashboards, create provider resources/accounts/keys, or make live provider calls.
 
 ## Compact project context
 
 Corpus is an exam-data/intelligence product for broad German A2/B1 evidence. Bestehen / App is its learner-facing downstream customer and owns learner state, coaching, Readiness and original exercise generation/evaluation. Corpus is initially operated by one owner as a personal project.
 
-Architecture must preserve six independent truth axes: provenance; authenticity/confidence; rights/usage; difficulty plus Generic-B1/TELC relevance; extraction/QA capability readiness; and identity/derivative lineage/metric-specific independence. Unknown/disputed/provisional/local states are first-class and there is no universal readiness flag. The App contract is pattern-first and learner-data-free; ordinary App sessions must not require live Corpus inference. All external source/file/media/model inputs are untrusted. Prefer cheap, precomputed, cached and batchable paths with bounded escalation.
+Architecture must preserve six independent truth axes: provenance; authenticity/confidence; rights/usage; difficulty plus Generic-B1/TELC relevance; extraction/QA capability readiness; identity/derivative lineage/metric-specific independence. Unknown/disputed/provisional/local states are first-class and there is no universal readiness flag. Ordinary App sessions must not require live Corpus inference. All external input is untrusted. Prefer cheap precomputed/batchable paths with bounded escalation.
+
+## App implementation reuse and no-provisioning rule — mandatory
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`, `m-elsharkawi/Bestehen-App/Implementation/Personal/02-provider-service-setup/handoff.md`, and `m-elsharkawi/Bestehen-App/docs/setup/personal/README.md` before mapping technology/provider/account boundaries.
+
+The current reuse baseline is GitHub/GitHub Actions; the existing two-VM Coolify boundary; Pangolin private ingress; Node/TypeScript/pnpm; PostgreSQL/Kysely/pg-boss; Cloudflare R2 EU; Auth0 EU; AWS SES Frankfurt; Gemini; OpenAI STT/TTS; Docker/Compose; fake adapters; and existing secret-custody conventions. The implementation handoff is a runbook baseline, not proof all external resources are already live.
+
+Default order is **no service → reuse App tool/account → separate least-privilege Corpus resource inside same account if needed → new vendor/account only with measured justification, incremental cost/ops, ADR and exit**. Same-account reuse must never mix App learner data with Corpus source data or reuse over-broad credentials.
 
 ## GitHub execution — mandatory
 
-- Read `m-elsharkawi/Bestehen-Shaping/main` and `m-elsharkawi/Bestehen-App/main` only; write only `m-elsharkawi/Bestehen-Corpus/main`.
-- Do not assume a local checkout or previous-chat files.
-- Fetch current file content before an update and use the current blob SHA.
-- Do not parallel-write the checklist or any same path.
-- Never modify Shaping, App, or `Bestehen-Corpus/Design/`.
-- Completion requires actual GitHub commits for output/ADRs/checklist.
+Read Shaping/App `main`; write only Corpus `main`; fetch current SHA before updates; no parallel same-path writes; never modify Shaping/App/Design; commit output/ADRs/checklist.
 
 ## Mandatory reads
 
-Read current versions of:
-
-- `m-elsharkawi/Bestehen-Shaping/corpus/17-bestehen-corpus-product-specification.md`
-- `m-elsharkawi/Bestehen-Shaping/corpus/01-product-mission-and-boundaries.md`
-- `m-elsharkawi/Bestehen-Shaping/corpus/02-source-strategy.md`
-- `m-elsharkawi/Bestehen-Shaping/corpus/12-corpus-app-contract.md`
-- `m-elsharkawi/Bestehen-Shaping/corpus/15-security-privacy-and-abuse-boundaries.md`
-- `m-elsharkawi/Bestehen-Shaping/app/28-bestehen-app-product-specification.md` for the current consumer boundary
-- `m-elsharkawi/Bestehen-Corpus/Architecture/00-architecture-shaping-plan.md`
-- `m-elsharkawi/Bestehen-Corpus/Architecture/01-architecture-charter-and-quality-attributes.md`
-- `m-elsharkawi/Bestehen-Corpus/Bestehen_Corpus_Architecture_Checklist.md` — full Stage 02 section
-- `m-elsharkawi/Bestehen-Corpus/Design/DESIGN-HANDOFF.md`
-- `m-elsharkawi/Bestehen-Corpus/Design/Corpus-00-Cover-Principles.dc.html`
-- `m-elsharkawi/Bestehen-Corpus/Design/Corpus-04-Desktop-Screens.dc.html` for owner-access/intake/run/health/App-impact context
-- `m-elsharkawi/Bestehen-Corpus/Design/Corpus-07-Flows.dc.html` for flows A–H and recovery branches
-- `m-elsharkawi/Bestehen-Corpus/Architecture/adr/README.md` and any current ADRs.
+- Corpus product Stages 01, 02, 12, 15, 17 and App product Stage 28.
+- `Architecture/00-architecture-shaping-plan.md`
+- `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md`
+- `Architecture/01-architecture-charter-and-quality-attributes.md`
+- `Bestehen_Corpus_Architecture_Checklist.md` — full Stage 02
+- `Design/DESIGN-HANDOFF.md`, `Design/Corpus-00-Cover-Principles.dc.html`, `Design/Corpus-04-Desktop-Screens.dc.html`, `Design/Corpus-07-Flows.dc.html`
+- `Architecture/adr/README.md`
+- App implementation provider handoff/runbook above, `.env.example`, and relevant current setup guides for Coolify/Pangolin/R2/Auth0/SES/AI when those boundaries appear.
 
 ## Product/design truths not to reopen
 
-Corpus is not a learner course, public mirror, generic scraper, learner-attempt store or exam authority. Initial acquisition is German A2/B1/mixed; A1 support belongs to App. Launch excludes public submissions/API/research UI, multi-tenancy, billing, collaboration and authenticated crawling of paid/private third-party sites. The owner console is internal. Do not let trust zones collapse the six truth axes.
+Corpus is not a learner course, public mirror, generic scraper, learner-attempt store or exam authority. Launch excludes public submissions/API/research UI, multi-tenancy, billing, collaboration and authenticated paid/private crawling. Owner console is internal. Do not let trust zones collapse six axes.
 
 ## Decisions this stage owns
 
-Settle every Stage 02 checklist item, including:
+1. C4-style context covering owner, source web, manual intake, Corpus processing/storage/jobs/UI, OCR/ASR/model services, App and future/non-goal actors.
+2. Trust zones among untrusted source network/content, intake/quarantine, trusted processing/control plane, external processors, owner browser/session, App publication and backups.
+3. Path classification: discovery/acquisition, offline/batch processing, owner operations, benchmark/evaluation, Corpus→App publication, and explicit absence of learner runtime path.
+4. External dependency inventory including what data each dependency receives and whether it is existing/reused/no-service/new-candidate.
+5. Map current App implementation operational boundary—GitHub, two-VM Coolify, Pangolin, current provider-account family—as the **reuse context**, without choosing detailed Corpus resources yet.
+6. Define what must be always available vs queue/defer/on-demand. Explicitly identify opportunities to avoid always-on Corpus workers/services.
+7. Record launch exclusions and triggers for future public submissions, multiple operators, paid/private crawling, commercial reuse or public API.
+8. Record current App asynchronous bundle-first import as Stage 19 constraint.
+9. Define outage/degradation for source sites, workers, OCR/ASR/models, storage, owner UI and App publication.
 
-1. **C4-style system context.** Identify owner/operator, source web, manual URL/file/media intake, Corpus processing/storage/scheduling/operations UI, OCR/ASR/model services, Bestehen / App and future/non-goal actors.
-2. **Trust zones.** Draw boundaries among untrusted source network/content, safe intake/quarantine, trusted processing/control plane, external model services, owner browser/session, App publication and backups.
-3. **Path classification.** Separate discovery/acquisition, offline/batch processing, owner operations, benchmark/evaluation and Corpus→App publication. Explicitly show the absent learner-runtime path.
-4. **External dependency inventory.** For each external dependency class, state whether it receives source bytes, derived text, metadata, credentials/secrets, or nothing sensitive; later stages will select specific technologies.
-5. **Runtime vs offline.** Define what must be available for the owner console, what can queue/defer, and what App can continue using from last-known-compatible data when Corpus is unavailable.
-6. **Current vs future boundaries.** Record launch exclusions and the explicit architectural trigger that would require re-opening context for public submissions, multiple operators, paid/private crawling, commercial reuse or public API.
-7. **App counterpart.** Record the current App architecture expectation of asynchronous/bundle-style precomputed Corpus import as a later Stage 19 integration constraint, without designing the provider protocol here.
-8. **System outage behavior.** Define expected degraded behavior for source sites, processing workers, OCR/ASR/model providers, storage, owner UI and App publication.
+## Alternatives / cost
 
-## Alternatives and prohibitions
-
-Compare synchronous/live Corpus dependency with offline/asynchronous publication only at context level. Do not select detailed API/bundle formats here. Do not introduce learner-data ingress “for personalization.” Do not treat a source provider, model provider or operations browser as equally trusted simply because they use HTTPS.
-
-## Research rule
-
-Stable product boundaries need no web research. If you make mutable claims about an external security/trust standard or service interaction pattern, use primary official sources and record access date. Detailed vendor selection belongs later.
-
-## Cross-cutting requirements
-
-- **Failure/recovery:** context diagrams must show where work can defer, retry, quarantine, continue from cached/compatible data, or require owner review.
-- **Security/privacy/rights:** identify where untrusted data crosses into trusted processing and where rights/takedown/security can stop downstream work.
-- **Cost:** distinguish always-on vs batchable dependencies and identify context choices that would create unnecessary recurring spend.
-- **Observability/testing:** define end-to-end context probes/scenarios Stage 27 must later validate.
+Compare a separate standalone Corpus control plane/vendor set against reuse of the App implementation boundary at context level. Recommend reuse unless a trust/isolation requirement blocks it. Identify where separate logical resources inside the same account are sufficient. Do not select physical resource names or provision anything.
 
 ## Deliverable
 
-Create or safely amend:
+Create/amend `Architecture/02-system-context-and-product-boundaries.md` using the normal 17-part structure. Include Mermaid context/trust diagrams, external dependency/data exposure table, always-on vs on-demand table, and an **App implementation reuse assessment**.
 
-`Architecture/02-system-context-and-product-boundaries.md`
+## Checklist workflow
 
-Use the normal stage structure: Purpose/Scope; Inputs/Traceability; Decisions/Rationale; Alternatives; Components/Boundaries/Ownership; Data/State/Contracts/Versioning; Flows/Transitions; Failure/Recovery/Uncertainty; Security/Privacy/Rights/Abuse; Performance/Reliability/Observability/Operations/Cost; Testing/Benchmark/Validation; Mermaid diagrams/tables; ADRs; relationships; Decisions Made; Open Questions/Deferrals; DoD.
-
-At minimum include a Mermaid context/trust-boundary diagram and an external-dependency/data-exposure table. Do not use ASCII-box diagrams.
-
-## Live-checklist workflow — mandatory
-
-1. Fetch the current checklist and read the complete Stage 02 section before decisions.
-2. Check `[x]` only after the decision is committed in the stage output or linked ADR.
-3. Use current SHA for sequential checklist updates; no parallel writes.
-4. Leave implementation-only work unchecked with `Deferred — architecture/implementation decision:` and reason.
-5. Leave owner blockers unchecked with `Blocked — owner decision required:` plus precise question and recommended default.
-6. Re-fetch/reconcile Stage 02 at the end.
-7. Do not edit unrelated stages except a documented cross-stage correction.
+Read full Stage 02 before decisions; check only committed evidence; sequential current-SHA writes; implementation deferrals and owner blockers use exact workflow phrases; re-fetch/reconcile at end.
 
 ## Handoff
 
-Report decisions, ADRs, assumptions/calibration needs, unresolved risks, cost-sensitive choices/cheaper fallback, exact downstream dependencies, contradictions and resolution authority, and confirmation of output/checklist commits. Stage 02 is complete only when later stages can locate every external actor/path/trust boundary without inventing product scope.
+Report decisions, ADRs, assumptions, unresolved risks, reuse/no-service choices, incremental-cost implications, downstream dependencies, contradictions/authority and commits. Stage 02 is complete only when later stages can locate every actor/path/trust boundary and understand that reusing the App implementation/account boundary is the default—not a permission to implement it now.
