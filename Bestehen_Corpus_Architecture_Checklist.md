@@ -26,34 +26,36 @@
 **Output:** `Architecture/01-architecture-charter-and-quality-attributes.md`  
 **Downstream:** every later stage.
 
+**Committed evidence:** [Stage 01 charter](Architecture/01-architecture-charter-and-quality-attributes.md) and [ADR-0001](Architecture/adr/ADR-0001-offline-first-reuse-first-operating-model.md).
+
 ### Inputs
-- [ ] Read Corpus product specification Stage 17, product mission Stage 01, cost Stage 14, security Stage 15, benchmark Stage 16, product overview, identity, workflow plan, design handoff, and this complete checklist section.
-- [ ] Record current source SHAs/versions and any contradiction found.
+- [x] Read Corpus product specification Stage 17, product mission Stage 01, cost Stage 14, security Stage 15, benchmark Stage 16, product overview, identity, workflow plan, design handoff, and this complete checklist section.
+- [x] Record current source SHAs/versions and any contradiction found.
 
 ### Decisions
-- [ ] Define architecture principles that preserve product boundary, six axes, uncertainty/locality, capability-scoped publication, immutable observation history, replaceability, and one-owner maintainability.
-- [ ] Convert product priorities into measurable quality-attribute scenarios for correctness, provenance, rights safety, security, recoverability, availability/degradation, performance, operability, accessibility, benchmark qualification, and cost.
-- [ ] Define architecture budget envelopes around the 20k–50k canonical Item design center, approximately `€3/1,000 Items` variable-processing target and approximately `€25/month` normal cash envelope, while marking them recalibratable rather than hardcoded.
-- [ ] Define decision criteria and precedence when simplicity, quality, cost, rights, security, benchmark evidence, and App compatibility conflict.
-- [ ] Define forbidden shortcuts: one ready flag, trust=rights coupling, source-volume=independence, destructive rerun, learner-data ingress, live App inference dependency, unbounded paid loops, active source execution, and hypothetical internet-scale overbuilding.
+- [x] Define architecture principles that preserve product boundary, six axes, uncertainty/locality, capability-scoped publication, immutable observation history, replaceability, and one-owner maintainability.
+- [x] Convert product priorities into measurable quality-attribute scenarios for correctness, provenance, rights safety, security, recoverability, availability/degradation, performance, operability, accessibility, benchmark qualification, and cost.
+- [x] Define architecture budget envelopes around the 20k–50k canonical Item design center, approximately `€3/1,000 Items` variable-processing target and approximately `€25/month` normal cash envelope, while marking them recalibratable rather than hardcoded.
+- [x] Define decision criteria and precedence when simplicity, quality, cost, rights, security, benchmark evidence, and App compatibility conflict.
+- [x] Define forbidden shortcuts: one ready flag, trust=rights coupling, source-volume=independence, destructive rerun, learner-data ingress, live App inference dependency, unbounded paid loops, active source execution, and hypothetical internet-scale overbuilding.
 
 ### Product invariants / research / alternatives
-- [ ] Explicitly list product truths later stages may not reopen and calibration values later stages may tune with evidence.
-- [ ] Compare at least two architecture operating philosophies (for example modular monolith/offline-first vs distributed service-first) only at principle level; do not select the final stack here.
-- [ ] Define when current official external research is mandatory and when repository product truth is sufficient.
+- [x] Explicitly list product truths later stages may not reopen and calibration values later stages may tune with evidence.
+- [x] Compare at least two architecture operating philosophies (for example modular monolith/offline-first vs distributed service-first) only at principle level; do not select the final stack here.
+- [x] Define when current official external research is mandatory and when repository product truth is sufficient.
 
 ### Contracts, failure, security, cost, testing
-- [ ] Define the minimum cross-stage language for stable identity, revision, method/model/rule/taxonomy/contract versions, finding, hold, stale, provisional and superseded state.
-- [ ] Define graceful-degradation principles: preserve known-valid output, stop unsafe work, defer expensive work, make uncertainty visible, and never convert infrastructure failure into corpus truth.
-- [ ] Define stage-level security/privacy/rights and audit expectations that every downstream architecture artifact must address.
-- [ ] Define required observability/cost/testability questions every stage must answer.
+- [x] Define the minimum cross-stage language for stable identity, revision, method/model/rule/taxonomy/contract versions, finding, hold, stale, provisional and superseded state.
+- [x] Define graceful-degradation principles: preserve known-valid output, stop unsafe work, defer expensive work, make uncertainty visible, and never convert infrastructure failure into corpus truth.
+- [x] Define stage-level security/privacy/rights and audit expectations that every downstream architecture artifact must address.
+- [x] Define required observability/cost/testability questions every stage must answer.
 
 ### ADRs
-- [ ] Define when an ADR is required and adopt the `Architecture/adr/` index/template; do not create architecture-choice ADRs before the owning stage decides them.
+- [x] Define when an ADR is required and adopt the `Architecture/adr/` index/template; do not create architecture-choice ADRs before the owning stage decides them.
 
 ### Definition of Done
-- [ ] Artifact contains measurable quality scenarios, budgets, decision rules, forbidden shortcuts, assumptions, empirical calibration needs, and downstream obligations.
-- [ ] Relevant checklist items are reconciled against the committed output; no later-stage decision is prematurely selected.
+- [x] Artifact contains measurable quality scenarios, budgets, decision rules, forbidden shortcuts, assumptions, empirical calibration needs, and downstream obligations.
+- [x] Relevant checklist items are reconciled against the committed output; no later-stage decision is prematurely selected.
 
 ---
 
