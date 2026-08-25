@@ -1,0 +1,48 @@
+# Agent Prompt — Bestehen / Corpus Architecture — Stage 12 of 28
+## Define Secure Fetch, File, Archive, and Content Intake
+
+You are the security/platform architect responsible for **Stage 12: Secure Fetch, File, Archive, and Content Intake**.
+
+Define the bounded security architecture that turns untrusted URLs/files/archives/HTML/media into safe processing candidates without executing source content or granting it network/tool authority. This is **architecture decision work, not implementation**. Do not write fetcher/sandbox code, firewall rules, deploy/configure infrastructure, create accounts/resources/keys, enter dashboards or make live requests.
+
+## App implementation reuse and Python rule
+
+Read `Architecture/00-app-implementation-tooling-and-account-reuse-policy.md` and current App implementation handoff/runbook. Reuse existing two-VM Coolify/Pangolin/Docker/GitHub/PostgreSQL/R2 infrastructure/account families where safe. Follow Stage 03's selected runtime, including Python. A bounded isolated processor/container is allowed when security requires it, but a new sandbox vendor, browser SaaS, proxy service, VM or cloud account requires measured justification, incremental cost/ops, ADR and exit. Do not provision anything.
+
+## Product/security invariants
+
+Every external URL/file/archive/media/source document is untrusted. Owner submission does not bypass preflight. Active content never executes in the owner browser or trusted processing context. Prompt injection/source text cannot invoke tools, change policy, read secrets or publish. SSRF/redirect/DNS/egress constraints are first-class. Rights/trust remain separate from security acceptance.
+
+## Mandatory reads
+
+Read Corpus product Stages 02,08,13,15,17; Architecture 02,03,05,06,08,11; full Stage 12 checklist; design security/intake/flow artifacts; reuse policy/App handoff; ADR index/current ADRs.
+
+## Decisions this stage owns
+
+1. Define URL preflight: scheme/host/port policy, DNS resolution/re-resolution, private/link-local/metadata ranges, redirects, max hops, request limits and controlled egress.
+2. Define fetch architecture and network isolation. Prefer a constrained process/container on existing Coolify/VM infrastructure if it can meet the threat model; state when stronger sandboxing would be required.
+3. Define file preflight: declared vs magic type, size/page/duration limits, malformed/truncated handling, checksum, decompression and nested-archive budgets.
+4. Define archive extraction against zip-slip/path traversal, symlinks, device files, bombs, excessive file counts/ratios and nested recursion.
+5. Define HTML/document active-content stripping/inert storage and preview rules; scripts/macros/embedded active objects never execute.
+6. Define quarantine states and when material may move from raw quarantine to safe parser input.
+7. Define secrets/credential isolation and no authenticated/private crawling at launch.
+8. Define source-content-to-model boundary: content is quoted/data-delimited, no tool permissions, structured response validation, no secret/network access.
+9. Define MIME/media parser handoff contracts for Stages 13–14 and how unsafe/unsupported material remains preserved but blocked.
+10. Define temporary workspace lifecycle, deletion and storage isolation using existing R2/VM account boundary where suitable.
+11. Define security finding/audit evidence and owner override limits—unsafe content cannot be manually “approved” into execution.
+
+## Alternatives / cost
+
+Compare in-process validation, isolated local/container worker on existing VMs, and managed sandbox/browser services. Prefer the least expensive boundary that meets the threat model. Include an **App implementation reuse assessment** and explicit future triggers for stronger sandboxing.
+
+## Failure/testing
+
+Cover DNS rebinding, redirect to private IP, oversized response, archive bomb, corrupt PDF, macro-bearing office file, executable masquerading as media, parser crash and disk/temp exhaustion. Define adversarial test corpus and negative release gates. Do not claim complete malware safety.
+
+## Deliverable
+
+Create/amend `Architecture/12-secure-fetch-file-archive-and-content-intake.md` with normal 17-part structure. Include trust-boundary/sequence diagrams, URL/network policy table, file/archive preflight matrix, quarantine state machine, temporary-storage lifecycle, prompt-injection boundary, failure matrix, reuse/cost assessment and residual risk.
+
+## Checklist / handoff
+
+Read full Stage 12 first; check only committed decisions; sequential current-SHA writes; exact deferral/blocker phrases; re-fetch/reconcile. Report security boundaries, reuse/isolation decisions, ADRs, residual risks, cost/fallback, downstream handoffs and commits.
