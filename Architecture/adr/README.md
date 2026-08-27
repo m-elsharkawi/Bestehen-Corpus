@@ -81,6 +81,7 @@ Stage agents append accepted ADRs here as they are created.
 | ADR | Status | Owning stage | Decision | Supersedes |
 |---|---|---:|---|---|
 | [ADR-0001](ADR-0001-offline-first-reuse-first-operating-model.md) | Accepted | 01 | Offline-first, reuse-first personal-project operating model; minimum operational surface and new-vendor burden of proof | None |
+| [ADR-0002](ADR-0002-one-way-asynchronous-corpus-to-app-publication-boundary.md) | Accepted | 02 | One-way asynchronous Corpus → App publication boundary; no synchronous App-facing surface, no inbound App path, no learner data | None |
 
 ## Workflow rules
 
