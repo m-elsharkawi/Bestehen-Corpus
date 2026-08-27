@@ -103,30 +103,32 @@
 **Output:** `Architecture/03-technology-stack-and-repository-strategy.md`  
 **Downstream:** 05,11–15,19–26.
 
+**Committed evidence:** [Stage 03 technology stack](Architecture/03-technology-stack-and-repository-strategy.md) and [ADR-0003](Architecture/adr/ADR-0003-python-first-modular-monolith-and-single-ecosystem-operations-console.md).
+
 ### Inputs
-- [ ] Read Architecture 01–02, product cost/security/operations/pipeline stages, design handoff, current target repository tree and current official platform/runtime documentation relevant to candidates.
+- [x] Read Architecture 01–02, product cost/security/operations/pipeline stages, design handoff, current target repository tree and current official platform/runtime documentation relevant to candidates.
 
 ### Decisions
-- [ ] Compare viable language/runtime/backend stacks against parser/media ecosystem, type safety, job support, testability, owner familiarity/maintenance burden, security patching, and portability.
-- [ ] Compare operations-UI strategies against the design’s dense desktop-first/accessibility contract without treating design HTML/runtime as production code.
-- [ ] Compare managed vs self-hosted candidates for relational persistence, object/blob storage, job scheduling/execution, search/index needs and hosting; avoid selecting extra services without measured need.
-- [ ] Choose repository/module/package boundaries and local-development strategy compatible with a modular personal project and later isolated workers where justified.
-- [ ] Define dependency/licensing/update policy and export/exit strategy for durable data and critical processing.
-- [ ] Define deployment candidates and constraints while leaving final environment/release operationalization to Stage 26.
+- [x] Compare viable language/runtime/backend stacks against parser/media ecosystem, type safety, job support, testability, owner familiarity/maintenance burden, security patching, and portability.
+- [x] Compare operations-UI strategies against the design’s dense desktop-first/accessibility contract without treating design HTML/runtime as production code.
+- [x] Compare managed vs self-hosted candidates for relational persistence, object/blob storage, job scheduling/execution, search/index needs and hosting; avoid selecting extra services without measured need.
+- [x] Choose repository/module/package boundaries and local-development strategy compatible with a modular personal project and later isolated workers where justified.
+- [x] Define dependency/licensing/update policy and export/exit strategy for durable data and critical processing.
+- [x] Define deployment candidates and constraints while leaving final environment/release operationalization to Stage 26.
 
 ### Research / alternatives
-- [ ] Use current primary official sources for framework support, hosting/service limits, pricing/licensing and security lifecycle; record access dates.
-- [ ] Include recurring cash, variable-processing, maintenance-time and lock-in comparisons for the recommended default and at least two credible alternatives.
+- [x] Use current primary official sources for framework support, hosting/service limits, pricing/licensing and security lifecycle; record access dates.
+- [x] Include recurring cash, variable-processing, maintenance-time and lock-in comparisons for the recommended default and at least two credible alternatives.
 
 ### Contracts, failure, security, cost, testing
-- [ ] Define how the chosen direction supports background work, partial success, content-addressed reuse, safe isolation and App bundle publication without microservice-per-domain sprawl.
-- [ ] Define cheap/local fallback when a managed dependency is unavailable or exceeds budget.
-- [ ] Define minimum local reproducibility, test tooling and observability hooks required of the selected stack.
+- [x] Define how the chosen direction supports background work, partial success, content-addressed reuse, safe isolation and App bundle publication without microservice-per-domain sprawl.
+- [x] Define cheap/local fallback when a managed dependency is unavailable or exceeds budget.
+- [x] Define minimum local reproducibility, test tooling and observability hooks required of the selected stack.
 
 ### ADRs / DoD
-- [ ] Create ADR(s) for durable stack/repository/operations-UI strategy decisions where cross-cutting.
-- [ ] Artifact makes a recommended default, not a shopping list, and names upgrade triggers rather than designing for hypothetical millions of records.
-- [ ] Checklist is re-fetched/reconciled.
+- [x] Create ADR(s) for durable stack/repository/operations-UI strategy decisions where cross-cutting.
+- [x] Artifact makes a recommended default, not a shopping list, and names upgrade triggers rather than designing for hypothetical millions of records.
+- [x] Checklist is re-fetched/reconciled.
 
 ---
 
