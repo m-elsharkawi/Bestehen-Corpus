@@ -67,29 +67,31 @@
 **Output:** `Architecture/02-system-context-and-product-boundaries.md`  
 **Downstream:** 03–28.
 
+**Committed evidence:** [Stage 02 system context](Architecture/02-system-context-and-product-boundaries.md) and [ADR-0002](Architecture/adr/ADR-0002-one-way-asynchronous-corpus-to-app-publication-boundary.md).
+
 ### Inputs
-- [ ] Read Stages 01–02 product shaping, Corpus/App contract Stage 12, security Stage 15, App product spec, design handoff, Architecture 01, workflow plan and checklist.
+- [x] Read Stages 01–02 product shaping, Corpus/App contract Stage 12, security Stage 15, App product spec, design handoff, Architecture 01, workflow plan and checklist.
 
 ### Decisions
-- [ ] Produce C4-style system-context and trust-boundary views covering owner/operator, source web, manual URL/file/media intake, Corpus processing, storage, scheduler/jobs, operations UI, OCR/ASR/model services, Bestehen / App, and future/non-goal actors.
-- [ ] Separate discovery/acquisition paths, offline/batch processing paths, owner operations paths, Corpus→App publication paths, and explicitly absent learner-runtime paths.
-- [ ] Define external dependency inventory and which dependencies receive source content, metadata, secrets, or no sensitive data.
-- [ ] Define launch boundaries for public API/submissions, paid/private authenticated crawling, multi-user operation, billing and collaboration as absent with explicit future triggers.
+- [x] Produce C4-style system-context and trust-boundary views covering owner/operator, source web, manual URL/file/media intake, Corpus processing, storage, scheduler/jobs, operations UI, OCR/ASR/model services, Bestehen / App, and future/non-goal actors.
+- [x] Separate discovery/acquisition paths, offline/batch processing paths, owner operations paths, Corpus→App publication paths, and explicitly absent learner-runtime paths.
+- [x] Define external dependency inventory and which dependencies receive source content, metadata, secrets, or no sensitive data.
+- [x] Define launch boundaries for public API/submissions, paid/private authenticated crawling, multi-user operation, billing and collaboration as absent with explicit future triggers.
 
 ### Product invariants / research / alternatives
-- [ ] Prove Corpus stores no learner profile/attempt/readiness data and App does not make ordinary runtime requests that trigger Corpus inference.
-- [ ] Compare direct synchronous integration vs asynchronous publication at context level without overriding Stage 19’s detailed contract ownership; record current App bundle-first counterpart as an integration constraint to reconcile later.
+- [x] Prove Corpus stores no learner profile/attempt/readiness data and App does not make ordinary runtime requests that trigger Corpus inference.
+- [x] Compare direct synchronous integration vs asynchronous publication at context level without overriding Stage 19’s detailed contract ownership; record current App bundle-first counterpart as an integration constraint to reconcile later.
 
 ### Contracts, failure, security, cost, testing
-- [ ] Identify trust zones and source/model/operator/App boundaries where authentication, authorization, sanitization, egress control, signing or integrity checks may be required.
-- [ ] Define system-level outage/degradation expectations for source sites, model/OCR/ASR providers, operations UI, processing workers and Corpus→App delivery.
-- [ ] Record data-residency/egress/cost questions later stack stages must answer without inventing compliance claims.
-- [ ] Define context-level observability and end-to-end scenario probes used again in Stage 27.
+- [x] Identify trust zones and source/model/operator/App boundaries where authentication, authorization, sanitization, egress control, signing or integrity checks may be required.
+- [x] Define system-level outage/degradation expectations for source sites, model/OCR/ASR providers, operations UI, processing workers and Corpus→App delivery.
+- [x] Record data-residency/egress/cost questions later stack stages must answer without inventing compliance claims.
+- [x] Define context-level observability and end-to-end scenario probes used again in Stage 27.
 
 ### ADRs / DoD
-- [ ] Create an ADR only if a durable system-boundary decision beyond product truth is necessary.
-- [ ] Artifact names all actors/trust zones/non-goals and has no ambiguous learner-data or live-runtime dependency.
-- [ ] Checklist is re-fetched and reconciled after commit.
+- [x] Create an ADR only if a durable system-boundary decision beyond product truth is necessary.
+- [x] Artifact names all actors/trust zones/non-goals and has no ambiguous learner-data or live-runtime dependency.
+- [x] Checklist is re-fetched and reconciled after commit.
 
 ---
 
